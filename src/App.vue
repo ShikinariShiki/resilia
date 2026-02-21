@@ -1,0 +1,78 @@
+<template>
+  <div class="min-h-screen" :class="[store.darkMode ? 'dark bg-slate-900' : 'bg-sand-50', { 'authenticated-layout': store.onboarded && !isFullscreenRoute }]">
+    <template v-if="store.onboarded && !isFullscreenRoute">
+      <!-- Fixed Sidebar -->
+      <NavSidebar
+        :collapsed="sidebarCollapsed"
+        :mobileOpen="mobileMenuOpen"
+        @toggle="sidebarCollapsed = !sidebarCollapsed"
+        @close-mobile="mobileMenuOpen = false"
+      />
+
+      <!-- Mobile Overlay -->
+      <div v-if="mobileMenuOpen" @click="mobileMenuOpen = false"
+        class="fixed inset-0 bg-black/40 z-30 md:hidden backdrop-blur-sm"></div>
+      
+      <!-- Main Content: Margin Left + Width Strategy -->
+      <div 
+        class="min-h-screen flex flex-col transition-all duration-300"
+        :style="{
+          marginLeft: isMobile ? '0px' : (sidebarCollapsed ? '72px' : '260px'),
+          width: isMobile ? '100%' : (sidebarCollapsed ? 'calc(100% - 72px)' : 'calc(100% - 260px)'),
+          maxWidth: isMobile ? '100vw' : undefined,
+          overflowX: 'hidden'
+        }"
+      >
+        <TopBar @toggle-menu="mobileMenuOpen = !mobileMenuOpen" />
+        <main class="flex-1 px-4 sm:px-6 md:px-10 lg:px-14 py-6 sm:py-8 md:py-10 lg:py-12 animate-fade-in w-full box-border">
+          <RouterView />
+        </main>
+      </div>
+    </template>
+    
+    <template v-else>
+      <RouterView />
+    </template>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
+import { useRoute, RouterView } from 'vue-router'
+import { useResiliaStore } from './stores/resiliaStore'
+import NavSidebar from './components/NavSidebar.vue'
+import TopBar from './components/TopBar.vue'
+
+const store = useResiliaStore()
+const route = useRoute()
+const sidebarCollapsed = ref(false)
+const mobileMenuOpen = ref(false)
+const windowWidth = ref(1024)
+
+function onResize() {
+  windowWidth.value = window.innerWidth
+  if (windowWidth.value >= 768) mobileMenuOpen.value = false
+}
+onMounted(() => {
+  windowWidth.value = window.innerWidth
+  window.addEventListener('resize', onResize)
+})
+onUnmounted(() => window.removeEventListener('resize', onResize))
+
+// Dark mode: toggle class on <html> for Tailwind dark: variants
+watchEffect(() => {
+  if (store.darkMode) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+})
+
+const fullscreenRoutes = ['landing', 'onboarding', 'journal', 'soothing', 'terms', 'privacy']
+const isFullscreenRoute = computed(() => fullscreenRoutes.includes(route.name))
+const isMobile = computed(() => windowWidth.value < 768)
+</script>
+
+<style scoped>
+/* No specific styles needed for margin strategy */
+</style>

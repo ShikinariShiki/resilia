@@ -1,0 +1,17 @@
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 25 modules transformed.
+[31m✗[39m Build failed in 370ms
+[31merror during build:
+[31m[@tailwindcss/vite:generate:build] Could not resolve value for theme function: `theme(colors.teal.500)`. Consider checking if the path is correct or provide a fallback value to silence this error.[31m
+file: [36mC:/Users/USER/Documents/ISF Post-Stress/src/views/SelfCheckIn.vue?vue&type=style&index=0&scoped=41cf335d&lang.css[31m
+    at Object.kn [as theme] (file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:13:4834)
+    at file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:13:5515
+    at br (file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:3:1718)
+    at I (file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:3:1377)
+    at Lr (file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:13:5407)
+    at file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:13:5179
+    at br (file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:3:1718)
+    at I (file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:3:1377)
+    at De (file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:13:5104)
+    at Wi (file:///C:/Users/USER/Documents/ISF%20Post-Stress/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:38:283)[39m
