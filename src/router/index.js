@@ -133,6 +133,11 @@ const routes = [
         name: 'erq-test',
         component: () => import('../views/ERQTest.vue'),
     },
+    {
+        path: '/admin',
+        name: 'admin-hub',
+        component: () => import('../views/AdminHub.vue'),
+    },
 ]
 
 const router = createRouter({

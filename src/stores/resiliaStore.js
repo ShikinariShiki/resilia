@@ -14,12 +14,13 @@ export const useResiliaStore = defineStore('resilia', () => {
         localStorage.removeItem('resilia_session_ts')
     }
 
-    // Auth
+    const adminEmails = ['natkevin143@gmail.com', 'nindynauu@gmail.com', 'nadiacentrina@gmail.com', 'giselleaayu@gmail.com', 'nurfahdina12@gmail.com']
+
     const isAuthenticated = ref(localStorage.getItem('resilia_auth') === 'true')
     const userEmail = ref(localStorage.getItem('resilia_email') || '')
     const authProvider = ref(localStorage.getItem('resilia_provider') || 'local')
     const isGoogleAccount = computed(() => authProvider.value === 'google')
-    const isAdmin = computed(() => userEmail.value === 'natkevin143@gmail.com' && isGoogleAccount.value)
+    const isAdmin = computed(() => adminEmails.includes(userEmail.value) && isGoogleAccount.value)
 
     watch(authProvider, (val) => {
         if (val) localStorage.setItem('resilia_provider', val)
@@ -2341,6 +2342,8 @@ export const useResiliaStore = defineStore('resilia', () => {
         onboarded.value = false
         hasCompletedCheckIn.value = false
 
+        localStorage.removeItem('admin_bypassed')
+
         const keysToRemove = Object.keys(localStorage).filter(k => k.startsWith('resilia_') && !['resilia_theme', 'resilia_locale'].includes(k))
         keysToRemove.forEach(k => localStorage.removeItem(k))
 
@@ -2896,6 +2899,15 @@ export const useResiliaStore = defineStore('resilia', () => {
             if (xp.value < 99999) xp.value = 99999
             if (level.value < 6) level.value = 6
             if (resiCoinBalance.value < 99999) resiCoinBalance.value = 99999
+
+            // Bypass onboarding and daily checkin on initial admin load
+            if (!localStorage.getItem('admin_bypassed')) {
+                onboarded.value = true
+                hasCompletedCheckIn.value = true
+                localStorage.setItem('resilia_onboarded', 'true')
+                localStorage.setItem('resilia_tours_completed', JSON.stringify(['home', 'dashboard', 'academy']))
+                localStorage.setItem('admin_bypassed', 'true')
+            }
         }
     }, { immediate: true })
 

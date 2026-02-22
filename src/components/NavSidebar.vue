@@ -73,7 +73,7 @@ import { computed } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import { useI18n } from '../i18n'
-import { Home, BookOpen, Briefcase, Wallet, BarChart3, User, ChevronLeft, ChevronRight, X, Target } from 'lucide-vue-next'
+import { Home, BookOpen, Briefcase, Wallet, BarChart3, User, ChevronLeft, ChevronRight, X, Target, Settings2 } from 'lucide-vue-next'
 
 defineProps({
   collapsed: { type: Boolean, default: false },
@@ -85,14 +85,20 @@ const { t } = useI18n()
 const store = useResiliaStore()
 const route = useRoute()
 
-const navItems = computed(() => [
-  { to: '/home', label: t('nav.home'), icon: Home },
-  { to: '/daily', label: 'Daily Missions', icon: Target },
-  { to: '/academy', label: t('nav.academy'), icon: BookOpen },
-  { to: '/toolkit', label: t('nav.toolkit'), icon: Briefcase },
-  { to: '/wallet', label: t('nav.wallet'), icon: Wallet },
-  { to: '/dashboard', label: t('nav.dashboard'), icon: BarChart3 },
-])
+const navItems = computed(() => {
+  const items = [
+    { to: '/home', label: t('nav.home'), icon: Home },
+    { to: '/daily', label: 'Daily Missions', icon: Target },
+    { to: '/academy', label: t('nav.academy'), icon: BookOpen },
+    { to: '/toolkit', label: t('nav.toolkit'), icon: Briefcase },
+    { to: '/wallet', label: t('nav.wallet'), icon: Wallet },
+    { to: '/dashboard', label: t('nav.dashboard'), icon: BarChart3 },
+  ]
+  if (store.isAdmin) {
+    items.push({ to: '/admin', label: 'Admin Hub', icon: Settings2 })
+  }
+  return items
+})
 
 const initials = computed(() => {
   const name = store.userName || 'R'

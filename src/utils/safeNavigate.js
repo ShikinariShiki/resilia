@@ -18,6 +18,7 @@ const ALLOWED_PATHS = [
     '/toolkit',
     '/terms',
     '/privacy',
+    '/admin',
 ]
 
 const ALLOWED_PREFIXES = [
