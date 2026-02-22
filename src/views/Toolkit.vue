@@ -3,7 +3,7 @@
     <div class="mb-10 sm:mb-12 animate-slide-up">
       <div class="flex items-center gap-3 mb-3">
         <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
-          <span class="text-white text-xl">🧰</span>
+          <PhToolbox :size="22" class="text-white" weight="fill" />
         </div>
         <div>
           <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink dark:text-white leading-tight">Toolkit</h1>
@@ -15,7 +15,7 @@
     <!-- Interactive Tools -->
     <div class="mb-8 sm:mb-10 animate-slide-up" style="animation-delay: 0.03s">
       <h2 class="font-heading text-lg font-bold text-ink dark:text-white mb-5 flex items-center gap-2">
-        <span class="w-7 h-7 rounded-lg bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center text-sm">🎯</span>
+        <span class="w-7 h-7 rounded-lg bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center text-sm"><PhTarget :size="16" weight="fill" class="text-teal-500" /></span>
         Interactive Tools
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
@@ -140,7 +140,7 @@
             </p>
           </div>
           <button @click="nextAffirmation" class="px-5 py-2 rounded-xl bg-pink-500 text-white font-heading font-bold text-xs hover:bg-pink-600 transition-all shadow-md shadow-pink-500/20">
-            ✨ New Affirmation
+            <PhSparkle :size="14" weight="fill" class="inline" /> New Affirmation
           </button>
         </div>
 
@@ -169,7 +169,7 @@
             class="w-full p-3 bg-gray-50 dark:bg-slate-700/50 dark:text-white rounded-lg text-xs font-body focus:outline-none focus:ring-2 focus:ring-emerald-400/50 resize-none mb-2"></textarea>
           <button @click="saveJournal" :disabled="!journalEntry.trim()"
             class="w-full py-2 rounded-lg bg-emerald-500 text-white font-heading font-bold text-xs hover:bg-emerald-600 transition-all disabled:opacity-30 shadow-sm">
-            {{ journalSaved ? '✓ Saved!' : '📝 Save Entry' }}
+            {{ journalSaved ? '✓ Saved!' : 'Save Entry' }}
           </button>
           <p class="text-[9px] text-gray-400 font-body mt-1.5 text-center">{{ journalEntries.length }} entries written</p>
         </div>
@@ -195,7 +195,7 @@
 
     <!-- Emergency Contacts by ASEAN Country -->
     <div class="mb-8 sm:mb-10 animate-slide-up" style="animation-delay: 0.08s">
-      <h2 class="font-heading text-lg font-bold text-ink dark:text-white mb-5">Emergency Contacts 🚨</h2>
+      <h2 class="font-heading text-lg font-bold text-ink dark:text-white mb-5">Emergency Contacts <PhSiren :size="16" weight="fill" class="inline text-red-500" /></h2>
       <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <div v-for="r in store.regionData" :key="r.code" class="bg-white dark:bg-slate-800/80 rounded-xl p-3.5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 text-center">
           <p class="text-xl mb-1">{{ r.flag }}</p>
@@ -240,7 +240,7 @@
           <p class="text-sm text-gray-600 dark:text-gray-300 font-body mb-4 leading-relaxed">{{ activeResource.description }}</p>
           <div class="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-4 mb-5">
             <p class="text-xs text-teal-700 dark:text-teal-300 font-body">
-              📞 Contact your local {{ activeResource.category }} provider for more information.
+              <PhPhone :size="14" weight="fill" class="inline" /> Contact your local {{ activeResource.category }} provider for more information.
               Resources are available across all 10 ASEAN countries.
             </p>
           </div>
@@ -254,6 +254,7 @@
 <script setup>
 import { ref, computed, onUnmounted } from 'vue'
 import { useResiliaStore } from '../stores/resiliaStore'
+import { PhToolbox, PhTarget, PhSparkle, PhSiren, PhPhone } from '@phosphor-icons/vue'
 
 const store = useResiliaStore()
 

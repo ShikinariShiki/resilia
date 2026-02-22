@@ -13,7 +13,7 @@
         <Moon v-else :size="18" />
       </button>
       <div class="hidden sm:flex items-center gap-1.5 bg-orange-50 dark:bg-orange-900/20 rounded-xl px-3 py-1.5">
-        <span class="text-sm">🪙</span>
+        <PhCoins :size="16" weight="fill" class="text-orange-500" />
         <span class="font-heading font-bold text-orange-600 dark:text-orange-400 text-xs">{{ store.resiCoinBalance }} RC</span>
       </div>
       <div class="flex items-center gap-1.5 rounded-xl px-3 py-1.5" :style="{ backgroundColor: store.currentTier.color + '10' }">
@@ -41,6 +41,7 @@ import { computed } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import { Menu, Sun, Moon } from 'lucide-vue-next'
+import { PhCoins } from '@phosphor-icons/vue'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 
 defineEmits(['toggle-menu'])

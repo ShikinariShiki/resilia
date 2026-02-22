@@ -7,9 +7,9 @@
         <div class="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
         <div class="flex items-center justify-between relative">
           <div>
-            <p class="text-[10px] sm:text-[11px] font-heading font-bold text-teal-200 uppercase tracking-wider mb-3">ResiCoin Vault 🏦</p>
+            <p class="text-[10px] sm:text-[11px] font-heading font-bold text-teal-200 uppercase tracking-wider mb-3">ResiCoin Vault <PhVault :size="14" weight="fill" class="inline" /></p>
             <div class="flex items-baseline gap-2 sm:gap-3">
-              <span class="text-2xl sm:text-3xl md:text-4xl">🪙</span>
+              <PhCoins :size="28" class="text-teal-200" weight="fill" />
               <span class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold">{{ store.resiCoinBalance }}</span>
               <span class="font-heading text-sm sm:text-lg text-teal-200">RC</span>
             </div>
@@ -23,7 +23,7 @@
       </div>
 
       <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
-        <p class="text-[10px] font-heading font-bold text-orange-500 dark:text-orange-400 uppercase tracking-wider mb-1">Community Fund 🤝</p>
+        <p class="text-[10px] font-heading font-bold text-orange-500 dark:text-orange-400 uppercase tracking-wider mb-1">Community Fund <PhHandshake :size="14" weight="fill" class="inline" /></p>
         <p class="text-[10px] text-gray-400 font-body mb-3">Sponsor PFA workshops across ASEAN communities.</p>
         <div class="flex gap-2.5 mb-3">
           <input v-model.number="donateAmount" type="number" min="1" placeholder="Amount"
@@ -36,13 +36,13 @@
         <!-- Transparency & perks -->
         <div class="space-y-1.5 pt-2 border-t border-gray-100 dark:border-slate-700/50">
           <p class="text-[9px] text-gray-400 font-body flex items-center gap-1.5">
-            <span class="text-teal-500">✦</span> Funds go to local PFA training workshops
+            <PhDiamondsFour :size="10" weight="fill" class="text-teal-500" /> Funds go to local PFA training workshops
           </p>
           <p class="text-[9px] text-gray-400 font-body flex items-center gap-1.5">
-            <span class="text-orange-500">✦</span> Earn +10% XP bonus per 50 RC donated
+            <PhDiamondsFour :size="10" weight="fill" class="text-orange-500" /> Earn +10% XP bonus per 50 RC donated
           </p>
           <p class="text-[9px] text-gray-400 font-body flex items-center gap-1.5">
-            <span class="text-purple-500">✦</span> Unlock exclusive "Community Patron" badge at 500 RC
+            <PhDiamondsFour :size="10" weight="fill" class="text-purple-500" /> Unlock exclusive "Community Patron" badge at 500 RC
           </p>
         </div>
       </div>
@@ -51,7 +51,7 @@
     <!-- Toolkit Banner -->
     <div class="bg-teal-50 dark:bg-teal-900/20 rounded-2xl p-4 sm:p-5 mb-8 flex items-center justify-between gap-4 animate-slide-up" style="animation-delay: 0.03s">
       <div>
-        <p class="font-heading font-bold text-xs text-teal-700 dark:text-teal-400">🧰 Free resources moved to Toolkit!</p>
+        <p class="font-heading font-bold text-xs text-teal-700 dark:text-teal-400"><PhToolbox :size="14" weight="fill" class="inline" /> Free resources moved to Toolkit!</p>
         <p class="text-[10px] text-teal-600/70 dark:text-teal-400/70 font-body mt-0.5">Counseling sessions, prep kits, and wellness tools are now free.</p>
       </div>
       <RouterLink to="/toolkit" class="px-4 py-2 bg-teal-500 text-white rounded-xl font-heading font-bold text-xs hover:bg-teal-600 transition-colors flex-shrink-0">
@@ -70,7 +70,7 @@
 
     <!-- Shop grid -->
     <div class="bg-white dark:bg-slate-800/80 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 mb-8 sm:mb-10 animate-slide-up" style="animation-delay: 0.07s">
-      <h3 class="font-heading text-base sm:text-lg font-bold text-ink dark:text-white mb-5">Guild Shop ⚔️</h3>
+      <h3 class="font-heading text-base sm:text-lg font-bold text-ink dark:text-white mb-5">Guild Shop <PhSword :size="16" weight="fill" class="inline text-teal-500" /></h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         <div v-for="item in filteredShop" :key="item.id" 
           class="group relative bg-gray-50 dark:bg-slate-700/40 rounded-xl sm:rounded-2xl p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden border-2"
@@ -93,7 +93,7 @@
           <button @click="redeem(item.id)" :disabled="store.resiCoinBalance < item.cost"
             class="w-full py-2 rounded-lg text-[10px] font-heading font-bold transition-colors flex items-center justify-center gap-1"
             :class="store.resiCoinBalance >= item.cost ? 'bg-teal-500 text-white hover:bg-teal-600 shadow-sm shadow-teal-500/20' : 'bg-gray-200 dark:bg-slate-600 text-gray-400 cursor-not-allowed'">
-            <span>🪙 {{ item.cost }} RC</span>
+            <span class="flex items-center gap-0.5"><PhCoins :size="12" weight="fill" /> {{ item.cost }} RC</span>
           </button>
         </div>
       </div>
@@ -102,12 +102,12 @@
     <!-- Transaction History (collapsible) -->
     <div class="bg-white dark:bg-slate-800/80 rounded-2xl sm:rounded-3xl shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 animate-slide-up" style="animation-delay: 0.09s">
       <button @click="showHistory = !showHistory" class="w-full flex items-center justify-between p-5 sm:p-7">
-        <h3 class="font-heading text-base sm:text-lg font-bold text-ink dark:text-white">Transaction History 🧾</h3>
+        <h3 class="font-heading text-base sm:text-lg font-bold text-ink dark:text-white">Transaction History <PhReceipt :size="16" weight="fill" class="inline text-gray-400" /></h3>
         <span class="text-gray-400 transition-transform duration-300 text-sm" :class="showHistory ? 'rotate-180' : ''">▼</span>
       </button>
       <div v-show="showHistory" class="px-5 sm:px-7 pb-5 sm:pb-7">
         <div v-if="store.transactions.length === 0" class="text-center py-10">
-          <p class="text-3xl mb-3">🧾</p>
+          <PhReceipt :size="28" class="text-gray-300 dark:text-gray-600 mx-auto mb-3" weight="duotone" />
           <p class="text-gray-400 font-body text-xs">No transactions yet. Start earning!</p>
         </div>
         <div v-else class="space-y-1.5 max-h-[280px] overflow-y-auto pr-1">
@@ -138,6 +138,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
+import { PhCoins, PhVault, PhHandshake, PhDiamondsFour, PhToolbox, PhSword, PhReceipt } from '@phosphor-icons/vue'
 import CoinAnimation from '../components/CoinAnimation.vue'
 
 const store = useResiliaStore()

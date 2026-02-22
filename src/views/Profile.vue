@@ -12,7 +12,7 @@
             {{ store.userName.charAt(0).toUpperCase() }}
           </div>
           <button @click="triggerFileInput" class="absolute inset-0 bg-black/40 rounded-3xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-            <span class="text-white text-xs font-bold font-heading">📷 Upload</span>
+            <span class="text-white text-xs font-bold font-heading flex items-center gap-1"><PhCamera :size="14" weight="fill" /> Upload</span>
           </button>
           <input type="file" id="avatar-upload" class="hidden" accept="image/*" @change="handleFileUpload">
         </div>
@@ -32,7 +32,7 @@
               Lv.{{ store.level }}
             </div>
             <div class="px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-xl text-sm font-heading font-bold">
-              🔥 {{ store.loginStreak }} streak
+              <PhFire :size="14" weight="fill" class="inline" /> {{ store.loginStreak }} streak
             </div>
           </div>
           <!-- XP bar -->
@@ -53,7 +53,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-8 sm:mb-10 animate-slide-up" style="animation-delay: 0.05s">
       <div v-for="stat in stats" :key="stat.label"
         class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 text-center">
-        <p class="text-2xl mb-1">{{ stat.icon }}</p>
+        <component :is="stat.icon" :size="22" :weight="'fill'" class="mb-1 mx-auto" :class="stat.color" />
         <p class="font-heading font-bold text-xl text-ink dark:text-white">{{ stat.value }}</p>
         <p class="text-[10px] text-gray-400 font-body mt-0.5">{{ stat.label }}</p>
       </div>
@@ -70,7 +70,7 @@
           <p class="font-heading font-bold text-xs text-ink dark:text-white mb-1">{{ ach.name }}</p>
           <p class="text-[10px] text-gray-400 font-body">{{ ach.description }}</p>
           <p v-if="ach.unlocked" class="text-[9px] text-teal-500 font-heading font-bold mt-2">{{ ach.date }}</p>
-          <p v-else class="text-[9px] text-gray-300 dark:text-gray-600 font-heading font-bold mt-2">🔒 Locked</p>
+          <p v-else class="text-[9px] text-gray-300 dark:text-gray-600 font-heading font-bold mt-2 flex items-center justify-center gap-0.5"><PhLock :size="10" weight="fill" /> Locked</p>
         </div>
       </div>
     </div>
@@ -131,7 +131,9 @@
           <div class="flex items-center gap-3">
             <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm"
               :class="tx.type === 'earn' ? 'bg-teal-50 dark:bg-teal-900/30 text-teal-500' : tx.type === 'donate' ? 'bg-red-50 dark:bg-red-900/30 text-red-500' : 'bg-orange-50 dark:bg-orange-900/30 text-orange-500'">
-              {{ tx.type === 'earn' ? '💰' : tx.type === 'donate' ? '❤️' : '🛒' }}
+              <PhCurrencyCircleDollar v-if="tx.type === 'earn'" :size="16" weight="fill" />
+              <PhHeartStraight v-else-if="tx.type === 'donate'" :size="16" weight="fill" />
+              <PhShoppingCart v-else :size="16" weight="fill" />
             </div>
             <div>
               <p class="font-heading font-bold text-xs text-ink dark:text-white">{{ tx.reason }}</p>
@@ -179,6 +181,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
+import { PhTrophy, PhCoins, PhBookOpen, PhGameController, PhFlower, PhFire, PhCamera, PhLock, PhCurrencyCircleDollar, PhHeartStraight, PhShoppingCart } from '@phosphor-icons/vue'
 
 const store = useResiliaStore()
 const router = useRouter()
@@ -194,12 +197,12 @@ const avatarColors = ['#0D9488', '#F97316', '#8B5CF6', '#EF4444', '#3B82F6', '#E
 const userCountry = computed(() => store.countries.find(c => c.code === store.countryCode))
 
 const stats = computed(() => [
-  { icon: '🏆', value: store.totalXPEarned, label: 'Total XP' },
-  { icon: '🪙', value: store.resiCoinBalance, label: 'ResiCoins' },
-  { icon: '📚', value: store.completedModules.length + store.completedBeginnerModules.length, label: 'Modules' },
-  { icon: '🎮', value: store.completedRPGs.length, label: 'RPGs Cleared' },
-  { icon: '🧘', value: store.breathingSessions, label: 'Breathing' },
-  { icon: '🔥', value: store.loginStreak, label: 'Streak' },
+  { icon: PhTrophy, value: store.totalXPEarned, label: 'Total XP', color: 'text-amber-500' },
+  { icon: PhCoins, value: store.resiCoinBalance, label: 'ResiCoins', color: 'text-orange-500' },
+  { icon: PhBookOpen, value: store.completedModules.length + store.completedBeginnerModules.length, label: 'Modules', color: 'text-teal-500' },
+  { icon: PhGameController, value: store.completedRPGs.length, label: 'RPGs Cleared', color: 'text-purple-500' },
+  { icon: PhFlower, value: store.breathingSessions, label: 'Breathing', color: 'text-pink-500' },
+  { icon: PhFire, value: store.loginStreak, label: 'Streak', color: 'text-red-500' },
 ])
 
 const hasChanges = computed(() => {
