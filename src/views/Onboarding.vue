@@ -16,7 +16,7 @@
         <div v-if="step === 0" key="welcome" class="text-center">
           <div class="mb-12 animate-slide-up">
             <div class="w-24 h-24 bg-gradient-to-br from-teal-400 to-teal-600 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-xl animate-pulse-slow">
-              <span class="text-5xl">📡</span>
+              <PhBroadcast :size="48" class="text-teal-100" weight="fill" />
             </div>
             <p class="text-teal-600/70 font-body text-xs uppercase tracking-[0.25em] mb-6 animate-slide-up">[ INCOMING TRANSMISSION ]</p>
             <h1 class="font-heading text-3xl md:text-4xl font-bold text-ink mb-5 leading-tight animate-slide-up" style="animation-delay: 0.05s">
@@ -46,7 +46,7 @@
         <div v-else-if="step === 1" key="country" class="animate-slide-up">
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span class="text-3xl">🌏</span>
+              <PhGlobeHemisphereEast :size="32" class="text-blue-500" weight="fill" />
             </div>
             <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ MISSION BRIEFING ]</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Every region has its own story</h2>
@@ -82,7 +82,7 @@
         <div v-else-if="step === 2" key="age" class="animate-slide-up">
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span class="text-3xl">🎂</span>
+              <PhCake :size="32" class="text-purple-500" weight="fill" />
             </div>
             <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ CLEARANCE CHECK ]</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Your readiness level</h2>
@@ -95,7 +95,7 @@
               :class="selectedAge === 'adult'
                 ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20'
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
-              <span class="text-2xl">✅</span>
+              <PhCheckCircle :size="24" class="text-teal-500" weight="fill" />
               <div>
                 <p class="font-heading font-bold text-sm">I am 18 or above</p>
                 <p class="text-xs mt-1" :class="selectedAge === 'adult' ? 'text-white/70' : 'text-gray-400'">Full access to all training modules</p>
@@ -106,7 +106,7 @@
               :class="selectedAge === 'minor'
                 ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20'
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
-              <span class="text-2xl">🔰</span>
+              <PhShieldChevron :size="24" class="text-teal-500" weight="fill" />
               <div>
                 <p class="font-heading font-bold text-sm">I am under 18</p>
                 <p class="text-xs mt-1" :class="selectedAge === 'minor' ? 'text-white/70' : 'text-gray-400'">Age-appropriate training path</p>
@@ -125,7 +125,7 @@
         <div v-else-if="step === 3" key="gender" class="animate-slide-up">
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span class="text-3xl">🧑‍🤝‍🧑</span>
+              <PhUsers :size="32" class="text-pink-500" weight="fill" />
             </div>
             <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ RESPONDER PROFILE ]</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Every responder is unique</h2>
@@ -138,7 +138,7 @@
               :class="selectedGender === g.value
                 ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20'
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
-              <span class="text-2xl">{{ g.icon }}</span>
+              <component :is="g.icon" :size="24" :class="selectedGender === g.value ? 'text-white' : 'text-gray-400'" weight="fill" />
               <p class="font-heading font-bold text-sm">{{ g.label }}</p>
             </button>
           </div>
@@ -154,7 +154,7 @@
         <div v-else-if="step === 4" key="disaster" class="animate-slide-up">
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span class="text-3xl">🌊</span>
+              <PhDrop :size="32" class="text-amber-500" weight="fill" />
             </div>
             <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ FIELD EXPERIENCE ]</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Some of us have already faced the storm</h2>
@@ -167,7 +167,7 @@
               :class="disasterExp === true
                 ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20'
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
-              <span class="text-2xl">🌧️</span>
+              <PhCloudRain :size="24" :class="disasterExp === true ? 'text-white' : 'text-gray-500'" weight="fill" />
               <div>
                 <p class="font-heading font-bold text-sm">Yes, I have</p>
                 <p class="text-xs mt-1" :class="disasterExp === true ? 'text-white/70' : 'text-gray-400'">Your experience makes you an invaluable responder</p>
@@ -178,7 +178,7 @@
               :class="disasterExp === false
                 ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20'
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
-              <span class="text-2xl">☀️</span>
+              <PhSun :size="24" :class="disasterExp === false ? 'text-white' : 'text-amber-500'" weight="fill" />
               <div>
                 <p class="font-heading font-bold text-sm">No, I haven't</p>
                 <p class="text-xs mt-1" :class="disasterExp === false ? 'text-white/70' : 'text-gray-400'">That's okay — preparation is the best defense</p>
@@ -197,7 +197,7 @@
         <div v-else-if="step === 5" key="name" class="animate-slide-up">
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span class="text-3xl">✨</span>
+              <PhSparkle :size="32" class="text-orange-500" weight="fill" />
             </div>
             <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ CALLSIGN ASSIGNMENT ]</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Your callsign awaits</h2>
@@ -216,7 +216,7 @@
               autofocus
             />
             <p v-if="nameError" class="text-xs text-red-500 font-body mt-2 flex items-center gap-1.5">
-              <span>⚠️</span> {{ nameError }}
+              <span class="flex items-center"><PhWarning :size="16" weight="fill" class="mr-1" /></span> {{ nameError }}
             </p>
           </div>
 
@@ -229,7 +229,7 @@
               </div>
               <div>
                 <p class="font-heading font-bold text-ink text-base">{{ name.trim() }}</p>
-                <p class="text-xs text-gray-400 font-body mt-1">🔰 Cadet · {{ selectedFlag }} · {{ selectedAge === 'adult' ? '18+' : 'Under 18' }}</p>
+                <p class="text-xs text-gray-400 font-body mt-1 flex items-center gap-1"><PhShieldChevron :size="12" weight="fill" class="text-teal-500" /> Cadet · {{ selectedFlag }} · {{ selectedAge === 'adult' ? '18+' : 'Under 18' }}</p>
               </div>
             </div>
           </div>
@@ -251,6 +251,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
+import { PhBroadcast, PhGlobeHemisphereEast, PhCake, PhCheckCircle, PhShieldChevron, PhUsers, PhGenderMale, PhGenderFemale, PhHandshake, PhDrop, PhCloudRain, PhSun, PhSparkle, PhWarning } from '@phosphor-icons/vue'
 import { validateDisplayName } from '../utils/profanityFilter'
 
 const store = useResiliaStore()
@@ -265,9 +266,9 @@ const name = ref('')
 const nameError = ref('')
 
 const genderOptions = [
-  { value: 'male', label: 'Male', icon: '♂️' },
-  { value: 'female', label: 'Female', icon: '♀️' },
-  { value: 'prefer_not_to_say', label: 'Prefer not to say', icon: '🤝' },
+  { value: 'male', label: 'Male', icon: PhGenderMale },
+  { value: 'female', label: 'Female', icon: PhGenderFemale },
+  { value: 'prefer_not_to_say', label: 'Prefer not to say', icon: PhHandshake },
 ]
 
 const selectedFlag = computed(() => {
