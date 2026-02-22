@@ -46,7 +46,7 @@
         <div class="flex items-center gap-3">
           <span class="text-xl">🔐</span>
           <div class="flex-1">
-            <p class="font-heading font-bold text-xs text-red-700 dark:text-red-300">PREREQUISITE: Emotion Regulation Assessment</p>
+            <p class="font-heading font-bold text-xs text-red-700 dark:text-red-300">PREREQUISITE: Ground-Zero Readiness Check</p>
             <p class="text-[10px] text-red-500/70 dark:text-red-400/60 font-body mt-0.5">Complete before accessing mission files</p>
           </div>
           <RouterLink to="/academy/erq/pre" class="px-4 py-2 bg-red-500 text-white text-[10px] font-heading font-bold rounded-xl hover:-translate-y-0.5 transition-all">
