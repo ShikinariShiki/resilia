@@ -224,7 +224,11 @@
                 class="act-start-btn" :style="{ color: selectedChapter.color }">
                 {{ act.chatSimulation ? '💬 Play' : 'Start' }} →
               </button>
-              <span v-else-if="store.isActCompleted(selectedChapter.id, act.id)" class="text-[10px] font-heading font-bold text-teal-500">Done</span>
+              <button v-else-if="store.isActCompleted(selectedChapter.id, act.id)"
+                @click="startActFlow(selectedChapter, act, ai)"
+                class="text-[10px] uppercase tracking-wider font-heading font-bold text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300 cursor-pointer bg-teal-500/10 hover:bg-teal-500/20 px-3 py-1.5 rounded-lg border border-teal-500/20 transition-all">
+                Replay ↺
+              </button>
             </div>
           </div>
 
@@ -235,14 +239,23 @@
               class="page-btn" :style="{ backgroundColor: selectedChapter.color, color: 'white' }">
               ⚔️ RPG Quest
             </button>
-            <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500">✓ Quest Complete</span>
+            <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500 cursor-pointer hover:opacity-80 transition-opacity" @click="openQuest(selectedChapter.questId)">✓ Quest Complete (Replay ↺)</span>
 
+            <button v-if="allActsCompleted(selectedChapter) && selectedChapter.liaChat?.post && !hasCompletedLiaPhase(selectedChapter.id, 'post')"
+              @click="openChat(selectedChapter.id, 'post')"
+              class="page-btn bg-[#E8E5DE] dark:bg-[#2A2620] text-gray-800 dark:text-gray-200 border border-gray-300/50 dark:border-gray-600/50 hover:shadow-md transition-all">
+              💬 Talk to Lia
+            </button>
 
-
-            <button v-if="selectedChapter.bridgeId && hasCompletedLiaPhase(selectedChapter.id, 'post') && !store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
+            <button v-if="selectedChapter.bridgeId && allActsCompleted(selectedChapter) && (!selectedChapter.liaChat?.post || hasCompletedLiaPhase(selectedChapter.id, 'post')) && !store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
               @click="openBridge(selectedChapter.bridgeId)"
-              class="page-btn bg-amber-500 text-white">
+              class="page-btn bg-amber-500 hover:bg-amber-600 text-white transition-colors shadow-md shadow-amber-500/20">
               📖 Continue Story →
+            </button>
+            <button v-else-if="selectedChapter.bridgeId && store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
+              @click="openBridge(selectedChapter.bridgeId)"
+              class="page-btn bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold hover:bg-amber-500 hover:text-white transition-all">
+              📖 Replay Story ↺
             </button>
           </div>
 
