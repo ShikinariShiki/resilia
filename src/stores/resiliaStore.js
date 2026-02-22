@@ -2891,6 +2891,14 @@ export const useResiliaStore = defineStore('resilia', () => {
         }
     }
 
+    watch([isAdmin, xp, resiCoinBalance], () => {
+        if (isAdmin.value) {
+            if (xp.value < 99999) xp.value = 99999
+            if (level.value < 6) level.value = 6
+            if (resiCoinBalance.value < 99999) resiCoinBalance.value = 99999
+        }
+    }, { immediate: true })
+
     return {
         isAuthenticated, userEmail, isAdmin, authProvider,
         userName, countryCode, onboarded, locale, bio, avatarColor, avatarUrl, joinDate,
