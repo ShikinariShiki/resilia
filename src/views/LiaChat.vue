@@ -328,8 +328,10 @@ function selectChoice(index, choice) {
   })
   scrollToBottom()
 
-  // Apply HP effect if simulation
-  if (isSimMode.value && choice.hpEffect) {
+  const alreadyCompleted = store.isActCompleted(chapterId.value, actId.value)
+
+  // Apply HP effect if simulation and not already completed
+  if (isSimMode.value && choice.hpEffect && !alreadyCompleted) {
     if (choice.hpEffect > 0) {
       store.healSimHP(choice.hpEffect)
     } else {
@@ -355,7 +357,7 @@ function selectChoice(index, choice) {
     }
 
     // Show HP change feedback
-    if (isSimMode.value && choice.hpEffect) {
+    if (isSimMode.value && choice.hpEffect && !alreadyCompleted) {
       await sleep(400)
       visibleMessages.value.push({
         from: 'lia',
