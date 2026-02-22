@@ -5,9 +5,7 @@
       :class="scrollY > 50 ? 'bg-white/85 dark:bg-[#0A0A0A]/85 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-white/5' : 'bg-transparent border-b border-transparent'">
       <div class="mx-auto h-16 md:h-20 flex items-center justify-between" style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg shadow-teal-500/20 transition-transform duration-500 hover:scale-110 hover:rotate-3">
-            <span class="text-white font-heading font-bold text-sm">R</span>
-          </div>
+          <img src="../assets/icon.png" class="w-10 h-10 object-cover rounded-2xl bg-teal-50 shadow-lg shadow-teal-500/20 transition-transform duration-500 hover:scale-110 hover:rotate-3" alt="RESILIA" />
           <span class="font-heading text-xl font-bold tracking-tight transition-colors duration-500"
             :class="scrollY > 50 ? 'text-ink dark:text-white' : 'text-ink dark:text-white'">RESILIA</span>
         </div>
@@ -389,9 +387,7 @@
     <footer class="py-12 bg-ink dark:bg-[#050505] border-t border-white/5" style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-xl flex items-center justify-center">
-            <span class="text-white font-heading font-bold text-[10px]">R</span>
-          </div>
+          <img src="../assets/icon.png" class="w-8 h-8 object-cover rounded-xl bg-teal-50 shadow-sm" alt="RESILIA" />
           <div>
             <span class="font-heading font-bold text-sm text-white">RESILIA</span>
             <p class="text-[10px] text-gray-600 font-body">Digital Reserve Corps for ASEAN</p>

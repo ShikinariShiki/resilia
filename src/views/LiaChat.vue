@@ -3,8 +3,9 @@
     <div class="lia-header">
       <button class="lia-back" @click="goBack">← Back</button>
       <div class="lia-header-info">
-        <div class="lia-avatar-ring">
-          <span class="lia-avatar-emoji">{{ currentSpeakerAvatar }}</span>
+        <div class="lia-avatar-ring" :class="{'bg-transparent': lastSpeaker === 'lia'}">
+          <img v-if="lastSpeaker === 'lia'" src="../assets/icon.png" class="w-full h-full object-cover rounded-full bg-teal-100 shadow-sm" alt="Lia" />
+          <span v-else class="lia-avatar-emoji">{{ currentSpeakerAvatar }}</span>
           <div class="lia-online-dot"></div>
         </div>
         <div>
@@ -33,8 +34,9 @@
           :class="msg.from === 'user' ? 'lia-row-right' : 'lia-row-left'"
         >
           <!-- NPC/Lia avatar -->
-          <div v-if="msg.from !== 'user'" class="lia-npc-avatar" :style="{ background: getNpcColor(msg.from) }">
-            {{ getNpcAvatar(msg.from) }}
+          <div v-if="msg.from !== 'user'" class="lia-npc-avatar" :class="{'bg-transparent': msg.from === 'lia'}" :style="msg.from !== 'lia' ? { background: getNpcColor(msg.from) } : {}">
+            <img v-if="msg.from === 'lia'" src="../assets/icon.png" class="w-full h-full object-cover rounded-full bg-teal-100 shadow-sm" alt="Lia" />
+            <span v-else>{{ getNpcAvatar(msg.from) }}</span>
           </div>
           <div class="lia-bubble" :class="msg.from === 'user' ? 'lia-bubble-right' : 'lia-bubble-left'" :style="msg.from !== 'user' && msg.from !== 'lia' ? { borderLeft: `3px solid ${getNpcColor(msg.from)}` } : {}">
             <p class="lia-npc-name" v-if="msg.from !== 'user' && msg.from !== 'lia'">{{ getNpcName(msg.from) }}</p>
@@ -46,8 +48,9 @@
 
       <!-- iMessage typing indicator -->
       <div v-if="isTyping" class="lia-bubble-row lia-row-left lia-typing-row">
-        <div class="lia-npc-avatar" :style="{ background: getNpcColor(lastSpeaker) }">
-          {{ getNpcAvatar(lastSpeaker) }}
+        <div class="lia-npc-avatar" :class="{'bg-transparent': lastSpeaker === 'lia'}" :style="lastSpeaker !== 'lia' ? { background: getNpcColor(lastSpeaker) } : {}">
+          <img v-if="lastSpeaker === 'lia'" src="../assets/icon.png" class="w-full h-full object-cover rounded-full bg-teal-100 shadow-sm" alt="Lia" />
+          <span v-else>{{ getNpcAvatar(lastSpeaker) }}</span>
         </div>
         <div class="lia-bubble lia-bubble-left lia-typing-bubble">
           <div class="lia-typing-dots">
@@ -172,7 +175,7 @@ const chatFlow = computed(() => {
 
 // NPC lookup helpers
 function getNpcAvatar(fromId) {
-  if (fromId === 'lia') return '🤖'
+  if (fromId === 'lia') return ''
   const npc = npcCharacters.value.find(n => n.id === fromId)
   return npc?.avatar || '👤'
 }

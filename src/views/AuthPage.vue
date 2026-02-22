@@ -7,9 +7,7 @@
     <div class="w-full max-w-md relative z-10">
       <!-- Logo -->
       <div class="text-center mb-10 animate-slide-up">
-        <div class="w-16 h-16 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-xl">
-          <span class="text-3xl">🛡️</span>
-        </div>
+        <img src="../assets/icon.png" class="w-16 h-16 object-cover rounded-2xl mx-auto mb-5 bg-teal-50 shadow-xl border border-teal-100/50" alt="RESILIA" />
         <h1 class="font-heading text-3xl md:text-4xl font-bold text-ink">
           Join <span class="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">RESILIA</span>
         </h1>

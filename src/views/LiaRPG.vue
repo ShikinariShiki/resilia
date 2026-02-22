@@ -82,8 +82,9 @@
           <!-- NPC Dialogue -->
           <div class="px-6 sm:px-8 pb-4">
             <div class="flex items-start gap-4 bg-teal-50/60 dark:bg-teal-900/15 rounded-2xl p-4 sm:p-5">
-              <div class="w-12 h-12 bg-teal-100 dark:bg-teal-800/40 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
-                {{ currentStep.emotion }}
+              <div class="w-12 h-12 bg-teal-50 dark:bg-teal-800/40 rounded-xl flex items-center justify-center flex-shrink-0 border border-teal-100/50 shadow-sm relative">
+                <img src="../assets/icon.png" class="w-full h-full object-cover rounded-xl" alt="Lia" />
+                <span class="absolute -bottom-1 -right-1 text-sm bg-white dark:bg-slate-800 rounded-full w-5 h-5 flex items-center justify-center shadow-sm" style="font-size: 10px;">{{ currentStep.emotion }}</span>
               </div>
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 mb-1.5">

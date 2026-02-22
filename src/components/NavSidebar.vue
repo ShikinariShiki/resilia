@@ -11,9 +11,7 @@
     <!-- Logo -->
     <div class="h-16 flex items-center justify-between" :class="collapsed ? 'md:px-4 md:justify-center px-6' : 'px-6'">
       <RouterLink to="/home" class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-          <span class="text-white font-heading font-bold text-base">R</span>
-        </div>
+        <img src="../assets/icon.png" class="w-10 h-10 object-cover rounded-2xl flex-shrink-0 bg-teal-50" alt="RESILIA" />
         <div v-if="!collapsed || mobileOpen">
           <h1 class="font-heading text-lg font-bold text-ink dark:text-white tracking-tight leading-none">RESILIA</h1>
           <p class="text-[10px] text-gray-400 font-body leading-none mt-0.5">Digital Reserve Corps</p>
