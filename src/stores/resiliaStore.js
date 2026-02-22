@@ -17,7 +17,14 @@ export const useResiliaStore = defineStore('resilia', () => {
     // Auth
     const isAuthenticated = ref(localStorage.getItem('resilia_auth') === 'true')
     const userEmail = ref(localStorage.getItem('resilia_email') || '')
-    const isAdmin = computed(() => userEmail.value === 'natkevin143@gmail.com')
+    const authProvider = ref(localStorage.getItem('resilia_provider') || 'local')
+    const isGoogleAccount = computed(() => authProvider.value === 'google')
+    const isAdmin = computed(() => userEmail.value === 'natkevin143@gmail.com' && isGoogleAccount.value)
+
+    watch(authProvider, (val) => {
+        if (val) localStorage.setItem('resilia_provider', val)
+        else localStorage.removeItem('resilia_provider')
+    })
 
     watch(isAdmin, (isAdm) => {
         if (isAdm) {
@@ -2330,6 +2337,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         }
         supabaseUserId.value = null
         isAuthenticated.value = false
+        authProvider.value = 'local'
         onboarded.value = false
         hasCompletedCheckIn.value = false
 
@@ -2884,7 +2892,7 @@ export const useResiliaStore = defineStore('resilia', () => {
     }
 
     return {
-        isAuthenticated, userEmail, isAdmin,
+        isAuthenticated, userEmail, isAdmin, authProvider,
         userName, countryCode, onboarded, locale, bio, avatarColor, avatarUrl, joinDate,
         userAge, userGender, hasDisasterExperience, userPersonalization,
         stabilityScore, isStable, soothingModeActive, hasCompletedCheckIn,

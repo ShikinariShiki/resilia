@@ -66,6 +66,7 @@ onMounted(async () => {
     if (session && user) {
       store.isAuthenticated = true
       store.userEmail = user.email
+      store.authProvider = user.app_metadata?.provider || 'local'
       await store.initFromSupabase(user.id)
       // If not onboarded but authenticated, go to onboarding
       if (!store.onboarded && route.name !== 'onboarding') {
@@ -82,6 +83,7 @@ if (isSupabaseConfigured()) {
     if (event === 'SIGNED_IN' && session?.user) {
       store.isAuthenticated = true
       store.userEmail = session.user.email
+      store.authProvider = session.user.app_metadata?.provider || 'local'
 
       // Extract Google profile photo and name from user metadata
       const meta = session.user.user_metadata || {}
@@ -106,6 +108,7 @@ if (isSupabaseConfigured()) {
       else router.push('/home')
     } else if (event === 'SIGNED_OUT') {
       store.isAuthenticated = false
+      store.authProvider = 'local'
       store.supabaseUserId = null
       router.push('/auth')
     }
