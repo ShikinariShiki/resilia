@@ -7,7 +7,7 @@
           <!-- Header -->
           <div class="text-center mb-6">
             <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-500/30">
-              <span class="text-3xl">🪙</span>
+              <PhCoins :size="32" class="text-white" weight="fill" />
             </div>
             <h2 class="font-heading text-2xl font-bold text-ink dark:text-white">Daily Reward!</h2>
             <p class="text-sm text-gray-400 dark:text-gray-400 font-body mt-1">Week {{ store.currentRewardWeek }} · Day {{ todayDayInWeek }}</p>
@@ -20,9 +20,10 @@
                 class="flex flex-col items-center gap-1">
                 <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold transition-all"
                   :class="getDayClass(day)">
-                  <span v-if="day.claimed">✓</span>
-                  <span v-else-if="day.day === store.currentRewardDay && !claimed">🪙</span>
-                  <span v-else>{{ day.isBonus ? '⭐' : (day.day % 7 || 7) }}</span>
+                  <PhCheck v-if="day.claimed" :size="18" weight="bold" />
+                  <PhCoins v-else-if="day.day === store.currentRewardDay && !claimed" :size="16" weight="fill" />
+                  <PhStar v-else-if="day.isBonus" :size="16" weight="fill" />
+                  <span v-else>{{ day.day % 7 || 7 }}</span>
                 </div>
                 <span class="text-[9px] font-heading font-bold" :class="day.isBonus ? 'text-amber-500' : 'text-gray-400 dark:text-gray-500'">
                   {{ day.coins }} RC
@@ -36,17 +37,19 @@
             <div class="text-center mb-4">
               <p class="text-lg font-heading font-bold text-ink dark:text-white">
                 Today's reward: <span class="text-amber-500">{{ todayReward?.coins || 5 }} RC</span>
-                <span v-if="todayReward?.isBonus" class="ml-1 text-amber-500">⭐ BONUS!</span>
+                <span v-if="todayReward?.isBonus" class="ml-1 text-amber-500 inline-flex items-center gap-1">
+                  <PhStar :size="14" weight="fill" /> BONUS!
+                </span>
               </p>
             </div>
             <button @click="claim" 
-              class="w-full py-4 bg-gradient-to-r from-amber-400 to-orange-500 text-white rounded-2xl font-heading font-bold text-base hover:shadow-lg hover:shadow-amber-500/30 transition-all active:scale-[0.98]">
-              Claim Reward! 🎉
+              class="w-full py-4 bg-gradient-to-r from-amber-400 to-orange-500 text-white rounded-2xl font-heading font-bold text-base hover:shadow-lg hover:shadow-amber-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+              <PhGift :size="20" weight="fill" /> Claim Reward!
             </button>
           </div>
           <div v-else class="text-center">
             <div class="mb-4">
-              <span class="text-5xl animate-bounce inline-block">🎉</span>
+              <PhConfetti :size="48" class="text-amber-500 mx-auto animate-bounce" weight="fill" />
             </div>
             <p class="font-heading font-bold text-lg text-teal-600 dark:text-teal-400 mb-2">+{{ claimedAmount }} RC Collected!</p>
             <p class="text-sm text-gray-400 font-body mb-4">Come back tomorrow for more rewards</p>
@@ -64,6 +67,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useResiliaStore } from '../stores/resiliaStore'
+import { PhCoins, PhCheck, PhStar, PhGift, PhConfetti } from '@phosphor-icons/vue'
 
 const store = useResiliaStore()
 const visible = ref(false)

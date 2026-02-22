@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TourGuide :steps="academyTourSteps" tourKey="academy" />
+    <TourGuide :steps="academyTourSteps" tourKey="academy" :totalSteps="9" :globalStepOffset="6" :delay="800" />
 
     <!-- Mission Dossier Header -->
     <div class="dossier-header mb-6 animate-slide-up">
@@ -296,6 +296,7 @@ import { ref, computed, nextTick, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import TourGuide from '../components/TourGuide.vue'
+import { PhBookOpen, PhBookmarkSimple, PhChartDonut } from '@phosphor-icons/vue'
 import LiaChat from './LiaChat.vue'
 import ActLesson from './ActLesson.vue'
 import ChapterQuest from './ChapterQuest.vue'
@@ -472,9 +473,9 @@ function isLiaGated(chapter) {
 }
 
 const academyTourSteps = [
-  { title: 'Mission Files', description: 'Each tab is a chapter in Lia\'s journey. Click a tab to open the chapter page.', target: '.book-left' },
-  { title: 'Chapter Details', description: 'The right panel shows acts, quizzes, and the RPG quest for the selected chapter.', target: '.book-right' },
-  { title: 'Progress Tracking', description: 'Dots show act completion. Green = done, gray = in progress.', target: '.tab-dots' },
+  { title: 'Mission Files', description: 'Each tab is a chapter in Lia\'s journey. Click a tab to open the chapter page.', target: '.book-left', icon: PhBookOpen },
+  { title: 'Chapter Details', description: 'The right panel shows acts, quizzes, and the RPG quest for the selected chapter.', target: '.book-right', icon: PhBookmarkSimple },
+  { title: 'Progress Tracking', description: 'Dots show act completion. Green = done, gray = in progress.', target: '.tab-dots', icon: PhChartDonut },
 ]
 </script>
 

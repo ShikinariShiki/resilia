@@ -1,12 +1,12 @@
 <template>
   <div>
-    <TourGuide :steps="dashboardTourSteps" tourKey="dashboard" />
+    <TourGuide ref="dashTour" :steps="dashboardTourSteps" tourKey="dashboard" nextTourRoute="/academy" :totalSteps="9" :globalStepOffset="3" :delay="800" />
 
     <!-- Header -->
     <div class="mb-10 sm:mb-12 animate-slide-up">
       <div class="flex items-center gap-3 mb-3">
         <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/20">
-          <span class="text-white text-xl">🛰️</span>
+          <PhBroadcast :size="22" class="text-white" weight="fill" />
         </div>
         <div>
           <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink dark:text-white leading-tight">
@@ -20,7 +20,7 @@
     <!-- Live Threat Ticker -->
     <div class="bg-red-50 dark:bg-red-900/15 rounded-2xl p-4 mb-8 overflow-hidden animate-slide-up border border-red-200/30 dark:border-red-800/30" style="animation-delay:0.02s">
       <div class="flex items-center gap-3">
-        <span class="text-xs font-heading font-bold text-red-500 uppercase tracking-wider animate-pulse flex-shrink-0">⚡ LIVE</span>
+        <span class="text-xs font-heading font-bold text-red-500 uppercase tracking-wider animate-pulse flex-shrink-0"><PhLightning :size="14" weight="fill" class="inline" /> LIVE</span>
         <div class="overflow-hidden flex-1">
           <div class="flex gap-12 ticker-scroll whitespace-nowrap text-xs font-body text-red-600 dark:text-red-400">
             <span v-for="(alert, i) in tickerAlerts" :key="i" class="inline-flex items-center gap-2">
@@ -67,7 +67,7 @@
     <!-- ASEAN Risk Comparison Chart -->
     <div class="mb-8 sm:mb-10 bg-white dark:bg-slate-800/80 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 animate-slide-up" style="animation-delay:0.04s">
       <h3 class="font-heading text-base sm:text-lg font-bold text-ink dark:text-white mb-2 flex items-center gap-2">
-        <span class="text-xl">📊</span> ASEAN Risk Comparison
+        <PhChartBar :size="20" weight="fill" class="inline text-teal-500" /> ASEAN Risk Comparison
       </h3>
       <p class="text-xs text-gray-500 mb-6 font-body">Comparative analysis of Disaster Risk Indices across member nations.</p>
       <div class="relative h-64 sm:h-80 w-full">
@@ -78,7 +78,7 @@
     <!-- ASEAN Country Cards — Interactive -->
     <div class="mb-8 sm:mb-10 animate-slide-up" style="animation-delay:0.06s">
       <h3 class="font-heading text-base sm:text-lg font-bold text-ink dark:text-white mb-5 flex items-center gap-2">
-        <span class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-sm">🗺️</span>
+        <span class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-sm"><PhGlobeHemisphereWest :size="16" weight="fill" class="text-teal-500" /></span>
         ASEAN Intelligence Hub
       </h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
@@ -99,7 +99,7 @@
             <!-- Emergency hotline -->
             <div class="bg-red-50/80 dark:bg-red-900/20 rounded-lg px-2 py-1.5 mt-2">
               <p class="text-[8px] font-heading text-red-400 uppercase tracking-wider">Emergency</p>
-              <p class="text-xs font-heading font-bold text-red-600 dark:text-red-400">📞 {{ r.emergencyHotline }}</p>
+              <p class="text-xs font-heading font-bold text-red-600 dark:text-red-400"><PhPhone :size="14" weight="fill" class="inline" /> {{ r.emergencyHotline }}</p>
             </div>
           </div>
         </div>
@@ -155,14 +155,14 @@
       <!-- ASEAN Today Feed -->
       <div class="bg-white dark:bg-slate-800/80 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
         <h3 class="font-heading text-base font-bold text-ink dark:text-white mb-5 flex items-center gap-2">
-          <span class="text-sm">📰</span> ASEAN Today
+          <PhNewspaper :size="16" weight="fill" class="inline text-teal-500" /> ASEAN Today
         </h3>
         <div class="space-y-3">
           <div v-for="fact in todayFacts" :key="fact.title"
             class="p-4 rounded-xl transition-colors"
             :class="fact.type === 'tip' ? 'bg-teal-50/60 dark:bg-teal-900/10' : fact.type === 'fact' ? 'bg-amber-50/60 dark:bg-amber-900/10' : 'bg-blue-50/60 dark:bg-blue-900/10'">
             <div class="flex items-start gap-3">
-              <span class="text-lg flex-shrink-0">{{ fact.icon }}</span>
+              <component :is="fact.icon" :size="18" weight="fill" class="flex-shrink-0" :class="fact.type === 'tip' ? 'text-teal-500' : fact.type === 'fact' ? 'text-amber-500' : 'text-blue-500'" />
               <div>
                 <p class="text-xs font-heading font-bold text-ink dark:text-white mb-0.5">{{ fact.title }}</p>
                 <p class="text-[11px] text-gray-500 dark:text-gray-400 font-body leading-relaxed">{{ fact.text }}</p>
@@ -175,7 +175,7 @@
       <!-- Community Leaderboard -->
       <div class="bg-white dark:bg-slate-800/80 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
         <h3 class="font-heading text-base font-bold text-ink dark:text-white mb-5 flex items-center gap-2">
-          <span class="text-sm">🏆</span> Community Leaderboard
+          <PhTrophy :size="16" weight="fill" class="inline text-amber-500" /> Community Leaderboard
         </h3>
         <div class="space-y-2.5">
           <div v-for="(user, i) in leaderboard" :key="i"
@@ -183,7 +183,7 @@
             :class="user.isYou ? 'bg-teal-50 dark:bg-teal-900/15 ring-1 ring-teal-200 dark:ring-teal-800' : 'hover:bg-gray-50 dark:hover:bg-slate-700/30'">
             <span class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-heading font-bold flex-shrink-0"
               :class="i < 3 ? 'bg-amber-50 dark:bg-amber-900/20 text-amber-600' : 'bg-gray-100 dark:bg-slate-700 text-gray-400'">
-              {{ i < 3 ? ['🥇','🥈','🥉'][i] : i + 1 }}
+              {{ i < 3 ? ['1st','2nd','3rd'][i] : i + 1 }}
             </span>
             <div class="flex-1 min-w-0">
               <p class="text-xs font-heading font-bold truncate" :class="user.isYou ? 'text-teal-600 dark:text-teal-400' : 'text-ink dark:text-white'">
@@ -200,7 +200,7 @@
     <!-- Responders + Recent Disasters -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 animate-slide-up" style="animation-delay:0.1s">
       <div id="responders" class="bg-white dark:bg-slate-800/80 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
-        <h3 class="font-heading text-base font-bold text-ink dark:text-white mb-5">Responders Deployed 🛡️</h3>
+        <h3 class="font-heading text-base font-bold text-ink dark:text-white mb-5">Responders Deployed <PhShieldCheck :size="16" weight="fill" class="inline text-teal-500" /></h3>
         <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
           <div v-for="r in store.regionData" :key="r.country" class="text-center p-3 sm:p-4 bg-gray-50 dark:bg-slate-700/30 rounded-xl sm:rounded-2xl hover:bg-teal-50 dark:hover:bg-teal-900/10 transition-colors cursor-default">
             <p class="text-xl sm:text-2xl mb-1.5">{{ r.flag }}</p>
@@ -211,7 +211,7 @@
       </div>
 
       <div class="bg-white dark:bg-slate-800/80 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
-        <h3 class="font-heading text-base font-bold text-ink dark:text-white mb-5">Recent Disasters ⚠️</h3>
+        <h3 class="font-heading text-base font-bold text-ink dark:text-white mb-5">Recent Disasters <PhWarning :size="16" weight="fill" class="inline text-amber-500" /></h3>
         <div class="space-y-2.5">
           <div v-for="r in sortedByRisk" :key="r.country" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors">
             <span class="text-lg flex-shrink-0">{{ r.flag }}</span>
@@ -234,6 +234,7 @@ import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import TourGuide from '../components/TourGuide.vue'
+import { PhCompass, PhMapTrifold, PhUsersThree, PhBroadcast, PhLightning, PhChartBar, PhGlobeHemisphereWest, PhPhone, PhNewspaper, PhTrophy, PhShieldCheck, PhWarning, PhLightbulb, PhCrosshair } from '@phosphor-icons/vue'
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 
@@ -324,9 +325,9 @@ const tickerAlerts = computed(() => store.regionData.map(r => ({
 
 // ASEAN Today Feed
 const todayFacts = [
-  { icon: '💡', title: 'Did You Know?', text: 'Indonesia experiences about 2,000 earthquakes per year, making it the most seismically active country in ASEAN.', type: 'fact' },
-  { icon: '🎯', title: 'Training Tip', text: 'Psychological First Aid (PFA) is most effective when applied within the first 72 hours after a disaster event.', type: 'tip' },
-  { icon: '📊', title: 'ASEAN Stats', text: 'Over 650 million people in ASEAN face increasing climate-related disaster risks each year.', type: 'stat' },
+  { icon: PhLightbulb, title: 'Did You Know?', text: 'Indonesia experiences about 2,000 earthquakes per year, making it the most seismically active country in ASEAN.', type: 'fact' },
+  { icon: PhCrosshair, title: 'Training Tip', text: 'Psychological First Aid (PFA) is most effective when applied within the first 72 hours after a disaster event.', type: 'tip' },
+  { icon: PhChartBar, title: 'ASEAN Stats', text: 'Over 650 million people in ASEAN face increasing climate-related disaster risks each year.', type: 'stat' },
 ]
 
 // Mock leaderboard
@@ -343,9 +344,9 @@ function riskColor(r) { return r > 40 ? 'text-red-500' : r > 20 ? 'text-orange-5
 function statusClass(r) { return r > 40 ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400' : r > 20 ? 'bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400' : 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400' }
 
 const dashboardTourSteps = [
-  { title: 'Mission Control', description: 'Your command center for ASEAN disaster intelligence and deployment data.', target: '#top-metrics' },
-  { title: 'ASEAN Intelligence', description: 'Click any country card to see detailed risk data, threats, and emergency hotlines.', target: '.country-card' },
-  { title: 'Responder Map', description: 'See trained responders deployed in each country.', target: '#responders' },
+  { title: 'Mission Control', description: 'Your command center for ASEAN disaster intelligence and deployment data.', target: '#top-metrics', icon: PhCompass },
+  { title: 'ASEAN Intelligence', description: 'Click any country card to see detailed risk data, threats, and emergency hotlines.', target: '.country-card', icon: PhMapTrifold },
+  { title: 'Responder Map', description: 'See trained responders deployed in each country.', target: '#responders', icon: PhUsersThree },
 ]
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <DailyRewardModal />
-    <TourGuide :steps="homeTourSteps" tourKey="home" />
+    <TourGuide :steps="homeTourSteps" tourKey="home" nextTourRoute="/dashboard" :totalSteps="9" :delay="2000" />
 
     <!-- Header -->
     <div class="mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up">
@@ -25,7 +25,7 @@
           <div class="text-right hidden md:block">
             <p class="text-[11px] font-heading font-bold text-gray-300 dark:text-gray-500 uppercase tracking-wider">{{ t('home.rank.next') }}</p>
             <p class="font-heading font-bold text-lg mt-1" v-if="store.nextTier" :style="{ color: store.nextTier.color }">{{ store.nextTier.icon }} {{ store.nextTier.name }}</p>
-            <p class="font-heading font-bold text-lg mt-1 text-gold" v-else>🏆 {{ t('home.rank.max') }}</p>
+            <p class="font-heading font-bold text-lg mt-1 text-gold" v-else><PhTrophy :size="20" weight="fill" class="inline" /> {{ t('home.rank.max') }}</p>
           </div>
         </div>
         <div class="w-full mt-3 sm:mt-4">
@@ -42,7 +42,7 @@
         <div>
           <p class="text-[10px] sm:text-[11px] font-heading font-bold text-teal-200 uppercase tracking-wider mb-3 sm:mb-4">{{ t('home.balance.label') }}</p>
           <div class="flex items-baseline gap-2 sm:gap-3">
-            <span class="text-2xl sm:text-3xl md:text-4xl animate-float">🪙</span>
+            <PhCoins :size="28" class="text-teal-200 animate-float" weight="fill" />
             <span class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold">{{ store.resiCoinBalance }}</span>
             <span class="font-heading text-sm sm:text-lg text-teal-200">RC</span>
           </div>
@@ -57,7 +57,7 @@
     <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up hover-lift" style="animation-delay: 0.07s">
       <div class="flex items-start sm:items-center justify-between gap-4 flex-col sm:flex-row">
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 bg-purple-500/20 dark:bg-purple-500/30 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 animate-pulse-soft">🏆</div>
+          <div class="w-12 h-12 bg-purple-500/20 dark:bg-purple-500/30 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 animate-pulse-soft"><PhTrophy :size="24" weight="fill" class="text-purple-500" /></div>
           <div>
             <p class="font-heading font-bold text-sm sm:text-base text-ink dark:text-white">{{ store.weeklyChallenge.title }}</p>
             <p class="text-xs text-gray-500 dark:text-gray-400 font-body mt-0.5">{{ store.weeklyChallenge.description }}</p>
@@ -97,7 +97,7 @@
             <div class="flex-1 min-w-0">
               <p class="font-heading font-bold text-xs sm:text-sm" :class="chapter.status === 'completed' ? 'text-teal-600 dark:text-teal-400' : 'text-ink dark:text-white'">{{ chapter.title }}</p>
               <p class="text-[10px] sm:text-xs text-gray-400 mt-0.5 font-body truncate">
-                {{ chapter.status === 'completed' ? '✓ Complete' : chapter.status === 'available' ? (chapter.chatSimulation ? '🎮 Simulation' : '📖 In Progress') : '🔒 Locked' }}
+                {{ chapter.status === 'completed' ? '✓ Complete' : chapter.status === 'available' ? (chapter.chatSimulation ? 'Simulation' : 'In Progress') : 'Locked' }}
               </p>
             </div>
             <span class="text-[9px] sm:text-[10px] font-heading font-bold px-2 py-1 rounded-lg flex-shrink-0"
@@ -113,7 +113,7 @@
         <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 text-white hover-lift">
           <p class="text-[9px] sm:text-[10px] md:text-[11px] font-heading font-bold text-orange-200 uppercase tracking-wider mb-2 sm:mb-3">{{ t('home.streak.label') }}</p>
           <div class="flex items-baseline gap-2">
-            <span class="text-2xl sm:text-3xl md:text-4xl animate-pulse-soft">🔥</span>
+            <PhFire :size="28" class="text-orange-200 animate-pulse-soft" weight="fill" />
             <span class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold">{{ store.loginStreak }}</span>
           </div>
           <p class="text-xs sm:text-sm text-orange-200 mt-1 sm:mt-2 font-body">{{ t('home.streak.unit') }}</p>
@@ -231,7 +231,7 @@
           <div class="w-full bg-gray-200 dark:bg-slate-600 rounded-full h-1.5 overflow-hidden">
             <div class="h-full bg-gradient-to-r from-teal-400 to-teal-600 rounded-full transition-all" :style="{ width: (ms.progress / ms.target * 100) + '%' }"></div>
           </div>
-          <p class="text-[9px] text-amber-500 font-heading font-bold mt-2">🪙 {{ t('home.milestones.reward', { amount: ms.reward }) }}</p>
+          <p class="text-[9px] text-amber-500 font-heading font-bold mt-2 flex items-center gap-0.5"><PhCoins :size="11" weight="fill" class="inline" /> {{ t('home.milestones.reward', { amount: ms.reward }) }}</p>
         </div>
       </div>
     </div>
@@ -240,7 +240,7 @@
     <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 animate-slide-up hover-lift" style="animation-delay: 0.25s">
       <h3 class="font-heading text-base sm:text-lg md:text-xl font-bold text-ink dark:text-white mb-5 sm:mb-6 md:mb-8">{{ t('home.activity.title') }}</h3>
       <div v-if="store.transactions.length === 0" class="text-center py-10 sm:py-12 md:py-16">
-        <p class="text-4xl sm:text-5xl mb-3 sm:mb-4 animate-float">📝</p>
+        <PhNotepad :size="40" class="text-gray-300 dark:text-gray-600 mb-3 sm:mb-4 mx-auto animate-float" weight="duotone" />
         <p class="text-gray-400 font-body text-xs sm:text-sm md:text-base">{{ t('home.activity.empty') }}</p>
       </div>
       <div v-else class="space-y-2 sm:space-y-3">
@@ -272,6 +272,7 @@ import { RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import { useI18n } from '../i18n'
 import { BookOpen, Briefcase, Wallet, BarChart3 } from 'lucide-vue-next'
+import { PhShieldCheckered, PhTarget, PhRocketLaunch, PhTrophy, PhCoins, PhFire, PhNotepad } from '@phosphor-icons/vue'
 import DailyRewardModal from '../components/DailyRewardModal.vue'
 import ConfettiAnimation from '../components/ConfettiAnimation.vue'
 import XPBarAnimated from '../components/XPBarAnimated.vue'
@@ -309,8 +310,8 @@ const quickActions = computed(() => [
 ])
 
 const homeTourSteps = [
-  { title: 'Your Rank Card', description: 'Track your progress as a Digital First Responder. Level up by completing modules and earning XP!', target: '#tour-rank-balance' },
-  { title: 'Daily Missions', description: 'Complete daily missions to earn bonus XP and ResiCoins. New missions appear every day!', target: '.grid.grid-cols-2.sm\\:grid-cols-4' },
-  { title: 'Quick Actions', description: 'Jump to any section of the app from here. Academy, Toolkit, Wallet, and Analytics are just one click away.', target: '.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-4' },
+  { title: 'Your Rank Card', description: 'Track your progress as a Digital First Responder. Level up by completing modules and earning XP!', target: '#tour-rank-balance', icon: PhShieldCheckered },
+  { title: 'Daily Missions', description: 'Complete daily missions to earn bonus XP and ResiCoins. New missions appear every day!', target: '.grid.grid-cols-2.sm\\:grid-cols-4', icon: PhTarget },
+  { title: 'Quick Actions', description: 'Jump to any section of the app from here. Academy, Toolkit, Wallet, and Analytics are just one click away.', target: '.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-4', icon: PhRocketLaunch },
 ]
 </script>
