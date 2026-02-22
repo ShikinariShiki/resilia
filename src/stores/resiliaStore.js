@@ -17,6 +17,15 @@ export const useResiliaStore = defineStore('resilia', () => {
     // Auth
     const isAuthenticated = ref(localStorage.getItem('resilia_auth') === 'true')
     const userEmail = ref(localStorage.getItem('resilia_email') || '')
+    const isAdmin = computed(() => userEmail.value === 'natkevin143@gmail.com')
+
+    watch(isAdmin, (isAdm) => {
+        if (isAdm) {
+            academyChapters.value.forEach(ch => { if (ch.status === 'locked') ch.status = 'available' })
+            beginnerModules.value.forEach(m => { if (m.status === 'locked') m.status = 'available' })
+            modules.value.forEach(m => { if (m.status === 'locked') m.status = 'available' })
+        }
+    }, { immediate: true })
 
     // Persisted user profile
     const _savedProfile = JSON.parse(localStorage.getItem('resilia_profile') || 'null')
@@ -358,7 +367,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         if (!questRetries.value[questId]) questRetries.value[questId] = 0
         questRetries.value[questId]++
         resetQuestHP()
-        return questRetries.value[questId] <= MAX_RETRIES
+        return true // Infinite retries for everyone
     }
 
     const academyChapters = ref([
@@ -1241,6 +1250,7 @@ export const useResiliaStore = defineStore('resilia', () => {
     const simCheckpoint = ref(localStorage.getItem('resilia_sim_checkpoint') || 'ch1h')
 
     function damageSimHP(amount) {
+        if (isAdmin.value) return simulationHP.value
         simulationHP.value = Math.max(0, simulationHP.value - amount)
         localStorage.setItem('resilia_sim_hp', String(simulationHP.value))
         return simulationHP.value
@@ -1286,7 +1296,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         const record = postTestAttempts.value[moduleId]
         record.attempts++
         record.scores.push(scorePercent)
-        if (scorePercent >= KKM_THRESHOLD) {
+        if (scorePercent >= KKM_THRESHOLD || isAdmin.value) {
             record.passed = true
             return { passed: true, score: scorePercent, attempts: record.attempts }
         }
@@ -1294,10 +1304,8 @@ export const useResiliaStore = defineStore('resilia', () => {
             passed: false,
             score: scorePercent,
             attempts: record.attempts,
-            canRetry: record.attempts < 3,
-            message: record.attempts >= 3
-                ? 'Maximum attempts reached. Please replay the video content with targeted notes.'
-                : `Score: ${scorePercent}%. Need ${KKM_THRESHOLD}% to unlock RPG Quest. ${3 - record.attempts} attempt(s) remaining.`
+            canRetry: true, // Infinite retries for everyone
+            message: `Score: ${scorePercent}%. Need ${KKM_THRESHOLD}% to pass. Infinite attempts remaining.`
         }
     }
 
@@ -2876,7 +2884,7 @@ export const useResiliaStore = defineStore('resilia', () => {
     }
 
     return {
-        isAuthenticated, userEmail,
+        isAuthenticated, userEmail, isAdmin,
         userName, countryCode, onboarded, locale, bio, avatarColor, avatarUrl, joinDate,
         userAge, userGender, hasDisasterExperience, userPersonalization,
         stabilityScore, isStable, soothingModeActive, hasCompletedCheckIn,

@@ -260,8 +260,18 @@
               class="page-btn bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold hover:bg-amber-500 hover:text-white transition-all">
               📖 Replay Story ↺
             </button>
+            <button v-else-if="!selectedChapter.bridgeId && store.completedChapterQuests?.includes(selectedChapter.questId)"
+              @click="openQuest(selectedChapter.questId)"
+              class="page-btn bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold hover:bg-amber-500 hover:text-white transition-all">
+              📖 Replay Quest ↺
+            </button>
+            <button v-else-if="allActsCompleted(selectedChapter) && !selectedChapter.questId && !selectedChapter.bridgeId"
+              @click="startActFlow(selectedChapter, selectedChapter.acts[0], 0)"
+              class="page-btn bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold hover:bg-amber-500 hover:text-white transition-all">
+              📖 Replay Chapter ↺
+            </button>
             
-            <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500 cursor-pointer hover:opacity-80 transition-opacity" @click="openQuest(selectedChapter.questId)">✓ Quest Complete (Replay ↺)</span>
+            <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500 cursor-pointer hover:opacity-80 transition-opacity" @click="openQuest(selectedChapter.questId)">✓ Quest Complete</span>
           </div>
 
           <!-- Locked hint -->
@@ -277,7 +287,7 @@
     <!-- /book-wrapper -->
 
     <!-- ERQ Post-Test -->
-    <div v-if="store.erqCompleted.pre && !store.erqCompleted.post && allChaptersComplete" class="mt-8 animate-slide-up">
+    <div v-if="(store.erqCompleted.pre || store.isAdmin) && !store.erqCompleted.post && allChaptersComplete" class="mt-8 animate-slide-up">
       <div class="dossier-alert border-l-4 border-amber-500 bg-amber-50/50 dark:bg-amber-900/10 rounded-r-2xl p-5">
         <div class="flex items-center gap-4">
           <span class="text-3xl">🎓</span>
@@ -325,7 +335,7 @@ const store = useResiliaStore()
 const completedChapters = computed(() => store.academyChapters.filter(c => c.status === 'completed').length)
 const overallProgress = computed(() => (completedChapters.value / store.academyChapters.length) * 100)
 const totalActsCompleted = computed(() => store.completedActs?.length || 0)
-const allChaptersComplete = computed(() => store.academyChapters.every(c => c.status === 'completed'))
+const allChaptersComplete = computed(() => store.isAdmin || store.academyChapters.every(c => c.status === 'completed'))
 const showSimHP = computed(() => store.academyChapters.some(c => c.chatSimulation && c.status !== 'locked'))
 
 const selectedFolder = ref(null)
@@ -464,12 +474,13 @@ function openFolder(chapter) {
 }
 
 function isChapterLocked(chapter) {
+  if (store.isAdmin) return false
   if (chapter.id === 'ch1' && !store.erqCompleted.pre) return true
   return chapter.status === 'locked'
 }
 
 function canAccessAct(chapterId, actIndex) {
-  if (actIndex === 0) return true
+  if (actIndex === 0 || store.isAdmin) return true
   const chapter = store.academyChapters.find(c => c.id === chapterId)
   if (!chapter?.acts) return false
   const prevAct = chapter.acts[actIndex - 1]
@@ -477,11 +488,13 @@ function canAccessAct(chapterId, actIndex) {
 }
 
 function allActsCompleted(chapter) {
+  if (store.isAdmin) return true
   if (!chapter.acts) return false
   return chapter.acts.every(act => store.isActCompleted(chapter.id, act.id))
 }
 
 function hasCompletedLiaPhase(chapterId, phase) {
+  if (store.isAdmin) return true
   const scores = store.liaEvalScores?.[chapterId]?.[phase]
   return scores && Object.keys(scores).length > 0
 }
