@@ -233,23 +233,26 @@
           </div>
 
           <!-- Bottom actions -->
-          <div v-if="selectedChapter.acts && selectedChapter.status !== 'locked'" class="page-actions">
-            <button v-if="allActsCompleted(selectedChapter) && selectedChapter.questId && !store.completedChapterQuests?.includes(selectedChapter.questId)"
-              @click="openQuest(selectedChapter.questId)"
-              class="page-btn" :style="{ backgroundColor: selectedChapter.color, color: 'white' }">
-              ⚔️ RPG Quest
-            </button>
-            <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500 cursor-pointer hover:opacity-80 transition-opacity" @click="openQuest(selectedChapter.questId)">✓ Quest Complete (Replay ↺)</span>
-
+          <div v-if="selectedChapter.acts && selectedChapter.status !== 'locked'" class="page-actions flex flex-col gap-3">
+            
+            <!-- 1. Talk to Lia (Priority) -->
             <button v-if="allActsCompleted(selectedChapter) && selectedChapter.liaChat?.post && !hasCompletedLiaPhase(selectedChapter.id, 'post')"
               @click="openChat(selectedChapter.id, 'post')"
-              class="page-btn bg-[#E8E5DE] dark:bg-[#2A2620] text-gray-800 dark:text-gray-200 border border-gray-300/50 dark:border-gray-600/50 hover:shadow-md transition-all">
+              class="page-btn bg-[#E8E5DE] dark:bg-[#2A2620] text-gray-800 dark:text-gray-200 border border-gray-300/50 dark:border-gray-600/50 hover:shadow-md transition-all animate-pulse">
               💬 Talk to Lia
             </button>
 
-            <button v-if="selectedChapter.bridgeId && allActsCompleted(selectedChapter) && (!selectedChapter.liaChat?.post || hasCompletedLiaPhase(selectedChapter.id, 'post')) && !store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
+            <!-- 2. RPG Quest (Requires Acts + Lia Post-Chat done) -->
+            <button v-if="allActsCompleted(selectedChapter) && (!selectedChapter.liaChat?.post || hasCompletedLiaPhase(selectedChapter.id, 'post')) && selectedChapter.questId && !store.completedChapterQuests?.includes(selectedChapter.questId)"
+              @click="openQuest(selectedChapter.questId)"
+              class="page-btn animate-pulse" :style="{ backgroundColor: selectedChapter.color, color: 'white', border: 'none' }">
+              ⚔️ RPG Quest
+            </button>
+
+            <!-- 3. Bridge Story (Requires Acts + Lia Post-Chat + RPG Quest done) -->
+            <button v-if="allActsCompleted(selectedChapter) && (!selectedChapter.liaChat?.post || hasCompletedLiaPhase(selectedChapter.id, 'post')) && (!selectedChapter.questId || store.completedChapterQuests?.includes(selectedChapter.questId)) && selectedChapter.bridgeId && !store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
               @click="openBridge(selectedChapter.bridgeId)"
-              class="page-btn bg-amber-500 hover:bg-amber-600 text-white transition-colors shadow-md shadow-amber-500/20">
+              class="page-btn bg-amber-500 hover:bg-amber-600 text-white transition-colors shadow-md shadow-amber-500/20 animate-pulse">
               📖 Continue Story →
             </button>
             <button v-else-if="selectedChapter.bridgeId && store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
@@ -257,6 +260,8 @@
               class="page-btn bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold hover:bg-amber-500 hover:text-white transition-all">
               📖 Replay Story ↺
             </button>
+            
+            <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500 cursor-pointer hover:opacity-80 transition-opacity" @click="openQuest(selectedChapter.questId)">✓ Quest Complete (Replay ↺)</span>
           </div>
 
           <!-- Locked hint -->
