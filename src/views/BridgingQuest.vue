@@ -102,8 +102,8 @@
           <h2 class="font-heading text-2xl font-bold text-ink dark:text-white mb-3">Story Chapter Complete!</h2>
           <p class="text-sm text-gray-400 font-body mb-4">{{ bridgeQuest.title }}</p>
           <template v-if="embedded">
-            <button @click="emit('close')" class="px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-xl font-heading font-bold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-md shadow-teal-500/20">
-              ← Back to Academy
+            <button @click="handleEmbeddedClose" class="px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-xl font-heading font-bold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-md shadow-teal-500/20">
+              Continue to {{ bridgeQuest.to }} →
             </button>
           </template>
           <template v-else>
@@ -211,6 +211,18 @@ function goToNextChapter() {
   } else {
     router.push('/academy')
   }
+}
+
+function handleEmbeddedClose() {
+  const toChapter = bridgeQuest.value?.to
+  if (toChapter) {
+    const idx = store.academyChapters.findIndex(c => c.title.includes(toChapter) || c.id === toChapter.toLowerCase().replace(' ', ''))
+    if (idx >= 0) {
+      emit('close', store.academyChapters[idx].id)
+      return
+    }
+  }
+  emit('close')
 }
 
 onUnmounted(() => {

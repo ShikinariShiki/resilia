@@ -2324,8 +2324,13 @@ export const useResiliaStore = defineStore('resilia', () => {
         isAuthenticated.value = false
         onboarded.value = false
         hasCompletedCheckIn.value = false
-        const keysToRemove = ['resilia_auth', 'resilia_session_ts', 'resilia_email', 'resilia_onboarded', 'resilia_profile', 'resilia_personalization', 'resilia_checkin_date', 'resilia_daily_session', 'resilia_login_streak', 'resilia_login_rewards_collected', 'resilia_reward_history']
+
+        const keysToRemove = Object.keys(localStorage).filter(k => k.startsWith('resilia_') && !['resilia_theme', 'resilia_locale'].includes(k))
         keysToRemove.forEach(k => localStorage.removeItem(k))
+
+        setTimeout(() => {
+            window.location.href = '/auth'
+        }, 100)
     }
 
     // ═══ Hydrate store from Supabase ═══

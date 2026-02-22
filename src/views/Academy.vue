@@ -409,8 +409,11 @@ function openBridge(bridgeId) {
   bridgeMode.value = { bridgeId }
 }
 
-function closeBridge() {
+function closeBridge(nextChapterId) {
   bridgeMode.value = null
+  if (typeof nextChapterId === 'string' && nextChapterId) {
+    selectedFolder.value = nextChapterId
+  }
 }
 
 function handleOpenBridge(payload) {
