@@ -1,15 +1,17 @@
 <template>
-  <div class="max-w-3xl mx-auto">
+  <div class="max-w-3xl mx-auto" :class="{ 'quest-embedded': embedded }">
     <div v-if="!quest" class="text-center py-20">
       <p class="text-4xl mb-4">❌</p>
       <p class="text-gray-400 font-body">Quest not found.</p>
-      <RouterLink to="/academy" class="text-teal-500 font-heading font-bold text-sm mt-4 inline-block hover:underline">← Back to Academy</RouterLink>
+      <button v-if="embedded" @click="emit('close')" class="text-teal-500 font-heading font-bold text-sm mt-4 inline-block hover:underline">← Back to Academy</button>
+      <RouterLink v-else to="/academy" class="text-teal-500 font-heading font-bold text-sm mt-4 inline-block hover:underline">← Back to Academy</RouterLink>
     </div>
 
     <div v-else>
       <!-- Start Screen -->
       <div v-if="!started" class="animate-slide-up">
-        <RouterLink to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block">← Academy</RouterLink>
+        <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block cursor-pointer">← Academy</button>
+        <RouterLink v-else to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block">← Academy</RouterLink>
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 text-center">
           <div class="text-6xl mb-6">{{ quest.cover || '⚔️' }}</div>
           <h1 class="font-heading text-2xl sm:text-3xl font-bold text-ink dark:text-white mb-2">{{ quest.title }}</h1>
@@ -51,7 +53,8 @@
       <div v-else-if="currentStepIndex < quest.steps.length && !questFailed" class="animate-slide-up" :key="currentStepIndex">
         <!-- Top bar with HP -->
         <div class="flex items-center gap-3 mb-6">
-          <RouterLink to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading">← Exit</RouterLink>
+          <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading cursor-pointer bg-transparent border-none">← Exit</button>
+          <RouterLink v-else to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading">← Exit</RouterLink>
           <div class="flex-1 h-1.5 bg-gray-100 dark:bg-slate-700 rounded-full overflow-hidden">
             <div class="h-full bg-gradient-to-r from-teal-400 to-teal-600 rounded-full transition-all duration-500" :style="{ width: stepProgress + '%' }"></div>
           </div>
@@ -92,18 +95,18 @@
         </div>
 
         <!-- Story Step (Chat UI) -->
-        <div v-else class="bg-[#111827] w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-slate-700/80 shadow-2xl flex flex-col h-[650px] max-h-[80vh]">
+        <div v-else class="bg-[#FAFAF8] dark:bg-[#1A1714] w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-amber-200/30 dark:border-amber-800/20 shadow-2xl flex flex-col h-[650px] max-h-[80vh]">
           <!-- Chat Header -->
-          <div class="flex items-center gap-3 p-4 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50">
+          <div class="flex items-center gap-3 p-4 bg-[#F0EDE6] dark:bg-[#211E19] backdrop-blur-md border-b border-amber-200/20 dark:border-amber-800/15">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-teal-400 flex items-center justify-center relative flex-shrink-0">
               <span class="text-xl">👩🏻‍🎓</span>
-              <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-slate-900 rounded-full"></span>
+              <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#F0EDE6] dark:border-[#211E19] rounded-full"></span>
             </div>
             <div>
-              <p class="font-heading font-bold text-white text-sm">Lia</p>
-              <p class="text-[10px] text-green-400 font-body">online</p>
+              <p class="font-heading font-bold text-ink dark:text-white text-sm">Lia</p>
+              <p class="text-[10px] text-green-500 font-body">online</p>
             </div>
-            <div class="ml-auto text-xs font-heading font-bold px-2 py-1 rounded bg-teal-500/20 text-teal-400">
+            <div class="ml-auto text-xs font-heading font-bold px-2 py-1 rounded bg-teal-500/20 text-teal-600 dark:text-teal-400">
                {{ currentStepIndex + 1 }} / {{ quest.steps.length }}
             </div>
           </div>
@@ -112,15 +115,15 @@
           <div class="flex-1 overflow-y-auto p-4 sm:p-5 flex flex-col gap-5">
             <!-- Narrative Pill -->
             <div v-if="currentStep.narrative" class="text-center my-2">
-              <span class="inline-block bg-white/5 text-gray-400 text-[11px] font-body px-4 py-2.5 rounded-2xl max-w-[95%] leading-relaxed italic border border-white/5">
+              <span class="inline-block bg-black/5 dark:bg-white/5 text-gray-500 dark:text-gray-400 text-[11px] font-body px-4 py-2.5 rounded-2xl max-w-[95%] leading-relaxed italic border border-black/5 dark:border-white/5">
                 {{ replaceNames(currentStep.narrative) }}
               </span>
             </div>
 
             <!-- Lia Message Bubble -->
             <div v-if="currentStep.npc" class="flex flex-col gap-1 items-start max-w-[85%] animate-slide-up">
-              <div class="bg-[#374151] text-[#F3F4F6] px-4 py-3 rounded-2xl rounded-tl-sm text-sm font-body leading-relaxed relative border border-slate-600/50">
-                <span v-if="currentStep.emotionLabel" class="text-[9px] text-teal-400 font-bold block mb-1 uppercase tracking-wider">{{ currentStep.emotionLabel }}</span>
+              <div class="bg-[#E8E5DE] dark:bg-[#2A2620] text-ink dark:text-[#E8E0D4] px-4 py-3 rounded-2xl rounded-tl-sm text-sm font-body leading-relaxed relative border border-gray-200/50 dark:border-amber-800/20">
+                <span v-if="currentStep.emotionLabel" class="text-[9px] text-teal-600 dark:text-teal-400 font-bold block mb-1 uppercase tracking-wider">{{ currentStep.emotionLabel }}</span>
                 {{ replaceNames(currentStep.npc) }}
                 <span v-if="currentStep.emotion" class="absolute -top-3 -right-3 text-2xl drop-shadow-md">{{ currentStep.emotion }}</span>
               </div>
@@ -142,26 +145,26 @@
 
             <!-- Feedback Bubble (from Lia) -->
             <div v-if="stepAnswered && selectedOption" class="flex flex-col gap-1 items-start max-w-[85%] mt-2 animate-slide-up" style="animation-delay: 0.1s">
-              <div class="bg-[#374151] text-white px-4 py-3 rounded-2xl rounded-tl-sm text-sm font-body leading-relaxed border"
+              <div class="bg-[#E8E5DE] dark:bg-[#2A2620] text-ink dark:text-white px-4 py-3 rounded-2xl rounded-tl-sm text-sm font-body leading-relaxed border"
                 :class="selectedOption.score >= 3 ? 'border-teal-500/50 shadow-[0_0_15px_rgba(20,184,166,0.15)]' : selectedOption.score >= 1 ? 'border-amber-500/50' : 'border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.15)]'">
-                 <div class="flex items-center gap-1.5 mb-1.5 border-b border-white/10 pb-1.5">
+                 <div class="flex items-center gap-1.5 mb-1.5 border-b border-black/10 dark:border-white/10 pb-1.5">
                     <span class="text-sm shadow-none">{{ selectedOption.score >= 3 ? '🌟' : selectedOption.score >= 1 ? '🤔' : '💔' }}</span>
-                    <span class="text-[10px] font-heading font-bold uppercase tracking-wider" :class="selectedOption.score >= 3 ? 'text-teal-400' : selectedOption.score >= 1 ? 'text-amber-400' : 'text-red-400'">
+                    <span class="text-[10px] font-heading font-bold uppercase tracking-wider" :class="selectedOption.score >= 3 ? 'text-teal-600 dark:text-teal-400' : selectedOption.score >= 1 ? 'text-amber-500 dark:text-amber-400' : 'text-red-500 dark:text-red-400'">
                       {{ selectedOption.score >= 3 ? 'Excellent (+3)' : selectedOption.score >= 1 ? 'Partial (+1)' : 'Missed (-1 HP)' }}
                     </span>
                  </div>
-                 <p class="text-gray-200">{{ replaceNames(selectedOption.feedback) }}</p>
+                 <p class="text-gray-600 dark:text-gray-200">{{ replaceNames(selectedOption.feedback) }}</p>
               </div>
             </div>
           </div>
 
           <!-- Bottom Choices Area -->
-          <div class="p-4 bg-slate-900/95 border-t border-slate-800 backdrop-blur-md shrink-0">
+          <div class="p-4 bg-[#F0EDE6]/95 dark:bg-[#211E19]/95 border-t border-amber-200/20 dark:border-amber-800/15 backdrop-blur-md shrink-0">
             <div v-if="!stepAnswered" class="flex flex-col gap-2.5">
               <p class="text-[10px] font-heading font-bold text-gray-500 uppercase tracking-wider text-center mb-1">Your Response</p>
               <button v-for="(opt, oi) in currentStep.options" :key="oi"
                 @click="selectOption(oi)"
-                class="w-full text-left p-3.5 rounded-xl transition-all border border-teal-500/30 hover:border-teal-400 bg-teal-500/10 hover:bg-teal-500/20 text-teal-50 text-sm font-body leading-relaxed">
+                class="w-full text-left p-3.5 rounded-xl transition-all border border-teal-500/30 hover:border-teal-400 bg-teal-500/10 hover:bg-teal-500/20 text-teal-800 dark:text-teal-50 text-sm font-body leading-relaxed">
                 {{ replaceNames(opt.text) }}
               </button>
             </div>
@@ -198,11 +201,18 @@
               class="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl font-heading font-bold text-sm hover:shadow-lg transition-all">
               🔄 Retry Quest ({{ retriesLeft }} left)
             </button>
+            <button v-else-if="embedded" @click="emit('close')"
+              class="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-heading font-bold text-sm">
+              📺 Rewatch Videos First
+            </button>
             <RouterLink v-else to="/academy"
               class="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-heading font-bold text-sm">
               📺 Rewatch Videos First
             </RouterLink>
-            <RouterLink to="/academy" class="px-6 py-3 bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-gray-300 rounded-xl font-heading font-bold text-sm hover:bg-gray-300 transition-all">
+            <button v-if="embedded" @click="emit('close')" class="px-6 py-3 bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-gray-300 rounded-xl font-heading font-bold text-sm hover:bg-gray-300 transition-all">
+              ← Back
+            </button>
+            <RouterLink v-else to="/academy" class="px-6 py-3 bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-gray-300 rounded-xl font-heading font-bold text-sm hover:bg-gray-300 transition-all">
               ← Back
             </RouterLink>
           </div>
@@ -238,7 +248,10 @@
             </div>
           </div>
           <div class="flex justify-center gap-3">
-            <RouterLink to="/academy" class="px-6 py-3 bg-teal-500 text-white rounded-xl font-heading font-bold text-sm hover:bg-teal-600 transition-colors">
+            <button v-if="embedded" @click="handleQuestComplete" class="px-6 py-3 bg-teal-500 text-white rounded-xl font-heading font-bold text-sm hover:bg-teal-600 transition-colors">
+              ← Back to Academy
+            </button>
+            <RouterLink v-else to="/academy" class="px-6 py-3 bg-teal-500 text-white rounded-xl font-heading font-bold text-sm hover:bg-teal-600 transition-colors">
               ← Back to Academy
             </RouterLink>
           </div>
@@ -253,10 +266,17 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 
+const props = defineProps({
+  propQuestId: { type: String, default: '' },
+  embedded: { type: Boolean, default: false },
+})
+
+const emit = defineEmits(['close'])
+
 const route = useRoute()
 const store = useResiliaStore()
 
-const questId = route.params.id
+const questId = props.propQuestId || route.params.id
 const quest = computed(() => store.chapterQuests?.[questId])
 
 const started = ref(false)
@@ -379,12 +399,22 @@ function retryQuest() {
   currentHP.value = store.MAX_QUEST_HP
 }
 
+function handleQuestComplete() {
+  emit('close')
+}
+
 onUnmounted(() => {
   if (timerInterval) clearInterval(timerInterval)
 })
 </script>
 
 <style scoped>
+.quest-embedded {
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
 .heart-lost {
   animation: heartShatter 0.4s ease-out;
 }

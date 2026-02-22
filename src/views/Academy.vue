@@ -59,9 +59,35 @@
     <!-- ═══════════════════════════════════════ -->
     <!-- HSR-STYLE BOOK LAYOUT (Two-Panel)      -->
     <!-- ═══════════════════════════════════════ -->
-    <div class="book-container" :class="{ 'book-opened': bookOpened, 'book-closed': !bookOpened }">
-      <!-- Book spine divider -->
-      <div class="book-spine"></div>
+    <div class="book-wrapper" :class="{ 'book-opened': bookOpened }">
+      <!-- Left Book Cover (swings left to open) -->
+      <div class="book-cover book-cover-left">
+        <div class="cover-inner">
+          <div class="cover-texture"></div>
+          <div class="cover-title">
+            <span class="cover-icon">📁</span>
+            <span class="cover-label">RESILIA</span>
+            <span class="cover-sub">Mission Dossier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Book Cover (swings right to open) -->
+      <div class="book-cover book-cover-right">
+        <div class="cover-inner">
+          <div class="cover-texture"></div>
+          <div class="cover-title">
+            <span class="cover-icon">🌏</span>
+            <span class="cover-label">ASEAN</span>
+            <span class="cover-sub">Field Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actual book content (always present behind covers) -->
+      <div class="book-container">
+        <!-- Book spine divider -->
+        <div class="book-spine"></div>
 
       <!-- LEFT PANEL — Chapter File Tabs (like book chapters/map tabs) -->
       <div class="book-left">
@@ -111,14 +137,26 @@
 
       <!-- RIGHT PANEL — Chapter Page (acts & details) -->
       <div class="book-right">
+        <!-- Embedded ChapterQuest overlay -->
+        <div v-if="questMode" class="book-chat-panel" :key="'quest-' + questMode.questId">
+          <ChapterQuest
+            :propQuestId="questMode.questId"
+            :embedded="true"
+            @close="closeQuest"
+          />
+        </div>
+
         <!-- Embedded ActLesson overlay -->
-        <div v-if="actMode" class="book-chat-panel" :key="'act-' + actMode.chapterId + '-' + actMode.actId">
+        <div v-else-if="actMode" class="book-chat-panel" :key="'act-' + actMode.chapterId + '-' + actMode.actId">
           <ActLesson
             :propChapterId="actMode.chapterId"
             :propActId="actMode.actId"
             :embedded="true"
             @close="closeAct"
             @next-act="handleNextAct"
+            @open-quest="handleOpenQuest"
+            @open-bridge="handleOpenBridge"
+            @open-lia-post="handleOpenLiaPost"
           />
         </div>
 
@@ -133,6 +171,15 @@
           />
         </div>
 
+        <!-- Embedded BridgingQuest overlay -->
+        <div v-else-if="bridgeMode" class="book-chat-panel" :key="'bridge-' + bridgeMode.bridgeId">
+          <BridgingQuest
+            :propBridgeId="bridgeMode.bridgeId"
+            :embedded="true"
+            @close="closeBridge"
+          />
+        </div>
+
         <!-- Empty state -->
         <div v-else-if="!selectedFolder" class="book-empty">
           <div class="book-empty-icon">📂</div>
@@ -141,7 +188,7 @@
         </div>
 
         <!-- Chapter page content -->
-        <div v-else-if="selectedChapter && !chatMode && !actMode" class="book-page" :key="selectedFolder">
+        <div v-else-if="selectedChapter && !chatMode && !actMode && !questMode && !bridgeMode" class="book-page" :key="selectedFolder">
           <!-- Page header -->
           <div class="page-header" :style="{ borderBottomColor: selectedChapter.color + '40' }">
             <span class="page-icon">{{ selectedChapter.icon }}</span>
@@ -156,26 +203,8 @@
             <span v-for="dest in selectedChapter.destinations" :key="dest" class="dest-tag">{{ dest }}</span>
           </div>
 
-          <!-- Lia Chat gate -->
-          <div v-if="selectedChapter.liaChat" class="page-section">
-            <div v-if="isLiaGated(selectedChapter) && !hasCompletedLiaPhase(selectedChapter.id, 'pre')" class="page-lia-gate">
-              <p class="text-[11px] text-teal-600 dark:text-teal-400 font-body mb-2">🔒 Chat with Lia to unlock acts</p>
-              <button @click="openChat(selectedChapter.id, 'pre')"
-                class="page-btn bg-gradient-to-r from-teal-500 to-teal-600 text-white">
-                💬 Chat with Lia
-              </button>
-            </div>
-            <button
-              v-else-if="!hasCompletedLiaPhase(selectedChapter.id, 'pre')"
-              @click="openChat(selectedChapter.id, 'pre')"
-              class="page-btn bg-gradient-to-r from-teal-500 to-teal-600 text-white">
-              💬 Chat with Lia
-            </button>
-            <span v-else class="page-status-badge text-teal-500">✓ Lia chat complete</span>
-          </div>
-
-          <!-- Acts list -->
-          <div v-if="selectedChapter.acts && !(isLiaGated(selectedChapter) && !hasCompletedLiaPhase(selectedChapter.id, 'pre'))" class="page-acts">
+          <!-- Acts list (always visible — Lia chat is now merged into act flow) -->
+          <div v-if="selectedChapter.acts" class="page-acts">
             <div v-for="(act, ai) in selectedChapter.acts" :key="act.id" class="page-act"
               :class="{
                 'act-done': store.isActCompleted(selectedChapter.id, act.id),
@@ -191,7 +220,7 @@
                 <span class="act-duration">{{ act.duration }}</span>
               </div>
               <button v-if="canAccessAct(selectedChapter.id, ai) && !store.isActCompleted(selectedChapter.id, act.id)"
-                @click="act.chatSimulation ? openChat(selectedChapter.id, '', act.id) : openAct(selectedChapter.id, act.id)"
+                @click="startActFlow(selectedChapter, act, ai)"
                 class="act-start-btn" :style="{ color: selectedChapter.color }">
                 {{ act.chatSimulation ? '💬 Play' : 'Start' }} →
               </button>
@@ -201,25 +230,20 @@
 
           <!-- Bottom actions -->
           <div v-if="selectedChapter.acts && selectedChapter.status !== 'locked'" class="page-actions">
-            <RouterLink v-if="allActsCompleted(selectedChapter) && selectedChapter.questId && !store.completedChapterQuests?.includes(selectedChapter.questId)"
-              :to="`/academy/quest/${selectedChapter.questId}`"
+            <button v-if="allActsCompleted(selectedChapter) && selectedChapter.questId && !store.completedChapterQuests?.includes(selectedChapter.questId)"
+              @click="openQuest(selectedChapter.questId)"
               class="page-btn" :style="{ backgroundColor: selectedChapter.color, color: 'white' }">
               ⚔️ RPG Quest
-            </RouterLink>
+            </button>
             <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500">✓ Quest Complete</span>
 
-            <button
-              v-if="selectedChapter.liaChat && store.completedChapterQuests?.includes(selectedChapter.questId) && !hasCompletedLiaPhase(selectedChapter.id, 'post')"
-              @click="openChat(selectedChapter.id, 'post')"
-              class="page-btn bg-amber-500 text-white">
-              💬 Wrap-up with Lia
-            </button>
 
-            <RouterLink v-if="selectedChapter.bridgeId && hasCompletedLiaPhase(selectedChapter.id, 'post') && !store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
-              :to="`/academy/bridging/${selectedChapter.bridgeId}`"
+
+            <button v-if="selectedChapter.bridgeId && hasCompletedLiaPhase(selectedChapter.id, 'post') && !store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
+              @click="openBridge(selectedChapter.bridgeId)"
               class="page-btn bg-amber-500 text-white">
               📖 Continue Story →
-            </RouterLink>
+            </button>
           </div>
 
           <!-- Locked hint -->
@@ -229,7 +253,10 @@
           </div>
         </div>
       </div>
+      </div>
+      <!-- /book-container -->
     </div>
+    <!-- /book-wrapper -->
 
     <!-- ERQ Post-Test -->
     <div v-if="store.erqCompleted.pre && !store.erqCompleted.post && allChaptersComplete" class="mt-8 animate-slide-up">
@@ -271,6 +298,8 @@ import { useResiliaStore } from '../stores/resiliaStore'
 import TourGuide from '../components/TourGuide.vue'
 import LiaChat from './LiaChat.vue'
 import ActLesson from './ActLesson.vue'
+import ChapterQuest from './ChapterQuest.vue'
+import BridgingQuest from './BridgingQuest.vue'
 
 const store = useResiliaStore()
 
@@ -293,18 +322,55 @@ onMounted(() => {
 const chatMode = ref(null)
 // Act mode state — when set, ActLesson is embedded in right panel
 const actMode = ref(null)
+// Quest mode state — when set, ChapterQuest is embedded in right panel
+const questMode = ref(null)
+// Bridge mode state — when set, BridgingQuest is embedded in right panel
+const bridgeMode = ref(null)
+
+// Pending action after Lia chat closes (auto-transition from pre-chat → act)
+const pendingAfterChat = ref(null)
 
 function openChat(chapterId, phase, actId) {
   actMode.value = null
+  questMode.value = null
+  bridgeMode.value = null
   chatMode.value = { chapterId, phase: phase || '', actId: actId || '' }
 }
 
 function closeChat() {
   chatMode.value = null
+  // If there's a pending action (e.g. Lia pre-chat just finished → auto-open act)
+  if (pendingAfterChat.value) {
+    const pending = pendingAfterChat.value
+    pendingAfterChat.value = null
+    if (pending.chatSimulation) {
+      openChat(pending.chapterId, '', pending.actId)
+    } else {
+      openAct(pending.chapterId, pending.actId)
+    }
+  }
+}
+
+// Smart act flow: opens Lia pre-chat before Act 1 if needed
+function startActFlow(chapter, act, actIndex) {
+  // If this is Act 1, chapter has liaChat.pre, and pre-chat not completed → open pre-chat first
+  if (actIndex === 0 && chapter.liaChat?.pre && !hasCompletedLiaPhase(chapter.id, 'pre')) {
+    pendingAfterChat.value = { chapterId: chapter.id, actId: act.id, chatSimulation: act.chatSimulation }
+    openChat(chapter.id, 'pre')
+    return
+  }
+  // Otherwise open act/simulation directly
+  if (act.chatSimulation) {
+    openChat(chapter.id, '', act.id)
+  } else {
+    openAct(chapter.id, act.id)
+  }
 }
 
 function openAct(chapterId, actId) {
   chatMode.value = null
+  questMode.value = null
+  bridgeMode.value = null
   actMode.value = { chapterId, actId }
 }
 
@@ -321,6 +387,39 @@ function handleNextAct(payload) {
   }
 }
 
+function openQuest(questId) {
+  chatMode.value = null
+  actMode.value = null
+  questMode.value = { questId }
+}
+
+function closeQuest() {
+  questMode.value = null
+}
+
+function handleOpenQuest(payload) {
+  openQuest(payload.questId)
+}
+
+function openBridge(bridgeId) {
+  chatMode.value = null
+  actMode.value = null
+  questMode.value = null
+  bridgeMode.value = { bridgeId }
+}
+
+function closeBridge() {
+  bridgeMode.value = null
+}
+
+function handleOpenBridge(payload) {
+  openBridge(payload.bridgeId)
+}
+
+function handleOpenLiaPost(payload) {
+  openChat(payload.chapterId, 'post')
+}
+
 function chapterDisplayId(id) {
   if (id === 'ch1h') return '1.5'
   if (id === 'ch2h') return '2.5'
@@ -333,6 +432,8 @@ function openFolder(chapter) {
   if (isChapterLocked(chapter)) return
   chatMode.value = null // close any open chat
   actMode.value = null  // close any open act
+  questMode.value = null // close any open quest
+  bridgeMode.value = null // close any open bridge
   if (selectedFolder.value === chapter.id) {
     selectedFolder.value = null
     return
@@ -397,7 +498,181 @@ const academyTourSteps = [
 }
 
 /* ═══════════════════════════════════════ */
-/* BOOK CONTAINER — HSR "As I've Written" */
+/* BOOK WRAPPER — Two-Cover Opening       */
+/* ═══════════════════════════════════════ */
+.book-wrapper {
+  position: relative;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+
+/* ── Book Covers ── */
+.book-cover {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 20;
+  transition: transform 2.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 2.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 1.2s ease 1.6s;
+  backface-visibility: hidden;
+  pointer-events: auto;
+}
+
+.book-cover-left {
+  left: 0;
+  transform-origin: left center;
+  border-radius: 24px 0 0 24px;
+}
+
+.book-cover-right {
+  right: 0;
+  transform-origin: right center;
+  border-radius: 0 24px 24px 0;
+}
+
+.cover-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-texture {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Paper grain pattern */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(139,115,85,0.03) 2px,
+      rgba(139,115,85,0.03) 4px
+    ),
+    /* Warm parchment base */
+    linear-gradient(145deg, #C4A97D 0%, #A8906A 25%, #96805A 50%, #B09572 75%, #C4A97D 100%);
+  border-radius: inherit;
+}
+
+/* Page edge detail — visible thin line at the hinge */
+.book-cover-left .cover-inner::after,
+.book-cover-right .cover-inner::after {
+  content: '';
+  position: absolute;
+  top: 4%;
+  bottom: 4%;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    rgba(200,180,140,0.0) 0%,
+    rgba(200,180,140,0.6) 15%,
+    rgba(180,160,120,0.8) 50%,
+    rgba(200,180,140,0.6) 85%,
+    rgba(200,180,140,0.0) 100%
+  );
+  z-index: 3;
+}
+
+.book-cover-left .cover-inner::after {
+  right: 0;
+}
+.book-cover-right .cover-inner::after {
+  left: 0;
+}
+
+.book-cover-left .cover-texture {
+  box-shadow:
+    inset -6px 0 24px rgba(80,60,30,0.25),
+    inset 0 0 60px rgba(80,60,30,0.08),
+    3px 0 12px rgba(80,60,30,0.12);
+}
+
+.book-cover-right .cover-texture {
+  box-shadow:
+    inset 6px 0 24px rgba(80,60,30,0.25),
+    inset 0 0 60px rgba(80,60,30,0.08),
+    -3px 0 12px rgba(80,60,30,0.12);
+}
+
+.cover-title {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 1px 6px rgba(60,40,10,0.35);
+}
+
+.cover-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(60,40,10,0.25));
+}
+
+.cover-label {
+  font-family: var(--font-heading, 'Space Grotesk', sans-serif);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #F5E6C8;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.cover-sub {
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.7rem;
+  color: rgba(245,230,200,0.6);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* ── Opened State — slow, natural page turn ── */
+.book-opened .book-cover-left {
+  transform: rotateY(-160deg);
+  opacity: 0;
+  pointer-events: none;
+  animation: pageFlutterLeft 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.book-opened .book-cover-right {
+  transform: rotateY(160deg);
+  opacity: 0;
+  pointer-events: none;
+  animation: pageFlutterRight 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+/* Gentle page flutter — mimics real paper catching air */
+@keyframes pageFlutterLeft {
+  0%   { transform: rotateY(0deg);    opacity: 1; }
+  15%  { transform: rotateY(-12deg);  opacity: 1; }
+  35%  { transform: rotateY(-60deg);  opacity: 1; }
+  55%  { transform: rotateY(-120deg); opacity: 0.8; }
+  75%  { transform: rotateY(-150deg); opacity: 0.4; }
+  100% { transform: rotateY(-160deg); opacity: 0; }
+}
+
+@keyframes pageFlutterRight {
+  0%   { transform: rotateY(0deg);    opacity: 1; }
+  15%  { transform: rotateY(12deg);   opacity: 1; }
+  35%  { transform: rotateY(60deg);   opacity: 1; }
+  55%  { transform: rotateY(120deg);  opacity: 0.8; }
+  75%  { transform: rotateY(150deg);  opacity: 0.4; }
+  100% { transform: rotateY(160deg);  opacity: 0; }
+}
+
+.book-opened .book-container {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ═══════════════════════════════════════ */
+/* BOOK CONTAINER — Content Inside        */
 /* ═══════════════════════════════════════ */
 .book-container {
   display: flex;
@@ -411,23 +686,10 @@ const academyTourSteps = [
     0 1px 3px rgba(0,0,0,0.04),
     inset 0 1px 0 rgba(255,255,255,0.8);
   position: relative;
-  /* Animation base */
-  transform-origin: left center;
-  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Book closed state */
-.book-closed {
+  /* Starts hidden, fades in when covers open */
   opacity: 0;
-  transform: perspective(1200px) rotateY(-60deg) scaleX(0.3);
-  filter: blur(4px);
-}
-
-/* Book opened state */
-.book-opened {
-  opacity: 1;
-  transform: perspective(1200px) rotateY(0deg) scaleX(1);
-  filter: blur(0);
+  transform: scale(0.97);
+  transition: opacity 1s ease 0.8s, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
 }
 
 :root.dark .book-container,
@@ -438,6 +700,23 @@ const academyTourSteps = [
     0 4px 24px rgba(0,0,0,0.3),
     0 1px 3px rgba(0,0,0,0.2),
     inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* Dark mode cover texture */
+:root.dark .cover-texture,
+.dark .cover-texture {
+  background:
+    linear-gradient(145deg, #2A231A 0%, #1E1812 30%, #16120D 60%, #241E16 100%);
+}
+
+:root.dark .cover-label,
+.dark .cover-label {
+  color: #C8B896;
+}
+
+:root.dark .cover-sub,
+.dark .cover-sub {
+  color: rgba(200,184,150,0.5);
 }
 
 /* Book spine */
@@ -880,9 +1159,15 @@ const academyTourSteps = [
 /* RESPONSIVE — stack vertically on mobile */
 /* ═══════════════════════════════════════ */
 @media (max-width: 768px) {
+  .book-cover {
+    display: none;
+  }
+
   .book-container {
     flex-direction: column;
     min-height: auto;
+    opacity: 1;
+    transform: scale(1);
   }
 
   .book-left {

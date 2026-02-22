@@ -197,6 +197,9 @@ const loginPassword = ref('')
 const showToS = ref(false)
 const showPrivacy = ref(false)
 
+// Loading state
+const isLoading = ref(false)
+
 function checkName() {
   nameError.value = validateDisplayName(regName.value) || ''
 }
@@ -207,10 +210,11 @@ const canRegister = computed(() => {
     regPassword.value.length >= 6 &&
     regPassword.value === regConfirm.value &&
     agreedToS.value &&
-    !nameError.value
+    !nameError.value &&
+    !isLoading.value
 })
 
-function handleRegister() {
+async function handleRegister() {
   formError.value = ''
   const nameErr = validateDisplayName(regName.value)
   if (nameErr) { nameError.value = nameErr; return }
@@ -219,28 +223,68 @@ function handleRegister() {
   if (regPassword.value !== regConfirm.value) { formError.value = 'Passwords do not match'; return }
   if (!agreedToS.value) { formError.value = 'You must agree to the Terms of Service'; return }
 
-  store.registerUser(regEmail.value, regPassword.value, regName.value)
-  router.push('/onboarding')
-}
-
-function handleLogin() {
-  formError.value = ''
-  if (!loginEmail.value || !loginPassword.value) { formError.value = 'Please fill in all fields'; return }
-
-  const success = store.loginUser(loginEmail.value, loginPassword.value)
-  if (success) {
-    router.push(store.onboarded ? '/home' : '/onboarding')
-  } else {
-    formError.value = 'Invalid email or password'
+  isLoading.value = true
+  try {
+    const result = await store.registerUser(regEmail.value, regPassword.value, regName.value)
+    if (result?.error) {
+      formError.value = result.error
+      return
+    }
+    router.push('/onboarding')
+  } catch (err) {
+    formError.value = 'Registration failed. Please try again.'
+    console.error('[Auth] Register error:', err)
+  } finally {
+    isLoading.value = false
   }
 }
 
-function handleGoogleAuth() {
-  // Mock Google authentication
-  const mockEmail = 'user@gmail.com'
-  const mockName = 'RESILIA User'
-  store.registerUser(mockEmail, 'google-auth', mockName)
-  router.push(store.onboarded ? '/home' : '/onboarding')
+async function handleLogin() {
+  formError.value = ''
+  if (!loginEmail.value || !loginPassword.value) { formError.value = 'Please fill in all fields'; return }
+
+  isLoading.value = true
+  try {
+    const result = await store.loginUser(loginEmail.value, loginPassword.value)
+    if (result?.error) {
+      formError.value = result.error
+      return
+    }
+    if (result?.success) {
+      router.push(store.onboarded ? '/home' : '/onboarding')
+    } else {
+      formError.value = 'Invalid email or password'
+    }
+  } catch (err) {
+    formError.value = 'Login failed. Please try again.'
+    console.error('[Auth] Login error:', err)
+  } finally {
+    isLoading.value = false
+  }
+}
+
+async function handleGoogleAuth() {
+  isLoading.value = true
+  try {
+    const result = await store.loginWithGoogle()
+    if (result?.error) {
+      // If Supabase not configured, fall back to mock
+      if (result.error === 'Supabase not configured') {
+        const mockEmail = 'user@gmail.com'
+        const mockName = 'RESILIA User'
+        await store.registerUser(mockEmail, 'google-auth', mockName)
+        router.push(store.onboarded ? '/home' : '/onboarding')
+      } else {
+        formError.value = result.error
+      }
+    }
+    // OAuth redirects — no need to handle success here
+  } catch (err) {
+    formError.value = 'Google sign-in failed. Please try again.'
+    console.error('[Auth] Google error:', err)
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 

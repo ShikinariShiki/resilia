@@ -38,13 +38,16 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue'
-import { useRoute, RouterView } from 'vue-router'
+import { useRoute, useRouter, RouterView } from 'vue-router'
 import { useResiliaStore } from './stores/resiliaStore'
 import NavSidebar from './components/NavSidebar.vue'
 import TopBar from './components/TopBar.vue'
+import { onAuthStateChange, getSession } from './services/authService'
+import { isSupabaseConfigured } from './lib/supabaseClient'
 
 const store = useResiliaStore()
 const route = useRoute()
+const router = useRouter()
 const sidebarCollapsed = ref(false)
 const mobileMenuOpen = ref(false)
 const windowWidth = ref(1024)
@@ -53,11 +56,61 @@ function onResize() {
   windowWidth.value = window.innerWidth
   if (windowWidth.value >= 768) mobileMenuOpen.value = false
 }
-onMounted(() => {
+onMounted(async () => {
   windowWidth.value = window.innerWidth
   window.addEventListener('resize', onResize)
+
+  // ═══ Supabase: Restore session on app load ═══
+  if (isSupabaseConfigured()) {
+    const { session, user } = await getSession()
+    if (session && user) {
+      store.isAuthenticated = true
+      store.userEmail = user.email
+      await store.initFromSupabase(user.id)
+      // If not onboarded but authenticated, go to onboarding
+      if (!store.onboarded && route.name !== 'onboarding') {
+        router.push('/onboarding')
+      }
+    }
+  }
 })
 onUnmounted(() => window.removeEventListener('resize', onResize))
+
+// ═══ Supabase: Listen for auth state changes ═══
+if (isSupabaseConfigured()) {
+  onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_IN' && session?.user) {
+      store.isAuthenticated = true
+      store.userEmail = session.user.email
+
+      // Extract Google profile photo and name from user metadata
+      const meta = session.user.user_metadata || {}
+      if (meta.avatar_url) {
+        store.avatarUrl = meta.avatar_url
+      }
+      // Extract first name from Google full_name (e.g. "John Doe" → "John")
+      const googleName = meta.full_name || meta.name || ''
+      
+      await store.initFromSupabase(session.user.id)
+      
+      // If store didn't already have a display name, use Google's
+      if (!store.userName && googleName) {
+        store.userName = googleName.split(' ')[0]
+      }
+      
+      // Sync the Google avatar + name to Supabase
+      store.syncToSupabase()
+      
+      // Route based on onboarding state
+      if (!store.onboarded) router.push('/onboarding')
+      else router.push('/home')
+    } else if (event === 'SIGNED_OUT') {
+      store.isAuthenticated = false
+      store.supabaseUserId = null
+      router.push('/auth')
+    }
+  })
+}
 
 // Dark mode: toggle class on <html> for Tailwind dark: variants
 watchEffect(() => {
@@ -68,7 +121,7 @@ watchEffect(() => {
   }
 })
 
-const fullscreenRoutes = ['landing', 'onboarding', 'journal', 'soothing', 'terms', 'privacy']
+const fullscreenRoutes = ['landing', 'auth', 'onboarding', 'journal', 'soothing', 'terms', 'privacy']
 const isFullscreenRoute = computed(() => fullscreenRoutes.includes(route.name))
 const isMobile = computed(() => windowWidth.value < 768)
 </script>

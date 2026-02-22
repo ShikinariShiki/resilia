@@ -1,5 +1,5 @@
 <template>
-  <div class="landing-root min-h-screen overflow-x-hidden" :class="scrollY > 0 ? 'scrolled' : ''">
+  <div class="landing-root dark min-h-screen overflow-x-hidden bg-[#050505]" :class="scrollY > 0 ? 'scrolled' : ''">
     <!-- Floating Navbar -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-apple"
       :class="scrollY > 50 ? 'bg-white/85 dark:bg-[#0A0A0A]/85 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-white/5' : 'bg-transparent border-b border-transparent'">
@@ -14,11 +14,35 @@
         <div class="flex items-center gap-2 sm:gap-5">
           <a href="#why-resilia" @click.prevent="scrollTo('why-resilia')" class="text-sm font-heading font-medium text-gray-500 hover:text-teal-600 cursor-pointer transition-colors hidden md:block">Why RESILIA</a>
           <a href="#features" @click.prevent="scrollTo('features')" class="text-sm font-heading font-medium text-gray-500 hover:text-teal-600 cursor-pointer transition-colors hidden md:block">How it Works</a>
+
+          <!-- Language Switcher -->
+          <div class="relative" ref="langDropdownRef">
+            <button @click="langOpen = !langOpen" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-heading font-bold text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300">
+              <span class="text-base">{{ currentLangFlag }}</span>
+              <span class="hidden sm:inline">{{ currentLangLabel }}</span>
+              <svg class="w-3 h-3 transition-transform duration-300" :class="langOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <Transition name="dropdown">
+              <div v-if="langOpen" class="absolute right-0 top-full mt-2 w-48 bg-[#1A1A1A]/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden z-50">
+                <div class="py-2 max-h-[320px] overflow-y-auto hide-scrollbar">
+                  <button v-for="lang in availableLangs" :key="lang.code"
+                    @click="setLandingLocale(lang.code)"
+                    class="w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm font-heading transition-all duration-200"
+                    :class="landingLocale === lang.code ? 'text-teal-400 bg-teal-500/10' : 'text-gray-400 hover:text-white hover:bg-white/5'">
+                    <span class="text-base">{{ lang.flag }}</span>
+                    <span>{{ lang.label }}</span>
+                    <span v-if="landingLocale === lang.code" class="ml-auto text-teal-400">✓</span>
+                  </button>
+                </div>
+              </div>
+            </Transition>
+          </div>
+
           <RouterLink v-if="store.onboarded" to="/home" class="text-sm font-heading font-bold text-teal-600 hover:text-teal-700 transition-colors hidden sm:block">
             Dashboard →
           </RouterLink>
           <button @click="getStarted" class="nav-cta-btn px-6 py-2.5 rounded-2xl font-heading font-bold text-sm transition-all duration-500">
-            {{ store.onboarded ? $t('common.openApp') : $t('common.getStarted') }}
+            {{ store.onboarded ? lt('common.openApp') : lt('common.getStarted') }}
           </button>
         </div>
       </div>
@@ -42,29 +66,29 @@
           <div class="hero-badge" :class="heroReady ? 'hero-badge-visible' : ''">
             <span class="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-500/8 border border-teal-500/15 rounded-full text-xs font-heading font-bold text-teal-600 backdrop-blur-sm">
               <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse-soft"></span>
-              {{ $t('landing.forAsean') }}
+              {{ lt('landing.forAsean') }}
             </span>
           </div>
 
           <!-- Kinetic headline with word-by-word reveal -->
           <h1 class="font-heading text-[clamp(2.5rem,6vw,5rem)] font-bold text-ink dark:text-white leading-[1.06] mt-6 mb-8">
-            <span class="kinetic-word" :class="heroReady ? 'kinetic-visible' : ''" style="--delay: 0.1s">{{ $t('landing.hero1') }}</span><br>
-            <span class="kinetic-word kinetic-gradient-teal" :class="heroReady ? 'kinetic-visible' : ''" style="--delay: 0.25s">{{ $t('landing.hero2') }}</span><br>
-            <span class="kinetic-word kinetic-gradient-orange" :class="heroReady ? 'kinetic-visible' : ''" style="--delay: 0.4s">{{ $t('landing.hero3') }}</span>
+            <span class="kinetic-word" :class="heroReady ? 'kinetic-visible' : ''" style="--delay: 0.1s">{{ lt('landing.hero1') }}</span><br>
+            <span class="kinetic-word kinetic-gradient-teal" :class="heroReady ? 'kinetic-visible' : ''" style="--delay: 0.25s">{{ lt('landing.hero2') }}</span><br>
+            <span class="kinetic-word kinetic-gradient-orange" :class="heroReady ? 'kinetic-visible' : ''" style="--delay: 0.4s">{{ lt('landing.hero3') }}</span>
           </h1>
 
           <p class="hero-desc text-gray-500 dark:text-gray-400 font-body text-lg md:text-xl leading-relaxed mb-10 max-w-lg"
             :class="heroReady ? 'hero-desc-visible' : ''">
-            {{ $t('landing.heroDesc') }}
+            {{ lt('landing.heroDesc') }}
           </p>
 
           <div class="hero-actions flex flex-wrap gap-4" :class="heroReady ? 'hero-actions-visible' : ''">
             <button @click="getStarted" class="group relative px-8 py-4 bg-ink dark:bg-white text-white dark:text-ink rounded-2xl font-heading font-bold text-base overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-ink/20 hover:-translate-y-1">
-              <span class="relative z-10">{{ $t('landing.startTraining') }}</span>
+              <span class="relative z-10">{{ lt('landing.startTraining') }}</span>
               <div class="absolute inset-0 bg-gradient-to-r from-teal-500 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </button>
             <a href="#why-resilia" @click.prevent="scrollTo('why-resilia')" class="px-8 py-4 bg-gray-100/80 dark:bg-slate-800/80 text-ink dark:text-white rounded-2xl font-heading font-bold cursor-pointer text-base hover:bg-gray-200/80 dark:hover:bg-slate-700/80 transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5">
-              {{ $t('landing.learnMore') }}
+              {{ lt('landing.learnMore') }}
             </a>
           </div>
         </div>
@@ -123,8 +147,8 @@
 
       <div class="text-center mb-20 reveal-base" :class="whyVisible ? 'reveal-visible' : 'reveal-hidden'">
         <p class="text-xs font-heading font-bold text-teal-500 uppercase tracking-[0.2em] mb-4">Why RESILIA</p>
-        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ $t('landing.whyTitle') }}</h2>
-        <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ $t('landing.whyDesc') }}</p>
+        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.whyTitle') }}</h2>
+        <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.whyDesc') }}</p>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
@@ -149,8 +173,8 @@
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="howVisible ? 'reveal-visible' : 'reveal-hidden'">
         <p class="text-xs font-heading font-bold text-orange-500 uppercase tracking-[0.2em] mb-4">How It Works</p>
-        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ $t('landing.howTitle') }}</h2>
-        <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ $t('landing.howDesc') }}</p>
+        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.howTitle') }}</h2>
+        <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.howDesc') }}</p>
       </div>
 
       <div class="max-w-5xl mx-auto">
@@ -193,8 +217,8 @@
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-16 reveal-base" :class="tiersVisible ? 'reveal-visible' : 'reveal-hidden'">
         <p class="text-xs font-heading font-bold text-purple-500 uppercase tracking-[0.2em] mb-4">Progression System</p>
-        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ $t('landing.roadmapTitle') }}</h2>
-        <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ $t('landing.roadmapDesc') }}</p>
+        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.roadmapTitle') }}</h2>
+        <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.roadmapDesc') }}</p>
       </div>
 
       <div class="w-full relative py-10">
@@ -280,8 +304,8 @@
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="testVisible ? 'reveal-visible' : 'reveal-hidden'">
         <p class="text-xs font-heading font-bold text-teal-500 uppercase tracking-[0.2em] mb-4">Testimonials</p>
-        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ $t('landing.voicesTitle') }}</h2>
-        <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ $t('landing.voicesDesc') }}</p>
+        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.voicesTitle') }}</h2>
+        <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.voicesDesc') }}</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
@@ -313,7 +337,7 @@
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="faqVisible ? 'reveal-visible' : 'reveal-hidden'">
         <p class="text-xs font-heading font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">FAQ</p>
-        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ $t('landing.faqTitle') }}</h2>
+        <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.faqTitle') }}</h2>
       </div>
       <div class="max-w-2xl mx-auto space-y-3">
         <div v-for="(faq, i) in faqs" :key="i"
@@ -347,11 +371,11 @@
       <div class="text-center relative" style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
         <div class="reveal-base" :class="ctaVisible ? 'reveal-visible' : 'reveal-hidden'">
           <p class="text-xs font-heading font-bold text-teal-400/70 uppercase tracking-[0.2em] mb-6">Ready to Begin?</p>
-          <h2 class="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight max-w-3xl mx-auto">{{ $t('landing.ctaTitle') }}</h2>
-          <p class="text-gray-500 font-body text-lg mb-14 max-w-lg mx-auto leading-relaxed">{{ $t('landing.ctaDesc') }}</p>
+          <h2 class="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight max-w-3xl mx-auto">{{ lt('landing.ctaTitle') }}</h2>
+          <p class="text-gray-500 font-body text-lg mb-14 max-w-lg mx-auto leading-relaxed">{{ lt('landing.ctaDesc') }}</p>
           <button @click="getStarted" class="group relative px-12 py-5 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-2xl font-heading font-bold text-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-teal-500/30 hover:-translate-y-1">
             <span class="relative z-10 flex items-center gap-2">
-              {{ $t('landing.ctaBtn') }}
+              {{ lt('landing.ctaBtn') }}
               <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
             <div class="absolute inset-0 bg-gradient-to-r from-teal-300 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -374,21 +398,32 @@
           </div>
         </div>
         <div class="flex items-center gap-6">
-          <RouterLink to="/terms" class="text-xs text-gray-500 font-body hover:text-gray-300 transition-colors">{{ $t('landing.footerTerms') }}</RouterLink>
-          <RouterLink to="/privacy" class="text-xs text-gray-500 font-body hover:text-gray-300 transition-colors">{{ $t('landing.footerPrivacy') }}</RouterLink>
+          <RouterLink to="/terms" class="text-xs text-gray-500 font-body hover:text-gray-300 transition-colors">{{ lt('landing.footerTerms') }}</RouterLink>
+          <RouterLink to="/privacy" class="text-xs text-gray-500 font-body hover:text-gray-300 transition-colors">{{ lt('landing.footerPrivacy') }}</RouterLink>
         </div>
-        <p class="text-xs text-gray-600 font-body">{{ $t('landing.footerCopyright') }}</p>
+        <p class="text-xs text-gray-600 font-body">{{ lt('landing.footerCopyright') }}</p>
       </div>
     </footer>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, reactive, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import { useI18n } from '../i18n'
 import AppleScrollytelling from '../components/AppleScrollytelling.vue'
+
+// Locale messages for landing-specific translation
+import en from '../locales/en'
+import idLocale from '../locales/id'
+import th from '../locales/th'
+import vi from '../locales/vi'
+import ms from '../locales/ms'
+import tl from '../locales/tl'
+import my from '../locales/my'
+import km from '../locales/km'
+import lo from '../locales/lo'
 
 // Phosphor Icons
 import {
@@ -413,6 +448,65 @@ import {
 const store = useResiliaStore()
 const router = useRouter()
 const { t } = useI18n()
+
+// ── Landing-specific locale (separate from app locale) ──
+const landingMessages = { en, id: idLocale, th, vi, ms, tl, my, km, lo }
+const landingLocale = ref(localStorage.getItem('resilia_landing_locale') || 'en')
+const langOpen = ref(false)
+const langDropdownRef = ref(null)
+
+const availableLangs = [
+  { code: 'en', flag: '🇬🇧', label: 'English' },
+  { code: 'id', flag: '🇮🇩', label: 'Bahasa Indonesia' },
+  { code: 'th', flag: '🇹🇭', label: 'ภาษาไทย' },
+  { code: 'vi', flag: '🇻🇳', label: 'Tiếng Việt' },
+  { code: 'ms', flag: '🇲🇾', label: 'Bahasa Melayu' },
+  { code: 'tl', flag: '🇵🇭', label: 'Filipino' },
+  { code: 'my', flag: '🇲🇲', label: 'မြန်မာဘာသာ' },
+  { code: 'km', flag: '🇰🇭', label: 'ភាសាខ្មែរ' },
+  { code: 'lo', flag: '🇱🇦', label: 'ພາສາລາວ' },
+]
+
+const currentLangFlag = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.flag || '🌏')
+const currentLangLabel = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.label || 'English')
+
+function setLandingLocale(code) {
+  landingLocale.value = code
+  localStorage.setItem('resilia_landing_locale', code)
+  langOpen.value = false
+}
+
+// Landing translate function (independent from app i18n)
+function lt(key) {
+  const keys = key.split('.')
+  let text = landingMessages[landingLocale.value]
+  for (const k of keys) {
+    if (text && text[k]) {
+      text = text[k]
+    } else {
+      // Fallback to English
+      let fallback = landingMessages.en
+      for (const fk of keys) {
+        if (fallback && fallback[fk]) {
+          fallback = fallback[fk]
+        } else {
+          return key
+        }
+      }
+      return fallback
+    }
+  }
+  return text
+}
+
+// Close dropdown on outside click
+function onClickOutside(e) {
+  if (langDropdownRef.value && !langDropdownRef.value.contains(e.target)) {
+    langOpen.value = false
+  }
+}
+onMounted(() => document.addEventListener('click', onClickOutside))
+onUnmounted(() => document.removeEventListener('click', onClickOutside))
 
 // ── Scroll Tracking & Navigation ──
 const scrollY = ref(0)
@@ -561,25 +655,25 @@ onUnmounted(() => { if (observer) observer.disconnect() })
 
 // ── Data ──
 const heroStats = computed(() => [
-  { value: '3,782', label: t('landing.stats.activeResponders'), bg: 'bg-gradient-to-br from-teal-50 to-teal-100/60 dark:from-teal-900/20 dark:to-teal-800/20 dark:border-teal-700/30', color: 'text-teal-600 dark:text-teal-400', subColor: 'text-teal-500/70 dark:text-teal-500/80', glowBg: 'bg-teal-100/40 dark:bg-teal-800/40' },
-  { value: '10', label: t('landing.stats.aseanCountries'), bg: 'bg-gradient-to-br from-orange-50 to-orange-100/60 dark:from-orange-900/20 dark:to-orange-800/20 dark:border-orange-700/30', color: 'text-orange-600 dark:text-orange-400', subColor: 'text-orange-500/70 dark:text-orange-500/80', glowBg: 'bg-orange-100/40 dark:bg-orange-800/40' },
-  { value: '28.9K', label: t('landing.stats.modulesCompleted'), bg: 'bg-gray-50/80 dark:bg-slate-800/80', color: 'text-ink dark:text-white', subColor: 'text-gray-400 dark:text-gray-500', glowBg: 'bg-gray-100/60 dark:bg-slate-700/80' },
-  { value: '12.4K', label: t('landing.stats.resiCoinsDonated'), bg: 'bg-gray-50/80 dark:bg-slate-800/80', color: 'text-ink dark:text-white', subColor: 'text-gray-400 dark:text-gray-500', glowBg: 'bg-gray-100/60 dark:bg-slate-700/80' },
+  { value: '3,782', label: lt('landing.stats.activeResponders'), bg: 'bg-gradient-to-br from-teal-50 to-teal-100/60 dark:from-teal-900/20 dark:to-teal-800/20 dark:border-teal-700/30', color: 'text-teal-600 dark:text-teal-400', subColor: 'text-teal-500/70 dark:text-teal-500/80', glowBg: 'bg-teal-100/40 dark:bg-teal-800/40' },
+  { value: '10', label: lt('landing.stats.aseanCountries'), bg: 'bg-gradient-to-br from-orange-50 to-orange-100/60 dark:from-orange-900/20 dark:to-orange-800/20 dark:border-orange-700/30', color: 'text-orange-600 dark:text-orange-400', subColor: 'text-orange-500/70 dark:text-orange-500/80', glowBg: 'bg-orange-100/40 dark:bg-orange-800/40' },
+  { value: '28.9K', label: lt('landing.stats.modulesCompleted'), bg: 'bg-gray-50/80 dark:bg-slate-800/80', color: 'text-ink dark:text-white', subColor: 'text-gray-400 dark:text-gray-500', glowBg: 'bg-gray-100/60 dark:bg-slate-700/80' },
+  { value: '12.4K', label: lt('landing.stats.resiCoinsDonated'), bg: 'bg-gray-50/80 dark:bg-slate-800/80', color: 'text-ink dark:text-white', subColor: 'text-gray-400 dark:text-gray-500', glowBg: 'bg-gray-100/60 dark:bg-slate-700/80' },
 ])
 
 const usps = computed(() => [
-  { icon: PhGameController, title: t('landing.usps.gamified'), desc: t('landing.usps.gamifiedDesc'), iconBg: 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400', hoverGradient: 'from-teal-50/50 to-transparent' },
-  { icon: PhGlobeHemisphereWest, title: t('landing.usps.asean'), desc: t('landing.usps.aseanDesc'), iconBg: 'bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400', hoverGradient: 'from-orange-50/50 to-transparent' },
-  { icon: PhBrain, title: t('landing.usps.science'), desc: t('landing.usps.scienceDesc'), iconBg: 'bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400', hoverGradient: 'from-purple-50/50 to-transparent' },
-  { icon: PhHandshake, title: t('landing.usps.community'), desc: t('landing.usps.communityDesc'), iconBg: 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400', hoverGradient: 'from-blue-50/50 to-transparent' },
+  { icon: PhGameController, title: lt('landing.usps.gamified'), desc: lt('landing.usps.gamifiedDesc'), iconBg: 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400', hoverGradient: 'from-teal-50/50 to-transparent' },
+  { icon: PhGlobeHemisphereWest, title: lt('landing.usps.asean'), desc: lt('landing.usps.aseanDesc'), iconBg: 'bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400', hoverGradient: 'from-orange-50/50 to-transparent' },
+  { icon: PhBrain, title: lt('landing.usps.science'), desc: lt('landing.usps.scienceDesc'), iconBg: 'bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400', hoverGradient: 'from-purple-50/50 to-transparent' },
+  { icon: PhHandshake, title: lt('landing.usps.community'), desc: lt('landing.usps.communityDesc'), iconBg: 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400', hoverGradient: 'from-blue-50/50 to-transparent' },
 ])
 
 const howItWorks = computed(() => [
-  { icon: PhClipboardText, title: t('landing.steps.checkIn'), desc: t('landing.steps.checkInDesc'), numBg: 'bg-teal-50 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400 shadow-sm' },
-  { icon: PhBooks, title: t('landing.steps.learn'), desc: t('landing.steps.learnDesc'), numBg: 'bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400 shadow-sm' },
-  { icon: PhGameController, title: t('landing.steps.practice'), desc: t('landing.steps.practiceDesc'), numBg: 'bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400 shadow-sm' },
-  { icon: PhChartBar, title: t('landing.steps.measure'), desc: t('landing.steps.measureDesc'), numBg: 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 shadow-sm' },
-  { icon: PhTrophy, title: t('landing.steps.levelUp'), desc: t('landing.steps.levelUpDesc'), numBg: 'bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 shadow-sm' },
+  { icon: PhClipboardText, title: lt('landing.steps.checkIn'), desc: lt('landing.steps.checkInDesc'), numBg: 'bg-teal-50 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400 shadow-sm' },
+  { icon: PhBooks, title: lt('landing.steps.learn'), desc: lt('landing.steps.learnDesc'), numBg: 'bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400 shadow-sm' },
+  { icon: PhGameController, title: lt('landing.steps.practice'), desc: lt('landing.steps.practiceDesc'), numBg: 'bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400 shadow-sm' },
+  { icon: PhChartBar, title: lt('landing.steps.measure'), desc: lt('landing.steps.measureDesc'), numBg: 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 shadow-sm' },
+  { icon: PhTrophy, title: lt('landing.steps.levelUp'), desc: lt('landing.steps.levelUpDesc'), numBg: 'bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 shadow-sm' },
 ])
 
 const tiers = computed(() => [
@@ -651,10 +745,6 @@ function scrollTo(id) {
 <style scoped>
 /* ━━━ NAVBAR ━━━ */
 .nav-cta-btn {
-  background: #1a1a1a;
-  color: white;
-}
-.dark .nav-cta-btn {
   background: white;
   color: #1a1a1a;
 }
@@ -663,6 +753,17 @@ function scrollTo(id) {
   color: white;
   transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(13, 148, 136, 0.3);
+}
+
+/* ━━━ DROPDOWN ANIMATION ━━━ */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.95);
 }
 
 /* ━━━ HERO ━━━ */

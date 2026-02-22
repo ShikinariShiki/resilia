@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
+import * as authService from '../services/authService'
+import * as dataService from '../services/dataService'
+import { isSupabaseConfigured } from '../lib/supabaseClient'
 
 export const useResiliaStore = defineStore('resilia', () => {
     // ═══ Session TTL (6 hours) ═══
@@ -23,6 +26,7 @@ export const useResiliaStore = defineStore('resilia', () => {
     const locale = ref(localStorage.getItem('resilia_locale') || 'en')
     const bio = ref(_savedProfile?.bio || '')
     const avatarColor = ref(_savedProfile?.avatarColor || '#0D9488')
+    const avatarUrl = ref(_savedProfile?.avatarUrl || '') // Google profile photo
     const joinDate = ref(_savedProfile?.joinDate || '')
 
     // Extended onboarding (persisted)
@@ -110,6 +114,8 @@ export const useResiliaStore = defineStore('resilia', () => {
         if (val) document.documentElement.classList.add('dark')
         else document.documentElement.classList.remove('dark')
     }, { immediate: true })
+
+
 
     // Daily Login Reward System
     const lastLoginDate = ref(isNewDay ? '' : (savedSession?.lastLoginDate || ''))
@@ -785,14 +791,28 @@ export const useResiliaStore = defineStore('resilia', () => {
                 {
                     id: 'act1', title: 'Storm in Vietnam', chatSimulation: true, description: 'Trapped in Hội An when a tropical storm makes landfall. Nguyễn Hoa finds you sheltering in a flooded alley. She offers a choice that will define the rest of your journey.', duration: '15 min', xpReward: 70, coinReward: 15, chatFlow: [
                         { from: 'lia', text: '🚨 STORM WARNING — you\'re in Hội An, Vietnam. the streets are flooding FAST.' },
+                        { from: 'lia', text: 'the old town is built at river level. when it rains like this, the Thu Bồn River overflows in MINUTES.' },
                         { from: 'nguyen', text: 'Hey! You — you can\'t stay here. The water will reach waist height in 20 minutes. Come with me or find your own way.' },
+                        { from: 'nguyen', text: 'I\'ve been through twelve floods. I know every alley, every elevated path. But I need to know — can you handle this?' },
                         {
-                            from: 'nguyen', text: 'But first: LOOK at yourself. Your hands — are they shaking?', type: 'choice', choices: [
-                                { text: 'Yes. I\'m terrified and I can feel it in my body.', hpEffect: 5, response: 'Good. Acknowledging fear is the first step to managing it. You just used LOOK on yourself.' },
-                                { text: 'I\'m fine. Let\'s just go.', hpEffect: -5, response: 'Denying your fear doesn\'t make it disappear. It just makes you unpredictable when the pressure gets worse.' },
-                                { text: 'I don\'t know — I can\'t think straight.', hpEffect: 0, response: 'That\'s honest. When you can\'t think clearly, slow down. Breathe. Then LOOK.' },
+                            from: 'nguyen', text: 'LOOK at yourself first. Your hands — are they shaking?', type: 'choice', choices: [
+                                { text: 'Yes. I\'m terrified and I can feel it in my body.', hpEffect: 5, response: 'Good. Acknowledging fear is the first step to managing it. You just used LOOK on yourself. Hoa nods: \"Honest. I can work with honest.\"' },
+                                { text: 'I\'m fine. Let\'s just go.', hpEffect: -5, response: 'Denying your fear doesn\'t make it disappear. Hoa frowns: \"People who say they\'re fine in a storm are the ones who freeze when it gets worse.\"' },
+                                { text: 'I don\'t know — I can\'t think straight.', hpEffect: 0, response: 'That\'s honest. Hoa grabs your shoulder: \"When you can\'t think, slow down. Breathe. Then LOOK.\"' },
                             ], key: 'vn_self_look'
                         },
+                        { from: 'nguyen', text: 'Quick exercise. Name 3 things you can see right now. Don\'t think — just say them.' },
+                        { from: 'lia', text: '👆 she\'s teaching you grounding. this is a real PFA technique — 5-4-3-2-1 sensory anchoring.' },
+                        { from: 'nguyen', text: 'Good. Now two sounds. The rain on the roof tiles... the river. Your brain is anchored to NOW. Not to fear.' },
+                        {
+                            from: 'lia', text: 'the water is rising. Hoa says there are two routes. which one?', type: 'choice', choices: [
+                                { text: 'The rooftop path — slower but stays above water level', hpEffect: 5, response: 'Smart. Hoa leads you across connected rooftops. Your legs burn but your feet stay dry. \"LOOK before you move,\" she says. \"Every time.\"' },
+                                { text: 'The main road — faster but the water is ankle-deep and rising', hpEffect: -5, response: 'You wade into brown water. Something sharp cuts your foot. Hoa pulls you onto a wall: \"Speed means nothing if you can\'t walk tomorrow.\"' },
+                                { text: 'Ask Hoa which she recommends — she knows this city', hpEffect: 10, response: 'Hoa smiles for the first time. \"Rooftops. Always rooftops.\" LISTENing to local knowledge just saved your energy and your feet.' },
+                            ], key: 'vn_route'
+                        },
+                        { from: 'nguyen', text: '[at the Red Cross shelter] You made it. Not everyone does on their first storm. Rest now.' },
+                        { from: 'lia', text: 'she\'s seen so many storms. but did you notice? she was scared too. she just knew HOW to manage it 💪' },
                     ], quiz: [
                         { question: 'During a crisis, acknowledging fear is important because:', options: ['It makes you weaker', 'It\'s the first step to managing your stress response', 'Others will help you more', 'It doesn\'t matter'], correct: 1 },
                     ]
@@ -800,35 +820,61 @@ export const useResiliaStore = defineStore('resilia', () => {
                 {
                     id: 'act2', title: 'Flood Crisis in Cambodia', chatSimulation: true, description: 'Sokha is 14, alone, and has survived three floods by himself. He doesn\'t trust adults. He doesn\'t trust you. Can you LISTEN well enough to earn his trust before the water rises?', duration: '18 min', xpReward: 80, coinReward: 18, chatFlow: [
                         { from: 'lia', text: 'you crossed into Cambodia. the flooding is worse here. and there\'s a kid — Sokha — he\'s alone 🥺' },
+                        { from: 'lia', text: 'he\'s been sitting on the same rooftop since yesterday. won\'t come down. won\'t talk to the aid workers.' },
                         { from: 'sokha', text: '...go away. I don\'t need help. I survived the last three floods alone. Adults always promise help and then disappear.' },
+                        { from: 'lia', text: 'he\'s 14. his parents went to Thailand for work and never came back. he\'s been alone for 2 years. 💔' },
                         {
                             from: 'lia', text: 'he won\'t trust you easily. what\'s your move?', type: 'choice', choices: [
-                                { text: 'Sit nearby silently and wait. Let him see you\'re not leaving.', hpEffect: 5, response: 'Sokha watches you for 10 minutes. Then: "...you\'re still here." You just used LISTEN — sometimes it means listening to silence.' },
-                                { text: 'Tell him you\'re here to help and he needs to come with you now.', hpEffect: -10, response: 'Sokha runs. He doesn\'t know you, and pushing too hard confirmed his fear that adults are controlling and untrustworthy.' },
-                                { text: 'Offer food and water first, then try to talk.', hpEffect: 0, response: 'He takes the food but doesn\'t speak. Not bad, but he needs emotional safety, not just physical resources.' },
+                                { text: 'Sit nearby silently and wait. Let him see you\'re not leaving.', hpEffect: 5, response: 'You sit 3 meters away. Say nothing. 10 minutes pass. Sokha\'s eyes dart toward you. Then: \"...you\'re still here.\" You just used LISTEN — sometimes it means listening to silence.' },
+                                { text: 'Tell him you\'re here to help and he needs to come with you now.', hpEffect: -10, response: 'Sokha jumps back. \"See?! Just like the others. TELLING me what to do!\" He runs to the far edge of the roof. Pushing too hard confirmed his fear that adults are controlling.' },
+                                { text: 'Offer food and water first, then try to talk.', hpEffect: 0, response: 'He takes the water bottle without looking at you. Drinks half in one gulp. He was dehydrated. \"...thanks.\" It\'s something — but he needs emotional safety, not just physical resources.' },
                             ], key: 'kh_sokha_trust'
                         },
+                        { from: 'sokha', text: '...my friend Dara. he was with me last flood. we had a system. we\'d signal each other from the rooftops with flashlights.' },
+                        { from: 'sokha', text: 'Dara moved to Phnom Penh. Now it\'s just me.' },
+                        { from: 'lia', text: 'he\'s opening up 🥺 this is LISTENing in action — he\'s telling you what he LOST. not just things. PEOPLE.' },
+                        {
+                            from: 'lia', text: 'Sokha trusts you enough to talk. but the water is still rising. what now?', type: 'choice', choices: [
+                                { text: 'Ask Sokha what HIS plan would be — he knows this area better than you', hpEffect: 10, response: 'Sokha\'s eyes light up. \"There\'s a temple on the hill. Concrete. It survived every flood.\" You just gave him agency. He\'s not a victim anymore — he\'s a guide.' },
+                                { text: 'Tell Sokha to follow you to the evacuation point the Red Cross set up', hpEffect: 0, response: 'Sokha goes quiet. He follows but looks miserable. You solved the problem but took away his control. Sometimes being safe isn\'t enough — feeling respected matters too.' },
+                                { text: 'Carry him to safety — he\'s just a kid', hpEffect: -10, response: 'Sokha shoves you away. \"I\'m NOT a baby!\" He survived 3 floods alone. Treating him as helpless erases his strength. Responders empower — they don\'t infantilize.' },
+                            ], key: 'kh_sokha_plan'
+                        },
+                        { from: 'sokha', text: '[walking together] ...you\'re the first person who asked what I think.' },
+                        { from: 'lia', text: 'LISTENing changed him. not from being afraid — from being INVISIBLE. you gave him the most powerful gift: being heard. 💛' },
                     ], quiz: [
                         { question: 'When someone doesn\'t trust you, the most effective PFA approach is:', options: ['Assert authority to show competence', 'Be present and patient — show through actions, not words', 'Offer material resources immediately', 'Call for professional help and leave'], correct: 1 },
                     ]
                 },
                 {
-                    id: 'act3', title: 'Drought in Laos', chatSimulation: true, description: 'The Mekong drops to its lowest level in decades. Khamla\'s village is dying of thirst. He knows a hidden spring — but it\'s across territory claimed by another village. Will you LINK across cultural boundaries?', duration: '15 min', xpReward: 70, coinReward: 15, chatFlow: [
+                    id: 'act3', title: 'Drought in Laos', chatSimulation: true, description: 'The Mekong drops to its lowest level in decades. Khamla\'s village is dying of thirst. He knows a hidden spring — but it\'s across territory claimed by another village. Will you LINK across cultural boundaries?', duration: '18 min', xpReward: 70, coinReward: 15, chatFlow: [
                         { from: 'lia', text: 'the flooding receded but now the REAL crisis: the Mekong is drying up. Khamla\'s village has no clean water.' },
+                        { from: 'lia', text: 'the Mekong used to be 12 meters deep here. now it\'s less than 3. the fish are gone. the rice paddies are cracking.' },
+                        { from: 'kham', text: 'My grandfather fished this river for 60 years. He said the spirits would always provide. But even spirits cannot fight the dams upstream.' },
                         { from: 'kham', text: 'There is a spring. Fresh water. But it\'s on land claimed by the village across the river. We\'ve been in conflict for decades over fishing rights.' },
+                        { from: 'lia', text: 'this is LINK territory — connecting people across divides. but it\'s not easy when history is involved.' },
                         {
                             from: 'kham', text: 'If we go together, how should we approach their chief?', type: 'choice', choices: [
-                                { text: 'Offer something in trade — cooperation must be mutual', hpEffect: 5, response: 'Brilliant. You proposed sharing Khamla\'s rice harvest in exchange for water access. Both villages survive. This is LINK at its highest form.' },
-                                { text: 'Just take the water — survival is more important than politics', hpEffect: -15, response: 'The rival village saw it as aggression. They blocked the spring entirely. Now both communities are losing.' },
-                                { text: 'Ask Lia to mediate as a neutral party', hpEffect: 0, response: 'I appreciate the trust, but LINKing requires YOU to build the bridge. I can support, but you must lead the connection.' },
+                                { text: 'Offer something in trade — cooperation must be mutual', hpEffect: 5, response: 'Khamla nods slowly. "Our rice harvest... we share it. In exchange for water access." The rival chief considers. "...your grandfather helped mine build a boat, once. I remember." Both villages survived because someone chose cooperation.' },
+                                { text: 'Just take the water — survival is more important than politics', hpEffect: -15, response: 'The rival village spotted you at the spring. They\'re furious. They blocked the path with fallen trees. Khamla is devastated: "You turned water into war." Now both communities are losing.' },
+                                { text: 'Ask Lia to mediate as a neutral party', hpEffect: 0, response: 'I appreciate the trust, but LINKing requires YOU to build the bridge. I can support, but you must lead the connection. That\'s what makes you a responder, not a bystander.' },
                             ], key: 'la_diplomacy'
                         },
+                        { from: 'kham', text: '[at the spring] The water is cold and clean. Both villages are drinking from it now.' },
+                        {
+                            from: 'lia', text: 'the rival chief asks if this arrangement can be permanent. what do you suggest?', type: 'choice', choices: [
+                                { text: 'Create a shared council — both village chiefs manage the spring together', hpEffect: 10, response: 'A joint water council. Both villages have a voice. You just turned a crisis into a community institution. This is LINK at its most powerful — lasting connection.' },
+                                { text: 'Leave it as a temporary emergency arrangement', hpEffect: 0, response: 'Fair. But when the next drought comes, will they cooperate again? Or will the old distrust return? Sustainability matters in disaster response.' },
+                                { text: 'Let the government decide water rights formally', hpEffect: -5, response: 'The nearest government office is 4 hours away. By the time bureaucracy moves, people will have already dehydrated. Local solutions save lives faster.' },
+                            ], key: 'la_longterm'
+                        },
+                        { from: 'lia', text: 'LINK isn\'t just connecting people in the moment — it\'s building structures that survive the next crisis. 🌉' },
                     ], quiz: [
                         { question: 'LINK across cultural boundaries requires:', options: ['Imposing your own solution', 'Mutual respect and finding shared interests', 'Avoiding the conflict entirely', 'Military intervention'], correct: 1 },
                     ]
                 },
                 {
-                    id: 'act4', title: '🧭 Find the Exit', chatSimulation: true, description: 'All three principles at once. The storm returns. Sokha is panicking. Khamla is injured. And you need to navigate a flooded rice paddy in the dark to reach the evacuation point — alone.', duration: '18 min', xpReward: 100, coinReward: 22, chatFlow: [
+                    id: 'act4', title: '🧭 Find the Exit', chatSimulation: true, description: 'All three principles at once. The storm returns. Sokha is panicking. Khamla is injured. And you need to navigate a flooded rice paddy in the dark to reach the evacuation point — alone.', duration: '22 min', xpReward: 100, coinReward: 22, chatFlow: [
                         { from: 'lia', text: 'the storm is BACK. this is the final test. everyone is counting on you.' },
                         { from: 'sokha', text: '[shaking] I can\'t... I can\'t do this again...' },
                         { from: 'kham', text: '[clutching his leg] My ankle... I stepped in a hidden ditch. I can\'t walk.' },
@@ -839,7 +885,26 @@ export const useResiliaStore = defineStore('resilia', () => {
                                 { text: 'LISTEN: Ask how everyone is feeling', hpEffect: 0, response: 'Emotion matters, but in immediate danger, LOOK comes first — assess physical safety, then emotional state.' },
                             ], key: 'final_drill'
                         },
-                        { from: 'lia', text: 'you got everyone to safety. YOU did that. 🥹' },
+                        { from: 'lia', text: 'good. you LOOKed first. now... Sokha.' },
+                        { from: 'sokha', text: '[hyperventilating] the water... it\'s coming up... it\'s like last time...' },
+                        {
+                            from: 'lia', text: 'Sokha is having a flashback. what\'s your LISTEN move?', type: 'choice', choices: [
+                                { text: 'Get at his eye level and say: "Sokha. Can you hear my voice? Tell me what you see right NOW."', hpEffect: 10, response: 'Sokha\'s breathing slows. "I see... mud. And you." Grounding works. You pulled him out of the past and into the present.' },
+                                { text: 'Tell him to calm down — panicking won\'t help anyone', hpEffect: -10, response: 'Telling someone to calm down during a flashback is like telling someone to stop bleeding. It doesn\'t work and it makes them feel broken.' },
+                                { text: 'Hug him tightly and tell him it\'ll be okay', hpEffect: 0, response: 'Physical contact without consent during a trauma response can feel like restraint. He flinches. Good intentions, wrong approach.' },
+                            ], key: 'final_listen'
+                        },
+                        { from: 'kham', text: 'The water reached my knee. We need to move NOW.' },
+                        {
+                            from: 'lia', text: 'final move. how do you LINK everyone together to get to safety?', type: 'choice', choices: [
+                                { text: 'Khamla leans on you for his ankle. Sokha walks ahead — he knows these fields. Give everyone a role.', hpEffect: 15, response: 'Khamla has your shoulder. Sokha has the flashlight. You have both of them. Three people, three strengths, ONE team. This is LINK.' },
+                                { text: 'You carry Khamla and let Sokha follow', hpEffect: 0, response: 'Khamla is heavy and Sokha falls behind in the dark. You arrive, but barely. A team is stronger than a hero carrying dead weight.' },
+                                { text: 'Send Sokha ahead to get help while you stay with Khamla', hpEffect: -5, response: 'Sokha doesn\'t know who to find. He wanders in the dark, scared. Splitting up removed your biggest asset: each other.' },
+                            ], key: 'final_link'
+                        },
+                        { from: 'sokha', text: '[at the evacuation point, trembling but smiling] ...we made it.' },
+                        { from: 'kham', text: 'You were good tonight. Even my grandfather would say so.' },
+                        { from: 'lia', text: 'you got everyone to safety. LOOK · LISTEN · LINK. all three. in the dark. in the rain. YOU did that. 🥹' },
                     ], quiz: [
                         { question: 'In an active emergency with multiple people, the correct PFA sequence is:', options: ['LISTEN → LOOK → LINK', 'LINK → LISTEN → LOOK', 'LOOK → LISTEN → LINK', 'Any order works'], correct: 2 },
                     ]
@@ -930,17 +995,32 @@ export const useResiliaStore = defineStore('resilia', () => {
             ],
             acts: [
                 {
-                    id: 'act1', title: '🇮🇩 Post-Earthquake Indonesia', chatSimulation: true, description: 'Palu. 7.5 magnitude. Kapten Adi wants martial law. Ibu Sari just wants to know if her daughter is alive. You\'re standing between a soldier and a mother — choose carefully.', duration: '20 min', xpReward: 100, coinReward: 25, chatFlow: [
+                    id: 'act1', title: '🇮🇩 Post-Earthquake Indonesia', chatSimulation: true, description: 'Palu. 7.5 magnitude. Kapten Adi wants martial law. Ibu Sari just wants to know if her daughter is alive. You\'re standing between a soldier and a mother — choose carefully.', duration: '25 min', xpReward: 100, coinReward: 25, chatFlow: [
                         { from: 'lia', text: '🚨 we\'re in Palu, Indonesia. the earthquake was 7.5. buildings are down. kapten adi is in charge but there\'s chaos everywhere.' },
+                        { from: 'lia', text: 'the ground liquefied in Petobo. entire neighborhoods sank into the earth. this isn\'t a movie — this actually happened in 2018.' },
                         { from: 'kapten_adi', text: 'Listen — I need order. Civilians must stay behind the perimeter. No one enters the collapse zone. That includes you.' },
+                        { from: 'kapten_adi', text: 'I lost two of my own soldiers in the first collapse trying to rescue without a plan. I will NOT lose more people to chaos.' },
                         { from: 'ibu_sari', text: '[crying] My daughter — she was in the school building. Please, you have to let me through. She\'s only 8.' },
+                        { from: 'ibu_sari', text: 'Her name is Putri. She was wearing a yellow shirt today. Yellow. She loves yellow.' },
+                        { from: 'lia', text: 'the way she\'s describing Putri\'s clothes... she\'s already preparing herself to identify a body. 💔' },
                         {
                             from: 'lia', text: 'kapten adi won\'t budge. ibu sari is breaking down. what do you do?', type: 'choice', choices: [
-                                { text: 'Support Kapten Adi — the perimeter is for everyone\'s safety, including Ibu Sari\'s', hpEffect: -5, response: 'Ibu Sari collapses. She screams that you\'re all the same. The crowd grows hostile. Safety is important, but ignoring a mother\'s desperation destroys trust.' },
-                                { text: 'Advocate for Ibu Sari — ask Kapten Adi to assign a soldier to escort her to the school zone', hpEffect: 10, response: 'Kapten Adi hesitates but agrees. A soldier escorts Ibu Sari. Her daughter is found alive. This is how you balance authority with compassion.' },
-                                { text: 'Sneak Ibu Sari past the perimeter yourself', hpEffect: -15, response: 'Kapten Adi catches you. He revokes your volunteer access. You meant well, but undermining military authority in a disaster zone puts everyone at risk.' },
+                                { text: 'Support Kapten Adi — the perimeter is for everyone\'s safety, including Ibu Sari\'s', hpEffect: -5, response: 'Ibu Sari collapses. She screams that you\'re all the same. The crowd grows hostile. A mother watching her world collapse — and you chose a fence. Safety matters, but so does humanity.' },
+                                { text: 'Advocate for Ibu Sari — ask Kapten Adi to assign a soldier to escort her to the school zone', hpEffect: 10, response: 'Kapten Adi\'s jaw clenches. But he sees it — a mother\'s desperation isn\'t defiance. It\'s love. He orders: Sersan! Take this woman to sector 3. A compromise. Authority AND compassion.' },
+                                { text: 'Sneak Ibu Sari past the perimeter yourself', hpEffect: -15, response: 'Kapten Adi catches you. He revokes your volunteer access. One person breaking rules means everyone thinks they can. You meant well — but short-cuts in disaster zones cost lives.' },
                             ], key: 'palu_crisis'
                         },
+                        { from: 'lia', text: 'kapten adi agrees to the escort. the soldier leads Ibu Sari through the rubble...' },
+                        { from: 'ibu_sari', text: '[running] PUTRI!! PUTRI SAYANG!!!' },
+                        { from: 'lia', text: '...she found her. alive. covered in dust. clutching a book. she\'s alive. 😭' },
+                        {
+                            from: 'kapten_adi', text: '[to you, quietly] You were right to push back. But tell me — how do I maintain order when every mother in this camp has the same desperation?', type: 'choice', choices: [
+                                { text: 'Create a family reunification desk — organized search with registered names, sectors, and updates', hpEffect: 10, response: 'Kapten Adi stares at you. Then he orders his soldiers to set up a registry table. Organized hope, he calls it. You just gave him a system that respects BOTH safety and humanity.' },
+                                { text: 'Let families search freely — the perimeter causes more panic than it prevents', hpEffect: -5, response: 'Three minutes later, a secondary collapse injures two civilians in the uncontrolled zone. Freedom without structure is chaos.' },
+                                { text: 'I don\'t know — I\'m just a volunteer, not military', hpEffect: 0, response: 'Kapten Adi sighs. Nobody is just anything in a disaster. You saw something I didn\'t. That\'s why we need you. Sometimes you underestimate your own impact.' },
+                            ], key: 'palu_system'
+                        },
+                        { from: 'lia', text: 'you didn\'t just save one child. you changed how this entire camp handles family reunification. that\'s what a RESPONDER does. 🫡' },
                     ], quiz: [
                         { question: 'In a disaster with military control, the best approach to an emotional crisis is:', options: ['Defy orders to help', 'Find a compromise that respects both authority and human dignity', 'Always obey without question', 'Leave and let others handle it'], correct: 1 },
                     ]
@@ -976,18 +1056,35 @@ export const useResiliaStore = defineStore('resilia', () => {
                     ]
                 },
                 {
-                    id: 'act4', title: '💛 The Heart of a Responder', chatSimulation: true, description: 'Final mission. Ibu Sari found her daughter — alive but traumatized. The child won\'t speak, won\'t eat, won\'t look at anyone. Use everything you\'ve ever learned. This is your moment.', duration: '20 min', xpReward: 150, coinReward: 35, chatFlow: [
+                    id: 'act4', title: '💛 The Heart of a Responder', chatSimulation: true, description: 'Final mission. Ibu Sari found her daughter — alive but traumatized. The child won\'t speak, won\'t eat, won\'t look at anyone. Use everything you\'ve ever learned. This is your moment.', duration: '25 min', xpReward: 150, coinReward: 35, chatFlow: [
                         { from: 'lia', text: 'ibu sari\'s daughter Putri was found. she\'s alive. but she hasn\'t spoken in 3 days. she won\'t eat. she won\'t look at anyone.' },
-                        { from: 'ibu_sari', text: '[whispering] She used to sing all day. Now she just sits there staring at the wall. Please... can you try?' },
+                        { from: 'lia', text: 'remember the yellow shirt? she\'s still wearing it. dusty. torn at the shoulder. but she won\'t let anyone take it off.' },
+                        { from: 'ibu_sari', text: '[whispering] She used to sing all day. Now she just sits there staring at the wall. Please... can you try? I\'ve tried everything.' },
+                        { from: 'lia', text: 'Putri is sitting in a corner of the medical tent. her knees are drawn up. her eyes are open but she\'s not really HERE.' },
+                        { from: 'lia', text: 'this is called dissociation. her brain protected her by checking out. your job isn\'t to force her back. it\'s to make HERE feel safe enough that she WANTS to return.' },
                         {
                             from: 'lia', text: 'this is everything. LOOK · LISTEN · LINK. for the most vulnerable person you\'ve ever met. go.', type: 'choice', choices: [
-                                { text: 'Sit on the floor near Putri — at her eye level — and just be present. Don\'t speak. Don\'t touch. Just exist beside her.', hpEffect: 15, response: 'After 20 minutes, Putri\'s eyes shift toward you. Small. Barely perceptible. But she noticed you. You gave her the rarest gift: unhurried human presence.' },
-                                { text: 'Try to engage her with a drawing activity — art can express what words can\'t', hpEffect: 5, response: 'She doesn\'t draw at first. But she picks up a crayon and holds it. It\'s something. Non-verbal engagement is a start.' },
-                                { text: 'Talk to her gently about what happened to help her process', hpEffect: -15, response: 'Putri covers her ears and curls tighter. Asking a traumatized child to verbalize their experience can cause re-traumatization.' },
+                                { text: 'Sit on the floor near Putri — at her eye level — and just be present. Don\'t speak. Don\'t touch. Just exist beside her.', hpEffect: 15, response: 'You sit. Minutes pass. Five. Ten. Twenty. The world shrinks to just this corner. Then — Putri\'s eyes shift. Toward you. Small. Barely perceptible. But she noticed you. She\'s coming back.' },
+                                { text: 'Try to engage her with a drawing activity — art can express what words can\'t', hpEffect: 5, response: 'You place crayons near her. She doesn\'t move. After 8 minutes, her hand slides toward the yellow crayon. She holds it but doesn\'t draw. Non-verbal engagement is a start. But she needs presence first.' },
+                                { text: 'Talk to her gently about what happened to help her process', hpEffect: -15, response: 'Putri covers her ears and curls tighter. Her body shakes. Asking a traumatized child to verbalize their experience can trigger re-traumatization. Silence was the right medicine.' },
                             ], key: 'putri_pfa'
                         },
-                        { from: 'ibu_sari', text: '[tears] She... she looked at you. She hasn\'t looked at anyone in three days. Thank you. Thank you.' },
-                        { from: 'lia', text: 'you just changed a life. this is what you trained for. 💛' },
+                        { from: 'lia', text: 'she looked at you. she LOOKED at you. 🥹' },
+                        { from: 'lia', text: 'now — very gently — can you build on that connection?' },
+                        {
+                            from: 'lia', text: 'Putri\'s eyes are on you. the tiniest window is open. what do you do next?', type: 'choice', choices: [
+                                { text: 'Place a crayon and paper between you and her. Start drawing something simple — a sun, a house. Don\'t look at her directly.', hpEffect: 10, response: 'You draw a sun. Simple. Warm. Putri watches your hand move. After a long silence... she picks up the yellow crayon. She draws a small, shaky circle. It\'s a flower. She\'s communicating.' },
+                                { text: 'Say her name softly: Putri. I\'m here. You\'re safe now.', hpEffect: 5, response: 'Her name. The first human word directed at her that wasn\'t a question or command. She blinks. Her grip on her knees loosens — just slightly.' },
+                                { text: 'Offer her food — she hasn\'t eaten in days', hpEffect: -5, response: 'She turns away. Her body isn\'t hungry — her soul is wounded. Physical needs can wait. Emotional safety comes first for trauma recovery.' },
+                            ], key: 'putri_build'
+                        },
+                        { from: 'ibu_sari', text: '[tears streaming] She... she drew something. She hasn\'t moved her hand in three days.' },
+                        { from: 'lia', text: 'and then...' },
+                        { from: 'lia', text: 'Putri looks at you. and whispers the first word anyone has heard from her in 72 hours:' },
+                        { from: 'lia', text: '...aman. Safe.' },
+                        { from: 'ibu_sari', text: '[sobbing, holding Putri] My baby... you\'re back. You\'re back.' },
+                        { from: 'lia', text: 'you didn\'t heal her. healing takes months, years, maybe. but you opened the door. you showed her that HERE — right now — is safe enough to come back to. 💛' },
+                        { from: 'lia', text: 'THAT is what a responder does. not save. not fix. just... be present. be human. be enough.' },
                     ], quiz: [
                         { question: 'When supporting a traumatized child who won\'t speak, the best approach is:', options: ['Ask them to describe what happened', 'Be physically present without pressure — let them set the pace', 'Distract them with games', 'Leave them alone until they\'re ready'], correct: 1 },
                     ]
@@ -1076,6 +1173,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         if (!liaEvalScores.value[chapterId][phase]) liaEvalScores.value[chapterId][phase] = {}
         liaEvalScores.value[chapterId][phase][key] = value
         localStorage.setItem('resilia_lia_eval', JSON.stringify(liaEvalScores.value))
+        syncToSupabase()
     }
 
     function getLiaEvalScore(chapterId, phase, key) {
@@ -1118,6 +1216,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         if (!erqScores.value[phase]) erqScores.value[phase] = {}
         erqScores.value[phase][questionId] = score
         localStorage.setItem('resilia_erq_scores', JSON.stringify(erqScores.value))
+        syncToSupabase()
     }
 
     function getErqResults(phase) {
@@ -1173,6 +1272,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         storyProgress.value.currentAct = act
         Object.assign(storyProgress.value.narrativeFlags, flags)
         localStorage.setItem('resilia_story_progress', JSON.stringify(storyProgress.value))
+        syncToSupabase()
     }
 
     // Post-test KKM (Kriteria Ketuntasan Minimal) system
@@ -1942,6 +2042,39 @@ export const useResiliaStore = defineStore('resilia', () => {
     const completedLiaRPGs = ref([])
     const completedChapterQuests = ref([])
 
+    // ═══ Auto-sync to Supabase when ANY critical data changes ═══
+    // NOTE: Must be placed after ALL referenced refs are declared
+    const _syncTrigger = computed(() => JSON.stringify({
+        // Profile
+        xp: xp.value,
+        level: level.value,
+        coins: resiCoinBalance.value,
+        onboarded: onboarded.value,
+        name: userName.value,
+        country: countryCode.value,
+        // Progress
+        acts: completedActs.value.length,
+        quests: completedLiaRPGs.value?.length || 0,
+        bridges: completedBridgingQuests.value?.length || 0,
+        chapQuests: completedChapterQuests.value?.length || 0,
+        sim: simulationHP.value,
+        simCp: simCheckpoint.value,
+        liaEval: Object.keys(liaEvalScores.value || {}).length,
+        erq: Object.keys(erqScores.value || {}).length,
+        story: storyProgress.value?.currentChapter,
+        // Settings
+        locale: locale.value,
+        dark: darkMode.value,
+        streak: loginStreak.value,
+        rewards: loginRewardsCollected.value,
+    }))
+    watch(_syncTrigger, () => {
+        // Only sync if authenticated and Supabase is active
+        if (isAuthenticated.value && isSupabaseConfigured()) {
+            syncToSupabase()
+        }
+    })
+
     function completeLiaRPG(rpgId, score) {
         if (!completedLiaRPGs.value.includes(rpgId)) {
             completedLiaRPGs.value.push(rpgId)
@@ -2102,7 +2235,22 @@ export const useResiliaStore = defineStore('resilia', () => {
             : 0
     })
 
-    function registerUser(email, password, name) {
+    // ═══ Supabase User ID ═══
+    const supabaseUserId = ref(null)
+
+    async function registerUser(email, password, name) {
+        // Try Supabase first
+        if (isSupabaseConfigured()) {
+            const result = await authService.signUp(email, password, name)
+            if (result.error) {
+                console.error('[Store] Registration error:', result.error)
+                return { error: result.error }
+            }
+            if (result.user) {
+                supabaseUserId.value = result.user.id
+            }
+        }
+        // Always set local state (works as fallback too)
         userEmail.value = email
         userName.value = name
         isAuthenticated.value = true
@@ -2110,9 +2258,29 @@ export const useResiliaStore = defineStore('resilia', () => {
         localStorage.setItem('resilia_email', email)
         localStorage.setItem('resilia_session_ts', Date.now().toString())
         localStorage.setItem('resilia_user', JSON.stringify({ email, name }))
+        return { error: null }
     }
 
-    function loginUser(email, password) {
+    async function loginUser(email, password) {
+        // Try Supabase first
+        if (isSupabaseConfigured()) {
+            const result = await authService.signIn(email, password)
+            if (result.error) {
+                return { success: false, error: result.error }
+            }
+            if (result.user) {
+                supabaseUserId.value = result.user.id
+                userEmail.value = result.user.email
+                isAuthenticated.value = true
+                localStorage.setItem('resilia_auth', 'true')
+                localStorage.setItem('resilia_email', result.user.email)
+                localStorage.setItem('resilia_session_ts', Date.now().toString())
+                // Hydrate from Supabase
+                await initFromSupabase(result.user.id)
+                return { success: true, error: null }
+            }
+        }
+        // Fallback: localStorage-based login
         const stored = localStorage.getItem('resilia_user')
         if (stored) {
             const user = JSON.parse(stored)
@@ -2122,7 +2290,6 @@ export const useResiliaStore = defineStore('resilia', () => {
                 userName.value = user.name
                 localStorage.setItem('resilia_auth', 'true')
                 localStorage.setItem('resilia_session_ts', Date.now().toString())
-                // Restore persisted profile
                 const profile = JSON.parse(localStorage.getItem('resilia_profile') || 'null')
                 if (profile) {
                     countryCode.value = profile.countryCode || ''
@@ -2132,24 +2299,135 @@ export const useResiliaStore = defineStore('resilia', () => {
                     bio.value = profile.bio || ''
                     joinDate.value = profile.joinDate || ''
                 }
-                return true
+                return { success: true, error: null }
             }
         }
-        // Allow any login for mock purposes
+        // Allow any login for mock (local-only mode)
         isAuthenticated.value = true
         userEmail.value = email
         localStorage.setItem('resilia_auth', 'true')
         localStorage.setItem('resilia_email', email)
         localStorage.setItem('resilia_session_ts', Date.now().toString())
-        return true
+        return { success: true, error: null }
     }
 
-    function logoutUser() {
+    async function loginWithGoogle() {
+        if (!isSupabaseConfigured()) return { error: 'Supabase not configured' }
+        return await authService.signInWithGoogle()
+    }
+
+    async function logoutUser() {
+        if (isSupabaseConfigured()) {
+            await authService.signOut()
+        }
+        supabaseUserId.value = null
         isAuthenticated.value = false
         onboarded.value = false
         hasCompletedCheckIn.value = false
         const keysToRemove = ['resilia_auth', 'resilia_session_ts', 'resilia_email', 'resilia_onboarded', 'resilia_profile', 'resilia_personalization', 'resilia_checkin_date', 'resilia_daily_session', 'resilia_login_streak', 'resilia_login_rewards_collected', 'resilia_reward_history']
         keysToRemove.forEach(k => localStorage.removeItem(k))
+    }
+
+    // ═══ Hydrate store from Supabase ═══
+    async function initFromSupabase(userId) {
+        if (!userId) return
+        supabaseUserId.value = userId
+
+        // Try migration first
+        await dataService.migrateFromLocalStorage(userId)
+
+        const data = await dataService.loadUserData(userId)
+        if (!data) return
+
+        // Profile
+        if (data.profile) {
+            const p = data.profile
+            userName.value = p.display_name || ''
+            countryCode.value = p.country_code || ''
+            userAge.value = p.age_group || ''
+            userGender.value = p.gender || ''
+            hasDisasterExperience.value = p.has_disaster_experience
+            bio.value = p.bio || ''
+            avatarColor.value = p.avatar_color || '#14B8A6'
+            xp.value = p.xp || 0
+            level.value = p.level || 1
+            totalXPEarned.value = p.total_xp_earned || 0
+            resiCoinBalance.value = p.coins || 0
+            onboarded.value = p.onboarded || false
+            joinDate.value = p.join_date || ''
+            if (p.avatar_url) avatarUrl.value = p.avatar_url
+            // Sync to localStorage cache
+            localStorage.setItem('resilia_onboarded', p.onboarded ? 'true' : 'false')
+            _saveProfile()
+        }
+
+        // Progress
+        if (data.progress) {
+            const pr = data.progress
+            if (pr.completed_acts) completedActs.value = pr.completed_acts
+            if (pr.completed_quests) completedLiaRPGs.value = pr.completed_quests
+            if (pr.completed_bridges) completedBridgingQuests.value = pr.completed_bridges
+            if (pr.completed_chapter_quests) completedChapterQuests.value = pr.completed_chapter_quests
+            if (pr.lia_eval_scores) liaEvalScores.value = pr.lia_eval_scores
+            if (pr.erq_scores) erqScores.value = pr.erq_scores
+            if (pr.story_progress) storyProgress.value = pr.story_progress
+            if (pr.sim_hp !== undefined) simulationHP.value = pr.sim_hp
+            if (pr.sim_checkpoint) simCheckpoint.value = pr.sim_checkpoint
+            if (pr.personalization) userPersonalization.value = pr.personalization
+        }
+
+        // Settings
+        if (data.settings) {
+            const s = data.settings
+            if (s.locale) locale.value = s.locale
+            if (s.dark_mode !== undefined) darkMode.value = s.dark_mode
+            if (s.login_streak) loginStreak.value = s.login_streak
+            if (s.login_rewards_collected) loginRewardsCollected.value = s.login_rewards_collected
+            if (s.reward_history) dailyRewardHistory.value = s.reward_history
+        }
+    }
+
+    // ═══ Sync all state to Supabase (debounced) ═══
+    function syncToSupabase() {
+        if (!supabaseUserId.value) return
+        dataService.debouncedSave(supabaseUserId.value, {
+            profile: {
+                userName: userName.value,
+                email: userEmail.value,
+                countryCode: countryCode.value,
+                userAge: userAge.value,
+                userGender: userGender.value,
+                hasDisasterExperience: hasDisasterExperience.value,
+                bio: bio.value,
+                avatarColor: avatarColor.value,
+                xp: xp.value,
+                level: level.value,
+                totalXPEarned: totalXPEarned.value,
+                resiCoinBalance: resiCoinBalance.value,
+                onboarded: onboarded.value,
+                joinDate: joinDate.value,
+                avatarUrl: avatarUrl.value,
+            },
+            progress: {
+                completedActs: completedActs.value,
+                completedQuests: completedLiaRPGs.value,
+                completedBridges: completedBridgingQuests.value,
+                completedChapterQuests: completedChapterQuests.value,
+                liaEvalScores: liaEvalScores.value,
+                erqScores: erqScores.value,
+                storyProgress: storyProgress.value,
+                simHP: simulationHP.value,
+                simCheckpoint: simCheckpoint.value,
+                personalization: userPersonalization.value,
+            },
+            settings: {
+                locale: locale.value,
+                darkMode: darkMode.value,
+                loginStreak: loginStreak.value,
+                loginRewardsCollected: loginRewardsCollected.value,
+                rewardHistory: dailyRewardHistory.value,
+            },
+        })
     }
 
     function completeOnboarding(name, country, age, gender, disasterExp) {
@@ -2163,6 +2441,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         localStorage.setItem('resilia_onboarded', 'true')
         _saveProfile()
         computePersonalization()
+        syncToSupabase()
     }
 
     function _saveProfile() {
@@ -2174,6 +2453,7 @@ export const useResiliaStore = defineStore('resilia', () => {
             hasDisasterExperience: hasDisasterExperience.value,
             bio: bio.value,
             avatarColor: avatarColor.value,
+            avatarUrl: avatarUrl.value,
             joinDate: joinDate.value,
         }))
     }
@@ -2248,6 +2528,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         if (!isStable.value) soothingModeActive.value = true
         completeDailyMission('checkin')
         saveDailySession()
+        syncToSupabase()
     }
 
     function completeSoothing() {
@@ -2591,7 +2872,7 @@ export const useResiliaStore = defineStore('resilia', () => {
 
     return {
         isAuthenticated, userEmail,
-        userName, countryCode, onboarded, locale, bio, avatarColor, joinDate,
+        userName, countryCode, onboarded, locale, bio, avatarColor, avatarUrl, joinDate,
         userAge, userGender, hasDisasterExperience, userPersonalization,
         stabilityScore, isStable, soothingModeActive, hasCompletedCheckIn,
         currentModule, moduleProgress, xp, totalXPEarned, level, completedModules, completedRPGs,
@@ -2617,7 +2898,8 @@ export const useResiliaStore = defineStore('resilia', () => {
         xpForNextLevel, xpProgress, completionRate,
         moduleTestScores, moduleTests,
         disasterRPGScenarios, completedDisasterRPGs,
-        registerUser, loginUser, logoutUser,
+        registerUser, loginUser, loginWithGoogle, logoutUser,
+        supabaseUserId, initFromSupabase, syncToSupabase,
         completeOnboarding, updateProfile, updateStability, completeSoothing,
         earnXP, earnCoins, redeemCoins, donateCoins,
         completeModule, completeRPG, completeDailyMission, moduleRPGCompleted,

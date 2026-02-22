@@ -144,9 +144,31 @@
         <div class="complete-icon">🎉</div>
         <h2>{{ actData?.title }} Complete!</h2>
         <p>+{{ actData?.xpReward }} XP · +{{ actData?.coinReward }} ResiCoins</p>
-        <button class="primary-btn" @click="goNext()">
-          {{ isLastAct ? 'Start RPG Quest →' : 'Continue to Next Act →' }}
-        </button>
+
+        <!-- Last act: show contextual buttons -->
+        <template v-if="isLastAct && embedded">
+          <div class="complete-actions">
+            <button v-if="chapterData?.liaChat?.post && !hasCompletedLiaPost" class="primary-btn lia-wrap-btn" @click="emit('open-lia-post', { chapterId: chapterId })">
+              💬 Wrap-up with Lia
+            </button>
+            <button v-if="chapterData?.bridgeId && !store.completedBridgingQuests.includes(chapterData.bridgeId)" class="primary-btn" @click="emit('open-bridge', { bridgeId: chapterData.bridgeId })">
+              📖 Continue Story →
+            </button>
+            <button v-if="chapterData?.questId && !store.completedChapterQuests?.includes(chapterData.questId)" class="secondary-btn" @click="emit('open-quest', { questId: chapterData.questId })">
+              ⚔️ RPG Quest
+            </button>
+            <button class="back-btn" @click="emit('close')">
+              ← Back to Academy
+            </button>
+          </div>
+        </template>
+
+        <!-- Not last act: continue to next -->
+        <template v-else>
+          <button class="primary-btn" @click="goNext()">
+            {{ isLastAct ? 'Start RPG Quest →' : 'Continue to Next Act →' }}
+          </button>
+        </template>
       </div>
     </section>
   </div>
@@ -164,7 +186,7 @@ const props = defineProps({
   embedded: { type: Boolean, default: false },
 })
 
-const emit = defineEmits(['close', 'next-act'])
+const emit = defineEmits(['close', 'next-act', 'open-quest', 'open-bridge', 'open-lia-post'])
 
 const route = useRoute()
 const router = useRouter()
@@ -178,6 +200,10 @@ const chapterActs = computed(() => chapterData.value?.acts || [])
 const actData = computed(() => chapterActs.value.find(a => a.id === actId.value))
 const actIndex = computed(() => chapterActs.value.findIndex(a => a.id === actId.value))
 const isLastAct = computed(() => actIndex.value === chapterActs.value.length - 1)
+const hasCompletedLiaPost = computed(() => {
+  const scores = store.liaEvalScores?.[chapterId.value]?.post
+  return scores && Object.keys(scores).length > 0
+})
 
 function isCompleted(aId) {
   return store.isActCompleted(chapterId.value, aId)
@@ -318,9 +344,11 @@ function goNext() {
   if (isLastAct.value) {
     // Go to chapter quest
     if (props.embedded) {
-      emit('close')
-      // Navigate to quest page (stays as separate page for RPG)
-      setTimeout(() => safeNavigate(router, `/academy/quest/${chapterData.value?.questId}`), 100)
+      if (chapterData.value?.questId) {
+        emit('open-quest', { questId: chapterData.value.questId })
+      } else {
+        emit('close')
+      }
     } else {
       safeNavigate(router, `/academy/quest/${chapterData.value?.questId}`)
     }
@@ -656,6 +684,45 @@ function goNext() {
   color: #22C55E;
   font-size: 0.95rem;
   margin: 0 0 24px;
+}
+
+.complete-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.secondary-btn {
+  padding: 12px 24px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: 2px solid #0D9488;
+  background: transparent;
+  color: #0D9488;
+}
+.secondary-btn:hover {
+  background: rgba(13,148,136,0.1);
+}
+:where(.dark, .dark *) .secondary-btn {
+  border-color: #2DD4BF;
+  color: #2DD4BF;
+}
+
+.complete-card .back-btn {
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #9CA3AF;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.complete-card .back-btn:hover {
+  color: #0D9488;
 }
 
 @keyframes bounceIn {

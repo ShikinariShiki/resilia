@@ -1,15 +1,17 @@
 <template>
-  <div class="max-w-3xl mx-auto">
+  <div class="max-w-3xl mx-auto" :class="{ 'bridge-embedded': embedded }">
     <div v-if="!bridgeQuest" class="text-center py-20">
       <p class="text-4xl mb-4">❌</p>
       <p class="text-gray-400 font-body">Bridging quest not found.</p>
-      <RouterLink to="/academy" class="text-teal-500 font-heading font-bold text-sm mt-4 inline-block hover:underline">← Back to Academy</RouterLink>
+      <button v-if="embedded" @click="emit('close')" class="text-teal-500 font-heading font-bold text-sm mt-4 inline-block hover:underline cursor-pointer">← Back to Academy</button>
+      <RouterLink v-else to="/academy" class="text-teal-500 font-heading font-bold text-sm mt-4 inline-block hover:underline">← Back to Academy</RouterLink>
     </div>
 
     <div v-else>
       <!-- Start Screen -->
       <div v-if="!started" class="animate-slide-up">
-        <RouterLink to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block">← Academy</RouterLink>
+        <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block cursor-pointer bg-transparent border-none">← Academy</button>
+        <RouterLink v-else to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block">← Academy</RouterLink>
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 text-center">
           <div class="text-6xl mb-6">📖</div>
           <h1 class="font-heading text-2xl sm:text-3xl font-bold text-ink dark:text-white mb-2">{{ bridgeQuest.title }}</h1>
@@ -27,7 +29,8 @@
       <!-- Active Step -->
       <div v-else-if="currentStepIndex < bridgeQuest.steps.length" class="animate-slide-up" :key="currentStepIndex">
         <div class="flex items-center gap-3 mb-6">
-          <RouterLink to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading">← Exit</RouterLink>
+          <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading cursor-pointer bg-transparent border-none">← Exit</button>
+          <RouterLink v-else to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading">← Exit</RouterLink>
           <div class="flex-1 h-1.5 bg-gray-100 dark:bg-slate-700 rounded-full overflow-hidden">
             <div class="h-full bg-gradient-to-r from-amber-400 to-amber-600 rounded-full transition-all duration-500" :style="{ width: stepProgress + '%' }"></div>
           </div>
@@ -98,13 +101,20 @@
           <div class="text-6xl mb-6">✨</div>
           <h2 class="font-heading text-2xl font-bold text-ink dark:text-white mb-3">Story Chapter Complete!</h2>
           <p class="text-sm text-gray-400 font-body mb-4">{{ bridgeQuest.title }}</p>
-          <p v-if="nextChapterRoute" class="text-xs text-teal-500 font-heading font-bold mb-6 animate-pulse">Continuing to {{ bridgeQuest.to }} in {{ autoNavCountdown }}s...</p>
-          <button v-if="nextChapterRoute" @click="goToNextChapter" class="px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-xl font-heading font-bold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-md shadow-teal-500/20">
-            Continue to {{ bridgeQuest.to }} →
-          </button>
-          <RouterLink v-else to="/academy" class="px-6 py-3 bg-teal-500 text-white rounded-xl font-heading font-bold text-sm hover:bg-teal-600 transition-colors">
-            ← Continue Journey
-          </RouterLink>
+          <template v-if="embedded">
+            <button @click="emit('close')" class="px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-xl font-heading font-bold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-md shadow-teal-500/20">
+              ← Back to Academy
+            </button>
+          </template>
+          <template v-else>
+            <p v-if="nextChapterRoute" class="text-xs text-teal-500 font-heading font-bold mb-6 animate-pulse">Continuing to {{ bridgeQuest.to }} in {{ autoNavCountdown }}s...</p>
+            <button v-if="nextChapterRoute" @click="goToNextChapter" class="px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-xl font-heading font-bold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-md shadow-teal-500/20">
+              Continue to {{ bridgeQuest.to }} →
+            </button>
+            <RouterLink v-else to="/academy" class="px-6 py-3 bg-teal-500 text-white rounded-xl font-heading font-bold text-sm hover:bg-teal-600 transition-colors">
+              ← Continue Journey
+            </RouterLink>
+          </template>
         </div>
       </div>
     </div>
@@ -116,11 +126,18 @@ import { ref, computed, onUnmounted } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 
+const props = defineProps({
+  propBridgeId: { type: String, default: '' },
+  embedded: { type: Boolean, default: false },
+})
+
+const emit = defineEmits(['close'])
+
 const route = useRoute()
 const router = useRouter()
 const store = useResiliaStore()
 
-const bridgeId = route.params.id
+const bridgeId = props.propBridgeId || route.params.id
 const bridgeQuest = computed(() => store.bridgingQuests?.[bridgeId])
 
 const started = ref(false)
@@ -150,7 +167,7 @@ function nextStep() {
 
   if (currentStepIndex.value >= bridgeQuest.value.steps.length) {
     store.completeBridgingQuest(bridgeId)
-    startAutoNav()
+    if (!props.embedded) startAutoNav()
   }
 }
 
