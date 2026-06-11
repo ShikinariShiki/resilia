@@ -2257,13 +2257,17 @@ export const useResiliaStore = defineStore('resilia', () => {
     async function registerUser(email, password, name) {
         // Try Supabase first
         if (isSupabaseConfigured()) {
-            const result = await authService.signUp(email, password, name)
-            if (result.error) {
-                console.error('[Store] Registration error:', result.error)
-                return { error: result.error }
-            }
-            if (result.user) {
-                supabaseUserId.value = result.user.id
+            try {
+                const result = await authService.signUp(email, password, name)
+                if (result.error) {
+                    console.error('[Store] Registration error:', result.error)
+                    return { error: result.error }
+                }
+                if (result.user) {
+                    supabaseUserId.value = result.user.id
+                }
+            } catch (err) {
+                console.warn('[Store] Supabase signup failed/offline, using local storage fallback:', err)
             }
         }
         // Always set local state (works as fallback too)
@@ -2280,20 +2284,24 @@ export const useResiliaStore = defineStore('resilia', () => {
     async function loginUser(email, password) {
         // Try Supabase first
         if (isSupabaseConfigured()) {
-            const result = await authService.signIn(email, password)
-            if (result.error) {
-                return { success: false, error: result.error }
-            }
-            if (result.user) {
-                supabaseUserId.value = result.user.id
-                userEmail.value = result.user.email
-                isAuthenticated.value = true
-                localStorage.setItem('resilia_auth', 'true')
-                localStorage.setItem('resilia_email', result.user.email)
-                localStorage.setItem('resilia_session_ts', Date.now().toString())
-                // Hydrate from Supabase
-                await initFromSupabase(result.user.id)
-                return { success: true, error: null }
+            try {
+                const result = await authService.signIn(email, password)
+                if (result.error) {
+                    return { success: false, error: result.error }
+                }
+                if (result.user) {
+                    supabaseUserId.value = result.user.id
+                    userEmail.value = result.user.email
+                    isAuthenticated.value = true
+                    localStorage.setItem('resilia_auth', 'true')
+                    localStorage.setItem('resilia_email', result.user.email)
+                    localStorage.setItem('resilia_session_ts', Date.now().toString())
+                    // Hydrate from Supabase
+                    await initFromSupabase(result.user.id)
+                    return { success: true, error: null }
+                }
+            } catch (err) {
+                console.warn('[Store] Supabase login failed/offline, using local storage fallback:', err)
             }
         }
         // Fallback: localStorage-based login
@@ -2329,7 +2337,12 @@ export const useResiliaStore = defineStore('resilia', () => {
 
     async function loginWithGoogle() {
         if (!isSupabaseConfigured()) return { error: 'Supabase not configured' }
-        return await authService.signInWithGoogle()
+        try {
+            return await authService.signInWithGoogle()
+        } catch (err) {
+            console.warn('[Store] Supabase Google login failed/offline:', err)
+            return { error: 'Supabase connection failed' }
+        }
     }
 
     async function logoutUser() {
