@@ -319,11 +319,14 @@ function toggleGrounding() {
 
 // ── Mood ──
 const moods = [{ emoji: '😊', label: 'Happy' }, { emoji: '😌', label: 'Calm' }, { emoji: '😐', label: 'Neutral' }, { emoji: '😔', label: 'Sad' }, { emoji: '😰', label: 'Anxious' }]
-const selectedMood = ref(null)
+const selectedMood = computed(() => store.moodLogs[0]?.emoji || null)
 const moodLogged = ref(false)
 function logMood(mood) {
-  selectedMood.value = mood.emoji; store.logMood(mood.emoji); moodLogged.value = true
-  setTimeout(() => { moodLogged.value = false }, 2000)
+  const success = store.logMood(mood.emoji)
+  if (success) {
+    moodLogged.value = true
+    setTimeout(() => { moodLogged.value = false }, 2000)
+  }
 }
 
 // ── Guided Meditation Timer ──
@@ -370,8 +373,13 @@ const emotionWheel = [
   { emoji: '😤', name: 'Frustrated', tip: 'Break the problem into smaller steps. Progress over perfection.' },
   { emoji: '🥰', name: 'Loved', tip: 'Connection is healing. Reach out to someone you appreciate.' },
 ]
-const selectedEmotion = ref(null)
-function selectEmotion(e) { selectedEmotion.value = e.name; store.logMood(e.emoji) }
+const selectedEmotion = computed(() => {
+  const lastEmoji = store.moodLogs[0]?.emoji
+  if (!lastEmoji) return null
+  const found = emotionWheel.find(e => e.emoji === lastEmoji)
+  return found ? found.name : null
+})
+function selectEmotion(e) { store.logMood(e.emoji) }
 
 // ── Journal ──
 const journalEntry = ref('')

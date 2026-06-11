@@ -2692,7 +2692,27 @@ export const useResiliaStore = defineStore('resilia', () => {
     }
 
     function logMood(emoji, note = '') {
-        moodLogs.value.unshift({ emoji, note, date: new Date().toLocaleDateString(), time: new Date().toLocaleTimeString() })
+        const lastLog = moodLogs.value[0]
+        const now = Date.now()
+        if (lastLog && (now - (lastLog.timestamp || 0) < 300000)) {
+            if (lastLog.emoji === emoji) {
+                return false
+            } else {
+                lastLog.emoji = emoji
+                lastLog.timestamp = now
+                lastLog.time = new Date().toLocaleTimeString()
+                lastLog.date = new Date().toLocaleDateString()
+                return true
+            }
+        }
+        moodLogs.value.unshift({
+            emoji,
+            note,
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
+            timestamp: now
+        })
+        return true
     }
 
     function logGroundingSession() {
