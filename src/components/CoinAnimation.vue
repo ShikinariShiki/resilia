@@ -1,8 +1,10 @@
 <template>
   <Transition name="coin">
-    <div v-if="visible" class="fixed top-20 right-8 z-50 flex items-center gap-2 bg-orange-500 border-2 border-ink px-4 py-2 shadow-brutal text-white font-heading font-bold text-lg pointer-events-none">
-      <span>🪙</span>
-      <span>+{{ amount }} RC</span>
+    <div v-if="visible" 
+      class="fixed top-20 right-8 z-50 flex items-center gap-2.5 px-5 py-3 rounded-2xl shadow-xl text-white font-heading font-bold text-base pointer-events-none border border-white/10 backdrop-blur-sm transition-all duration-300"
+      :class="amount >= 0 ? 'bg-gradient-to-r from-teal-500 to-emerald-600 shadow-teal-500/20' : 'bg-gradient-to-r from-orange-500 to-rose-600 shadow-orange-500/20'">
+      <span class="text-lg">🪙</span>
+      <span>{{ amount >= 0 ? '+' : '' }}{{ amount }} RC</span>
     </div>
   </Transition>
 </template>
