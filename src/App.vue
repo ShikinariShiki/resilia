@@ -87,11 +87,13 @@ if (isSupabaseConfigured()) {
 
       // Extract Google profile photo and name from user metadata
       const meta = session.user.user_metadata || {}
-      if (meta.avatar_url) {
-        store.avatarUrl = meta.avatar_url
+      // Google may expose the photo as avatar_url or picture
+      const googlePhoto = meta.avatar_url || meta.picture || ''
+      if (googlePhoto) {
+        store.avatarUrl = googlePhoto
       }
       // Extract first name from Google full_name (e.g. "John Doe" → "John")
-      const googleName = meta.full_name || meta.name || ''
+      const googleName = meta.full_name || meta.name || meta.given_name || ''
       
       await store.initFromSupabase(session.user.id)
       

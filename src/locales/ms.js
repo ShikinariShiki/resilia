@@ -5,7 +5,11 @@ export default {
         wallet: 'Dompet',
         dashboard: 'Papan Pemuka',
         profile: 'Profil',
-        toolkit: 'Kit Alat'
+        toolkit: 'Kit Alat',
+        daily: 'Misi Harian',
+        admin: 'Hab Admin',
+        collapse: 'Kuncupkan',
+        tagline: 'Kor Simpanan Digital'
     },
     common: {
         getStarted: 'Mula',

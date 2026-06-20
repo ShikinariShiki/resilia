@@ -5,7 +5,11 @@ export default {
         wallet: 'Pitaka',
         dashboard: 'Dashboard',
         profile: 'Profile',
-        toolkit: 'Toolkit'
+        toolkit: 'Toolkit',
+        daily: 'Pang-araw-araw na Misyon',
+        admin: 'Admin Hub',
+        collapse: 'I-collapse',
+        tagline: 'Digital Reserve Corps'
     },
     common: {
         getStarted: 'Magsimula',

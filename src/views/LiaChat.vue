@@ -40,7 +40,7 @@
           </div>
           <div class="lia-bubble" :class="msg.from === 'user' ? 'lia-bubble-right' : 'lia-bubble-left'" :style="msg.from !== 'user' && msg.from !== 'lia' ? { borderLeft: `3px solid ${getNpcColor(msg.from)}` } : {}">
             <p class="lia-npc-name" v-if="msg.from !== 'user' && msg.from !== 'lia'">{{ getNpcName(msg.from) }}</p>
-            <p v-html="msg.text"></p>
+            <p v-html="sanitizeHtml(msg.text)"></p>
             <span class="lia-time">{{ formatTime(i) }}</span>
           </div>
         </div>
@@ -113,6 +113,7 @@
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
+import { sanitizeHtml } from '../utils/sanitize'
 
 const props = defineProps({
   propChapterId: { type: String, default: '' },

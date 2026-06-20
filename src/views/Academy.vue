@@ -5,7 +5,7 @@
     <!-- Mission Dossier Header -->
     <div class="dossier-header mb-6 animate-slide-up">
       <div class="flex items-center gap-3 mb-2">
-        <span class="text-2xl">📁</span>
+        <PhFolders :size="26" weight="duotone" class="text-amber-600 dark:text-amber-400" />
         <div>
           <h1 class="font-heading font-bold text-xl text-ink dark:text-white tracking-tight">Mission Dossier</h1>
           <p class="text-[10px] font-heading uppercase tracking-[0.2em] text-amber-600/80 dark:text-amber-400/60">
@@ -182,7 +182,7 @@
 
         <!-- Empty state -->
         <div v-else-if="!selectedFolder" class="book-empty">
-          <div class="book-empty-icon">📂</div>
+          <div class="book-empty-icon"><PhFolderOpen :size="44" weight="duotone" class="text-gray-300 dark:text-slate-600" /></div>
           <p class="book-empty-text">Select a chapter file to view</p>
           <p class="book-empty-sub">Click any chapter on the left to open its contents</p>
         </div>
@@ -324,7 +324,7 @@ import { ref, computed, nextTick, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import TourGuide from '../components/TourGuide.vue'
-import { PhBookOpen, PhBookmarkSimple, PhChartDonut } from '@phosphor-icons/vue'
+import { PhBookOpen, PhBookmarkSimple, PhChartDonut, PhFolders, PhFolderOpen } from '@phosphor-icons/vue'
 import LiaChat from './LiaChat.vue'
 import ActLesson from './ActLesson.vue'
 import ChapterQuest from './ChapterQuest.vue'

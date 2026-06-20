@@ -5,7 +5,11 @@ export default {
         wallet: 'Wallet',
         dashboard: 'Dashboard',
         profile: 'Profile',
-        toolkit: 'Toolkit'
+        toolkit: 'Toolkit',
+        daily: 'Daily Missions',
+        admin: 'Admin Hub',
+        collapse: 'Collapse',
+        tagline: 'Digital Reserve Corps'
     },
     common: {
         getStarted: 'Get Started',

@@ -90,33 +90,17 @@
 
         <!-- Right: Animated Stats + Video Placeholder -->
         <div class="hero-visual" :class="heroReady ? 'hero-visual-visible' : ''">
-          <!-- Mascot Lia + personalized daily-missions preview -->
-          <div class="relative mb-8">
-            <img src="../assets/lia-point-left.png" alt="Lia, your resilience guide" class="hero-lia" />
-            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl shadow-ink/10 border border-gray-100 dark:border-slate-700">
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-2.5">
-                  <span class="w-9 h-9 rounded-xl bg-teal-500 flex items-center justify-center text-white text-sm font-heading font-bold">L</span>
-                  <div>
-                    <p class="font-heading font-bold text-ink dark:text-white text-sm leading-none">Today's missions</p>
-                    <p class="text-[11px] text-gray-400 mt-1">Personalized for you by AI</p>
-                  </div>
-                </div>
-                <span class="text-[10px] font-heading font-bold text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2.5 py-1 rounded-lg">AI</span>
-              </div>
-              <div class="space-y-2.5">
-                <div v-for="(m, i) in previewMissions" :key="i" class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-slate-700/50 transition-transform duration-300 hover:translate-x-1">
-                  <span class="text-lg leading-none"> m.icon </span>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-xs font-heading font-bold text-ink dark:text-white truncate"> m.title </p>
-                    <p class="text-[10px] text-gray-400 mt-0.5">+ m.xp  XP</p>
-                  </div>
-                  <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0" :class="m.done ? 'bg-teal-500 border-teal-500' : 'border-gray-300 dark:border-slate-500'">
-                    <svg v-if="m.done" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5l2.5 2.5 4.5-5"/></svg>
-                  </div>
-                </div>
-              </div>
+          <!-- Hero video -->
+          <div class="hero-video-wrap mb-8">
+            <div v-if="!heroVideoPlaying" class="hero-video-facade" role="button" tabindex="0" @click="heroVideoPlaying = true" @keydown.enter="heroVideoPlaying = true">
+              <img src="https://i.ytimg.com/vi/c0YzDVIt9yg/maxresdefault.jpg" alt="Watch how Resilia works" class="hero-video-thumb" loading="lazy" />
+              <div class="hero-video-overlay"></div>
+              <button class="hero-video-play" aria-label="Play video">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <span class="hero-video-label">Watch how Resilia works</span>
             </div>
+            <iframe v-else class="hero-video-frame" src="https://www.youtube-nocookie.com/embed/c0YzDVIt9yg?autoplay=1&rel=0&modestbranding=1" title="Resilia" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
 
           <!-- Stats grid with animated counters -->
@@ -462,7 +446,7 @@ const availableLangs = [
   { code: 'id', flag: '🇮🇩', label: 'Bahasa Indonesia' },
   { code: 'th', flag: '🇹🇭', label: 'ภาษาไทย' },
   { code: 'vi', flag: '🇻🇳', label: 'Tiếng Việt' },
-  { code: 'ms', flag: '🇲🇾', label: 'Bahasa Melayu' },
+  { code: 'ms', flag: '����🇾', label: 'Bahasa Melayu' },
   { code: 'tl', flag: '🇵🇭', label: 'Filipino' },
   { code: 'my', flag: '🇲🇲', label: 'မြန်မာဘာသာ' },
   { code: 'km', flag: '🇰🇭', label: 'ភាសាខ្មែរ' },
@@ -585,6 +569,7 @@ function scrollTier(dir) {
 
 // ── Hero entrance animation ──
 const heroReady = ref(false)
+const heroVideoPlaying = ref(false)
 onMounted(() => { setTimeout(() => { heroReady.value = true }, 200) })
 
 // ── Animated counters ──
@@ -953,6 +938,18 @@ function scrollTo(id) {
 }
 
 /* ━━━ VIDEO PREVIEW ━━━ */
+.hero-video-wrap { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(26,26,26,0.18); aspect-ratio: 16 / 9; background:#0d1117; }
+.hero-video-facade { position:absolute; inset:0; cursor:pointer; }
+.hero-video-thumb { width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+.hero-video-facade:hover .hero-video-thumb { transform: scale(1.05); }
+.hero-video-overlay { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.45)); }
+.hero-video-play { position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); width:74px; height:74px; border:none; border-radius:50%; background: rgba(13,148,136,.92); display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 8px 30px rgba(13,148,136,.5); transition: transform .25s, background .25s; }
+.hero-video-play svg { margin-left:4px; }
+.hero-video-facade:hover .hero-video-play { transform: translate(-50%,-50%) scale(1.1); background:#0D9488; }
+.hero-video-play::after { content:''; position:absolute; inset:-10px; border-radius:50%; border:2px solid rgba(255,255,255,.5); animation: heroPulse 2s ease-out infinite; }
+@keyframes heroPulse { 0%{ transform:scale(1); opacity:.7 } 100%{ transform:scale(1.5); opacity:0 } }
+.hero-video-label { position:absolute; bottom:18px; left:20px; color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; text-shadow:0 2px 8px rgba(0,0,0,.6); }
+.hero-video-frame { position:absolute; inset:0; width:100%; height:100%; border:0; }
 .video-preview {
   transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -5,7 +5,11 @@ export default {
         wallet: 'กระเป๋าเงิน',
         dashboard: 'แดชบอร์ด',
         profile: 'โปรไฟล์',
-        toolkit: 'กล่องเครื่องมือ'
+        toolkit: 'กล่องเครื่องมือ',
+        daily: 'ภารกิจประจำวัน',
+        admin: 'ศูนย์แอดมิน',
+        collapse: 'ย่อ',
+        tagline: 'กองหนุนดิจิทัล'
     },
     common: {
         getStarted: 'เริ่มต้น',

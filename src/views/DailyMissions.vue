@@ -2,7 +2,7 @@
   <div>
     <div class="mb-8 sm:mb-10 animate-slide-up">
       <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink dark:text-white leading-tight">
-        Daily Missions 🎯
+        Daily Missions
       </h1>
       <p class="text-gray-400 font-body mt-2 text-sm sm:text-base">Complete missions to earn XP, ResiCoins, and streak rewards.</p>
     </div>
@@ -74,7 +74,7 @@
         <div class="h-full bg-gradient-to-r from-teal-400 to-teal-600 rounded-full transition-all duration-500"
           :style="{ width: (store.dailyMissionsCompleted / store.dailyMissionsTotal * 100) + '%' }"></div>
       </div>
-      <p v-if="store.dailyMissionsCompleted === store.dailyMissionsTotal" class="text-xs text-teal-500 font-heading font-bold mt-3">🏆 All missions complete! Come back tomorrow.</p>
+      <p v-if="store.dailyMissionsCompleted === store.dailyMissionsTotal" class="text-xs text-teal-500 font-heading font-bold mt-3">All missions complete! Come back tomorrow.</p>
     </div>
   </div>
 </template>

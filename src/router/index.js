@@ -46,7 +46,7 @@ const routes = [
     {
         path: '/academy/rpg/:id',
         name: 'rpg',
-        component: () => import('../views/ScenarioRPG.vue'),
+        component: () => import('../views/RpgQuestView.vue'),
     },
     {
         path: '/academy/test/:moduleId/:testType',

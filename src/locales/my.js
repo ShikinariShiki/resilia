@@ -5,7 +5,11 @@ export default {
         wallet: 'ပိုက်ဆံအိတ်',
         dashboard: 'ဒိုင်ခွက်',
         profile: 'ပရိုဖိုင်',
-        toolkit: 'ကိရိယာတန်ဆာပလာ'
+        toolkit: 'ကိရိယာတန်ဆာပလာ',
+        daily: 'နေ့စဉ်တာဝန်များ',
+        admin: 'အက်ဒမင်ဓာန',
+        collapse: 'ခေါက်သိမ်းရန်',
+        tagline: 'ဒစ်ဂျစ်တယ်အရံတပ်ဖွဲ့'
     },
     common: {
         getStarted: 'စတင်ရန်',

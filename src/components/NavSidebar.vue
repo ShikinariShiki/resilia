@@ -14,7 +14,7 @@
         <img src="../assets/icon.png" class="w-10 h-10 object-cover rounded-2xl flex-shrink-0 bg-teal-50" alt="RESILIA" />
         <div v-if="!collapsed || mobileOpen">
           <h1 class="font-heading text-lg font-bold text-ink dark:text-white tracking-tight leading-none">RESILIA</h1>
-          <p class="text-[10px] text-gray-400 font-body leading-none mt-0.5">Digital Reserve Corps</p>
+          <p class="text-[10px] text-gray-400 font-body leading-none mt-0.5" v-text="t('nav.tagline')"></p>
         </div>
       </RouterLink>
       <button @click="$emit('close-mobile')" class="md:hidden w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700">
@@ -48,7 +48,7 @@
       <button @click="$emit('toggle')"
         class="w-full flex items-center justify-center gap-2 h-9 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 text-xs font-medium">
         <component :is="collapsed ? ChevronRight : ChevronLeft" :size="16" />
-        <span v-if="!collapsed">Collapse</span>
+        <span v-if="!collapsed" v-text="t('nav.collapse')"></span>
       </button>
     </div>
 
@@ -88,14 +88,14 @@ const route = useRoute()
 const navItems = computed(() => {
   const items = [
     { to: '/home', label: t('nav.home'), icon: Home },
-    { to: '/daily', label: 'Daily Missions', icon: Target },
+    { to: '/daily', label: t('nav.daily'), icon: Target },
     { to: '/academy', label: t('nav.academy'), icon: BookOpen },
     { to: '/toolkit', label: t('nav.toolkit'), icon: Briefcase },
     { to: '/wallet', label: t('nav.wallet'), icon: Wallet },
     { to: '/dashboard', label: t('nav.dashboard'), icon: BarChart3 },
   ]
   if (store.isAdmin) {
-    items.push({ to: '/admin', label: 'Admin Hub', icon: Settings2 })
+    items.push({ to: '/admin', label: t('nav.admin'), icon: Settings2 })
   }
   return items
 })

@@ -5,7 +5,11 @@ export default {
         wallet: 'Ví',
         dashboard: 'Bảng điều khiển',
         profile: 'Hồ sơ',
-        toolkit: 'Công cụ'
+        toolkit: 'Công cụ',
+        daily: 'Nhiệm vụ hằng ngày',
+        admin: 'Trung tâm quản trị',
+        collapse: 'Thu gọn',
+        tagline: 'Lực lượng Dự bị Số'
     },
     common: {
         getStarted: 'Bắt đầu',

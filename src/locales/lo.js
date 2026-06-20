@@ -5,7 +5,11 @@ export default {
         wallet: 'ກະເປົາເງິນ',
         dashboard: 'ແຜງຄວບຄຸມ',
         profile: 'ໂປຣໄຟລ໌',
-        toolkit: 'ກ່ອງເຄື່ອງມື'
+        toolkit: 'ກ່ອງເຄື່ອງມື',
+        daily: 'ໜ້າວ຺ກປະຈຳວັນ',
+        admin: 'ສູນຜູ້ດູແລ',
+        collapse: 'ຫຍີ້',
+        tagline: 'ກອງໜຸນດິຈິຕອນ'
     },
     common: {
         getStarted: 'ເລີ່ມຕົ້ນ',

@@ -5,7 +5,11 @@ export default {
         wallet: 'Dompet',
         dashboard: 'Dasbor',
         profile: 'Profil',
-        toolkit: 'Alat Kelengkapan'
+        toolkit: 'Alat Kelengkapan',
+        daily: 'Misi Harian',
+        admin: 'Pusat Admin',
+        collapse: 'Ciutkan',
+        tagline: 'Korps Cadangan Digital'
     },
     common: {
         getStarted: 'Mulai',

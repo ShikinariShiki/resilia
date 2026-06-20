@@ -1,11 +1,12 @@
 name: 'Build Tauri App'
 
 on:
-  push:
-    branches:
-      - main
-      - master
+  # Only build desktop releases on explicit version tags or manual trigger.
+  # This avoids the workflow failing on every push to main (web app deploys via Vercel).
   workflow_dispatch:
+  push:
+    tags:
+      - 'app-v*'
 
 jobs:
   build:

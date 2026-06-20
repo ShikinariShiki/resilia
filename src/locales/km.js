@@ -5,7 +5,11 @@ export default {
         wallet: 'កាបូប',
         dashboard: 'ផ្ទាំងគ្រប់គ្រង',
         profile: 'ប្រវត្តិរូប',
-        toolkit: 'ប្រអប់ឧបករណ៍'
+        toolkit: 'ប្រអប់ឧបករណ៍',
+        daily: 'បេសកកម្មប្រចាំថ្ងៃ',
+        admin: 'មជ្ឆមណ្ឌលអ្នកគ្រប់គ្រង',
+        collapse: 'បង្រួម',
+        tagline: 'កងជំនួយអ៊ីជិថល'
     },
     common: {
         getStarted: 'ចាប់ផ្តើម',

@@ -40,7 +40,7 @@
                 :class="nameError ? 'ring-2 ring-red-400/50' : ''"
                 @input="checkName" />
               <p v-if="nameError" class="text-xs text-red-500 font-body mt-2 flex items-center gap-1.5">
-                <span>⚠️</span> {{ nameError }}
+                <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg> {{ nameError }}
               </p>
             </div>
 
@@ -82,7 +82,7 @@
           </label>
 
           <!-- Error -->
-          <p v-if="formError" class="text-xs text-red-500 font-body mb-4 flex items-center gap-1.5"><span>❌</span> {{ formError }}</p>
+          <p v-if="formError" class="text-xs text-red-500 font-body mb-4 flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg> {{ formError }}</p>
 
           <!-- Register Button -->
           <button @click="handleRegister" :disabled="!canRegister"
@@ -114,7 +114,7 @@
             </div>
           </div>
 
-          <p v-if="formError" class="text-xs text-red-500 font-body mb-4 flex items-center gap-1.5"><span>❌</span> {{ formError }}</p>
+          <p v-if="formError" class="text-xs text-red-500 font-body mb-4 flex items-center gap-1.5"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg> {{ formError }}</p>
 
           <button @click="handleLogin" :disabled="!loginEmail || !loginPassword"
             class="w-full py-4 bg-ink text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed mb-4">
@@ -289,17 +289,21 @@ async function handleGoogleAuth() {
 </script>
 
 <style scoped>
-.slide-enter-active,
+.slide-enter-active {
+  transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
 .slide-leave-active {
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.55, 0, 1, 0.45);
 }
 .slide-enter-from {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateX(28px) scale(0.98);
+  filter: blur(4px);
 }
 .slide-leave-to {
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translateX(-28px) scale(0.98);
+  filter: blur(4px);
 }
 .fade-enter-active,
 .fade-leave-active {
