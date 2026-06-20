@@ -68,7 +68,7 @@
                   <div class="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center">
                     <span class="text-lg">❓</span>
                   </div>
-                  <h2 class="font-heading text-xl font-bold text-ink dark:text-white">Quiz — Question {{ quizIndex + 1 }}/{{ mod.quiz.length }}</h2>
+                  <h2 class="font-heading text-xl font-bold text-ink dark:text-white">Quiz, Question {{ quizIndex + 1 }}/{{ mod.quiz.length }}</h2>
                 </div>
 
                 <p class="font-heading font-bold text-ink dark:text-white text-base sm:text-lg mb-6">{{ mod.quiz[quizIndex].question }}</p>
@@ -86,7 +86,7 @@
                 <div v-if="quizAnswered" class="mt-6 p-4 rounded-2xl"
                   :class="quizCorrect ? 'bg-teal-50 dark:bg-teal-900/20' : 'bg-red-50 dark:bg-red-900/20'">
                   <p class="font-heading font-bold text-sm" :class="quizCorrect ? 'text-teal-600 dark:text-teal-400' : 'text-red-500'">
-                    {{ quizCorrect ? '✓ Correct!' : '✗ Not quite — the correct answer is highlighted above.' }}
+                    {{ quizCorrect ? '✓ Correct!' : '✗ Not quite, the correct answer is highlighted above.' }}
                   </p>
                 </div>
               </div>

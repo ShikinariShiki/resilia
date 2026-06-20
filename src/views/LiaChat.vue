@@ -307,7 +307,7 @@ function selectScale(value) {
 
   visibleMessages.value.push({
     from: 'user',
-    text: `${value} — ${item.scaleLabel[value - 1]}`,
+    text: `${value}, ${item.scaleLabel[value - 1]}`,
   })
 
   store.saveLiaEvalScore(chapterId.value, phase.value || 'sim', item.key, value)
@@ -482,7 +482,7 @@ onMounted(() => {
   background: var(--chat-bg);
 }
 
-/* Embedded mode — fills parent container */
+/* Embedded mode, fills parent container */
 .lia-wrapper.lia-embedded {
   max-width: 100%;
   height: 100%;

@@ -1,12 +1,12 @@
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient'
 
 /**
- * Auth Service — wraps Supabase Auth with secure defaults.
+ * Auth Service, wraps Supabase Auth with secure defaults.
  * Falls back to localStorage mock if Supabase is not configured.
  */
 
 // ═══════════════════════════════════════
-// Sign Up — email + password
+// Sign Up, email + password
 // ═══════════════════════════════════════
 export async function signUp(email, password, displayName) {
     if (!isSupabaseConfigured()) {
@@ -45,7 +45,7 @@ export async function signUp(email, password, displayName) {
 }
 
 // ═══════════════════════════════════════
-// Sign In — email + password
+// Sign In, email + password
 // ═══════════════════════════════════════
 export async function signIn(email, password) {
     if (!isSupabaseConfigured()) {
@@ -62,11 +62,11 @@ export async function signIn(email, password) {
 }
 
 // ═══════════════════════════════════════
-// Sign In With Google — OAuth redirect
+// Sign In With Google, OAuth redirect
 // ═══════════════════════════════════════
 export async function signInWithGoogle() {
     if (!isSupabaseConfigured()) {
-        return { error: 'Supabase not configured — Google OAuth unavailable' }
+        return { error: 'Supabase not configured, Google OAuth unavailable' }
     }
 
     const { data, error } = await supabase.auth.signInWithOAuth({

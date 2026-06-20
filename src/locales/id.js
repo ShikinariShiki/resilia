@@ -273,7 +273,7 @@ export default {
         r_supportive: 'Kamu bener... siap siaga itu kebalikan dari rasa takut. Itu namanya PINTAR 🧠',
         r_enthusiastic: 'IYA BANGET!! Ya ampun ayo kita lakuin!! 🎉',
         r_dismissive: '...maksudku uang tuh satu hal tapi ilmu itu gratis kan? 😅',
-        msg8: 'Oke serius ngomong nih — sebelum kita mulai, aku pengen tahu lebih banyak tentang kamu!',
+        msg8: 'Oke serius ngomong nih, sebelum kita mulai, aku pengen tahu lebih banyak tentang kamu!',
         q3: 'Kenapa kamu tertarik dengan respons bencana?',
         q3_a: 'Aku pernah ngalamin bencana sebelumnya',
         q3_b: 'Aku pengen bantu komunitasku',
@@ -294,7 +294,7 @@ export default {
         r_impatient: 'Aku suka gayamu! Langsung ke intinya haha 😂',
         msg9: 'Oke rasanya udah cukup interogasinya buat hari ini 😄',
         msg10: 'Aku punya firasat bagus soal ini, {Name}. Sampai jumpa di Bab 1! 🌟',
-        msg11: 'Eh tunggu — satu hal lagi. Aku selalu bawa ini ke mana-mana...',
+        msg11: 'Eh tunggu, satu hal lagi. Aku selalu bawa ini ke mana-mana...',
         msg12: '*ngirim foto peta ASEAN yang lecek penuh bintang* ⭐',
         msg13: 'Tiap bintang itu tempat yang pengen aku kunjungin. Suatu hari, aku bakal tempel pin di setiap tempatnya. Ayo kita wujudkan bareng-bareng 🗺️✨'
     }

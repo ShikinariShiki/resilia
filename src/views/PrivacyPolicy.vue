@@ -34,12 +34,12 @@
           <h2 class="font-heading font-bold text-lg text-ink dark:text-white mb-3">4. Your Rights (GDPR)</h2>
           <p>Under the GDPR and applicable laws, you have the right to:</p>
           <ul class="list-disc pl-5 space-y-1 mt-2">
-            <li><strong class="text-ink dark:text-white">Access</strong> — View all personal data stored locally</li>
-            <li><strong class="text-ink dark:text-white">Rectification</strong> — Correct any inaccurate data through the app settings</li>
-            <li><strong class="text-ink dark:text-white">Erasure</strong> — Delete all data by clearing your browser's localStorage</li>
-            <li><strong class="text-ink dark:text-white">Portability</strong> — Export your data (feature coming in future release)</li>
-            <li><strong class="text-ink dark:text-white">Restriction</strong> — Limit how your data is processed</li>
-            <li><strong class="text-ink dark:text-white">Objection</strong> — Object to specific processing activities</li>
+            <li><strong class="text-ink dark:text-white">Access</strong>, View all personal data stored locally</li>
+            <li><strong class="text-ink dark:text-white">Rectification</strong>, Correct any inaccurate data through the app settings</li>
+            <li><strong class="text-ink dark:text-white">Erasure</strong>, Delete all data by clearing your browser's localStorage</li>
+            <li><strong class="text-ink dark:text-white">Portability</strong>, Export your data (feature coming in future release)</li>
+            <li><strong class="text-ink dark:text-white">Restriction</strong>, Limit how your data is processed</li>
+            <li><strong class="text-ink dark:text-white">Objection</strong>, Object to specific processing activities</li>
           </ul>
         </section>
 

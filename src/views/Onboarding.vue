@@ -25,7 +25,7 @@
             </h1>
             <p class="text-gray-400 font-body text-sm md:text-base leading-relaxed max-w-sm mx-auto animate-slide-up" style="animation-delay: 0.1s">
               Across Southeast Asia, communities are calling for help. Disasters strike without warning. 
-              But there are those who are prepared — the <strong class="text-ink">Digital Reserve Corps</strong>.
+              But there are those who are prepared, the <strong class="text-ink">Digital Reserve Corps</strong>.
             </p>
             <p class="text-gray-500 font-body text-sm mt-4 italic animate-slide-up" style="animation-delay: 0.15s">
               Your training begins now.
@@ -181,7 +181,7 @@
               <PhSun :size="24" :class="disasterExp === false ? 'text-white' : 'text-amber-500'" weight="fill" />
               <div>
                 <p class="font-heading font-bold text-sm">No, I haven't</p>
-                <p class="text-xs mt-1" :class="disasterExp === false ? 'text-white/70' : 'text-gray-400'">That's okay — preparation is the best defense</p>
+                <p class="text-xs mt-1" :class="disasterExp === false ? 'text-white/70' : 'text-gray-400'">That's okay, preparation is the best defense</p>
               </div>
             </button>
           </div>

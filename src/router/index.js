@@ -150,7 +150,7 @@ const publicRoutes = ['landing', 'auth', 'onboarding', 'terms', 'privacy']
 router.beforeEach((to, from, next) => {
     const store = useResiliaStore()
 
-    // Allowlist validation — block navigation to unknown routes
+    // Allowlist validation, block navigation to unknown routes
     if (!isAllowedRoute(to.path)) {
         console.warn(`[router] Blocked navigation to disallowed path: ${to.path}`)
         return next({ name: store.isAuthenticated ? 'home' : 'auth' })

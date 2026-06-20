@@ -193,7 +193,7 @@
               <div class="flex-1 min-w-0">
                 <p class="font-heading font-bold text-xs sm:text-sm truncate transition-colors"
                    :class="chapter.status === 'available' ? 'text-ink dark:text-white' : 'text-gray-500 dark:text-gray-400'">
-                  {{ chapter.status === 'locked' ? `${chapter.icon} ${chapter.title.split(' — ')[0]}` : chapter.title }}
+                  {{ chapter.status === 'locked' ? `${chapter.icon} ${chapter.title.split(', ')[0]}` : chapter.title }}
                 </p>
                 <p class="text-[10px] sm:text-xs mt-0.5" :class="chapter.status === 'available' ? 'text-orange-600 dark:text-orange-400 font-bold' : 'text-gray-400'">
                    {{ chapter.status === 'completed' ? '✓ Complete' : chapter.status === 'available' ? 'Continue your journey' : 'Complete previous to unlock' }}

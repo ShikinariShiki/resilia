@@ -274,7 +274,7 @@ async function handleGoogleAuth() {
       router.push(store.onboarded ? '/home' : '/onboarding')
       return
     }
-    // OAuth redirects — no need to handle success here
+    // OAuth redirects, no need to handle success here
   } catch (err) {
     console.warn('[Auth] Google sign-in failed (network error), falling back to local admin mode:', err)
     const mockEmail = 'natkevin143@gmail.com'

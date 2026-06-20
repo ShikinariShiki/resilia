@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <!-- Top metrics — Personal Readiness + Global Stats -->
+    <!-- Top metrics, Personal Readiness + Global Stats -->
     <div id="top-metrics" class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10 animate-slide-up" style="animation-delay:0.03s">
       <!-- Personal Readiness Score -->
       <div class="bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl sm:rounded-3xl p-5 sm:p-7 text-white relative overflow-hidden">
@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    <!-- ASEAN Country Cards — Interactive -->
+    <!-- ASEAN Country Cards, Interactive -->
     <div class="mb-8 sm:mb-10 animate-slide-up" style="animation-delay:0.06s">
       <h3 class="font-heading text-base sm:text-lg font-bold text-ink dark:text-white mb-5 flex items-center gap-2">
         <span class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-sm"><PhGlobeHemisphereWest :size="16" weight="fill" class="text-teal-500" /></span>
@@ -140,7 +140,7 @@
         <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="bg-amber-50/50 dark:bg-amber-900/10 rounded-xl p-4">
             <p class="text-[9px] font-heading text-amber-600 uppercase mb-1">Top Threats</p>
-            <p class="text-sm font-body text-amber-700 dark:text-amber-400">{{ selectedData.topDisasters || '—' }}</p>
+            <p class="text-sm font-body text-amber-700 dark:text-amber-400">{{ selectedData.topDisasters || '-' }}</p>
           </div>
           <div class="bg-red-50/50 dark:bg-red-900/10 rounded-xl p-4">
             <p class="text-[9px] font-heading text-red-600 uppercase mb-1">Most Recent</p>

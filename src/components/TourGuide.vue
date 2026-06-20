@@ -9,11 +9,16 @@
         <div v-if="highlightStyle" class="absolute border-2 border-teal-400 rounded-xl shadow-[0_0_0_9999px_rgba(0,0,0,0.6)] bg-transparent pointer-events-none transition-all duration-500 ease-out"
           :style="highlightStyle"></div>
 
-        <!-- Tooltip card — always within viewport -->
+        <!-- Tooltip card, always within viewport -->
         <div ref="tooltipEl"
           class="absolute bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-5 transition-all duration-500 ease-out animate-slide-up"
           :style="tooltipStyle"
           style="max-width: min(360px, calc(100vw - 32px)); width: max-content;">
+          <!-- Mascot Lia, points toward the highlighted element -->
+          <img :src="mascotSide === 'left' ? liaPointLeft : liaPointRight"
+            alt="Lia, your guide"
+            class="tour-lia pointer-events-none select-none"
+            :class="mascotSide === 'left' ? 'tour-lia-left' : 'tour-lia-right'" />
           <!-- Close button -->
           <button @click="skip" class="absolute top-3 right-3 w-7 h-7 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-gray-400 hover:text-ink dark:hover:text-white hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors" aria-label="Close tour">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>
@@ -61,6 +66,8 @@
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { PhShieldCheck } from '@phosphor-icons/vue'
+import liaPointLeft from '../assets/lia-point-left.png'
+import liaPointRight from '../assets/lia-point-right.png'
 
 const props = defineProps({
   steps: {
@@ -106,6 +113,7 @@ const currentIndex = ref(0)
 const highlightStyle = ref(null)
 const tooltipStyle = ref(null)
 const tooltipEl = ref(null)
+const mascotSide = ref('right')
 
 const currentStep = computed(() => props.steps[currentIndex.value])
 const totalStepsAllPages = computed(() => props.totalSteps || props.steps.length)
@@ -163,7 +171,7 @@ function positionElements() {
       height: `${rect.height + padding * 2}px`,
     }
 
-    // Calculate tooltip position — clamp to viewport
+    // Calculate tooltip position, clamp to viewport
     const tooltipWidth = 340
     const tooltipHeight = 200
     const margin = 16
@@ -186,6 +194,11 @@ function positionElements() {
     left = rect.left + rect.width / 2 - tooltipWidth / 2
     left = Math.max(margin, Math.min(left, window.innerWidth - tooltipWidth - margin))
 
+    // Lia points toward the highlighted element
+    const targetCenter = rect.left + rect.width / 2
+    const tipCenter = left + tooltipWidth / 2
+    mascotSide.value = targetCenter < tipCenter ? 'left' : 'right'
+
     // Final clamp: ensure bottom doesn't exceed viewport
     top = Math.min(top, window.innerHeight - tooltipHeight - margin)
     top = Math.max(margin, top)
@@ -196,6 +209,7 @@ function positionElements() {
     }
   } else {
     // No target found, center the tooltip
+    mascotSide.value = 'right'
     highlightStyle.value = null
     tooltipStyle.value = {
       top: '50%',
@@ -290,5 +304,23 @@ defineExpose({ start })
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+.tour-lia {
+  position: absolute;
+  width: 84px;
+  height: auto;
+  top: -66px;
+  z-index: 1;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
+  animation: lia-bounce 2.4s ease-in-out infinite;
+}
+.tour-lia-left { left: -20px; transform-origin: bottom center; }
+.tour-lia-right { right: -20px; transform-origin: bottom center; }
+@keyframes lia-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@media (max-width: 480px) {
+  .tour-lia { width: 64px; top: -52px; }
 }
 </style>

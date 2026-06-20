@@ -24,7 +24,7 @@
             </h1>
             <p class="text-gray-400 font-body text-sm mb-3 max-w-md mx-auto">
               {{ testType === 'pre'
-                ? 'Before you begin this module, let\'s see what you already know. Don\'t worry — there are no wrong answers here!'
+                ? 'Before you begin this module, let\'s see what you already know. Don\'t worry, there are no wrong answers here!'
                 : 'You\'ve completed the module! Let\'s see how much you\'ve learned. Ready?' }}
             </p>
             <p class="text-xs text-gray-300 dark:text-gray-600 font-body mb-10">{{ questions.length }} questions · No time limit</p>

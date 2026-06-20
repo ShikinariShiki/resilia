@@ -53,9 +53,6 @@
         <!-- Gradient orbs with parallax -->
         <div class="hero-orb hero-orb-1" :style="{ transform: `translate(${scrollY * 0.08}px, ${scrollY * 0.12}px)` }"></div>
         <div class="hero-orb hero-orb-2" :style="{ transform: `translate(${-scrollY * 0.05}px, ${scrollY * 0.06}px)` }"></div>
-        <div class="hero-orb hero-orb-3" :style="{ transform: `translate(${scrollY * 0.03}px, ${-scrollY * 0.08}px)` }"></div>
-        <!-- Grid pattern -->
-        <div class="absolute inset-0 hero-grid opacity-[0.03]"></div>
       </div>
 
       <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center relative w-full pt-20 md:pt-0">
@@ -93,22 +90,31 @@
 
         <!-- Right: Animated Stats + Video Placeholder -->
         <div class="hero-visual" :class="heroReady ? 'hero-visual-visible' : ''">
-          <!-- Floating video/app preview placeholder -->
-          <div class="video-preview relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-1 shadow-2xl shadow-ink/20 mb-8 overflow-hidden group hover:shadow-3xl transition-all duration-700">
-            <div class="absolute inset-0 bg-gradient-to-br from-teal-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-            <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-[1.25rem] p-8 min-h-[280px] flex flex-col items-center justify-center gap-4">
-              <div class="w-16 h-16 rounded-full bg-teal-500/20 flex items-center justify-center backdrop-blur-sm border border-teal-500/30 group-hover:scale-110 transition-transform duration-500">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-teal-400 ml-1">
-                  <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
-                </svg>
+          <!-- Mascot Lia + personalized daily-missions preview -->
+          <div class="relative mb-8">
+            <img src="../assets/lia-point-left.png" alt="Lia, your resilience guide" class="hero-lia" />
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-2xl shadow-ink/10 border border-gray-100 dark:border-slate-700">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-9 h-9 rounded-xl bg-teal-500 flex items-center justify-center text-white text-sm font-heading font-bold">L</span>
+                  <div>
+                    <p class="font-heading font-bold text-ink dark:text-white text-sm leading-none">Today's missions</p>
+                    <p class="text-[11px] text-gray-400 mt-1">Personalized for you by AI</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-heading font-bold text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 px-2.5 py-1 rounded-lg">AI</span>
               </div>
-              <p class="text-gray-400 font-heading font-bold text-sm">Watch RESILIA in Action</p>
-              <p class="text-gray-600 font-body text-xs">2 min · See how responders train with gamified simulations</p>
-              <!-- Floating UI mockup dots -->
-              <div class="absolute top-4 left-4 flex gap-1.5">
-                <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
+              <div class="space-y-2.5">
+                <div v-for="(m, i) in previewMissions" :key="i" class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-slate-700/50 transition-transform duration-300 hover:translate-x-1">
+                  <span class="text-lg leading-none"> m.icon </span>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs font-heading font-bold text-ink dark:text-white truncate"> m.title </p>
+                    <p class="text-[10px] text-gray-400 mt-0.5">+ m.xp  XP</p>
+                  </div>
+                  <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0" :class="m.done ? 'bg-teal-500 border-teal-500' : 'border-gray-300 dark:border-slate-500'">
+                    <svg v-if="m.done" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5l2.5 2.5 4.5-5"/></svg>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -650,6 +656,12 @@ onMounted(() => {
 onUnmounted(() => { if (observer) observer.disconnect() })
 
 // ── Data ──
+const previewMissions = [
+  { icon: '\uD83E\uDEC1', title: 'Calm Breathing', xp: 10, done: true },
+  { icon: '\uD83D\uDCD6', title: 'Complete a Lesson', xp: 25, done: false },
+  { icon: '\uD83C\uDFAE', title: 'Play an RPG Scenario', xp: 30, done: false },
+]
+
 const heroStats = computed(() => [
   { value: '3,782', label: lt('landing.stats.activeResponders'), bg: 'bg-gradient-to-br from-teal-50 to-teal-100/60 dark:from-teal-900/20 dark:to-teal-800/20 dark:border-teal-700/30', color: 'text-teal-600 dark:text-teal-400', subColor: 'text-teal-500/70 dark:text-teal-500/80', glowBg: 'bg-teal-100/40 dark:bg-teal-800/40' },
   { value: '10', label: lt('landing.stats.aseanCountries'), bg: 'bg-gradient-to-br from-orange-50 to-orange-100/60 dark:from-orange-900/20 dark:to-orange-800/20 dark:border-orange-700/30', color: 'text-orange-600 dark:text-orange-400', subColor: 'text-orange-500/70 dark:text-orange-500/80', glowBg: 'bg-orange-100/40 dark:bg-orange-800/40' },
@@ -688,7 +700,7 @@ const testimonials = computed(() => [
 ])
 
 const faqs = computed(() => [
-  { q: 'What is Psychological First Aid (PFA)?', a: 'PFA is a framework developed by the WHO for providing emotional and practical support to people affected by crises. It\'s not therapy — it\'s about being a compassionate, informed first responder when disaster strikes.' },
+  { q: 'What is Psychological First Aid (PFA)?', a: 'PFA is a framework developed by the WHO for providing emotional and practical support to people affected by crises. It\'s not therapy, it\'s about being a compassionate, informed first responder when disaster strikes.' },
   { q: 'Is RESILIA free to use?', a: 'Yes! RESILIA is completely free. All modules, RPGs, and tools are accessible without payment. ResiCoins are earned through engagement, not purchased.' },
   { q: 'Do I need medical training?', a: 'Not at all. RESILIA is designed for anyone aged 15+. We start from the basics and build up your knowledge gradually through gamified modules.' },
   { q: 'What languages are supported?', a: 'Currently English and Bahasa Indonesia, with Thai, Vietnamese, Malay, Filipino, Burmese, Khmer, and Lao coming soon to serve all ASEAN countries.' },
@@ -773,13 +785,13 @@ function scrollTo(id) {
 }
 .hero-orb-1 {
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(13, 148, 136, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.05) 0%, transparent 70%);
   top: -15%; right: -10%;
   animation: float-slow 20s ease-in-out infinite;
 }
 .hero-orb-2 {
   width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.04) 0%, transparent 70%);
   bottom: 10%; left: -5%;
   animation: float-slow 15s ease-in-out infinite reverse;
 }
@@ -946,6 +958,19 @@ function scrollTo(id) {
 }
 .video-preview:hover {
   transform: translateY(-4px) scale(1.01);
+}
+.hero-lia {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  right: -8px;
+  top: -88px;
+  z-index: 5;
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.16));
+  animation: float-slow 6s ease-in-out infinite;
+}
+@media (max-width: 768px) {
+  .hero-lia { width: 92px; top: -68px; right: 4px; }
 }
 
 /* Hide scrollbar for carousel but keep functionality */

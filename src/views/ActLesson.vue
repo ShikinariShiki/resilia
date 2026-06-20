@@ -78,7 +78,7 @@
         </div>
         <div class="content-card">
           <h4>🌏 Cultural Context</h4>
-          <p>{{ chapterData?.location }} — Understanding local perspectives on disaster response and community resilience.</p>
+          <p>{{ chapterData?.location }}, Understanding local perspectives on disaster response and community resilience.</p>
         </div>
       </div>
     </section>

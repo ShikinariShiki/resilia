@@ -1,5 +1,5 @@
 /**
- * Safe navigation utility — validates redirect targets against an allowlist
+ * Safe navigation utility, validates redirect targets against an allowlist
  * before navigating. Prevents open redirect vulnerabilities.
  */
 
@@ -38,7 +38,7 @@ const ALLOWED_PREFIXES = [
 
 /**
  * Checks whether a path string is a known, safe internal route.
- * @param {string} path — the path to validate
+ * @param {string} path, the path to validate
  * @returns {boolean}
  */
 export function isAllowedRoute(path) {
@@ -51,7 +51,7 @@ export function isAllowedRoute(path) {
         if (url.origin !== 'http://localhost') return false
         path = url.pathname
     } catch {
-        // not a valid URL — could be a relative path, continue validation
+        // not a valid URL, could be a relative path, continue validation
     }
 
     // Block paths that try to escape (e.g. //evil.com, javascript:, data:)

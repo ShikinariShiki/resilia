@@ -1,7 +1,7 @@
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient'
 
 /**
- * Data Service — syncs user data between Supabase and localStorage.
+ * Data Service, syncs user data between Supabase and localStorage.
  * Uses debounced saves to avoid excessive writes.
  * Falls back to localStorage-only if Supabase is not configured.
  */
@@ -118,7 +118,7 @@ export async function saveSettings(userId, data) {
 }
 
 // ═══════════════════════════════════════
-// Debounced Save — batches all saves
+// Debounced Save, batches all saves
 // ═══════════════════════════════════════
 export function debouncedSave(userId, { profile, progress, settings }) {
     if (_saveTimer) clearTimeout(_saveTimer)

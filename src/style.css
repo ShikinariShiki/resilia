@@ -412,3 +412,21 @@ input[type="range"]::-moz-range-thumb {
 .organic-radius {
   border-radius: 18px 24px 20px 22px;
 }
+/* Onboarding shared controls (added for redesigned questionnaire) */
+@layer components {
+  .nav-back {
+    @apply px-6 py-4 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 text-ink dark:text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors;
+  }
+  .nav-next {
+    @apply flex-1 px-6 py-4 bg-ink dark:bg-teal-500 text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 dark:hover:bg-teal-400 transition-all active:scale-[0.99] disabled:opacity-30 disabled:cursor-not-allowed;
+  }
+  .choice {
+    @apply w-full flex items-center gap-4 p-5 rounded-2xl text-left font-body transition-all border;
+  }
+  .choice-on {
+    @apply bg-teal-500 border-teal-500 text-white shadow-md shadow-teal-500/20;
+  }
+  .choice-off {
+    @apply bg-white dark:bg-slate-800 border-gray-100 dark:border-slate-700 hover:border-teal-200 dark:hover:border-slate-600 text-ink dark:text-white;
+  }
+}

@@ -65,7 +65,7 @@ export default {
             practice: 'Practice',
             practiceDesc: 'Apply knowledge in scenario-based RPGs with branching dialogue and realistic disaster situations.',
             measure: 'Reflect',
-            measureDesc: 'Your journey shapes itself to you. Personalized insights help you see your own growth — no pressure, just clarity.',
+            measureDesc: 'Your journey shapes itself to you. Personalized insights help you see your own growth, no pressure, just clarity.',
             levelUp: 'Level Up',
             levelUpDesc: 'Earn XP, climb ranks, unlock perks, and become a certified Digital First Responder.'
         }
@@ -273,7 +273,7 @@ export default {
         r_supportive: 'You\'re right... being prepared is the opposite of being scared. It\'s being SMART 🧠',
         r_enthusiastic: 'YES!! Omg let\'s do it!! 🎉',
         r_dismissive: '...I mean money is one thing but knowledge is free right? 😅',
-        msg8: 'Okay real talk tho — before we dive in, I wanna know more about you!',
+        msg8: 'Okay real talk tho, before we dive in, I wanna know more about you!',
         q3: 'Why are you interested in disaster response?',
         q3_a: 'I\'ve experienced a disaster before',
         q3_b: 'I want to help my community',
@@ -294,7 +294,7 @@ export default {
         r_impatient: 'I like your style! Straight to the point haha 😂',
         msg9: 'Okay I think that\'s enough interrogation for one day 😄',
         msg10: 'I have a good feeling about this, {Name}. See you in Chapter 1! 🌟',
-        msg11: 'Oh wait — one more thing. I always carry this with me...',
+        msg11: 'Oh wait, one more thing. I always carry this with me...',
         msg12: '*sends a photo of a crumpled ASEAN map covered in stars* ⭐',
         msg13: 'Each star is a place I want to visit. One day, I\'ll put a pin on every one. Let\'s make that happen together 🗺️✨'
     }

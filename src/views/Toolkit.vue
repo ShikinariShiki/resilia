@@ -308,8 +308,8 @@ const groundingSteps = [
   { count: '5', label: 'things you can SEE', emoji: '👀', prompt: 'Look around and name 5 things you can see right now.' },
   { count: '4', label: 'things you can TOUCH', emoji: '✋', prompt: 'Reach out and feel 4 different textures around you.' },
   { count: '3', label: 'things you can HEAR', emoji: '👂', prompt: 'Listen carefully for 3 distinct sounds.' },
-  { count: '2', label: 'things you can SMELL', emoji: '👃', prompt: 'Notice 2 scents — even subtle ones.' },
-  { count: '1', label: 'thing you can TASTE', emoji: '👅', prompt: 'Focus on 1 taste — your mouth, a sip of water.' },
+  { count: '2', label: 'things you can SMELL', emoji: '👃', prompt: 'Notice 2 scents, even subtle ones.' },
+  { count: '1', label: 'thing you can TASTE', emoji: '👅', prompt: 'Focus on 1 taste, your mouth, a sip of water.' },
 ]
 function toggleGrounding() {
   if (!groundingActive.value) { groundingActive.value = true; groundingStep.value = 0 }

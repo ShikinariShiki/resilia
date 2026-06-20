@@ -64,7 +64,7 @@
 
           <div v-if="attentionAnswered" class="mt-6">
             <p class="text-sm font-heading font-bold" :class="attentionCorrect ? 'text-teal-500' : 'text-red-500'">
-              {{ attentionCorrect ? '✅ Correct! Quick reflexes!' : '❌ Wrong — stay alert next time!' }}
+              {{ attentionCorrect ? '✅ Correct! Quick reflexes!' : '❌ Wrong, stay alert next time!' }}
             </p>
             <button @click="nextStep" class="mt-4 px-6 py-2.5 bg-teal-500 text-white rounded-xl font-heading font-bold text-sm hover:bg-teal-600 transition-colors">
               Continue →

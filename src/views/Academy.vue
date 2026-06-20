@@ -89,7 +89,7 @@
         <!-- Book spine divider -->
         <div class="book-spine"></div>
 
-      <!-- LEFT PANEL — Chapter File Tabs (like book chapters/map tabs) -->
+      <!-- LEFT PANEL, Chapter File Tabs (like book chapters/map tabs) -->
       <div class="book-left">
         <div class="book-tabs-header">
           <span class="text-[9px] font-heading uppercase tracking-widest text-amber-700/60 dark:text-amber-400/40">Table of Contents</span>
@@ -116,7 +116,7 @@
               </span>
               <span class="tab-icon">{{ chapter.icon }}</span>
               <div class="tab-text">
-                <span class="tab-title">{{ chapter.title.replace(/Chapter \d+(\.\d+)?\s*—\s*/, '') }}</span>
+                <span class="tab-title">{{ chapter.title.replace(/Chapter \d+(\.\d+)?\s*-\s*/, '') }}</span>
                 <span class="tab-status">
                   {{ chapter.status === 'completed' ? '✓ Done' : isChapterLocked(chapter) ? '🔒' : 'Active' }}
                 </span>
@@ -135,7 +135,7 @@
         </div>
       </div>
 
-      <!-- RIGHT PANEL — Chapter Page (acts & details) -->
+      <!-- RIGHT PANEL, Chapter Page (acts & details) -->
       <div class="book-right">
         <!-- Embedded ChapterQuest overlay -->
         <div v-if="questMode" class="book-chat-panel" :key="'quest-' + questMode.questId">
@@ -203,7 +203,7 @@
             <span v-for="dest in selectedChapter.destinations" :key="dest" class="dest-tag">{{ dest }}</span>
           </div>
 
-          <!-- Acts list (always visible — Lia chat is now merged into act flow) -->
+          <!-- Acts list (always visible, Lia chat is now merged into act flow) -->
           <div v-if="selectedChapter.acts" class="page-acts">
             <div v-for="(act, ai) in selectedChapter.acts" :key="act.id" class="page-act"
               :class="{
@@ -347,13 +347,13 @@ onMounted(() => {
   setTimeout(() => { bookOpened.value = true }, 100)
 })
 
-// Chat mode state — when set, LiaChat is embedded in right panel
+// Chat mode state, when set, LiaChat is embedded in right panel
 const chatMode = ref(null)
-// Act mode state — when set, ActLesson is embedded in right panel
+// Act mode state, when set, ActLesson is embedded in right panel
 const actMode = ref(null)
-// Quest mode state — when set, ChapterQuest is embedded in right panel
+// Quest mode state, when set, ChapterQuest is embedded in right panel
 const questMode = ref(null)
-// Bridge mode state — when set, BridgingQuest is embedded in right panel
+// Bridge mode state, when set, BridgingQuest is embedded in right panel
 const bridgeMode = ref(null)
 
 // Pending action after Lia chat closes (auto-transition from pre-chat → act)
@@ -527,7 +527,7 @@ const academyTourSteps = [
 }
 
 /* ═══════════════════════════════════════ */
-/* BOOK WRAPPER — Two-Cover Opening       */
+/* BOOK WRAPPER, Two-Cover Opening       */
 /* ═══════════════════════════════════════ */
 .book-wrapper {
   position: relative;
@@ -589,7 +589,7 @@ const academyTourSteps = [
   border-radius: inherit;
 }
 
-/* Page edge detail — visible thin line at the hinge */
+/* Page edge detail, visible thin line at the hinge */
 .book-cover-left .cover-inner::after,
 .book-cover-right .cover-inner::after {
   content: '';
@@ -661,7 +661,7 @@ const academyTourSteps = [
   text-transform: uppercase;
 }
 
-/* ── Opened State — slow, natural page turn ── */
+/* ── Opened State, slow, natural page turn ── */
 .book-opened .book-cover-left {
   transform: rotateY(-160deg);
   opacity: 0;
@@ -676,7 +676,7 @@ const academyTourSteps = [
   animation: pageFlutterRight 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
 }
 
-/* Gentle page flutter — mimics real paper catching air */
+/* Gentle page flutter, mimics real paper catching air */
 @keyframes pageFlutterLeft {
   0%   { transform: rotateY(0deg);    opacity: 1; }
   15%  { transform: rotateY(-12deg);  opacity: 1; }
@@ -701,7 +701,7 @@ const academyTourSteps = [
 }
 
 /* ═══════════════════════════════════════ */
-/* BOOK CONTAINER — Content Inside        */
+/* BOOK CONTAINER, Content Inside        */
 /* ═══════════════════════════════════════ */
 .book-container {
   display: flex;
@@ -773,7 +773,7 @@ const academyTourSteps = [
   );
 }
 
-/* LEFT PANEL — Chapter tabs */
+/* LEFT PANEL, Chapter tabs */
 .book-left {
   width: 260px;
   min-width: 260px;
@@ -913,7 +913,7 @@ const academyTourSteps = [
   background: #4B5563;
 }
 
-/* RIGHT PANEL — Chapter page */
+/* RIGHT PANEL, Chapter page */
 .book-right {
   flex: 1;
   display: flex;
@@ -1185,7 +1185,7 @@ const academyTourSteps = [
 }
 
 /* ═══════════════════════════════════════ */
-/* RESPONSIVE — stack vertically on mobile */
+/* RESPONSIVE, stack vertically on mobile */
 /* ═══════════════════════════════════════ */
 @media (max-width: 768px) {
   .book-cover {

@@ -20,10 +20,10 @@
         <h1 v-else>Your Journey Is Complete.</h1>
         <p v-if="phase === 'pre'" class="erq-intro-desc">
           An earthquake has just struck. You're about to experience 10 scenarios.
-          There are no right or wrong answers — just choose what feels most natural to you.
+          There are no right or wrong answers, just choose what feels most natural to you.
         </p>
         <p v-else class="erq-intro-desc">
-          You've graduated from the Digital Reserve Corps. But the earthquake storyline continues —
+          You've graduated from the Digital Reserve Corps. But the earthquake storyline continues, 
           this time, in the aftermath. How has your thinking changed?
         </p>
         <div class="erq-intro-meta">
@@ -79,10 +79,10 @@
         <h1 v-else>Reflection Complete!</h1>
         <p v-if="phase === 'pre'" class="erq-complete-desc">
           Thank you for sharing how you'd respond in those situations.
-          Your answers help Lia understand where you're starting from — now let's begin your journey!
+          Your answers help Lia understand where you're starting from, now let's begin your journey!
         </p>
         <p v-else class="erq-complete-desc">
-          You've come so far. From your first day at school to the frontlines of disaster response —
+          You've come so far. From your first day at school to the frontlines of disaster response, 
           your growth is remarkable. Welcome to the Digital Reserve Corps. 💛
         </p>
         <button class="erq-continue-btn" @click="finish">
