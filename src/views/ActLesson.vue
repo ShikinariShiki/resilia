@@ -321,7 +321,7 @@ function nextPostQ() {
       if (postTestAnswers.value[i] === q.correct) correct++
     })
     const score = Math.round((correct / postTestQuestions.value.length) * 100)
-    store.submitPostTest(chapterId.value, score)
+    store.submitPostTest(`act_${chapterId.value}`, score)
     finishAct()
   }
 }
