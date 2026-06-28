@@ -3,7 +3,7 @@ import { ref, computed, watch } from 'vue'
 import * as authService from '../services/authService'
 import * as dataService from '../services/dataService'
 import { isSupabaseConfigured } from '../lib/supabaseClient'
-import { predictMissionWeights, generatePersonalizedMissions, recommendMissions } from '../ml/recommend'
+import { predictMissionWeights, generatePersonalizedMissions, recommendMissions, adaptWeightsByDistress } from '../ml/recommend'
 
 export const useResiliaStore = defineStore('resilia', () => {
     // ═══ Session TTL (6 hours) ═══
@@ -2469,18 +2469,6 @@ export const useResiliaStore = defineStore('resilia', () => {
         if (data.avatarColor) avatarColor.value = data.avatarColor
     }
 
-    function updateStability(score) {
-        stabilityScore.value = score
-        isStable.value = score <= 21
-        hasCompletedCheckIn.value = true
-        lastCheckInDate.value = new Date().toISOString().slice(0, 10)
-        localStorage.setItem('resilia_checkin_date', lastCheckInDate.value)
-        if (!isStable.value) soothingModeActive.value = true
-        completeDailyMission('checkin')
-        saveDailySession()
-        syncToSupabase()
-    }
-
     function completeSoothing() {
         soothingModeActive.value = false
         isStable.value = true
@@ -2858,6 +2846,51 @@ export const useResiliaStore = defineStore('resilia', () => {
             }
         }
     }, { immediate: true })
+
+    function updateStability(scorePercent, avgLikert) {
+        stabilityScore.value = scorePercent
+        isStable.value = scorePercent > 30
+        soothingModeActive.value = scorePercent <= 30
+        
+        let bestCat = 'toolkit'
+        
+        // ML Adaptation: Shift daily missions based on today's distress
+        let baseWeights = userPersonalization.value?.dailyMissionWeights
+        if (!baseWeights) {
+            // Default baseline if user is on legacy data
+            baseWeights = {
+                lesson: 1.0,
+                rpg: 1.0,
+                toolkit: 1.0,
+                checkin: 1.0,
+                donate: 0.5,
+                dashboard: 0.5
+            }
+        }
+        
+        const adaptedWeights = adaptWeightsByDistress(baseWeights, avgLikert || ((100 - scorePercent) / 100 * 6 + 1))
+        
+        // Re-roll today's missions using the new adapted probabilities
+        dailyMissions.value = generatePersonalizedMissions(adaptedWeights)
+        
+        // Find the highest priority activity for the dynamic popup
+        let maxW = -999
+        for (const cat in adaptedWeights) {
+            if (adaptedWeights[cat] > maxW) {
+                maxW = adaptedWeights[cat]
+                bestCat = cat
+            }
+        }
+        
+        hasCompletedCheckIn.value = true
+        lastCheckInDate.value = getResiliaDay()
+        localStorage.setItem('resilia_checkin_date', lastCheckInDate.value)
+        completeDailyMission('checkin')
+        saveDailySession()
+        syncToSupabase()
+        
+        return bestCat
+    }
 
     return {
         isAuthenticated, userEmail, isAdmin, authProvider,
