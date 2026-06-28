@@ -16,7 +16,7 @@
           <!-- Language Switcher -->
           <div class="relative" ref="langDropdownRef">
             <button @click="langOpen = !langOpen" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-heading font-bold text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300">
-              <span class="text-base">{{ currentLangFlag }}</span>
+              <img :src="currentLangFlag" class="w-5 h-auto inline-block rounded-sm shadow-sm" alt="Flag" />
               <span class="hidden sm:inline">{{ currentLangLabel }}</span>
               <svg class="w-3 h-3 transition-transform duration-300" :class="langOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -447,18 +447,18 @@ const langOpen = ref(false)
 const langDropdownRef = ref(null)
 
 const availableLangs = [
-  { code: 'en', flag: 'https://flagcdn.com/w40/gb.png', label: 'English' },
-  { code: 'id', flag: 'https://flagcdn.com/w40/id.png', label: 'Bahasa Indonesia' },
-  { code: 'th', flag: 'https://flagcdn.com/w40/th.png', label: 'ภาษาไทย' },
-  { code: 'vi', flag: 'https://flagcdn.com/w40/vn.png', label: 'Tiếng Việt' },
-  { code: 'ms', flag: 'https://flagcdn.com/w40/un.png', label: 'Bahasa Melayu' },
-  { code: 'tl', flag: 'https://flagcdn.com/w40/ph.png', label: 'Filipino' },
-  { code: 'my', flag: 'https://flagcdn.com/w40/mm.png', label: 'မြန်မာဘာသာ' },
-  { code: 'km', flag: 'https://flagcdn.com/w40/kh.png', label: 'ភាសាខ្មែរ' },
-  { code: 'lo', flag: 'https://flagcdn.com/w40/la.png', label: 'ພາສາລາວ' },
+  { code: 'en', flag: '/src/assets/flags/gb.svg', label: 'English' },
+  { code: 'id', flag: '/src/assets/flags/id.svg', label: 'Bahasa Indonesia' },
+  { code: 'th', flag: '/src/assets/flags/th.svg', label: 'ภาษาไทย' },
+  { code: 'vi', flag: '/src/assets/flags/vn.svg', label: 'Tiếng Việt' },
+  { code: 'ms', flag: '/src/assets/flags/un.svg', label: 'Bahasa Melayu' },
+  { code: 'tl', flag: '/src/assets/flags/ph.svg', label: 'Filipino' },
+  { code: 'my', flag: '/src/assets/flags/mm.svg', label: 'မြန်မာဘာသာ' },
+  { code: 'km', flag: '/src/assets/flags/kh.svg', label: 'ភាសាខ្មែរ' },
+  { code: 'lo', flag: '/src/assets/flags/la.svg', label: 'ພາສາລາວ' },
 ]
 
-const currentLangFlag = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.flag || 'https://flagcdn.com/w40/un.png')
+const currentLangFlag = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.flag || '/src/assets/flags/un.svg')
 const currentLangLabel = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.label || 'English')
 
 function setLandingLocale(code) {

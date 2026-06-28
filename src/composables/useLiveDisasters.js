@@ -49,7 +49,7 @@ export function useLiveDisasters() {
           time: eq.properties.time,
           url: eq.properties.url,
           // Generic warning flag
-          flag: 'https://flagcdn.com/w40/un.png'
+          flag: '/src/assets/flags/.svg'
         }
       })
 

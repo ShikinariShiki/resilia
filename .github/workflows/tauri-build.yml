@@ -26,18 +26,18 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: setup node
-        uses: actions/setup-node@49933ea5288caeca8642195f882787471b1b7cca # v4.4.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: lts/*
 
       - name: install Rust stable
-        uses: dtolnay/rust-toolchain@b3b07ba8b418998c39fb20f53e8b695cdcc97272 # stable
+        uses: dtolnay/rust-toolchain@29eef336d9b2848a0b548edc03f92a220660cdb8 # stable
 
       - name: install dependencies (Windows)
         if: matrix.platform == 'windows-latest'
         run: npm ci || npm install
 
-      - uses: tauri-apps/tauri-action@45ab08a3d16b7ceb3393c8a6c72de4c0dce76ce4 # v0.5.22
+      - uses: tauri-apps/tauri-action@84b9d35b5fc46c1e45415bdb6144030364f7ebc5 # v0.5.22
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
