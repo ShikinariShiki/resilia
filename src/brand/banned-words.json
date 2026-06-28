@@ -1,0 +1,17 @@
+{
+  "note": "UI copy, feature names, and locales must not contain these. The copy linter fails the build on any hit.",
+  "bannedWords": [
+    "leverage", "seamless", "robust", "empower", "unlock", "elevate", "journey", "harness",
+    "supercharge", "revolutionize", "cutting edge", "next generation", "holistic", "synergy",
+    "ecosystem", "delve", "navigate the", "in today's world", "game changer", "unleash",
+    "transform your", "effortless", "frictionless", "world class", "best in class", "tailored",
+    "curated for you", "dive deep", "embark"
+  ],
+  "replacements": {
+    "embark": "start",
+    "ecosystem": "tools",
+    "holistic": "clear",
+    "journey": "practice",
+    "empower": "help"
+  }
+}

@@ -1,35 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import "tailwindcss";
+
+/*
+ * Fonts are self-hosted via @fontsource and imported in src/main.js on a
+ * networked build, see docs/IMPLEMENTATION-SPEC.md Phase 1 item 5. The Google
+ * Fonts CDN import was removed to keep the CSP tight and avoid layout shift.
+ * Until @fontsource is installed the stacks below fall back to system fonts so
+ * nothing breaks.
+ */
 
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Brand anchor, teal */
   --color-teal-50: #F0FDFA;
-  --color-teal-100: #CCFBF1;
+  --color-teal-100: #CDEDE8;
   --color-teal-200: #99F6E4;
+  --color-teal-300: #5FC9BD;
   --color-teal-400: #2DD4BF;
   --color-teal-500: #0D9488;
-  --color-teal-600: #0F766E;
-  --color-teal-700: #115E59;
+  --color-teal-600: #0B7B72;
+  --color-teal-700: #095E57;
+
+  /* Warm highlight, ember (kept under the orange-* names used across views) */
   --color-orange-50: #FFF7ED;
   --color-orange-100: #FFEDD5;
   --color-orange-200: #FED7AA;
-  --color-orange-400: #FB923C;
-  --color-orange-500: #F97316;
-  --color-orange-600: #EA580C;
-  --color-sand-50: #FAFAF8;
-  --color-sand-100: #F5F5F0;
-  --color-sand-200: #EAEAE0;
-  --color-sand-300: #DDDDD0;
-  --color-ink: #1A1A1A;
-  --color-coral: #FF6B6B;
-  --color-mint: #4ECDC4;
-  --color-lavender: #A78BFA;
-  --color-gold: #F59E0B;
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --color-orange-400: #F2935C;
+  --color-orange-500: #E8743B;
+  --color-orange-600: #C95A28;
 
-  /* Warm slate overrides — replaces cold blue-gray with earthy warm tones */
+  /* Paper surfaces, warm sunlit recycled paper */
+  --color-sand-50: #FDFCF8;
+  --color-sand-100: #F7F4EC;
+  --color-sand-200: #EFE9DD;
+  --color-sand-300: #E4DCC9;
+
+  --color-ink: #1B1813;
+  --color-coral: #D6533F;
+  --color-mint: #5FC9BD;
+  /* Lavender retired, repointed to the brand indigo so no purple remains while
+     any leftover text-lavender utility keeps compiling. */
+  --color-lavender: #5B6BC0;
+  --color-gold: #ECA227;
+
+  /* Brand additions, full token palette */
+  --color-ember-400: #F2935C;
+  --color-ember-500: #E8743B;
+  --color-ember-600: #C95A28;
+  --color-amber-300: #F4C770;
+  --color-amber-500: #ECA227;
+  --color-amber-600: #C9851B;
+  --color-indigo-400: #8090D6;
+  --color-indigo-500: #5B6BC0;
+  --color-indigo-600: #46559E;
+  --color-bark-700: #322C20;
+  --color-bark-800: #242017;
+  --color-bark-900: #1A1712;
+  --color-bark-950: #121009;
+  --color-success: #3FA76A;
+  --color-warning: #E8A93C;
+  --color-danger: #D6533F;
+  --color-info: #5B6BC0;
+  --color-hp: #D6533F;
+  --color-xp: #0D9488;
+  --color-combo: #E8743B;
+  --color-coin: #ECA227;
+
+  /* Type families, brand kit. Fraunces display, Hanken UI, DM Mono numerals. */
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-heading: 'Fraunces', ui-serif, Georgia, serif;
+  --font-body: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Radii, brand scale */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Motion tokens */
+  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --duration-micro: 140ms;
+  --duration-base: 240ms;
+  --duration-expressive: 420ms;
+
+  /* Warm slate overrides, replaces cold blue-gray with earthy warm tones */
   --color-slate-50: #FAF9F7;
   --color-slate-100: #F0EDE6;
   --color-slate-200: #E2DDD4;
@@ -69,13 +126,13 @@
     padding-right: env(safe-area-inset-right);
   }
 
-  /* True dark mode — warm earthy charcoal, NOT cold AI-blue */
+  /* True dark mode, warm earthy bark, not cold AI blue */
   .dark body {
     background-color: #141210;
     color: #d4cfc6;
   }
 
-  /* Grain texture for anti-AI organic feel */
+  /* Grain texture for an organic feel */
   .dark body::after {
     content: '';
     position: fixed;
@@ -86,7 +143,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Light mode grain texture — subtle organic feel */
+  /* Light mode grain texture, subtle organic feel */
   body::before {
     content: '';
     position: fixed;
@@ -116,7 +173,7 @@
   }
 }
 
-/* ━━━ FORM ELEMENTS ━━━ */
+/* FORM ELEMENTS */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -149,7 +206,7 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
 }
 
-/* ━━━ SCROLLBAR ━━━ */
+/* SCROLLBAR */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -167,18 +224,22 @@ input[type="range"]::-moz-range-thumb {
   background: #9CA3AF;
 }
 
-/* ━━━ CORE ANIMATIONS ━━━ */
+/*
+ * CORE ANIMATIONS
+ * The old global entrance animated translateY(30px) + scale + blur(8px) on
+ * every surface, the universal AI motion tell. It is replaced with a calm
+ * content-aware entrance, transform and opacity only, brand easing, no blur.
+ * Vary real entrances per content with src/composables/useReveal.js.
+ */
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px) scale(0.98);
-    filter: blur(8px);
+    transform: translateY(16px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
+    transform: translateY(0);
   }
 }
 
@@ -239,35 +300,6 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
-/* Premium glow pulse */
-@keyframes glow-pulse {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(13, 148, 136, 0.1);
-  }
-
-  50% {
-    box-shadow: 0 0 40px rgba(13, 148, 136, 0.2);
-  }
-}
-
-/* Gradient shift */
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Shimmer for loading states */
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
@@ -278,25 +310,12 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
-/* Scale breathing */
-@keyframes breathe {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.02);
-  }
-}
-
 .animate-slide-up {
-  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: slideUp var(--duration-expressive) var(--ease-entrance) both;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn var(--duration-base) ease-out;
 }
 
 .animate-pulse-soft {
@@ -311,48 +330,43 @@ input[type="range"]::-moz-range-thumb {
   animation: shake-attention 0.8s ease-in-out;
 }
 
-.animate-glow-pulse {
-  animation: glow-pulse 3s ease-in-out infinite;
-}
+/*
+ * Decorative glow and gradient-shift loops were removed from the global sheet,
+ * they read as template chrome. If a single intentional accent needs a glow,
+ * add it locally and gate it behind prefers-reduced-motion. The class names are
+ * kept as no-ops so existing markup does not break.
+ */
+.animate-glow-pulse {}
+.animate-gradient-shift {}
+.animate-breathe {}
 
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradient-shift 4s ease-in-out infinite;
-}
-
-.animate-breathe {
-  animation: breathe 4s ease-in-out infinite;
-}
-
-/* ━━━ PREMIUM TRANSITION CURVES ━━━ */
+/* PREMIUM TRANSITION CURVES */
 .ease-apple {
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-timing-function: var(--ease-entrance);
 }
 
 .ease-bounce-out {
   transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ━━━ SCROLL-REVEAL SYSTEM ━━━ */
+/* SCROLL-REVEAL SYSTEM, blur removed, transform and opacity only */
 .reveal-base {
-  transition-property: all;
-  transition-duration: 1000ms;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-property: transform, opacity;
+  transition-duration: var(--duration-expressive);
+  transition-timing-function: var(--ease-entrance);
 }
 
 .reveal-hidden {
   opacity: 0;
-  transform: translateY(30px) scale(0.96);
-  filter: blur(8px);
+  transform: translateY(16px);
 }
 
 .reveal-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: translateY(0);
 }
 
-/* ━━━ UTILITY CLASSES ━━━ */
+/* UTILITY CLASSES */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -360,59 +374,56 @@ input[type="range"]::-moz-range-thumb {
   overflow: hidden;
 }
 
-/* Card hover lift — Apple-grade */
+/* Card hover lift, warm shadow, 2px lift per the brand kit */
 .hover-lift {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--duration-base) var(--ease-entrance),
+    box-shadow var(--duration-base) var(--ease-entrance);
 }
 
 .hover-lift:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(40, 34, 24, 0.10);
 }
 
 .dark .hover-lift:hover {
-  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
-/* Glassmorphism utility */
+/* Glassmorphism utility, used sparingly */
 .glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(253, 252, 248, 0.62);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .dark .glass {
-  background: rgba(20, 18, 16, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(26, 23, 18, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Neon glow for accent elements */
+/* Accent glows kept as warm, low-intensity opt-in utilities */
 .glow-teal {
-  box-shadow: 0 0 20px rgba(13, 148, 136, 0.15),
-    0 0 40px rgba(13, 148, 136, 0.05),
-    inset 0 0 20px rgba(13, 148, 136, 0.05);
+  box-shadow: 0 0 18px rgba(13, 148, 136, 0.12);
 }
 
 .glow-orange {
-  box-shadow: 0 0 20px rgba(249, 115, 22, 0.15),
-    0 0 40px rgba(249, 115, 22, 0.05),
-    inset 0 0 20px rgba(249, 115, 22, 0.05);
+  box-shadow: 0 0 18px rgba(232, 116, 59, 0.12);
 }
 
-/* Focus ring — premium indicator */
+/* Focus ring, single consistent indicator */
 .focus-ring:focus-visible {
-  outline: 2px solid rgba(13, 148, 136, 0.5);
+  outline: 2px solid rgba(13, 148, 136, 0.55);
   outline-offset: 2px;
   border-radius: inherit;
 }
 
-/* Anti-AI: Organic border radius variations */
+/* Organic border radius variation */
 .organic-radius {
   border-radius: 18px 24px 20px 22px;
 }
-/* Onboarding shared controls (added for redesigned questionnaire) */
+
+/* Onboarding shared controls */
 @layer components {
   .nav-back {
     @apply px-6 py-4 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 text-ink dark:text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors;
@@ -428,5 +439,26 @@ input[type="range"]::-moz-range-thumb {
   }
   .choice-off {
     @apply bg-white dark:bg-slate-800 border-gray-100 dark:border-slate-700 hover:border-teal-200 dark:hover:border-slate-600 text-ink dark:text-white;
+  }
+}
+
+/* Reduced motion, mandatory calm path. Opacity only, no transforms or loops. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-slide-up,
+  .animate-fade-in {
+    animation: fadeIn 0.001ms both;
+  }
+
+  .reveal-hidden {
+    transform: none;
   }
 }
