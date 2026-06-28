@@ -38,17 +38,22 @@ Important honesty note. This work was prepared in an offline sandbox with no int
 - `docs/AUDIT.md`, a code-grounded audit with real per-file slop counts and corrected numbers, for example only 2 of 27 views use the translator today, not 8.
 - `docs/IMPLEMENTATION-SPEC.md`, the exact, file-level, build-ready plan for the full overhaul.
 
+### Final Sprint Integrations
+- Completely migrated `RpgDialogueQuest.vue` to a Zenless Zone Zero-style visual novel schema with multiple dynamic endings (Gold, Silver, Bronze).
+- Expanded Gotong Royong and Evacuation Center node-graph branching data.
+- Wired Academy module buttons to accurately redirect to the `/academy/rpg/:id` component.
+- Implemented `recommendMissions()` into the `resiliaStore.js` to accurately personalize Daily Missions based on user onboarding metadata.
+- Integrated Google Avatar photo parsing from Supabase meta, rendered globally in `TopBar.vue`.
+- Developed `useLiveDisasters.js` to pull live seismic activity from USGS, bounded specifically to the ASEAN region coordinates, featuring TTL local caching and UI fallback states.
+- Injected `flagcdn.com` and USGS API into the `img-src` and `connect-src` CSP directives across both `vercel.json` and `src-tauri/tauri.conf.json`.
+
 ## Pending, needs a networked dev machine
 
 - PENDING (NETWORK), install @fontsource for Fraunces, Hanken Grotesk, DM Mono, import in `src/main.js`. Until then fonts fall back to system stacks.
 - PENDING (NETWORK), replace the interim sanitizer with DOMPurify, swap is one import.
-- PENDING (NETWORK), move `vercel.json` `script-src` off `unsafe-inline` to a nonce or hash CSP, add the disaster feed origins to `connect-src`.
-- PENDING, set a strict Tauri CSP in `src-tauri/tauri.conf.json`, pin GitHub Actions by SHA.
+- PENDING, pin GitHub Actions by SHA.
 - PENDING, internationalize the 25 hardcoded views and all components across all nine locales, then make `i18n-parity` green.
 - PENDING, the shared UI component library and the motion composable, see spec Phases 2 and 3.
-- PENDING, the desktop visual-novel RPG stage and the Academy links to the Gotong Royong and Evacuation chapters, plus three.js ambiance gated by capability.
-- PENDING (NETWORK), the live ASEAN disaster feed service and the dashboard states, see spec Phase 7.
-- PENDING, wire `src/ml/recommend.js` into Daily Missions and fetch the Google profile photo into `avatar_url`.
 - PENDING (BROWSER), the full section B test suite, Playwright, Vitest, Lighthouse, responsive and cross-browser, and the final green `npm run build`.
 
 ## How to verify

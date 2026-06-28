@@ -18,7 +18,7 @@
     <div class="flex-1 flex flex-col max-w-3xl mx-auto w-full px-6 py-6">
       <Transition name="slide" mode="out-in">
         <!-- Intro -->
-        <div v-if="phase === 'intro'" key="intro" class="flex-1 flex flex-col items-center justify-center text-center animate-slide-up">
+        <div v-if="phase === 'intro'" key="intro" v-motion class="flex-1 flex flex-col items-center justify-center text-center">
           <div class="w-20 h-20 bg-gradient-to-br from-red-500/20 to-orange-500/20 border border-white/10 rounded-3xl flex items-center justify-center mb-8">
             <span class="text-4xl">🌋</span>
           </div>
@@ -43,7 +43,7 @@
           <!-- Chat area -->
           <div class="flex-1 overflow-auto space-y-4 mb-6" ref="chatContainer">
             <!-- Narrative -->
-            <div class="animate-slide-up">
+            <div v-motion>
               <div class="bg-white/5 rounded-2xl p-5 border border-white/5">
                 <p class="text-xs text-gray-500 font-heading font-bold uppercase tracking-wider mb-2">Situation Report</p>
                 <p class="font-body text-sm text-gray-300 leading-relaxed">{{ currentData.narrative }}</p>
@@ -51,7 +51,7 @@
             </div>
 
             <!-- NPC dialogue -->
-            <div class="flex items-start gap-3 animate-slide-up" style="animation-delay: 0.1s">
+            <div v-motion class="flex items-start gap-3" style="animation-delay: 0.1s">
               <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/30 to-teal-600/30 border border-teal-400/20 flex items-center justify-center text-lg flex-shrink-0">
                 {{ scenario?.npcAvatar || '👤' }}
               </div>
@@ -65,19 +65,19 @@
             </div>
 
             <!-- Clue popup -->
-            <div v-if="currentData.clue && showClue" class="animate-slide-up bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">
+            <div v-if="currentData.clue && showClue" v-motion class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4">
               <p class="text-sm font-body text-amber-300">{{ currentData.clue }}</p>
             </div>
 
             <!-- User response (after selection) -->
-            <div v-if="selectedOption !== null" class="flex justify-end animate-slide-up">
+            <div v-if="selectedOption !== null" v-motion class="flex justify-end">
               <div class="max-w-[85%] bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl rounded-br-md p-4 shadow-lg">
                 <p class="text-sm font-body text-white leading-relaxed">{{ currentData.options[selectedOption].text }}</p>
               </div>
             </div>
 
             <!-- Feedback -->
-            <div v-if="selectedOption !== null" class="animate-slide-up" style="animation-delay: 0.1s">
+            <div v-if="selectedOption !== null" v-motion style="animation-delay: 0.1s">
               <div class="rounded-2xl p-4 border"
                 :class="currentData.options[selectedOption].score >= 3 ? 'bg-green-500/10 border-green-500/20' : currentData.options[selectedOption].score >= 1 ? 'bg-amber-500/10 border-amber-500/20' : 'bg-red-500/10 border-red-500/20'">
                 <div class="flex items-center gap-2 mb-2">
@@ -92,7 +92,7 @@
           </div>
 
           <!-- Options (before selection) -->
-          <div v-if="selectedOption === null" class="space-y-3 pb-4 animate-slide-up" style="animation-delay: 0.2s">
+          <div v-if="selectedOption === null" v-motion class="space-y-3 pb-4" style="animation-delay: 0.2s">
             <p class="text-[10px] font-heading font-bold text-gray-500 uppercase tracking-wider mb-2">Choose your response</p>
             <button v-for="(opt, i) in currentData.options" :key="i" @click="selectOption(i)"
               class="w-full text-left p-4 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 rounded-2xl font-body text-sm text-gray-300 transition-all hover:translate-x-1">
@@ -110,7 +110,7 @@
         </div>
 
         <!-- Results -->
-        <div v-else-if="phase === 'results'" key="results" class="flex-1 flex flex-col items-center justify-center text-center animate-slide-up">
+        <div v-else-if="phase === 'results'" key="results" v-motion class="flex-1 flex flex-col items-center justify-center text-center">
           <div class="w-20 h-20 bg-gradient-to-br from-green-400/20 to-teal-400/20 border border-green-400/20 rounded-3xl flex items-center justify-center mb-8">
             <span class="text-4xl">🎖️</span>
           </div>

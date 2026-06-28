@@ -3,13 +3,13 @@
     <TourGuide :steps="academyTourSteps" tourKey="academy" :totalSteps="9" :globalStepOffset="6" :delay="800" />
 
     <!-- Mission Dossier Header -->
-    <div class="dossier-header mb-6 animate-slide-up">
+    <div v-motion class="dossier-header mb-6">
       <div class="flex items-center gap-3 mb-2">
         <PhFolders :size="26" weight="duotone" class="text-amber-600 dark:text-amber-400" />
         <div>
-          <h1 class="font-heading font-bold text-xl text-ink dark:text-white tracking-tight">Mission Dossier</h1>
+          <h1 class="font-heading font-bold text-xl text-ink dark:text-white tracking-tight">{{ t('academy.dossierTitle') }}</h1>
           <p class="text-[10px] font-heading uppercase tracking-[0.2em] text-amber-600/80 dark:text-amber-400/60">
-            CLASSIFIED · LIA'S ASEAN JOURNEY · {{ completedChapters }}/{{ store.academyChapters.length }} FILES PROCESSED
+            {{ t('academy.dossierSub').replace('{done}', completedChapters).replace('{total}', store.academyChapters.length) }}
           </p>
         </div>
       </div>
@@ -27,30 +27,30 @@
       <div class="flex gap-4 mt-4">
         <div class="dossier-stat">
           <span class="text-sm font-heading font-bold text-teal-600 dark:text-teal-400">{{ totalActsCompleted }}</span>
-          <span class="text-[8px] uppercase tracking-wider text-gray-400">Acts Done</span>
+          <span class="text-[8px] uppercase tracking-wider text-gray-400">{{ t('academy.statActs') }}</span>
         </div>
         <div class="dossier-stat">
           <span class="text-sm font-heading font-bold text-orange-500">{{ store.completedChapterQuests?.length || 0 }}</span>
-          <span class="text-[8px] uppercase tracking-wider text-gray-400">Quests</span>
+          <span class="text-[8px] uppercase tracking-wider text-gray-400">{{ t('academy.statQuests') }}</span>
         </div>
         <div v-if="showSimHP" class="dossier-stat">
           <span class="text-sm font-heading font-bold text-red-500">❤️ {{ store.simulationHP }}</span>
-          <span class="text-[8px] uppercase tracking-wider text-gray-400">Sim HP</span>
+          <span class="text-[8px] uppercase tracking-wider text-gray-400">{{ t('academy.statSimHP') }}</span>
         </div>
       </div>
     </div>
 
     <!-- ERQ Pre-Test Banner -->
-    <div v-if="!store.erqCompleted.pre" class="mb-6 animate-slide-up" style="animation-delay: 0.06s">
+    <div v-if="!store.erqCompleted.pre" v-motion class="mb-6" style="animation-delay: 0.06s">
       <div class="dossier-alert border-l-4 border-red-500 bg-red-50/50 dark:bg-red-900/10 rounded-r-2xl p-4">
         <div class="flex items-center gap-3">
           <span class="text-xl">🔐</span>
           <div class="flex-1">
-            <p class="font-heading font-bold text-xs text-red-700 dark:text-red-300">PREREQUISITE: Ground-Zero Readiness Check</p>
-            <p class="text-[10px] text-red-500/70 dark:text-red-400/60 font-body mt-0.5">Complete before accessing mission files</p>
+            <p class="font-heading font-bold text-xs text-red-700 dark:text-red-300">{{ t('academy.preReqTitle') }}</p>
+            <p class="text-[10px] text-red-500/70 dark:text-red-400/60 font-body mt-0.5">{{ t('academy.preReqDesc') }}</p>
           </div>
           <RouterLink to="/academy/erq/pre" class="px-4 py-2 bg-red-500 text-white text-[10px] font-heading font-bold rounded-xl hover:-translate-y-0.5 transition-all">
-            Begin →
+            {{ t('academy.btnBegin') }}
           </RouterLink>
         </div>
       </div>
@@ -67,7 +67,7 @@
           <div class="cover-title">
             <span class="cover-icon">📁</span>
             <span class="cover-label">RESILIA</span>
-            <span class="cover-sub">Mission Dossier</span>
+            <span class="cover-sub">{{ t('academy.bookCoverLeft') }}</span>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
           <div class="cover-title">
             <span class="cover-icon">🌏</span>
             <span class="cover-label">ASEAN</span>
-            <span class="cover-sub">Field Journal</span>
+            <span class="cover-sub">{{ t('academy.bookCoverRight') }}</span>
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@
       <!-- LEFT PANEL, Chapter File Tabs (like book chapters/map tabs) -->
       <div class="book-left">
         <div class="book-tabs-header">
-          <span class="text-[9px] font-heading uppercase tracking-widest text-amber-700/60 dark:text-amber-400/40">Table of Contents</span>
+          <span class="text-[9px] font-heading uppercase tracking-widest text-amber-700/60 dark:text-amber-400/40">{{ t('academy.toc') }}</span>
         </div>
 
         <div class="book-tabs-scroll">
@@ -118,7 +118,7 @@
               <div class="tab-text">
                 <span class="tab-title">{{ chapter.title.replace(/Chapter \d+(\.\d+)?\s*-\s*/, '') }}</span>
                 <span class="tab-status">
-                  {{ chapter.status === 'completed' ? '✓ Done' : isChapterLocked(chapter) ? '🔒' : 'Active' }}
+                  {{ chapter.status === 'completed' ? t('academy.statusDone') : isChapterLocked(chapter) ? '🔒' : t('academy.statusActive') }}
                 </span>
               </div>
             </div>
@@ -183,8 +183,8 @@
         <!-- Empty state -->
         <div v-else-if="!selectedFolder" class="book-empty">
           <div class="book-empty-icon"><PhFolderOpen :size="44" weight="duotone" class="text-gray-300 dark:text-slate-600" /></div>
-          <p class="book-empty-text">Select a chapter file to view</p>
-          <p class="book-empty-sub">Click any chapter on the left to open its contents</p>
+          <p class="book-empty-text">{{ t('academy.emptyTitle') }}</p>
+          <p class="book-empty-sub">{{ t('academy.emptyDesc') }}</p>
         </div>
 
         <!-- Chapter page content -->
@@ -222,12 +222,12 @@
               <button v-if="canAccessAct(selectedChapter.id, ai) && !store.isActCompleted(selectedChapter.id, act.id)"
                 @click="startActFlow(selectedChapter, act, ai)"
                 class="act-start-btn" :style="{ color: selectedChapter.color }">
-                {{ act.chatSimulation ? '💬 Play' : 'Start' }} →
+                {{ act.chatSimulation ? t('academy.btnPlay') : t('academy.btnStart') }}
               </button>
               <button v-else-if="store.isActCompleted(selectedChapter.id, act.id)"
                 @click="startActFlow(selectedChapter, act, ai)"
                 class="text-[10px] uppercase tracking-wider font-heading font-bold text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300 cursor-pointer bg-teal-500/10 hover:bg-teal-500/20 px-3 py-1.5 rounded-lg border border-teal-500/20 transition-all">
-                Replay ↺
+                {{ t('academy.btnReplay') }}
               </button>
             </div>
           </div>
@@ -239,45 +239,45 @@
             <button v-if="allActsCompleted(selectedChapter) && selectedChapter.liaChat?.post && !hasCompletedLiaPhase(selectedChapter.id, 'post')"
               @click="openChat(selectedChapter.id, 'post')"
               class="page-btn bg-[#E8E5DE] dark:bg-[#2A2620] text-gray-800 dark:text-gray-200 border border-gray-300/50 dark:border-gray-600/50 hover:shadow-md transition-all animate-pulse">
-              💬 Talk to Lia
+              {{ t('academy.btnTalkLia') }}
             </button>
 
             <!-- 2. RPG Quest (Requires Acts + Lia Post-Chat done) -->
             <button v-if="allActsCompleted(selectedChapter) && (!selectedChapter.liaChat?.post || hasCompletedLiaPhase(selectedChapter.id, 'post')) && selectedChapter.questId && !store.completedChapterQuests?.includes(selectedChapter.questId)"
               @click="openQuest(selectedChapter.questId)"
               class="page-btn animate-pulse" :style="{ backgroundColor: selectedChapter.color, color: 'white', border: 'none' }">
-              ⚔️ RPG Quest
+              {{ t('academy.btnRpgQuest') }}
             </button>
 
             <!-- 3. Bridge Story (Requires Acts + Lia Post-Chat + RPG Quest done) -->
             <button v-if="allActsCompleted(selectedChapter) && (!selectedChapter.liaChat?.post || hasCompletedLiaPhase(selectedChapter.id, 'post')) && (!selectedChapter.questId || store.completedChapterQuests?.includes(selectedChapter.questId)) && selectedChapter.bridgeId && !store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
               @click="openBridge(selectedChapter.bridgeId)"
               class="page-btn bg-amber-500 hover:bg-amber-600 text-white transition-colors shadow-md shadow-amber-500/20 animate-pulse">
-              📖 Continue Story →
+              {{ t('academy.btnContinueStory') }}
             </button>
             <button v-else-if="selectedChapter.bridgeId && store.completedBridgingQuests.includes(selectedChapter.bridgeId)"
               @click="openBridge(selectedChapter.bridgeId)"
               class="page-btn bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold hover:bg-amber-500 hover:text-white transition-all">
-              📖 Replay Story ↺
+              {{ t('academy.btnReplayStory') }}
             </button>
             <button v-else-if="!selectedChapter.bridgeId && store.completedChapterQuests?.includes(selectedChapter.questId)"
               @click="openQuest(selectedChapter.questId)"
               class="page-btn bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold hover:bg-amber-500 hover:text-white transition-all">
-              📖 Replay Quest ↺
+              {{ t('academy.btnReplayQuest') }}
             </button>
             <button v-else-if="allActsCompleted(selectedChapter) && !selectedChapter.questId && !selectedChapter.bridgeId"
               @click="startActFlow(selectedChapter, selectedChapter.acts[0], 0)"
               class="page-btn bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold hover:bg-amber-500 hover:text-white transition-all">
-              📖 Replay Chapter ↺
+              {{ t('academy.btnReplayChapter') }}
             </button>
             
-            <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500 cursor-pointer hover:opacity-80 transition-opacity" @click="openQuest(selectedChapter.questId)">✓ Quest Complete</span>
+            <span v-if="store.completedChapterQuests?.includes(selectedChapter?.questId)" class="page-status-badge text-teal-500 cursor-pointer hover:opacity-80 transition-opacity" @click="openQuest(selectedChapter.questId)">{{ t('academy.questComplete') }}</span>
           </div>
 
           <!-- Locked hint -->
           <div v-if="selectedChapter.status === 'locked' && selectedChapter.acts" class="page-locked-hint">
-            <p class="text-xs text-gray-400">🔒 Complete the previous chapter to unlock</p>
-            <p class="text-[10px] text-gray-300 mt-1">{{ selectedChapter.acts.length }} acts · {{ selectedChapter.acts.reduce((s, a) => s + parseInt(a.duration), 0) }} min total</p>
+            <p class="text-xs text-gray-400">{{ t('academy.lockedHint') }}</p>
+            <p class="text-[10px] text-gray-300 mt-1">{{ t('academy.lockedMeta').replace('{acts}', selectedChapter.acts.length).replace('{mins}', selectedChapter.acts.reduce((s, a) => s + parseInt(a.duration), 0)) }}</p>
           </div>
         </div>
       </div>
@@ -287,26 +287,26 @@
     <!-- /book-wrapper -->
 
     <!-- ERQ Post-Test -->
-    <div v-if="(store.erqCompleted.pre || store.isAdmin) && !store.erqCompleted.post && allChaptersComplete" class="mt-8 animate-slide-up">
+    <div v-if="(store.erqCompleted.pre || store.isAdmin) && !store.erqCompleted.post && allChaptersComplete" v-motion class="mt-8">
       <div class="dossier-alert border-l-4 border-amber-500 bg-amber-50/50 dark:bg-amber-900/10 rounded-r-2xl p-5">
         <div class="flex items-center gap-4">
           <span class="text-3xl">🎓</span>
           <div class="flex-1">
-            <h3 class="font-heading font-bold text-sm text-amber-800 dark:text-amber-300 mb-1">All Files Processed</h3>
-            <p class="text-[11px] text-amber-600/80 dark:text-amber-400/70 font-body">Final assessment: see how much you've grown.</p>
+            <h3 class="font-heading font-bold text-sm text-amber-800 dark:text-amber-300 mb-1">{{ t('academy.postReqTitle') }}</h3>
+            <p class="text-[11px] text-amber-600/80 dark:text-amber-400/70 font-body">{{ t('academy.postReqDesc') }}</p>
           </div>
           <RouterLink to="/academy/erq/post" class="px-5 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-heading font-bold rounded-2xl hover:-translate-y-0.5 transition-all shadow-sm shadow-amber-500/20">
-            Start →
+            {{ t('academy.btnStart') }}
           </RouterLink>
         </div>
       </div>
     </div>
 
     <!-- Training RPG Scenarios -->
-    <div v-if="Object.keys(store.disasterRPGScenarios).length > 0" class="mt-10 animate-slide-up" style="animation-delay: 0.3s">
+    <div v-if="Object.keys(store.disasterRPGScenarios).length > 0" v-motion class="mt-10" style="animation-delay: 0.3s">
       <h2 class="font-heading text-base font-bold text-ink dark:text-white mb-4 flex items-center gap-2">
         <span class="w-7 h-7 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-xs">🎮</span>
-        Training RPG Scenarios
+        {{ t('academy.trainingRpg') }}
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <RouterLink v-for="(rpg, key) in store.disasterRPGScenarios" :key="key" :to="`/academy/disaster-rpg/${key}`"
@@ -329,8 +329,10 @@ import LiaChat from './LiaChat.vue'
 import ActLesson from './ActLesson.vue'
 import ChapterQuest from './ChapterQuest.vue'
 import BridgingQuest from './BridgingQuest.vue'
+import { useI18n } from '../i18n'
 
 const store = useResiliaStore()
+const { t } = useI18n()
 
 const completedChapters = computed(() => store.academyChapters.filter(c => c.status === 'completed').length)
 const overallProgress = computed(() => (completedChapters.value / store.academyChapters.length) * 100)
@@ -417,9 +419,7 @@ function handleNextAct(payload) {
 }
 
 function openQuest(questId) {
-  chatMode.value = null
-  actMode.value = null
-  questMode.value = { questId }
+  router.push(`/academy/rpg/${questId}`)
 }
 
 function closeQuest() {
@@ -501,7 +501,7 @@ function hasCompletedLiaPhase(chapterId, phase) {
 
 
 const academyTourSteps = [
-  { title: 'Mission Files', description: 'Each tab is a chapter in Lia\'s journey. Click a tab to open the chapter page.', target: '.book-left', icon: PhBookOpen },
+  { title: 'Mission Files', description: 'Each tab is a chapter in Lia\'s story. Click a tab to open the chapter page.', target: '.book-left', icon: PhBookOpen },
   { title: 'Chapter Details', description: 'The right panel shows acts, quizzes, and the RPG quest for the selected chapter.', target: '.book-right', icon: PhBookmarkSimple },
   { title: 'Progress Tracking', description: 'Dots show act completion. Green = done, gray = in progress.', target: '.tab-dots', icon: PhChartDonut },
 ]
@@ -1259,9 +1259,7 @@ const academyTourSteps = [
   backdrop-filter: blur(8px);
 }
 
-.animate-slide-up {
-  animation: slideUp 0.5s ease-out both;
-}
+
 
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(12px); }

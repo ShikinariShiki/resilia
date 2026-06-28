@@ -22,7 +22,7 @@
             <PhMapPin :size="32" weight="duotone" />
           </div>
           <h3 class="font-heading font-bold text-ink dark:text-white text-xl text-center">Field Ready</h3>
-          <p class="text-sm font-body text-gray-500 text-center mt-2">Real-world localized scenarios tailored for ASEAN topographies.</p>
+          <p class="text-sm font-body text-gray-500 text-center mt-2">Real-world localized scenarios built for ASEAN topographies.</p>
         </div>
 
         <!-- Middle Layer (Layer II) -->

@@ -10,7 +10,7 @@
     <!-- Main -->
     <div class="flex-1 px-6 sm:px-8 md:px-12 py-6 md:py-10">
       <div class="w-full max-w-3xl mx-auto">
-        <div v-if="mod" class="animate-slide-up">
+        <div v-if="mod" v-motion>
           <!-- Module header -->
           <div class="text-center mb-10 md:mb-14">
             <div class="w-20 h-20 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-teal-500/20">

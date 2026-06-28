@@ -1,0 +1,308 @@
+{
+  "en": {
+    "navWhy": "Why RESILIA",
+    "navHow": "How it Works",
+    "videoLabel": "Watch how Resilia works",
+    "subtitleWhy": "Why RESILIA",
+    "subtitleHow": "How It Works",
+    "subtitleProgression": "Progression System",
+    "xpRequired": "{xp} XP required",
+    "subtitleTestimonials": "Testimonials",
+    "subtitleFaq": "FAQ",
+    "subtitleReady": "Ready to Begin?",
+    "freeForever": "Free forever · No credit card · All ASEAN languages",
+    "footerTagline": "Digital Reserve Corps for ASEAN",
+    "tiers": [
+      { "name": "Cadet", "perks": ["Foundations access", "Toolkit access", "Daily missions"], "desc": "Your training begins. Learn the fundamentals of Psychological First Aid and build basic readiness." },
+      { "name": "Trainee", "perks": ["PFA modules", "Calm Breathing", "Community challenges"], "desc": "Access hands-on modules and essential breathing techniques to build inner resilience and confidence." },
+      { "name": "Responder", "perks": ["Advanced RPGs", "Mood tracking", "Double rewards"], "desc": "Step into realistic disaster scenarios. Test your skills through interactive RPGs and earn bonus XP." },
+      { "name": "Guardian", "perks": ["Mentor badge", "Double XP weekends", "Priority access"], "desc": "Achieve veteran status. Access exclusive community channels and wear the distinguished Mentor badge." },
+      { "name": "Commander", "perks": ["Custom frames", "Exclusive scenarios", "Community lead"], "desc": "Lead by example. Gain prestige cosmetics and access to ultra-hardcore, zero-mistake disaster drills." },
+      { "name": "Marshal", "perks": ["Leaderboard crown", "All cosmetics", "Legacy status"], "desc": "The peak of the Digital Reserve Corps. You are a master of crisis response, recognized across all of ASEAN." }
+    ],
+    "testimonials": [
+      { "quote": "RESILIA taught me how to stay calm during the Cianjur earthquake. The breathing techniques I learned literally saved my family from panicking.", "role": "Student, Indonesia" },
+      { "quote": "The RPG scenarios feel incredibly real. I practiced flood evacuation steps so many times that when it actually happened, I knew exactly what to do.", "role": "Volunteer, Vietnam" },
+      { "quote": "As a teacher, I use RESILIA modules to teach my students about disaster preparedness. The gamification keeps them engaged for hours.", "role": "Educator, Philippines" }
+    ],
+    "faqs": [
+      { "q": "What is Psychological First Aid (PFA)?", "a": "PFA is a framework developed by the WHO for providing emotional and practical support to people affected by crises. It's not therapy, it's about being a compassionate, informed first responder when disaster strikes." },
+      { "q": "Is RESILIA free to use?", "a": "Yes! RESILIA is completely free. All modules, RPGs, and tools are accessible without payment. ResiCoins are earned through engagement, not purchased." },
+      { "q": "Do I need medical training?", "a": "Not at all. RESILIA is designed for anyone aged 15+. We start from the basics and build up your knowledge gradually through gamified modules." },
+      { "q": "What languages are supported?", "a": "Currently English and Bahasa Indonesia, with Thai, Vietnamese, Malay, Filipino, Burmese, Khmer, and Lao coming soon to serve all ASEAN countries." },
+      { "q": "Is my data safe?", "a": "In this MVP, all data is stored locally in your browser. No data is transmitted to external servers. Your privacy is our priority." }
+    ]
+  },
+  "id": {
+    "navWhy": "Mengapa RESILIA",
+    "navHow": "Cara Kerjanya",
+    "videoLabel": "Tonton cara kerja Resilia",
+    "subtitleWhy": "Mengapa RESILIA",
+    "subtitleHow": "Cara Kerjanya",
+    "subtitleProgression": "Sistem Kemajuan",
+    "xpRequired": "Butuh {xp} XP",
+    "subtitleTestimonials": "Testimoni",
+    "subtitleFaq": "FAQ",
+    "subtitleReady": "Siap untuk Memulai?",
+    "freeForever": "Selalu gratis · Tanpa kartu kredit · Seluruh bahasa ASEAN",
+    "footerTagline": "Korps Cadangan Digital untuk ASEAN",
+    "tiers": [
+      { "name": "Kadet", "perks": ["Akses dasar", "Akses alat", "Misi harian"], "desc": "Pelatihan Anda dimulai. Pelajari dasar-dasar Pertolongan Pertama Psikologis dan bangun kesiapan awal." },
+      { "name": "Peserta", "perks": ["Modul PFA", "Pernapasan Tenang", "Tantangan komunitas"], "desc": "Akses modul praktik dan teknik pernapasan untuk membangun ketahanan batin dan kepercayaan diri." },
+      { "name": "Responden", "perks": ["RPG lanjutan", "Pelacakan mood", "Hadiah ganda"], "desc": "Masuk ke skenario bencana yang realistis. Uji keterampilan Anda melalui RPG dan dapatkan XP bonus." },
+      { "name": "Penjaga", "perks": ["Lencana mentor", "Akhir pekan XP ganda", "Akses prioritas"], "desc": "Raih status veteran. Akses saluran komunitas eksklusif dan kenakan lencana Mentor bergengsi." },
+      { "name": "Komandan", "perks": ["Bingkai khusus", "Skenario eksklusif", "Pemimpin komunitas"], "desc": "Beri contoh. Dapatkan kosmetik prestise dan latihan bencana tanpa kesalahan yang sangat sulit." },
+      { "name": "Marsekal", "perks": ["Mahkota papan peringkat", "Semua kosmetik", "Status warisan"], "desc": "Puncak dari Korps Cadangan Digital. Anda adalah ahli respons krisis yang diakui di seluruh ASEAN." }
+    ],
+    "testimonials": [
+      { "quote": "RESILIA mengajari saya cara tetap tenang saat gempa Cianjur. Teknik pernapasan yang saya pelajari menyelamatkan keluarga saya dari kepanikan.", "role": "Pelajar, Indonesia" },
+      { "quote": "Skenario RPG terasa sangat nyata. Saya mempraktikkan evakuasi banjir berkali-kali sehingga ketika itu terjadi, saya tahu persis apa yang harus dilakukan.", "role": "Relawan, Vietnam" },
+      { "quote": "Sebagai seorang guru, saya menggunakan modul RESILIA untuk mengajar kesiapsiagaan bencana. Gamifikasinya membuat mereka betah belajar berjam-jam.", "role": "Pendidik, Filipina" }
+    ],
+    "faqs": [
+      { "q": "Apa itu Pertolongan Pertama Psikologis (PFA)?", "a": "PFA adalah kerangka kerja yang dikembangkan oleh WHO untuk memberikan dukungan emosional dan praktis kepada orang-orang yang terkena krisis. Ini bukan terapi, ini tentang menjadi responden pertama yang penuh kasih dan terinformasi saat bencana melanda." },
+      { "q": "Apakah RESILIA gratis untuk digunakan?", "a": "Ya! RESILIA sepenuhnya gratis. Semua modul, RPG, dan alat dapat diakses tanpa pembayaran. ResiCoins diperoleh melalui keterlibatan, bukan dibeli." },
+      { "q": "Apakah saya memerlukan pelatihan medis?", "a": "Sama sekali tidak. RESILIA dirancang untuk siapa saja berusia 15+. Kami mulai dari dasar dan membangun pengetahuan Anda secara bertahap melalui modul gamifikasi." },
+      { "q": "Bahasa apa saja yang didukung?", "a": "Saat ini Bahasa Inggris dan Bahasa Indonesia, dengan bahasa Thai, Vietnam, Melayu, Filipina, Burma, Khmer, dan Lao akan segera hadir untuk melayani semua negara ASEAN." },
+      { "q": "Apakah data saya aman?", "a": "Dalam MVP ini, semua data disimpan secara lokal di browser Anda. Tidak ada data yang dikirim ke server eksternal. Privasi Anda adalah prioritas kami." }
+    ]
+  },
+  "ms": {
+    "navWhy": "Mengapa RESILIA",
+    "navHow": "Cara Berfungsi",
+    "videoLabel": "Tonton cara Resilia berfungsi",
+    "subtitleWhy": "Mengapa RESILIA",
+    "subtitleHow": "Cara Berfungsi",
+    "subtitleProgression": "Sistem Kemajuan",
+    "xpRequired": "Perlu {xp} XP",
+    "subtitleTestimonials": "Testimoni",
+    "subtitleFaq": "Soalan Lazim",
+    "subtitleReady": "Bersedia untuk Mula?",
+    "freeForever": "Percuma selamanya · Tiada kad kredit · Semua bahasa ASEAN",
+    "footerTagline": "Korps Simpanan Digital untuk ASEAN",
+    "tiers": [
+      { "name": "Kadet", "perks": ["Akses asas", "Akses alatan", "Misi harian"], "desc": "Latihan bermula. Pelajari asas Pertolongan Cemas Psikologi dan bina kesediaan asas." },
+      { "name": "Pelatih", "perks": ["Modul PFA", "Pernafasan Tenang", "Cabaran komuniti"], "desc": "Akses modul amali dan teknik pernafasan untuk membina ketahanan dan keyakinan." },
+      { "name": "Responden", "perks": ["RPG lanjutan", "Penjejakan mood", "Ganjaran berganda"], "desc": "Masuk ke senario bencana realistik. Uji kemahiran anda dan dapatkan XP bonus." },
+      { "name": "Penjaga", "perks": ["Lencana mentor", "Hujung minggu XP berganda", "Akses keutamaan"], "desc": "Capai status veteran. Akses saluran komuniti eksklusif." },
+      { "name": "Komander", "perks": ["Bingkai tersuai", "Senario eksklusif", "Ketua komuniti"], "desc": "Dapatkan kosmetik prestij dan akses latihan bencana tahap tinggi." },
+      { "name": "Marsyal", "perks": ["Mahkota papan pendahulu", "Semua kosmetik", "Status warisan"], "desc": "Puncak Korps Simpanan Digital. Anda adalah pakar respons krisis ASEAN." }
+    ],
+    "testimonials": [
+      { "quote": "RESILIA mengajar saya cara bertenang semasa gempa bumi Cianjur.", "role": "Pelajar, Indonesia" },
+      { "quote": "Senario RPG terasa sangat realistik. Saya mempraktikkan langkah pemindahan banjir banyak kali.", "role": "Sukarelawan, Vietnam" },
+      { "quote": "Sebagai seorang guru, saya menggunakan modul RESILIA untuk mengajar pelajar saya.", "role": "Pendidik, Filipina" }
+    ],
+    "faqs": [
+      { "q": "Apakah Pertolongan Cemas Psikologi (PFA)?", "a": "PFA ialah rangka kerja oleh WHO untuk memberi sokongan emosi dan praktikal kepada mangsa krisis." },
+      { "q": "Adakah RESILIA percuma?", "a": "Ya! RESILIA adalah percuma sepenuhnya. Tiada bayaran diperlukan." },
+      { "q": "Adakah saya memerlukan latihan perubatan?", "a": "Tidak sama sekali. RESILIA direka untuk sesiapa sahaja yang berumur 15+ tahun." },
+      { "q": "Apakah bahasa yang disokong?", "a": "Pada masa ini Bahasa Inggeris dan Bahasa Indonesia. Bahasa lain di ASEAN akan datang segera." },
+      { "q": "Adakah data saya selamat?", "a": "Dalam MVP ini, semua data disimpan secara setempat dalam penyemak imbas anda." }
+    ]
+  },
+  "tl": {
+    "navWhy": "Bakit RESILIA",
+    "navHow": "Paano Gumagana",
+    "videoLabel": "Panoorin kung paano gumagana",
+    "subtitleWhy": "Bakit RESILIA",
+    "subtitleHow": "Paano Gumagana",
+    "subtitleProgression": "Sistema ng Pag-unlad",
+    "xpRequired": "{xp} XP kailangan",
+    "subtitleTestimonials": "Mga Testimonya",
+    "subtitleFaq": "FAQ",
+    "subtitleReady": "Handa na Magsimula?",
+    "freeForever": "Libre habang buhay · Walang credit card · Lahat ng wika sa ASEAN",
+    "footerTagline": "Digital Reserve Corps para sa ASEAN",
+    "tiers": [
+      { "name": "Kadet", "perks": ["Akses sa batayan", "Akses sa kagamitan", "Araw-araw na misyon"], "desc": "Nagsisimula na ang iyong pagsasanay. Matutunan ang mga pangunahing kaalaman." },
+      { "name": "Trainee", "perks": ["PFA modules", "Kalmadong Paghinga", "Hamon sa komunidad"], "desc": "Mag-access ng mga module para sa katatagan at kumpiyansa." },
+      { "name": "Responder", "perks": ["Advanced RPGs", "Mood tracking", "Dobleng reward"], "desc": "Subukan ang iyong mga kasanayan sa mga makatotohanang sitwasyon ng sakuna." },
+      { "name": "Tagabantay", "perks": ["Badge ng mentor", "Dobleng XP weekends", "Pangunahing akses"], "desc": "Maabot ang status ng beterano at kumuha ng mentor badge." },
+      { "name": "Kumander", "perks": ["Custom na frame", "Eksklusibong senaryo", "Lider ng komunidad"], "desc": "Mamuno at mag-access ng pinakamahirap na mga pagsasanay sa sakuna." },
+      { "name": "Marshal", "perks": ["Korona ng leaderboard", "Lahat ng kosmetiko", "Status ng legacy"], "desc": "Ang rurok ng Digital Reserve Corps. Kinikilala sa buong ASEAN." }
+    ],
+    "testimonials": [
+      { "quote": "Tinuruan ako ng RESILIA na maging kalmado noong lindol sa Cianjur.", "role": "Estudyante, Indonesia" },
+      { "quote": "Pakiramdam ng mga sitwasyong RPG ay napakatotoo. Nagsanay ako sa paglikas mula sa baha nang maraming beses.", "role": "Volunteer, Vietnam" },
+      { "quote": "Bilang guro, ginagamit ko ang mga module ng RESILIA upang turuan ang aking mga estudyante.", "role": "Guro, Pilipinas" }
+    ],
+    "faqs": [
+      { "q": "Ano ang Psychological First Aid (PFA)?", "a": "Ang PFA ay binuo ng WHO upang magbigay ng emosyonal na suporta sa mga taong apektado ng krisis." },
+      { "q": "Libre ba ang RESILIA?", "a": "Oo! Ang RESILIA ay ganap na libre." },
+      { "q": "Kailangan ko ba ng pagsasanay medikal?", "a": "Hindi. Ang RESILIA ay para sa kahit sinong may edad 15+." },
+      { "q": "Anong mga wika ang suportado?", "a": "Kasalukuyang Ingles at Indonesian. Marami pang wika sa ASEAN ang paparating." },
+      { "q": "Ligtas ba ang aking data?", "a": "Nakaimbak ang lahat ng data nang lokal sa iyong browser. Walang naipapadala sa mga server." }
+    ]
+  },
+  "vi": {
+    "navWhy": "Tại sao RESILIA",
+    "navHow": "Cách hoạt động",
+    "videoLabel": "Xem cách Resilia hoạt động",
+    "subtitleWhy": "Tại sao RESILIA",
+    "subtitleHow": "Cách hoạt động",
+    "subtitleProgression": "Hệ thống Tiến trình",
+    "xpRequired": "Cần {xp} XP",
+    "subtitleTestimonials": "Cảm nhận",
+    "subtitleFaq": "Câu hỏi thường gặp",
+    "subtitleReady": "Sẵn sàng Bắt đầu?",
+    "freeForever": "Miễn phí mãi mãi · Không cần thẻ tín dụng · Mọi ngôn ngữ ASEAN",
+    "footerTagline": "Lực lượng Dự bị Kỹ thuật số ASEAN",
+    "tiers": [
+      { "name": "Học viên", "perks": ["Truy cập cơ bản", "Bộ công cụ", "Nhiệm vụ hàng ngày"], "desc": "Tìm hiểu các nguyên tắc cơ bản của Sơ cứu Tâm lý." },
+      { "name": "Thực tập sinh", "perks": ["Bài học PFA", "Tập thở", "Thử thách cộng đồng"], "desc": "Truy cập các kỹ thuật thở cần thiết để xây dựng khả năng phục hồi." },
+      { "name": "Người ứng cứu", "perks": ["RPG nâng cao", "Theo dõi tâm trạng", "Phần thưởng gấp đôi"], "desc": "Kiểm tra kỹ năng qua các tình huống nhập vai thảm họa thực tế." },
+      { "name": "Người bảo vệ", "perks": ["Huy hiệu Mentor", "Cuối tuần nhân đôi XP", "Quyền ưu tiên"], "desc": "Đạt được trạng thái kỳ cựu và truy cập các kênh cộng đồng độc quyền." },
+      { "name": "Chỉ huy", "perks": ["Khung tùy chỉnh", "Kịch bản độc quyền", "Dẫn dắt cộng đồng"], "desc": "Giành được các trang bị uy tín và tham gia các cuộc diễn tập thảm họa khắc nghiệt." },
+      { "name": "Nguyên soái", "perks": ["Vương miện xếp hạng", "Mọi trang bị", "Trạng thái huyền thoại"], "desc": "Đỉnh cao của Lực lượng Dự bị Kỹ thuật số. Chuyên gia ứng phó khủng hoảng ASEAN." }
+    ],
+    "testimonials": [
+      { "quote": "RESILIA đã dạy tôi cách giữ bình tĩnh trong trận động đất ở Cianjur.", "role": "Học sinh, Indonesia" },
+      { "quote": "Các tình huống RPG cảm giác vô cùng chân thực. Tôi đã thực hành di tản lũ lụt rất nhiều lần.", "role": "Tình nguyện viên, Việt Nam" },
+      { "quote": "Là một giáo viên, tôi sử dụng các bài học của RESILIA để dạy cho học sinh của mình.", "role": "Nhà giáo dục, Philippines" }
+    ],
+    "faqs": [
+      { "q": "Sơ cứu tâm lý (PFA) là gì?", "a": "PFA là một khuôn khổ của WHO để hỗ trợ tinh thần cho người bị ảnh hưởng bởi khủng hoảng." },
+      { "q": "RESILIA có miễn phí không?", "a": "Có! RESILIA hoàn toàn miễn phí." },
+      { "q": "Tôi có cần đào tạo y tế không?", "a": "Không hề. RESILIA dành cho bất kỳ ai từ 15 tuổi trở lên." },
+      { "q": "Hỗ trợ những ngôn ngữ nào?", "a": "Tiếng Anh, Tiếng Indonesia và các ngôn ngữ ASEAN khác đang được bổ sung." },
+      { "q": "Dữ liệu của tôi có an toàn không?", "a": "Tất cả dữ liệu chỉ được lưu cục bộ trên trình duyệt của bạn." }
+    ]
+  },
+  "th": {
+    "navWhy": "ทำไมต้อง RESILIA",
+    "navHow": "วิธีใช้งาน",
+    "videoLabel": "ดูวิธีใช้งาน Resilia",
+    "subtitleWhy": "ทำไมต้อง RESILIA",
+    "subtitleHow": "วิธีใช้งาน",
+    "subtitleProgression": "ระบบความก้าวหน้า",
+    "xpRequired": "ต้องการ {xp} XP",
+    "subtitleTestimonials": "ข้อความรับรอง",
+    "subtitleFaq": "คำถามที่พบบ่อย",
+    "subtitleReady": "พร้อมเริ่มหรือยัง?",
+    "freeForever": "ฟรีตลอดไป · ไม่ต้องใช้บัตรเครดิต · ภาษาอาเซียนทั้งหมด",
+    "footerTagline": "กองกำลังสำรองดิจิทัลสำหรับอาเซียน",
+    "tiers": [
+      { "name": "นักเรียนนายร้อย", "perks": ["พื้นฐาน", "เครื่องมือ", "ภารกิจรายวัน"], "desc": "เรียนรู้พื้นฐานการปฐมพยาบาลทางจิตวิทยา" },
+      { "name": "ผู้รับการฝึก", "perks": ["โมดูล PFA", "การฝึกหายใจ", "ความท้าทายชุมชน"], "desc": "เข้าถึงโมดูลและการหายใจที่จำเป็น" },
+      { "name": "ผู้ตอบสนอง", "perks": ["RPG ขั้นสูง", "ติดตามอารมณ์", "รางวัลสองเท่า"], "desc": "ทดสอบทักษะของคุณในสถานการณ์จำลองที่สมจริง" },
+      { "name": "ผู้พิทักษ์", "perks": ["ตราที่ปรึกษา", "XP สองเท่าสุดสัปดาห์", "สิทธิ์พิเศษ"], "desc": "บรรลุสถานะทหารผ่านศึกและเข้าถึงช่องทางชุมชน" },
+      { "name": "ผู้บังคับบัญชา", "perks": ["กรอบโปรไฟล์", "สถานการณ์พิเศษ", "ผู้นำชุมชน"], "desc": "เป็นผู้นำและเข้าถึงการฝึกซ้อมภัยพิบัติระดับสูง" },
+      { "name": "จอมพล", "perks": ["มงกุฎกระดานผู้นำ", "ของประดับทั้งหมด", "สถานะตำนาน"], "desc": "จุดสูงสุดของกองกำลังสำรองดิจิทัล" }
+    ],
+    "testimonials": [
+      { "quote": "RESILIA สอนให้ฉันใจเย็นช่วงแผ่นดินไหว", "role": "นักเรียน, อินโดนีเซีย" },
+      { "quote": "สถานการณ์ RPG สมจริงมาก ฉันฝึกอพยพน้ำท่วมหลายครั้ง", "role": "อาสาสมัคร, เวียดนาม" },
+      { "quote": "ในฐานะครู ฉันใช้โมดูล RESILIA สอนนักเรียน", "role": "นักการศึกษา, ฟิลิปปินส์" }
+    ],
+    "faqs": [
+      { "q": "PFA คืออะไร?", "a": "PFA คือกรอบงานที่พัฒนาโดย WHO เพื่อให้การสนับสนุนทางอารมณ์แก่ผู้ได้รับผลกระทบ" },
+      { "q": "RESILIA ใช้งานฟรีหรือไม่?", "a": "ใช่ ฟรีทั้งหมด" },
+      { "q": "ฉันต้องมีการฝึกอบรมทางการแพทย์หรือไม่?", "a": "ไม่ต้องเลย ออกแบบมาสำหรับทุกคนที่มีอายุ 15 ปีขึ้นไป" },
+      { "q": "รองรับภาษาใดบ้าง?", "a": "อังกฤษ อินโดนีเซีย และภาษาอื่นๆในอาเซียนกำลังตามมา" },
+      { "q": "ข้อมูลของฉันปลอดภัยหรือไม่?", "a": "ข้อมูลทั้งหมดจะถูกเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น" }
+    ]
+  },
+  "km": {
+    "navWhy": "ហេតុអ្វី RESILIA",
+    "navHow": "របៀបដំណើរការ",
+    "videoLabel": "មើលរបៀប Resilia ដំណើរការ",
+    "subtitleWhy": "ហេតុអ្វី RESILIA",
+    "subtitleHow": "របៀបដំណើរការ",
+    "subtitleProgression": "ប្រព័ន្ធវឌ្ឍនភាព",
+    "xpRequired": "ត្រូវការ {xp} XP",
+    "subtitleTestimonials": "សក្ខីកម្ម",
+    "subtitleFaq": "សំណួរដែលសួរញឹកញាប់",
+    "subtitleReady": "ត្រៀមខ្លួនចាប់ផ្តើមហើយឬនៅ?",
+    "freeForever": "ឥតគិតថ្លៃជារៀងរហូត",
+    "footerTagline": "កងកម្លាំងបម្រុងឌីជីថលអាស៊ាន",
+    "tiers": [
+      { "name": "និស្សិត", "perks": ["មូលដ្ឋាន", "ឧបករណ៍", "បេសកកម្មប្រចាំថ្ងៃ"], "desc": "រៀនពីមូលដ្ឋានគ្រឹះ។" },
+      { "name": "អ្នកហ្វឹកហាត់", "perks": ["ម៉ូឌុល PFA", "ដកដង្ហើម", "បញ្ហាប្រឈមសហគមន៍"], "desc": "ចូលប្រើម៉ូឌុលដើម្បីកសាងភាពធន់។" },
+      { "name": "អ្នកឆ្លើយតប", "perks": ["RPG កម្រិតខ្ពស់", "តាមដានអារម្មណ៍", "រង្វាន់ទ្វេដង"], "desc": "សាកល្បងជំនាញរបស់អ្នកនៅក្នុងសេណារីយ៉ូគ្រោះមហន្តរាយ។" },
+      { "name": "អ្នកការពារ", "perks": ["ផ្លាកសញ្ញា Mentor", "ចុងសប្តាហ៍ XP ទ្វេដង", "ការចូលប្រើជាអាទិភាព"], "desc": "ទទួលបានឋានៈអតីតយុទ្ធជន។" },
+      { "name": "មេបញ្ជាការ", "perks": ["ស៊ុមផ្ទាល់ខ្លួន", "សេណារីយ៉ូផ្តាច់មុខ", "អ្នកដឹកនាំសហគមន៍"], "desc": "ចូលប្រើសមយុទ្ធគ្រោះមហន្តរាយដ៏លំបាកបំផុត។" },
+      { "name": "សេនាប្រមុខ", "perks": ["មកុដ", "គ្រឿងសំអាងទាំងអស់", "ស្ថានភាពកេរ្តិ៍ដំណែល"], "desc": "កំពូលនៃកងកម្លាំងបម្រុងឌីជីថលអាស៊ាន។" }
+    ],
+    "testimonials": [
+      { "quote": "RESILIA បានបង្រៀនខ្ញុំពីរបៀបរក្សាភាពស្ងប់ស្ងាត់។", "role": "សិស្ស, ឥណ្ឌូនេស៊ី" },
+      { "quote": "សេណារីយ៉ូ RPG មានអារម្មណ៍ថាពិតប្រាកដណាស់។", "role": "អ្នកស្ម័គ្រចិត្ត, វៀតណាម" },
+      { "quote": "ក្នុងនាមជាគ្រូបង្រៀន ខ្ញុំប្រើប្រាស់ម៉ូឌុល RESILIA សម្រាប់សិស្សរបស់ខ្ញុំ។", "role": "អ្នកអប់រំ, ហ្វីលីពីន" }
+    ],
+    "faqs": [
+      { "q": "តើ PFA ជាអ្វី?", "a": "PFA គឺជាក្របខ័ណ្ឌសម្រាប់ការគាំទ្រផ្លូវចិត្តរបស់ WHO ។" },
+      { "q": "តើ RESILIA ឥតគិតថ្លៃទេ?", "a": "បាទ! ឥតគិតថ្លៃទាំងស្រុង។" },
+      { "q": "តើខ្ញុំត្រូវការការបណ្តុះបណ្តាលវេជ្ជសាស្ត្រទេ?", "a": "អត់ទេ។" },
+      { "q": "តើមានភាសាអ្វីខ្លះ?", "a": "អង់គ្លេស ឥណ្ឌូនេស៊ី និងភាសាអាស៊ានផ្សេងទៀត។" },
+      { "q": "តើទិន្នន័យរបស់ខ្ញុំមានសុវត្ថិភាពទេ?", "a": "ទិន្នន័យត្រូវបានរក្សាទុកក្នុងមូលដ្ឋានប៉ុណ្ណោះ។" }
+    ]
+  },
+  "lo": {
+    "navWhy": "ເປັນຫຍັງ RESILIA",
+    "navHow": "ວິທີການເຮັດວຽກ",
+    "videoLabel": "ເບິ່ງວິທີການເຮັດວຽກ",
+    "subtitleWhy": "ເປັນຫຍັງ RESILIA",
+    "subtitleHow": "ວິທີການເຮັດວຽກ",
+    "subtitleProgression": "ລະບົບຄວາມຄືບໜ້າ",
+    "xpRequired": "ຕ້ອງການ {xp} XP",
+    "subtitleTestimonials": "ປະຈັກພະຍານ",
+    "subtitleFaq": "ຄຳຖາມທີ່ຖາມເລື້ອຍໆ",
+    "subtitleReady": "ພ້ອມທີ່ຈະເລີ່ມຕົ້ນ?",
+    "freeForever": "ຟຣີຕະຫຼອດໄປ",
+    "footerTagline": "ກອງກຳລັງສຳຮອງດິຈິຕອນ",
+    "tiers": [
+      { "name": "ນັກຮຽນ", "perks": ["ພື້ນຖານ", "ເຄື່ອງມື", "ພາລະກິດປະຈໍາວັນ"], "desc": "ຮຽນຮູ້ພື້ນຖານ." },
+      { "name": "ຜູ້ຝຶກອົບຮົມ", "perks": ["ໂມດູນ PFA", "ການຫາຍໃຈ", "ສິ່ງທ້າທາຍຊຸມຊົນ"], "desc": "ເຂົ້າເຖິງໂມດູນເພື່ອສ້າງຄວາມທົນທານ." },
+      { "name": "ຜູ້ຕອບສະໜອງ", "perks": ["RPG ຂັ້ນສູງ", "ຕິດຕາມອາລົມ", "ລາງວັນສອງເທົ່າ"], "desc": "ທົດສອບທັກສະຂອງທ່ານໃນສະຖານະການໄພພິບັດ." },
+      { "name": "ຜູ້ປົກຄອງ", "perks": ["ປ້າຍ Mentor", "XP ສອງເທົ່າ", "ສິດທິພິເສດ"], "desc": "ໄດ້ຮັບສະຖານະນັກຮົບເກົ່າ." },
+      { "name": "ຜູ້ບັນຊາການ", "perks": ["ກອບໂປຣໄຟລ໌", "ສະຖານະການພິເສດ", "ຜູ້ນຳຊຸມຊົນ"], "desc": "ເຂົ້າເຖິງການຊ້ອມຮົບໄພພິບັດ." },
+      { "name": "ຈອມພົນ", "perks": ["ມົງກຸດ", "ຂອງປະດັບທັງໝົດ", "ສະຖານະນິທານ"], "desc": "ຈຸດສູງສຸດຂອງກອງກຳລັງສຳຮອງດິຈິຕອນ." }
+    ],
+    "testimonials": [
+      { "quote": "RESILIA ສອນໃຫ້ຂ້ອຍສະຫງົບ.", "role": "ນັກຮຽນ, ອິນໂດເນເຊຍ" },
+      { "quote": "ສະຖານະການ RPG ມີຄວາມຮູ້ສຶກແທ້ຈິງຫຼາຍ.", "role": "ອາສາສະໝັກ, ຫວຽດນາມ" },
+      { "quote": "ໃນຖານະເປັນຄູອາຈານ ຂ້ອຍໃຊ້ໂມດູນ RESILIA.", "role": "ນັກການສຶກສາ, ຟີລິບປິນ" }
+    ],
+    "faqs": [
+      { "q": "PFA ແມ່ນຫຍັງ?", "a": "PFA ແມ່ນກອບສໍາລັບການສະຫນັບສະຫນູນທາງດ້ານຈິດໃຈໂດຍ WHO." },
+      { "q": "RESILIA ໃຊ້ຟຣີບໍ່?", "a": "ແມ່ນແລ້ວ! ຟຣີທັງໝົດ." },
+      { "q": "ຂ້ອຍຕ້ອງການການຝຶກອົບຮົມທາງການແພດບໍ?", "a": "ບໍ່ເລີຍ." },
+      { "q": "ຮອງຮັບພາສາໃດແດ່?", "a": "ອັງກິດ ອິນໂດເນເຊຍ ແລະພາສາອາຊຽນອື່ນໆ." },
+      { "q": "ຂໍ້ມູນຂອງຂ້ອຍປອດໄພບໍ່?", "a": "ຂໍ້ມູນຖືກເກັບໄວ້ໃນທ້ອງຖິ່ນເທົ່ານັ້ນ." }
+    ]
+  },
+  "my": {
+    "navWhy": "ဘာကြောင့် RESILIA",
+    "navHow": "အလုပ်လုပ်ပုံ",
+    "videoLabel": "မည်သို့အလုပ်လုပ်ပုံကြည့်ရန်",
+    "subtitleWhy": "ဘာကြောင့် RESILIA",
+    "subtitleHow": "အလုပ်လုပ်ပုံ",
+    "subtitleProgression": "တိုးတက်မှုစနစ်",
+    "xpRequired": "{xp} XP လိုအပ်သည်",
+    "subtitleTestimonials": "ထောက်ခံချက်များ",
+    "subtitleFaq": "မေးလေ့ရှိသောမေးခွန်းများ",
+    "subtitleReady": "စတင်ရန်အဆင်သင့်ဖြစ်ပြီလား?",
+    "freeForever": "အမြဲတမ်းအခမဲ့",
+    "footerTagline": "အာဆီယံ ဒစ်ဂျစ်တယ်အရန်တပ်ဖွဲ့",
+    "tiers": [
+      { "name": "ဗိုလ်လောင်း", "perks": ["အခြေခံများ", "ကိရိယာတန်ဆာပလာ", "နေ့စဉ်တာဝန်များ"], "desc": "အခြေခံများကိုလေ့လာပါ။" },
+      { "name": "သင်တန်းသား", "perks": ["PFA မော်ဂျူးများ", "အသက်ရှူခြင်း", "အသိုင်းအဝိုင်းစိန်ခေါ်မှုများ"], "desc": "ကြံ့ခိုင်မှုတည်ဆောက်ပါ။" },
+      { "name": "တုံ့ပြန်သူ", "perks": ["အဆင့်မြင့် RPG", "ခံစားချက်ခြေရာခံ", "ဆုနှစ်ဆ"], "desc": "သဘာဝဘေးအန္တရာယ်အခြေအနေများတွင်စမ်းသပ်ပါ။" },
+      { "name": "အုပ်ထိန်းသူ", "perks": ["ဆရာတံဆိပ်", "စနေတနင်္ဂနွေ XP နှစ်ဆ", "ဦးစားပေးဝင်ရောက်ခွင့်"], "desc": "ဝါရင့်အဆင့်ကိုရယူပါ။" },
+      { "name": "တပ်မှူး", "perks": ["စိတ်ကြိုက်ဘောင်များ", "သီးသန့်အခြေအနေများ", "အသိုင်းအဝိုင်းခေါင်းဆောင်"], "desc": "အထူးလေ့ကျင့်ခန်းများဝင်ရောက်ပါ။" },
+      { "name": "စစ်သေနာပတိ", "perks": ["သရဖူ", "အလှဆင်ပစ္စည်းအားလုံး", "ဒဏ္ဍာရီအဆင့်"], "desc": "ဒစ်ဂျစ်တယ်အရန်တပ်ဖွဲ့၏ထိပ်ဆုံးအဆင့်။" }
+    ],
+    "testimonials": [
+      { "quote": "RESILIA သည်ငလျင်အတွင်းတည်ငြိမ်ရန်သင်ပေးသည်။", "role": "ကျောင်းသား၊ အင်ဒိုနီးရှား" },
+      { "quote": "RPG အခြေအနေများသည်အလွန်တကယ့်ကိုခံစားရသည်။", "role": "စေတနာ့ဝန်ထမ်း၊ ဗီယက်နမ်" },
+      { "quote": "ဆရာတစ်ဦးအနေဖြင့်ကျောင်းသားများအားသင်ကြားရန် RESILIA ကိုအသုံးပြုသည်။", "role": "ပညာတတ်၊ ဖိလစ်ပိုင်" }
+    ],
+    "faqs": [
+      { "q": "PFA ဆိုတာဘာလဲ?", "a": "WHO မှစိတ်ပိုင်းဆိုင်ရာအထောက်အပံ့ဖြစ်သည်။" },
+      { "q": "RESILIA အခမဲ့လား?", "a": "ဟုတ်ကဲ့! လုံးဝအခမဲ့ဖြစ်သည်။" },
+      { "q": "ဆေးဘက်ဆိုင်ရာသင်တန်းလိုအပ်ပါသလား?", "a": "လုံးဝမလိုအပ်ပါ။" },
+      { "q": "မည်သည့်ဘာသာစကားများကိုထောက်ပံ့ပေးသနည်း?", "a": "အင်္ဂလိပ်၊ အင်ဒိုနီးရှားနှင့်အခြားအာဆီယံဘာသာစကားများ။" },
+      { "q": "ကျွန်ုပ်၏ဒေတာလုံခြုံပါသလား?", "a": "ဒေတာအားလုံးကိုသင့်ဘရောက်ဇာတွင်သာသိမ်းဆည်းထားသည်။" }
+    ]
+  }
+}

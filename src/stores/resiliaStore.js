@@ -3,7 +3,7 @@ import { ref, computed, watch } from 'vue'
 import * as authService from '../services/authService'
 import * as dataService from '../services/dataService'
 import { isSupabaseConfigured } from '../lib/supabaseClient'
-import { predictMissionWeights, generatePersonalizedMissions } from '../ml/recommend'
+import { predictMissionWeights, generatePersonalizedMissions, recommendMissions } from '../ml/recommend'
 
 export const useResiliaStore = defineStore('resilia', () => {
     // ═══ Session TTL (6 hours) ═══
@@ -208,29 +208,29 @@ export const useResiliaStore = defineStore('resilia', () => {
     const modulesCompletedGlobal = ref(28910)
 
     const regionData = ref([
-        { country: 'Indonesia', code: 'ID', flag: '🇮🇩', population: 275.5, gdpPerCapita: 4788, hdi: 0.705, disasterRiskIndex: 46.92, readiness: 74, responders: 1240, recentDisaster: 'Cianjur Earthquake 2022', annualDisasters: 3092, topDisasters: 'Earthquake, Flood, Volcano', emergencyHotline: '112 / 119' },
-        { country: 'Philippines', code: 'PH', flag: '🇵🇭', population: 115.6, gdpPerCapita: 3623, hdi: 0.699, disasterRiskIndex: 45.12, readiness: 68, responders: 890, recentDisaster: 'Typhoon Rai 2021', annualDisasters: 1058, topDisasters: 'Typhoon, Earthquake, Flood', emergencyHotline: '911' },
-        { country: 'Vietnam', code: 'VN', flag: '🇻🇳', population: 99.5, gdpPerCapita: 4164, hdi: 0.703, disasterRiskIndex: 24.96, readiness: 55, responders: 420, recentDisaster: 'Typhoon Noru 2022', annualDisasters: 394, topDisasters: 'Typhoon, Flood, Landslide', emergencyHotline: '113 / 115' },
-        { country: 'Thailand', code: 'TH', flag: '🇹🇭', population: 71.8, gdpPerCapita: 7233, hdi: 0.800, disasterRiskIndex: 14.37, readiness: 82, responders: 610, recentDisaster: 'Southern Floods 2023', annualDisasters: 128, topDisasters: 'Flood, Drought, Landslide', emergencyHotline: '1669' },
-        { country: 'Malaysia', code: 'MY', flag: '🇲🇾', population: 33.9, gdpPerCapita: 12448, hdi: 0.803, disasterRiskIndex: 8.63, readiness: 78, responders: 340, recentDisaster: 'Selangor Floods 2021', annualDisasters: 52, topDisasters: 'Flood, Landslide, Haze', emergencyHotline: '999' },
-        { country: 'Myanmar', code: 'MM', flag: '🇲🇲', population: 54.4, gdpPerCapita: 1210, hdi: 0.585, disasterRiskIndex: 42.55, readiness: 42, responders: 180, recentDisaster: 'Cyclone Mocha 2023', annualDisasters: 312, topDisasters: 'Cyclone, Flood, Earthquake', emergencyHotline: '199' },
-        { country: 'Cambodia', code: 'KH', flag: '🇰🇭', population: 16.9, gdpPerCapita: 1768, hdi: 0.593, disasterRiskIndex: 16.58, readiness: 48, responders: 95, recentDisaster: 'Mekong Floods 2022', annualDisasters: 67, topDisasters: 'Flood, Drought, Storm', emergencyHotline: '119' },
-        { country: 'Laos', code: 'LA', flag: '🇱🇦', population: 7.5, gdpPerCapita: 2054, hdi: 0.607, disasterRiskIndex: 15.57, readiness: 38, responders: 45, recentDisaster: 'Dam Collapse 2018', annualDisasters: 34, topDisasters: 'Flood, Drought, UXO', emergencyHotline: '1195' },
-        { country: 'Singapore', code: 'SG', flag: '🇸🇬', population: 5.9, gdpPerCapita: 72794, hdi: 0.939, disasterRiskIndex: 2.42, readiness: 91, responders: 220, recentDisaster: 'Heatwave 2023', annualDisasters: 3, topDisasters: 'Heatwave, Flood, Haze', emergencyHotline: '995' },
-        { country: 'Brunei', code: 'BN', flag: '🇧🇳', population: 0.45, gdpPerCapita: 31449, hdi: 0.829, disasterRiskIndex: 3.08, readiness: 85, responders: 42, recentDisaster: 'Floods 2021', annualDisasters: 5, topDisasters: 'Flood, Haze, Fire', emergencyHotline: '993' },
+        { country: 'Indonesia', code: 'ID', flag: 'https://flagcdn.com/w40/id.png', population: 275.5, gdpPerCapita: 4788, hdi: 0.705, disasterRiskIndex: 46.92, readiness: 74, responders: 1240, recentDisaster: 'Cianjur Earthquake 2022', annualDisasters: 3092, topDisasters: 'Earthquake, Flood, Volcano', emergencyHotline: '112 / 119' },
+        { country: 'Philippines', code: 'PH', flag: 'https://flagcdn.com/w40/ph.png', population: 115.6, gdpPerCapita: 3623, hdi: 0.699, disasterRiskIndex: 45.12, readiness: 68, responders: 890, recentDisaster: 'Typhoon Rai 2021', annualDisasters: 1058, topDisasters: 'Typhoon, Earthquake, Flood', emergencyHotline: '911' },
+        { country: 'Vietnam', code: 'VN', flag: 'https://flagcdn.com/w40/vn.png', population: 99.5, gdpPerCapita: 4164, hdi: 0.703, disasterRiskIndex: 24.96, readiness: 55, responders: 420, recentDisaster: 'Typhoon Noru 2022', annualDisasters: 394, topDisasters: 'Typhoon, Flood, Landslide', emergencyHotline: '113 / 115' },
+        { country: 'Thailand', code: 'TH', flag: 'https://flagcdn.com/w40/th.png', population: 71.8, gdpPerCapita: 7233, hdi: 0.800, disasterRiskIndex: 14.37, readiness: 82, responders: 610, recentDisaster: 'Southern Floods 2023', annualDisasters: 128, topDisasters: 'Flood, Drought, Landslide', emergencyHotline: '1669' },
+        { country: 'Malaysia', code: 'MY', flag: 'https://flagcdn.com/w40/my.png', population: 33.9, gdpPerCapita: 12448, hdi: 0.803, disasterRiskIndex: 8.63, readiness: 78, responders: 340, recentDisaster: 'Selangor Floods 2021', annualDisasters: 52, topDisasters: 'Flood, Landslide, Haze', emergencyHotline: '999' },
+        { country: 'Myanmar', code: 'MM', flag: 'https://flagcdn.com/w40/mm.png', population: 54.4, gdpPerCapita: 1210, hdi: 0.585, disasterRiskIndex: 42.55, readiness: 42, responders: 180, recentDisaster: 'Cyclone Mocha 2023', annualDisasters: 312, topDisasters: 'Cyclone, Flood, Earthquake', emergencyHotline: '199' },
+        { country: 'Cambodia', code: 'KH', flag: 'https://flagcdn.com/w40/kh.png', population: 16.9, gdpPerCapita: 1768, hdi: 0.593, disasterRiskIndex: 16.58, readiness: 48, responders: 95, recentDisaster: 'Mekong Floods 2022', annualDisasters: 67, topDisasters: 'Flood, Drought, Storm', emergencyHotline: '119' },
+        { country: 'Laos', code: 'LA', flag: 'https://flagcdn.com/w40/la.png', population: 7.5, gdpPerCapita: 2054, hdi: 0.607, disasterRiskIndex: 15.57, readiness: 38, responders: 45, recentDisaster: 'Dam Collapse 2018', annualDisasters: 34, topDisasters: 'Flood, Drought, UXO', emergencyHotline: '1195' },
+        { country: 'Singapore', code: 'SG', flag: 'https://flagcdn.com/w40/sg.png', population: 5.9, gdpPerCapita: 72794, hdi: 0.939, disasterRiskIndex: 2.42, readiness: 91, responders: 220, recentDisaster: 'Heatwave 2023', annualDisasters: 3, topDisasters: 'Heatwave, Flood, Haze', emergencyHotline: '995' },
+        { country: 'Brunei', code: 'BN', flag: 'https://flagcdn.com/w40/bn.png', population: 0.45, gdpPerCapita: 31449, hdi: 0.829, disasterRiskIndex: 3.08, readiness: 85, responders: 42, recentDisaster: 'Floods 2021', annualDisasters: 5, topDisasters: 'Flood, Haze, Fire', emergencyHotline: '993' },
     ])
 
     const countries = ref([
-        { code: 'ID', name: 'Indonesia', flag: '🇮🇩' },
-        { code: 'PH', name: 'Philippines', flag: '🇵🇭' },
-        { code: 'VN', name: 'Vietnam', flag: '🇻🇳' },
-        { code: 'TH', name: 'Thailand', flag: '🇹🇭' },
-        { code: 'MY', name: 'Malaysia', flag: '🇲🇾' },
-        { code: 'MM', name: 'Myanmar', flag: '🇲🇲' },
-        { code: 'KH', name: 'Cambodia', flag: '🇰🇭' },
-        { code: 'LA', name: 'Laos', flag: '🇱🇦' },
-        { code: 'SG', name: 'Singapore', flag: '🇸🇬' },
-        { code: 'BN', name: 'Brunei', flag: '🇧🇳' },
+        { code: 'ID', name: 'Indonesia', flag: 'https://flagcdn.com/w40/id.png' },
+        { code: 'PH', name: 'Philippines', flag: 'https://flagcdn.com/w40/ph.png' },
+        { code: 'VN', name: 'Vietnam', flag: 'https://flagcdn.com/w40/vn.png' },
+        { code: 'TH', name: 'Thailand', flag: 'https://flagcdn.com/w40/th.png' },
+        { code: 'MY', name: 'Malaysia', flag: 'https://flagcdn.com/w40/my.png' },
+        { code: 'MM', name: 'Myanmar', flag: 'https://flagcdn.com/w40/mm.png' },
+        { code: 'KH', name: 'Cambodia', flag: 'https://flagcdn.com/w40/kh.png' },
+        { code: 'LA', name: 'Laos', flag: 'https://flagcdn.com/w40/la.png' },
+        { code: 'SG', name: 'Singapore', flag: 'https://flagcdn.com/w40/sg.png' },
+        { code: 'BN', name: 'Brunei', flag: 'https://flagcdn.com/w40/bn.png' },
     ])
 
     const levelTiers = [
@@ -360,7 +360,7 @@ export const useResiliaStore = defineStore('resilia', () => {
             earnXP(50)
             earnCoins(10, `Bridging Quest: ${bridgeId}`)
 
-            // Unlock the next chapter using the bridge quest's 'to' field
+            // Access the next chapter using the bridge quest's 'to' field
             const quest = bridgingQuests.value[bridgeId]
             if (quest) {
                 // Try to match by parsing the bridge ID last segment (e.g. bridge_ch1_ch1h → ch1h)
@@ -439,7 +439,7 @@ export const useResiliaStore = defineStore('resilia', () => {
             ],
             liaChat: {
                 pre: [
-                    { from: 'lia', text: 'heyyy welcome to RESILIA!! 🎉 im Lia, ur guide through this whole journey' },
+                    { from: 'lia', text: 'heyyy welcome to RESILIA!! 🎉 im Lia, ur guide through this whole training' },
                     { from: 'lia', text: 'before we jump in, i just wanna know how ur feeling rn. no wrong answers ok?' },
                     { from: 'lia', text: 'on a scale of 1-5, how confident do you feel about handling unexpected situations?', type: 'scale', scaleLabel: ['not at all', 'a little', 'kinda', 'pretty confident', 'super ready'], key: 'confidence' },
                     { from: 'lia', text: 'got it! and how much do you know about natural disasters in Southeast Asia?', type: 'scale', scaleLabel: ['nothing', 'heard of it', 'some stuff', 'quite a bit', 'expert mode'], key: 'knowledge' },
@@ -584,7 +584,7 @@ export const useResiliaStore = defineStore('resilia', () => {
                 ],
                 post: [
                     { from: 'lia', text: 'you survived your first field trip!! 🇸🇬🇧🇳' },
-                    { from: 'lia', text: 'how much did observing real infrastructure boost your confidence?', type: 'scale', scaleLabel: ['not much', 'a tiny bit', 'somewhat', 'a lot', 'game changer'], key: 'readiness' },
+                    { from: 'lia', text: 'how much did observing real infrastructure boost your confidence?', type: 'scale', scaleLabel: ['not much', 'a tiny bit', 'somewhat', 'a lot', 'completely'], key: 'readiness' },
                     { from: 'lia', text: 'amazing start 🌱 things get more real from here!' },
                 ],
             },
@@ -822,7 +822,7 @@ export const useResiliaStore = defineStore('resilia', () => {
             ],
             acts: [
                 {
-                    id: 'act1', title: 'Storm in Vietnam', chatSimulation: true, description: 'Trapped in Hội An when a tropical storm makes landfall. Nguyễn Hoa finds you sheltering in a flooded alley. She offers a choice that will define the rest of your journey.', duration: '15 min', xpReward: 70, coinReward: 15, chatFlow: [
+                    id: 'act1', title: 'Storm in Vietnam', chatSimulation: true, description: 'Trapped in Hội An when a tropical storm makes landfall. Nguyễn Hoa finds you sheltering in a flooded alley. She offers a choice that will define the rest of your training.', duration: '15 min', xpReward: 70, coinReward: 15, chatFlow: [
                         { from: 'lia', text: '🚨 STORM WARNING, you\'re in Hội An, Vietnam. the streets are flooding FAST.' },
                         { from: 'lia', text: 'the old town is built at river level. when it rains like this, the Thu Bồn River overflows in MINUTES.' },
                         { from: 'nguyen', text: 'Hey! You, you can\'t stay here. The water will reach waist height in 20 minutes. Come with me or find your own way.' },
@@ -870,7 +870,7 @@ export const useResiliaStore = defineStore('resilia', () => {
                             from: 'lia', text: 'Sokha trusts you enough to talk. but the water is still rising. what now?', type: 'choice', choices: [
                                 { text: 'Ask Sokha what HIS plan would be, he knows this area better than you', hpEffect: 10, response: 'Sokha\'s eyes light up. \"There\'s a temple on the hill. Concrete. It survived every flood.\" You just gave him agency. He\'s not a victim anymore, he\'s a guide.' },
                                 { text: 'Tell Sokha to follow you to the evacuation point the Red Cross set up', hpEffect: 0, response: 'Sokha goes quiet. He follows but looks miserable. You solved the problem but took away his control. Sometimes being safe isn\'t enough, feeling respected matters too.' },
-                                { text: 'Carry him to safety, he\'s just a kid', hpEffect: -10, response: 'Sokha shoves you away. \"I\'m NOT a baby!\" He survived 3 floods alone. Treating him as helpless erases his strength. Responders empower, they don\'t infantilize.' },
+                                { text: 'Carry him to safety, he\'s just a kid', hpEffect: -10, response: 'Sokha shoves you away. \"I\'m NOT a baby!\" He survived 3 floods alone. Treating him as helpless erases his strength. Responders uplift, they don\'t infantilize.' },
                             ], key: 'kh_sokha_plan'
                         },
                         { from: 'sokha', text: '[walking together] ...you\'re the first person who asked what I think.' },
@@ -1434,7 +1434,7 @@ export const useResiliaStore = defineStore('resilia', () => {
                     npc: '"Let\'s join together, {Name}! I have a feeling this is the start of something big." *she pulls out the crumpled ASEAN map* "Each star is a place. Let\'s make them real."',
                     emotion: '🌟', emotionLabel: 'Hopeful',
                     options: [
-                        { text: '"Count me in, Lia. Let\'s make those stars real."', score: 3, feedback: 'And so the journey begins. 🌟' },
+                        { text: '"Count me in, Lia. Let\'s make those stars real."', score: 3, feedback: 'And so the training begins. 🌟' },
                         { text: '"Sure, why not."', score: 1, feedback: 'Lukewarm, but you\'re in.' },
                     ]
                 },
@@ -1556,7 +1556,7 @@ export const useResiliaStore = defineStore('resilia', () => {
                     npc: '"I survived the simulation, {Name}! I used breathing technique when I felt my chest tighten. I recognized my behavioral stress signs before they spiraled. I even called my support person!" *she grins* "Now the instructor says we\'re ready for Chapter 4, applying PFA to OTHERS. Real people in real distress. Am I ready?"',
                     emotion: '💪', emotionLabel: 'Confident',
                     options: [
-                        { text: '"You just proved you can take care of yourself under pressure, Lia. That\'s the foundation. Now you pour from a FULL cup, not an empty one. Let\'s learn to help others."', score: 3, feedback: 'From self-care to other-care. The journey evolves. 🤝' },
+                        { text: '"You just proved you can take care of yourself under pressure, Lia. That\'s the foundation. Now you pour from a FULL cup, not an empty one. Let\'s learn to help others."', score: 3, feedback: 'From self-care to other-care. The path evolves. 🤝' },
                     ]
                 },
             ]
@@ -1860,7 +1860,7 @@ export const useResiliaStore = defineStore('resilia', () => {
                     npc: '"Phra Somchai refuses. He says \'the Dhamma does not discriminate by passport.\' But the official threatens to cut the temple\'s disaster funding. What do we do?"',
                     emotion: '😤', emotionLabel: 'Conflicted',
                     options: [
-                        { text: '"Document the official\'s demand. Contact the media and international monitors. A government threatening a temple over refugee protection is a story that writes itself. The official will back down from public scrutiny."', score: 3, isCorrect: true, feedback: 'Strategic leverage. The truth is the most powerful tool.' },
+                        { text: '"Document the official\'s demand. Contact the media and international monitors. A government threatening a temple over refugee protection is a story that writes itself. The official will back down from public scrutiny."', score: 3, isCorrect: true, feedback: 'Strategic advantage. The truth is the most powerful tool.' },
                         { text: '"Comply. We can\'t lose the funding."', score: 0, isCorrect: false, feedback: 'Sacrificing vulnerable people for funding is a moral failure.' },
                         { text: '"Hide the refugees somewhere else."', score: 1, isCorrect: false, feedback: 'Band-aid solution that treats refugees as a problem to conceal.' },
                     ]
@@ -1998,7 +1998,7 @@ export const useResiliaStore = defineStore('resilia', () => {
             earnXP(200)
             earnCoins(40, `Chapter Quest: ${questId}`)
             completeDailyMission('rpg')
-            // Unlock next chapter
+            // Access next chapter
             const chapIdx = academyChapters.value.findIndex(c => c.questId === questId)
             if (chapIdx >= 0) {
                 academyChapters.value[chapIdx].status = 'completed'
@@ -2028,7 +2028,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         { id: 4, name: 'Streak Shield', cost: 60, icon: '🛡️', category: 'Booster', rarity: 'Rare', description: 'Protects your streak if you miss a day' },
         // Cosmetics (Common → Legendary)
         { id: 5, name: 'Custom Avatar Frame', cost: 50, icon: '🖼️', category: 'Cosmetic', rarity: 'Common', description: 'A basic colored frame for your avatar' },
-        { id: 6, name: 'Dark Theme Premium', cost: 40, icon: '🌙', category: 'Cosmetic', rarity: 'Common', description: 'Unlock premium dark mode palette' },
+        { id: 6, name: 'Dark Theme Premium', cost: 40, icon: '🌙', category: 'Cosmetic', rarity: 'Common', description: 'Access premium dark mode palette' },
         { id: 7, name: 'Name Color: Teal', cost: 60, icon: '✨', category: 'Cosmetic', rarity: 'Common', description: 'Change your display name to teal' },
         { id: 8, name: 'Custom Profile Banner', cost: 80, icon: '🎨', category: 'Cosmetic', rarity: 'Rare', description: 'Upload a custom banner image' },
         { id: 9, name: 'Animated Avatar Frame', cost: 150, icon: '💫', category: 'Cosmetic', rarity: 'Epic', description: 'Glowing animated frame for your avatar' },
@@ -2067,7 +2067,7 @@ export const useResiliaStore = defineStore('resilia', () => {
     // Level perks
     const levelPerks = {
         1: ['Access to Foundations modules', 'Toolkit access', 'Daily missions'],
-        2: ['Unlock PFA modules', 'Calm Breathing tool', 'Community challenges'],
+        2: ['Access PFA modules', 'Calm Breathing tool', 'Community challenges'],
         3: ['Advanced RPG scenarios', 'Mood tracking history', 'Double daily rewards'],
         4: ['Mentor badge', 'Double XP weekends', 'Priority event access'],
         5: ['Custom avatar frames', 'Exclusive scenarios', 'Community leadership'],
@@ -2457,8 +2457,8 @@ export const useResiliaStore = defineStore('resilia', () => {
         userPersonalization.value = personalization
         localStorage.setItem('resilia_personalization', JSON.stringify(personalization))
 
-        // Generate a personalized daily-mission set from the model weights.
-        dailyMissions.value = generatePersonalizedMissions(weights)
+        // Generate a personalized daily-mission set using the unified recommender.
+        dailyMissions.value = recommendMissions(answers)
         saveDailySession()
     }
 

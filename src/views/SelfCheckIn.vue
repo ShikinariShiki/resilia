@@ -12,7 +12,7 @@
     <div class="flex-1 flex items-center justify-center px-6 sm:px-8 md:px-12 py-6 md:py-10">
       <div class="w-full max-w-2xl relative">
 
-        <div class="text-center mb-10 md:mb-14 animate-slide-up">
+        <div v-motion class="text-center mb-10 md:mb-14">
           <h1 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-ink dark:text-white leading-tight mb-3">Daily Journal 📝</h1>
           <p class="text-gray-400 font-body text-sm md:text-base max-w-md mx-auto leading-relaxed">Help yourself before helping others. How have you been feeling lately?</p>
         </div>
@@ -105,17 +105,17 @@
           </button>
         </div>
 
-        <!-- Breathing offer overlay -->
-        <div v-if="breathingOffer" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center px-6">
-          <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl animate-slide-up">
-            <div class="text-5xl mb-4">🧘</div>
-            <h2 class="font-heading text-xl font-bold text-ink dark:text-white mb-3">Take a Moment?</h2>
-            <p class="text-sm text-gray-400 font-body mb-6 leading-relaxed">It seems like things have been a bit heavy lately. A quick breathing exercise can help you feel grounded.</p>
+        <!-- Dynamic Activity Offer Overlay -->
+        <div v-if="activityOffer" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center px-6">
+          <div v-motion class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl">
+            <div class="text-5xl mb-4">{{ popupContent.emoji }}</div>
+            <h2 class="font-heading text-xl font-bold text-ink dark:text-white mb-3">{{ popupContent.title }}</h2>
+            <p class="text-sm text-gray-400 font-body mb-6 leading-relaxed">{{ popupContent.desc }}</p>
             <div class="flex flex-col gap-3">
-              <button @click="goBreathing" class="w-full px-6 py-3.5 bg-gradient-to-r from-teal-500 to-teal-600 text-white font-heading font-bold text-sm rounded-2xl shadow-lg shadow-teal-500/25 hover:-translate-y-0.5 transition-all">
-                Yes, let's breathe 🌿
+              <button @click="acceptActivity" class="w-full px-6 py-3.5 bg-gradient-to-r from-teal-500 to-teal-600 text-white font-heading font-bold text-sm rounded-2xl shadow-lg shadow-teal-500/25 hover:-translate-y-0.5 transition-all">
+                {{ popupContent.btn }}
               </button>
-              <button @click="skipBreathing" class="w-full px-6 py-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 font-heading font-bold text-sm rounded-2xl hover:bg-gray-50 dark:hover:bg-slate-700 transition-all">
+              <button @click="skipActivity" class="w-full px-6 py-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 font-heading font-bold text-sm rounded-2xl hover:bg-gray-50 dark:hover:bg-slate-700 transition-all">
                 Skip for now →
               </button>
             </div>
@@ -171,26 +171,35 @@ function nextQuestion() {
   }
 }
 
-const breathingOffer = ref(false)
+const activityOffer = ref(false)
+const bestActivity = ref('toolkit')
+
+const popupData = {
+  toolkit: { emoji: '🧘', title: 'Take a Moment?', desc: 'It seems like things have been a bit heavy lately. A quick breathing exercise can help you feel grounded.', btn: 'Yes, let\'s breathe 🌿', route: '/toolkit' },
+  checkin: { emoji: '📝', title: 'Need to Vent?', desc: 'You seem a bit overwhelmed. Writing your thoughts down in a private journal can clear your mind.', btn: 'Open Journal 📔', route: '/journal' },
+  lesson: { emoji: '🧠', title: 'Ready to Learn?', desc: 'You are in a great state of mind! This is the perfect time to build your disaster readiness skills.', btn: 'Go to Academy 📚', route: '/academy' },
+  rpg: { emoji: '🛡️', title: 'Field Drill Time', desc: 'Your focus is sharp today. How about running a quick disaster response scenario to test your instincts?', btn: 'Start RPG Scenario 🎮', route: '/academy' },
+  donate: { emoji: '🤝', title: 'Spread the Positivity', desc: 'You are doing great! Consider paying it forward by checking out community donation goals.', btn: 'View Community 🌍', route: '/wallet' },
+  dashboard: { emoji: '📊', title: 'Analytical Mindset', desc: 'You are feeling balanced. It\'s a good time to review the latest ASEAN disaster data.', btn: 'Open Dashboard 📈', route: '/dashboard' }
+}
+
+const popupContent = computed(() => popupData[bestActivity.value] || popupData.toolkit)
 
 function submit() {
   if (answers.value[currentIndex.value] === 0) return
   const total = answers.value.reduce((sum, v) => sum + v, 0)
   const avg = total / questions.length
   let scorePercent = Math.round(((7 - avg) / 6) * 100)
-  store.updateStability(scorePercent)
-  if (store.soothingModeActive) {
-    breathingOffer.value = true
-  } else {
-    router.push('/home')
-  }
+  
+  bestActivity.value = store.updateStability(scorePercent, avg)
+  activityOffer.value = true
 }
 
-function goBreathing() {
-  router.push('/soothing')
+function acceptActivity() {
+  router.push(popupContent.value.route)
 }
 
-function skipBreathing() {
+function skipActivity() {
   router.push('/home')
 }
 </script>

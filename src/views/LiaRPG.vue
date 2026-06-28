@@ -8,7 +8,7 @@
 
     <div v-else>
       <!-- Header -->
-      <div v-if="!started" class="animate-slide-up">
+      <div v-if="!started" v-motion>
         <RouterLink to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block">← Academy</RouterLink>
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 text-center">
           <div class="text-6xl mb-6">{{ scenario.cover }}</div>
@@ -30,7 +30,7 @@
       </div>
 
       <!-- Active step -->
-      <div v-else-if="currentStepIndex < scenario.steps.length" class="animate-slide-up" :key="currentStepIndex">
+      <div v-else-if="currentStepIndex < scenario.steps.length" v-motion :key="currentStepIndex">
         <!-- Progress -->
         <div class="flex items-center gap-3 mb-6">
           <RouterLink to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading">← Exit</RouterLink>
@@ -135,7 +135,7 @@
       </div>
 
       <!-- Completion -->
-      <div v-else class="text-center animate-slide-up">
+      <div v-else v-motion class="text-center">
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
           <div class="text-6xl mb-6">🏆</div>
           <h2 class="font-heading text-2xl sm:text-3xl font-bold text-ink dark:text-white mb-3">Chapter Complete!</h2>

@@ -14,43 +14,41 @@
       <Transition name="slide" mode="out-in">
         <!-- Step 0: Welcome Splash (Narrative) -->
         <div v-if="step === 0" key="welcome" class="text-center">
-          <div class="mb-12 animate-slide-up">
+          <div v-motion class="mb-12">
             <div class="w-24 h-24 bg-gradient-to-br from-teal-400 to-teal-600 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-xl animate-pulse-slow">
               <PhBroadcast :size="48" class="text-teal-100" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-xs uppercase tracking-[0.25em] mb-6 animate-slide-up">[ INCOMING TRANSMISSION ]</p>
-            <h1 class="font-heading text-3xl md:text-4xl font-bold text-ink mb-5 leading-tight animate-slide-up" style="animation-delay: 0.05s">
-              A signal has been<br>
-              <span class="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">detected…</span>
+            <p v-motion class="text-teal-600/70 font-body text-xs uppercase tracking-[0.25em] mb-6">{{ t('onboarding.step0.transmission') }}</p>
+            <h1 v-motion class="font-heading text-3xl md:text-4xl font-bold text-ink mb-5 leading-tight" style="animation-delay: 0.05s">
+              {{ t('onboarding.step0.title1') }}<br>
+              <span class="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">{{ t('onboarding.step0.title2') }}</span>
             </h1>
-            <p class="text-gray-400 font-body text-sm md:text-base leading-relaxed max-w-sm mx-auto animate-slide-up" style="animation-delay: 0.1s">
-              Across Southeast Asia, communities are calling for help. Disasters strike without warning. 
-              But there are those who are prepared, the <strong class="text-ink">Digital Reserve Corps</strong>.
+            <p v-motion class="text-gray-400 font-body text-sm md:text-base leading-relaxed max-w-sm mx-auto" style="animation-delay: 0.1s" v-html="t('onboarding.step0.desc')">
             </p>
-            <p class="text-gray-500 font-body text-sm mt-4 italic animate-slide-up" style="animation-delay: 0.15s">
-              Your training begins now.
+            <p v-motion class="text-gray-500 font-body text-sm mt-4 italic" style="animation-delay: 0.15s">
+              {{ t('onboarding.step0.subdesc') }}
             </p>
           </div>
-          <div class="space-y-5 animate-slide-up" style="animation-delay: 0.2s">
+          <div v-motion class="space-y-5" style="animation-delay: 0.2s">
             <button @click="step = 1"
               class="w-full px-8 py-5 bg-ink text-white rounded-2xl font-heading font-bold text-base md:text-lg hover:bg-gray-800 transition-all hover:shadow-xl">
-              Accept the Mission →
+              {{ t('onboarding.step0.accept') }}
             </button>
             <RouterLink to="/" class="inline-block text-sm text-gray-400 font-body hover:text-teal-600 transition-colors">
-              ← Back to landing page
+              {{ t('onboarding.step0.backToLanding') }}
             </RouterLink>
           </div>
         </div>
 
         <!-- Step 1: Country Selection -->
-        <div v-else-if="step === 1" key="country" class="animate-slide-up">
+        <div v-else-if="step === 1" key="country" v-motion>
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhGlobeHemisphereEast :size="32" class="text-blue-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ MISSION BRIEFING ]</p>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Every region has its own story</h2>
-            <p class="text-gray-400 font-body text-sm">Where will your journey begin? Select your ASEAN base of operations.</p>
+            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step1.briefing') }}</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step1.title') }}</h2>
+            <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step1.desc') }}</p>
           </div>
 
           <div class="grid grid-cols-2 gap-3 mb-8">
@@ -62,31 +60,31 @@
                 ? 'bg-teal-500 text-white shadow-lg shadow-teal-500/20 scale-[1.02]'
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'"
             >
-              <span class="text-xl">{{ c.flag }}</span>
+              <img :src="c.flag" class="w-6 h-auto inline-block rounded-sm shadow-sm" alt="Flag" />
               <span class="font-medium text-xs">{{ c.name }}</span>
             </button>
           </div>
 
           <div class="flex justify-between gap-4">
             <button @click="step = 0" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">
-              ← Back
+              {{ t('onboarding.step1.back') }}
             </button>
             <button @click="step = 2" :disabled="!selectedCountry"
               class="flex-1 px-6 py-4 bg-ink text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed">
-              Continue →
+              {{ t('onboarding.step1.continue') }}
             </button>
           </div>
         </div>
 
         <!-- Step 2: Age Check -->
-        <div v-else-if="step === 2" key="age" class="animate-slide-up">
+        <div v-else-if="step === 2" key="age" v-motion>
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhCake :size="32" class="text-purple-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ CLEARANCE CHECK ]</p>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Your readiness level</h2>
-            <p class="text-gray-400 font-body text-sm">Before we assign your training path, we need to calibrate your experience level.</p>
+            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step2.clearance') }}</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step2.title') }}</h2>
+            <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step2.desc') }}</p>
           </div>
 
           <div class="space-y-3 mb-8">
@@ -97,8 +95,8 @@
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
               <PhCheckCircle :size="24" class="text-teal-500" weight="fill" />
               <div>
-                <p class="font-heading font-bold text-sm">I am 18 or above</p>
-                <p class="text-xs mt-1" :class="selectedAge === 'adult' ? 'text-white/70' : 'text-gray-400'">Full access to all training modules</p>
+                <p class="font-heading font-bold text-sm">{{ t('onboarding.step2.adult') }}</p>
+                <p class="text-xs mt-1" :class="selectedAge === 'adult' ? 'text-white/70' : 'text-gray-400'">{{ t('onboarding.step2.adultDesc') }}</p>
               </div>
             </button>
             <button @click="selectedAge = 'minor'"
@@ -108,28 +106,28 @@
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
               <PhShieldChevron :size="24" class="text-teal-500" weight="fill" />
               <div>
-                <p class="font-heading font-bold text-sm">I am under 18</p>
-                <p class="text-xs mt-1" :class="selectedAge === 'minor' ? 'text-white/70' : 'text-gray-400'">Age-appropriate training path</p>
+                <p class="font-heading font-bold text-sm">{{ t('onboarding.step2.minor') }}</p>
+                <p class="text-xs mt-1" :class="selectedAge === 'minor' ? 'text-white/70' : 'text-gray-400'">{{ t('onboarding.step2.minorDesc') }}</p>
               </div>
             </button>
           </div>
 
           <div class="flex justify-between gap-4">
-            <button @click="step = 1" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">← Back</button>
+            <button @click="step = 1" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">{{ t('onboarding.step1.back') }}</button>
             <button @click="step = 3" :disabled="!selectedAge"
-              class="flex-1 px-6 py-4 bg-ink text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed">Continue →</button>
+              class="flex-1 px-6 py-4 bg-ink text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed">{{ t('onboarding.step1.continue') }}</button>
           </div>
         </div>
 
         <!-- Step 3: Gender -->
-        <div v-else-if="step === 3" key="gender" class="animate-slide-up">
+        <div v-else-if="step === 3" key="gender" v-motion>
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhUsers :size="32" class="text-pink-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ RESPONDER PROFILE ]</p>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Every responder is unique</h2>
-            <p class="text-gray-400 font-body text-sm">Your perspective matters. This helps us personalize your training experience.</p>
+            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step3.profile') }}</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step3.title') }}</h2>
+            <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step3.desc') }}</p>
           </div>
 
           <div class="space-y-3 mb-8">
@@ -144,21 +142,21 @@
           </div>
 
           <div class="flex justify-between gap-4">
-            <button @click="step = 2" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">← Back</button>
+            <button @click="step = 2" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">{{ t('onboarding.step1.back') }}</button>
             <button @click="step = 4" :disabled="!selectedGender"
-              class="flex-1 px-6 py-4 bg-ink text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed">Continue →</button>
+              class="flex-1 px-6 py-4 bg-ink text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed">{{ t('onboarding.step1.continue') }}</button>
           </div>
         </div>
 
         <!-- Step 4: Disaster Experience -->
-        <div v-else-if="step === 4" key="disaster" class="animate-slide-up">
+        <div v-else-if="step === 4" key="disaster" v-motion>
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhDrop :size="32" class="text-amber-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ FIELD EXPERIENCE ]</p>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Some of us have already faced the storm</h2>
-            <p class="text-gray-400 font-body text-sm">Have you ever personally experienced a natural disaster? This helps us tailor your journey.</p>
+            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step4.fieldExp') }}</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step4.title') }}</h2>
+            <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step4.desc') }}</p>
           </div>
 
           <div class="space-y-3 mb-8">
@@ -169,8 +167,8 @@
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
               <PhCloudRain :size="24" :class="disasterExp === true ? 'text-white' : 'text-gray-500'" weight="fill" />
               <div>
-                <p class="font-heading font-bold text-sm">Yes, I have</p>
-                <p class="text-xs mt-1" :class="disasterExp === true ? 'text-white/70' : 'text-gray-400'">Your experience makes you an invaluable responder</p>
+                <p class="font-heading font-bold text-sm">{{ t('onboarding.step4.yes') }}</p>
+                <p class="text-xs mt-1" :class="disasterExp === true ? 'text-white/70' : 'text-gray-400'">{{ t('onboarding.step4.yesDesc') }}</p>
               </div>
             </button>
             <button @click="disasterExp = false"
@@ -180,35 +178,35 @@
                 : 'bg-white hover:bg-gray-50 text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)]'">
               <PhSun :size="24" :class="disasterExp === false ? 'text-white' : 'text-amber-500'" weight="fill" />
               <div>
-                <p class="font-heading font-bold text-sm">No, I haven't</p>
-                <p class="text-xs mt-1" :class="disasterExp === false ? 'text-white/70' : 'text-gray-400'">That's okay, preparation is the best defense</p>
+                <p class="font-heading font-bold text-sm">{{ t('onboarding.step4.no') }}</p>
+                <p class="text-xs mt-1" :class="disasterExp === false ? 'text-white/70' : 'text-gray-400'">{{ t('onboarding.step4.noDesc') }}</p>
               </div>
             </button>
           </div>
 
           <div class="flex justify-between gap-4">
-            <button @click="step = 3" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">← Back</button>
+            <button @click="step = 3" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">{{ t('onboarding.step1.back') }}</button>
             <button @click="step = 5" :disabled="disasterExp === null"
-              class="flex-1 px-6 py-4 bg-ink text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed">Continue →</button>
+              class="flex-1 px-6 py-4 bg-ink text-white rounded-2xl font-heading font-bold text-sm hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed">{{ t('onboarding.step1.continue') }}</button>
           </div>
         </div>
 
         <!-- Step 5: Name + Profile Preview -->
-        <div v-else-if="step === 5" key="name" class="animate-slide-up">
+        <div v-else-if="step === 5" key="name" v-motion>
           <div class="text-center mb-8 md:mb-10">
             <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhSparkle :size="32" class="text-orange-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">[ CALLSIGN ASSIGNMENT ]</p>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">Your callsign awaits</h2>
-            <p class="text-gray-400 font-body text-sm">This name will be remembered across ASEAN. Choose wisely, responder.</p>
+            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step5.callsign') }}</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step5.title') }}</h2>
+            <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step5.desc') }}</p>
           </div>
 
           <div class="mb-6">
             <input
               v-model="name"
               type="text"
-              placeholder="Enter your callsign"
+              :placeholder="t('onboarding.step5.placeholder')"
               class="w-full px-6 py-5 bg-white rounded-2xl font-body text-base text-ink shadow-[0_1px_3px_rgba(0,0,0,0.06)] focus:outline-none focus:ring-2 focus:ring-teal-400/50 placeholder:text-gray-300 transition-all"
               :class="nameError ? 'ring-2 ring-red-400/50' : ''"
               @input="checkName"
@@ -220,25 +218,24 @@
             </p>
           </div>
 
-          <!-- Preview card -->
-          <div v-if="name.trim() && !nameError" class="bg-white rounded-2xl p-6 mb-8 shadow-[0_1px_3px_rgba(0,0,0,0.06)] animate-slide-up">
-            <p class="text-[10px] font-heading font-bold text-gray-300 uppercase tracking-wider mb-4">Your responder profile</p>
+          <div v-if="name.trim() && !nameError" v-motion class="bg-white rounded-2xl p-6 mb-8 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+            <p class="text-[10px] font-heading font-bold text-gray-300 uppercase tracking-wider mb-4">{{ t('onboarding.step5.profilePreview') }}</p>
             <div class="flex items-center gap-4">
               <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-heading font-bold text-lg">
                 {{ name.trim().split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) }}
               </div>
               <div>
                 <p class="font-heading font-bold text-ink text-base">{{ name.trim() }}</p>
-                <p class="text-xs text-gray-400 font-body mt-1 flex items-center gap-1"><PhShieldChevron :size="12" weight="fill" class="text-teal-500" /> Cadet · {{ selectedFlag }} · {{ selectedAge === 'adult' ? '18+' : 'Under 18' }}</p>
+                <p class="text-xs text-gray-400 font-body mt-1 flex items-center gap-1"><PhShieldChevron :size="12" weight="fill" class="text-teal-500" /> {{ t('onboarding.step5.cadet') }} · {{ selectedFlag }} · {{ selectedAge === 'adult' ? t('onboarding.step5.adultLabel') : t('onboarding.step5.minorLabel') }}</p>
               </div>
             </div>
           </div>
 
           <div class="flex justify-between gap-4">
-            <button @click="step = 4" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">← Back</button>
+            <button @click="step = 4" class="px-6 py-4 bg-white text-ink rounded-2xl font-heading font-bold text-sm shadow-[0_1px_3px_rgba(0,0,0,0.06)] hover:bg-gray-50 transition-colors">{{ t('onboarding.step1.back') }}</button>
             <button @click="finish" :disabled="!name.trim() || !!nameError"
               class="flex-1 px-6 py-4 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-2xl font-heading font-bold text-sm hover:shadow-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed">
-              Begin Training →
+              {{ t('onboarding.step5.begin') }}
             </button>
           </div>
         </div>
@@ -253,9 +250,11 @@ import { RouterLink, useRouter } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import { PhBroadcast, PhGlobeHemisphereEast, PhCake, PhCheckCircle, PhShieldChevron, PhUsers, PhGenderMale, PhGenderFemale, PhHandshake, PhDrop, PhCloudRain, PhSun, PhSparkle, PhWarning } from '@phosphor-icons/vue'
 import { validateDisplayName } from '../utils/profanityFilter'
+import { useI18n } from '../i18n'
 
 const store = useResiliaStore()
 const router = useRouter()
+const { t } = useI18n()
 
 const step = ref(0)
 const selectedCountry = ref('')
@@ -265,15 +264,15 @@ const disasterExp = ref(null)
 const name = ref('')
 const nameError = ref('')
 
-const genderOptions = [
-  { value: 'male', label: 'Male', icon: PhGenderMale },
-  { value: 'female', label: 'Female', icon: PhGenderFemale },
-  { value: 'prefer_not_to_say', label: 'Prefer not to say', icon: PhHandshake },
-]
+const genderOptions = computed(() => [
+  { value: 'male', label: t('onboarding.step3.male'), icon: PhGenderMale },
+  { value: 'female', label: t('onboarding.step3.female'), icon: PhGenderFemale },
+  { value: 'prefer_not_to_say', label: t('onboarding.step3.preferNotToSay'), icon: PhHandshake },
+])
 
 const selectedFlag = computed(() => {
   const country = store.countries.find(c => c.code === selectedCountry.value)
-  return country ? `${country.flag} ${country.name}` : ''
+  return country ? `\${country.name}` : ''
 })
 
 function checkName() {

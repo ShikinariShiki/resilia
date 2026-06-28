@@ -7,8 +7,8 @@
     <div class="erq-header">
       <button class="erq-back" @click="$router.push('/academy')">← Back</button>
       <div class="erq-phase-badge">
-        <span v-if="phase === 'pre'">🌏 Before Your Journey</span>
-        <span v-else>🎓 After Your Journey</span>
+        <span v-if="phase === 'pre'">🌏 Before Your Training</span>
+        <span v-else>🎓 After Your Training</span>
       </div>
     </div>
 
@@ -16,8 +16,8 @@
     <section v-if="!started" class="erq-intro">
       <div class="erq-intro-card">
         <div class="erq-intro-icon">{{ phase === 'pre' ? '🌏' : '🎓' }}</div>
-        <h1 v-if="phase === 'pre'">Before Your Journey Begins...</h1>
-        <h1 v-else>Your Journey Is Complete.</h1>
+        <h1 v-if="phase === 'pre'">Before Your Training Begins...</h1>
+        <h1 v-else>Your Training Is Complete.</h1>
         <p v-if="phase === 'pre'" class="erq-intro-desc">
           An earthquake has just struck. You're about to experience 10 scenarios.
           There are no right or wrong answers, just choose what feels most natural to you.
@@ -79,7 +79,7 @@
         <h1 v-else>Reflection Complete!</h1>
         <p v-if="phase === 'pre'" class="erq-complete-desc">
           Thank you for sharing how you'd respond in those situations.
-          Your answers help Lia understand where you're starting from, now let's begin your journey!
+          Your answers help Lia understand where you're starting from. Now let's begin your training!
         </p>
         <p v-else class="erq-complete-desc">
           You've come so far. From your first day at school to the frontlines of disaster response, 

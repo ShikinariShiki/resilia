@@ -9,7 +9,7 @@
 
     <div v-else>
       <!-- Start Screen -->
-      <div v-if="!started" class="animate-slide-up">
+      <div v-if="!started" v-motion>
         <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block cursor-pointer bg-transparent border-none">← Academy</button>
         <RouterLink v-else to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block">← Academy</RouterLink>
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 text-center">
@@ -27,7 +27,7 @@
       </div>
 
       <!-- Active Step -->
-      <div v-else-if="currentStepIndex < bridgeQuest.steps.length" class="animate-slide-up" :key="currentStepIndex">
+      <div v-else-if="currentStepIndex < bridgeQuest.steps.length" v-motion :key="currentStepIndex">
         <div class="flex items-center gap-3 mb-6">
           <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading cursor-pointer bg-transparent border-none">← Exit</button>
           <RouterLink v-else to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading">← Exit</RouterLink>
@@ -60,7 +60,7 @@
             </div>
 
             <!-- Lia Message Bubble -->
-            <div v-if="currentStep.npc" class="flex flex-col gap-1 items-start max-w-[85%] animate-slide-up">
+            <div v-if="currentStep.npc" v-motion class="flex flex-col gap-1 items-start max-w-[85%]">
               <div class="bg-[#E8E5DE] dark:bg-[#2A2620] text-ink dark:text-[#E8E0D4] px-4 py-3 rounded-2xl rounded-tl-sm text-sm font-body leading-relaxed relative border border-gray-200/50 dark:border-amber-800/20">
                 {{ replaceNames(currentStep.npc) }}
                 <span v-if="currentStep.emotion" class="absolute -top-3 -right-3 text-2xl drop-shadow-md">{{ currentStep.emotion }}</span>
@@ -68,7 +68,7 @@
             </div>
 
             <!-- User Response Bubble -->
-            <div v-if="stepAnswered && selectedOptionIndex !== null" class="flex flex-col gap-1 items-end self-end max-w-[85%] mt-2 animate-slide-up">
+            <div v-if="stepAnswered && selectedOptionIndex !== null" v-motion class="flex flex-col gap-1 items-end self-end max-w-[85%] mt-2">
                <div class="bg-gradient-to-br from-teal-500 to-teal-600 text-white px-4 py-3 rounded-2xl rounded-tr-sm text-sm font-body leading-relaxed shadow-lg shadow-teal-500/20">
                   {{ replaceNames(typeof currentStep.options[selectedOptionIndex] === 'string' ? currentStep.options[selectedOptionIndex] : currentStep.options[selectedOptionIndex].text) }}
                </div>
@@ -96,7 +96,7 @@
       </div>
 
       <!-- Complete -->
-      <div v-else class="text-center animate-slide-up">
+      <div v-else v-motion class="text-center">
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
           <div class="text-6xl mb-6">✨</div>
           <h2 class="font-heading text-2xl font-bold text-ink dark:text-white mb-3">Story Chapter Complete!</h2>
@@ -112,7 +112,7 @@
               Continue to {{ bridgeQuest.to }} →
             </button>
             <RouterLink v-else to="/academy" class="px-6 py-3 bg-teal-500 text-white rounded-xl font-heading font-bold text-sm hover:bg-teal-600 transition-colors">
-              ← Continue Journey
+              ← Continue Training
             </RouterLink>
           </template>
         </div>
@@ -171,7 +171,7 @@ function nextStep() {
   }
 }
 
-// Seamless flow: find next chapter and auto-navigate
+// Auto-flow: find next chapter and navigate
 const nextChapterRoute = computed(() => {
   if (!bridgeQuest.value) return null
   const toChapter = bridgeQuest.value.to

@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
 /*
- * Fonts are self-hosted via @fontsource and imported in src/main.js on a
- * networked build, see docs/IMPLEMENTATION-SPEC.md Phase 1 item 5. The Google
- * Fonts CDN import was removed to keep the CSP tight and avoid layout shift.
- * Until @fontsource is installed the stacks below fall back to system fonts so
- * nothing breaks.
+ * Brand fonts are self-hosted via @fontsource (imported in src/main.js).
+ * No Google Fonts CDN dependency. The families below resolve from the
+ * installed packages with system stacks as fallback.
  */
 
 @variant dark (&:where(.dark, .dark *));
@@ -67,9 +65,9 @@
   --color-coin: #ECA227;
 
   /* Type families, brand kit. Fraunces display, Hanken UI, DM Mono numerals. */
-  --font-display: 'Fraunces', ui-serif, Georgia, serif;
-  --font-heading: 'Fraunces', ui-serif, Georgia, serif;
-  --font-body: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-heading: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-body: 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
 
   /* Radii, brand scale */

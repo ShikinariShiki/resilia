@@ -18,7 +18,7 @@
         </div>
       </RouterLink>
       <button @click="$emit('close-mobile')" class="md:hidden w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700">
-        <X :size="18" />
+        <PhX :size="18" />
       </button>
     </div>
 
@@ -47,7 +47,7 @@
     <div class="px-3 py-3 border-t border-gray-100 dark:border-slate-700 hidden md:block">
       <button @click="$emit('toggle')"
         class="w-full flex items-center justify-center gap-2 h-9 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 text-xs font-medium">
-        <component :is="collapsed ? ChevronRight : ChevronLeft" :size="16" />
+        <component :is="collapsed ? PhCaretRight : PhCaretLeft" :size="16" />
         <span v-if="!collapsed" v-text="t('nav.collapse')"></span>
       </button>
     </div>
@@ -61,7 +61,7 @@
         </div>
         <div v-if="!collapsed || mobileOpen" class="min-w-0">
           <p class="text-sm font-semibold text-ink dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors truncate leading-tight">{{ store.userName || 'Responder' }}</p>
-          <p class="text-[11px] text-gray-400 leading-tight">{{ store.currentTier.icon }} {{ store.currentTier.name }}</p>
+          <p class="text-[11px] text-gray-400 leading-tight flex items-center gap-1"><component :is="getTierIcon(store.level)" weight="fill" class="w-3 h-3" /> {{ store.currentTier.name }}</p>
         </div>
       </RouterLink>
     </div>
@@ -73,7 +73,7 @@ import { computed } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import { useI18n } from '../i18n'
-import { Home, BookOpen, Briefcase, Wallet, BarChart3, User, ChevronLeft, ChevronRight, X, Target, Settings2 } from 'lucide-vue-next'
+import { PhHouse, PhBookOpen, PhBriefcase, PhWallet, PhChartBar, PhCaretLeft, PhCaretRight, PhX, PhTarget, PhSlidersHorizontal, PhStarHalf, PhPlant, PhShield, PhStar, PhMedal, PhTrophy } from '@phosphor-icons/vue'
 
 defineProps({
   collapsed: { type: Boolean, default: false },
@@ -87,18 +87,30 @@ const route = useRoute()
 
 const navItems = computed(() => {
   const items = [
-    { to: '/home', label: t('nav.home'), icon: Home },
-    { to: '/daily', label: t('nav.daily'), icon: Target },
-    { to: '/academy', label: t('nav.academy'), icon: BookOpen },
-    { to: '/toolkit', label: t('nav.toolkit'), icon: Briefcase },
-    { to: '/wallet', label: t('nav.wallet'), icon: Wallet },
-    { to: '/dashboard', label: t('nav.dashboard'), icon: BarChart3 },
+    { to: '/home', label: t('nav.home'), icon: PhHouse },
+    { to: '/daily', label: t('nav.daily'), icon: PhTarget },
+    { to: '/academy', label: t('nav.academy'), icon: PhBookOpen },
+    { to: '/toolkit', label: t('nav.toolkit'), icon: PhBriefcase },
+    { to: '/wallet', label: t('nav.wallet'), icon: PhWallet },
+    { to: '/dashboard', label: t('nav.dashboard'), icon: PhChartBar },
   ]
   if (store.isAdmin) {
-    items.push({ to: '/admin', label: t('nav.admin'), icon: Settings2 })
+    items.push({ to: '/admin', label: t('nav.admin'), icon: PhSlidersHorizontal })
   }
   return items
 })
+
+const getTierIcon = (level) => {
+  switch (level) {
+    case 1: return PhStarHalf
+    case 2: return PhPlant
+    case 3: return PhShield
+    case 4: return PhStar
+    case 5: return PhMedal
+    case 6: return PhTrophy
+    default: return PhShield
+  }
+}
 
 const initials = computed(() => {
   const name = store.userName || 'R'

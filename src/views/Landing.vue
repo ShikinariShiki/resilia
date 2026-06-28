@@ -10,8 +10,8 @@
             :class="scrollY > 50 ? 'text-ink dark:text-white' : 'text-ink dark:text-white'">RESILIA</span>
         </div>
         <div class="flex items-center gap-2 sm:gap-5">
-          <a href="#why-resilia" @click.prevent="scrollTo('why-resilia')" class="text-sm font-heading font-medium text-gray-500 hover:text-teal-600 cursor-pointer transition-colors hidden md:block">Why RESILIA</a>
-          <a href="#features" @click.prevent="scrollTo('features')" class="text-sm font-heading font-medium text-gray-500 hover:text-teal-600 cursor-pointer transition-colors hidden md:block">How it Works</a>
+          <a href="#why-resilia" @click.prevent="scrollTo('why-resilia')" class="text-sm font-heading font-medium text-gray-500 hover:text-teal-600 cursor-pointer transition-colors hidden md:block">{{ lt('landing.navWhy') }}</a>
+          <a href="#features" @click.prevent="scrollTo('features')" class="text-sm font-heading font-medium text-gray-500 hover:text-teal-600 cursor-pointer transition-colors hidden md:block">{{ lt('landing.navHow') }}</a>
 
           <!-- Language Switcher -->
           <div class="relative" ref="langDropdownRef">
@@ -27,7 +27,7 @@
                     @click="setLandingLocale(lang.code)"
                     class="w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm font-heading transition-all duration-200"
                     :class="landingLocale === lang.code ? 'text-teal-400 bg-teal-500/10' : 'text-gray-400 hover:text-white hover:bg-white/5'">
-                    <span class="text-base">{{ lang.flag }}</span>
+                    <img :src="lang.flag" class="w-6 h-auto inline-block rounded-sm shadow-sm" alt="Flag" />
                     <span>{{ lang.label }}</span>
                     <span v-if="landingLocale === lang.code" class="ml-auto text-teal-400">✓</span>
                   </button>
@@ -53,6 +53,11 @@
         <!-- Gradient orbs with parallax -->
         <div class="hero-orb hero-orb-1" :style="{ transform: `translate(${scrollY * 0.08}px, ${scrollY * 0.12}px)` }"></div>
         <div class="hero-orb hero-orb-2" :style="{ transform: `translate(${-scrollY * 0.05}px, ${scrollY * 0.06}px)` }"></div>
+        
+        <!-- Floating Glass Shapes -->
+        <div class="absolute top-[20%] left-[10%] w-16 h-16 bg-teal-500/10 backdrop-blur-md rounded-2xl rotate-12 animate-float border border-teal-500/20"></div>
+        <div class="absolute top-[35%] right-[45%] w-10 h-10 bg-orange-500/10 backdrop-blur-md rounded-full -rotate-12 animate-float border border-orange-500/20" style="animation-delay: 2s"></div>
+        <div class="absolute bottom-[25%] left-[40%] w-12 h-12 border-4 border-purple-500/10 backdrop-blur-md rounded-xl rotate-45 animate-float" style="animation-delay: 1s"></div>
       </div>
 
       <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center relative w-full pt-20 md:pt-0">
@@ -98,7 +103,7 @@
               <button class="hero-video-play" aria-label="Play video">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
               </button>
-              <span class="hero-video-label">Watch how Resilia works</span>
+              <span class="hero-video-label">{{ lt('landing.videoLabel') }}</span>
             </div>
             <iframe v-else class="hero-video-frame" src="https://www.youtube-nocookie.com/embed/c0YzDVIt9yg?autoplay=1&rel=0&modestbranding=1" title="Resilia" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
@@ -134,7 +139,7 @@
         :style="{ transform: `translateY(${(scrollY - 600) * 0.03}px)` }"></div>
 
       <div class="text-center mb-20 reveal-base" :class="whyVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-teal-500 uppercase tracking-[0.2em] mb-4">Why RESILIA</p>
+        <p class="text-xs font-heading font-bold text-teal-500 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleWhy') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.whyTitle') }}</h2>
         <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.whyDesc') }}</p>
       </div>
@@ -160,7 +165,7 @@
     <section id="features" ref="howSection" class="py-28 md:py-40 bg-gradient-to-b from-sand-50 to-white dark:from-slate-900 dark:to-[#0A0A0A] relative"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="howVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-orange-500 uppercase tracking-[0.2em] mb-4">How It Works</p>
+        <p class="text-xs font-heading font-bold text-orange-500 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleHow') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.howTitle') }}</h2>
         <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.howDesc') }}</p>
       </div>
@@ -204,7 +209,7 @@
     <section ref="tiersSection" class="py-28 md:py-40 bg-white dark:bg-[#0A0A0A] relative overflow-hidden"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-16 reveal-base" :class="tiersVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-purple-500 uppercase tracking-[0.2em] mb-4">Progression System</p>
+        <p class="text-xs font-heading font-bold text-purple-500 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleProgression') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.roadmapTitle') }}</h2>
         <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.roadmapDesc') }}</p>
       </div>
@@ -245,7 +250,7 @@
               <div class="flex items-center gap-4 mb-5">
                 <div>
                   <p class="font-heading font-bold text-xl transition-colors duration-500" :style="{ color: activeTierIndex === i ? tier.color : '#9CA3AF' }">{{ tier.name }}</p>
-                  <p class="text-[10px] text-gray-400 dark:text-gray-500 font-heading uppercase tracking-wider mt-0.5">{{ tier.minXP }} XP required</p>
+                  <p class="text-[10px] text-gray-400 dark:text-gray-500 font-heading uppercase tracking-wider mt-0.5">{{ lt('landing.xpRequired').replace('{xp}', tier.minXP) }}</p>
                 </div>
               </div>
               <div class="flex flex-wrap gap-2">
@@ -291,7 +296,7 @@
     <section ref="testSection" class="py-28 md:py-40 bg-gradient-to-b from-white to-sand-50 dark:from-[#0A0A0A] dark:to-slate-900 relative"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="testVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-teal-500 uppercase tracking-[0.2em] mb-4">Testimonials</p>
+        <p class="text-xs font-heading font-bold text-teal-500 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleTestimonials') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.voicesTitle') }}</h2>
         <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.voicesDesc') }}</p>
       </div>
@@ -324,7 +329,7 @@
     <section ref="faqSection" class="py-28 md:py-40 bg-sand-50 dark:bg-slate-900"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="faqVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">FAQ</p>
+        <p class="text-xs font-heading font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleFaq') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.faqTitle') }}</h2>
       </div>
       <div class="max-w-2xl mx-auto space-y-3">
@@ -358,7 +363,7 @@
       </div>
       <div class="text-center relative" style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
         <div class="reveal-base" :class="ctaVisible ? 'reveal-visible' : 'reveal-hidden'">
-          <p class="text-xs font-heading font-bold text-teal-400/70 uppercase tracking-[0.2em] mb-6">Ready to Begin?</p>
+          <p class="text-xs font-heading font-bold text-teal-400/70 uppercase tracking-[0.2em] mb-6">{{ lt('landing.subtitleReady') }}</p>
           <h2 class="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight max-w-3xl mx-auto">{{ lt('landing.ctaTitle') }}</h2>
           <p class="text-gray-500 font-body text-lg mb-14 max-w-lg mx-auto leading-relaxed">{{ lt('landing.ctaDesc') }}</p>
           <button @click="getStarted" class="group relative px-12 py-5 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-2xl font-heading font-bold text-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-teal-500/30 hover:-translate-y-1">
@@ -368,7 +373,7 @@
             </span>
             <div class="absolute inset-0 bg-gradient-to-r from-teal-300 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </button>
-          <p class="text-gray-600 font-body text-xs mt-6">Free forever · No credit card · All ASEAN languages</p>
+          <p class="text-gray-600 font-body text-xs mt-6">{{ lt('landing.freeForever') }}</p>
         </div>
       </div>
     </section>
@@ -380,7 +385,7 @@
           <img src="../assets/icon.png" class="w-8 h-8 object-cover rounded-xl bg-teal-50 shadow-sm" alt="RESILIA" />
           <div>
             <span class="font-heading font-bold text-sm text-white">RESILIA</span>
-            <p class="text-[10px] text-gray-600 font-body">Digital Reserve Corps for ASEAN</p>
+            <p class="text-[10px] text-gray-600 font-body">{{ lt('landing.footerTagline') }}</p>
           </div>
         </div>
         <div class="flex items-center gap-6">
@@ -442,18 +447,18 @@ const langOpen = ref(false)
 const langDropdownRef = ref(null)
 
 const availableLangs = [
-  { code: 'en', flag: '🇬🇧', label: 'English' },
-  { code: 'id', flag: '🇮🇩', label: 'Bahasa Indonesia' },
-  { code: 'th', flag: '🇹🇭', label: 'ภาษาไทย' },
-  { code: 'vi', flag: '🇻🇳', label: 'Tiếng Việt' },
-  { code: 'ms', flag: '����🇾', label: 'Bahasa Melayu' },
-  { code: 'tl', flag: '🇵🇭', label: 'Filipino' },
-  { code: 'my', flag: '🇲🇲', label: 'မြန်မာဘာသာ' },
-  { code: 'km', flag: '🇰🇭', label: 'ភាសាខ្មែរ' },
-  { code: 'lo', flag: '🇱🇦', label: 'ພາສາລາວ' },
+  { code: 'en', flag: 'https://flagcdn.com/w40/gb.png', label: 'English' },
+  { code: 'id', flag: 'https://flagcdn.com/w40/id.png', label: 'Bahasa Indonesia' },
+  { code: 'th', flag: 'https://flagcdn.com/w40/th.png', label: 'ภาษาไทย' },
+  { code: 'vi', flag: 'https://flagcdn.com/w40/vn.png', label: 'Tiếng Việt' },
+  { code: 'ms', flag: 'https://flagcdn.com/w40/un.png', label: 'Bahasa Melayu' },
+  { code: 'tl', flag: 'https://flagcdn.com/w40/ph.png', label: 'Filipino' },
+  { code: 'my', flag: 'https://flagcdn.com/w40/mm.png', label: 'မြန်မာဘာသာ' },
+  { code: 'km', flag: 'https://flagcdn.com/w40/kh.png', label: 'ភាសាខ្មែរ' },
+  { code: 'lo', flag: 'https://flagcdn.com/w40/la.png', label: 'ພາສາລາວ' },
 ]
 
-const currentLangFlag = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.flag || '🌏')
+const currentLangFlag = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.flag || 'https://flagcdn.com/w40/un.png')
 const currentLangLabel = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.label || 'English')
 
 function setLandingLocale(code) {
@@ -669,28 +674,42 @@ const howItWorks = computed(() => [
   { icon: PhTrophy, title: lt('landing.steps.levelUp'), desc: lt('landing.steps.levelUpDesc'), numBg: 'bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400 shadow-sm' },
 ])
 
-const tiers = computed(() => [
-  { name: 'Cadet', minXP: 0, color: '#9CA3AF', icon: PhFlag, perks: ['Foundations access', 'Toolkit access', 'Daily missions'], desc: 'Your journey begins. Learn the fundamentals of Psychological First Aid and build basic readiness.' },
-  { name: 'Trainee', minXP: 100, color: '#0D9488', icon: PhPlant, perks: ['PFA modules', 'Calm Breathing', 'Community challenges'], desc: 'Unlock hands-on modules and essential breathing techniques to build inner resilience and confidence.' },
-  { name: 'Responder', minXP: 250, color: '#F97316', icon: PhShieldCheck, perks: ['Advanced RPGs', 'Mood tracking', 'Double rewards'], desc: 'Step into realistic disaster scenarios. Test your skills through interactive RPGs and earn bonus XP.' },
-  { name: 'Guardian', minXP: 500, color: '#EAB308', icon: PhStar, perks: ['Mentor badge', 'Double XP weekends', 'Priority access'], desc: 'Achieve veteran status. Access exclusive community channels and wear the distinguished Mentor badge.' },
-  { name: 'Commander', minXP: 1000, color: '#8B5CF6', icon: PhMedal, perks: ['Custom frames', 'Exclusive scenarios', 'Community lead'], desc: 'Lead by example. Gain prestige cosmetics and access to ultra-hardcore, zero-mistake disaster drills.' },
-  { name: 'Marshal', minXP: 2000, color: '#DC2626', icon: PhCrown, perks: ['Leaderboard crown', 'All cosmetics', 'Legacy status'], desc: 'The peak of the Digital Reserve Corps. You are a master of crisis response, recognized across all of ASEAN.' },
-])
+const tiers = computed(() => {
+  const tData = lt('landing.tiers');
+  if (!Array.isArray(tData)) return [];
+  const meta = [
+    { color: '#9CA3AF', icon: PhFlag, minXP: 0 },
+    { color: '#0D9488', icon: PhPlant, minXP: 100 },
+    { color: '#F97316', icon: PhShieldCheck, minXP: 250 },
+    { color: '#EAB308', icon: PhStar, minXP: 500 },
+    { color: '#8B5CF6', icon: PhMedal, minXP: 1000 },
+    { color: '#DC2626', icon: PhCrown, minXP: 2000 }
+  ];
+  return tData.map((t, i) => ({
+    ...t,
+    minXP: meta[i]?.minXP || 0,
+    color: meta[i]?.color || '#9CA3AF',
+    icon: meta[i]?.icon || PhFlag
+  }));
+})
 
-const testimonials = computed(() => [
-  { quote: 'RESILIA taught me how to stay calm during the Cianjur earthquake. The breathing techniques I learned literally saved my family from panicking.', name: 'Putri Ayu', role: 'Student, Indonesia', avatar: 'PA', color: '#0D9488' },
-  { quote: 'The RPG scenarios feel incredibly real. I practiced flood evacuation steps so many times that when it actually happened, I knew exactly what to do.', name: 'Nguyen Thanh', role: 'Volunteer, Vietnam', avatar: 'NT', color: '#F97316' },
-  { quote: 'As a teacher, I use RESILIA modules to teach my students about disaster preparedness. The gamification keeps them engaged for hours.', name: 'Maria Santos', role: 'Educator, Philippines', avatar: 'MS', color: '#8B5CF6' },
-])
+const testimonials = computed(() => {
+  const tData = lt('landing.testimonials');
+  if (!Array.isArray(tData)) return [];
+  const meta = [
+    { name: 'Putri Ayu', avatar: 'PA', color: '#0D9488' },
+    { name: 'Nguyen Thanh', avatar: 'NT', color: '#F97316' },
+    { name: 'Maria Santos', avatar: 'MS', color: '#8B5CF6' }
+  ];
+  return tData.map((t, i) => ({
+    ...t,
+    name: meta[i]?.name || 'User',
+    avatar: meta[i]?.avatar || 'U',
+    color: meta[i]?.color || '#0D9488'
+  }));
+})
 
-const faqs = computed(() => [
-  { q: 'What is Psychological First Aid (PFA)?', a: 'PFA is a framework developed by the WHO for providing emotional and practical support to people affected by crises. It\'s not therapy, it\'s about being a compassionate, informed first responder when disaster strikes.' },
-  { q: 'Is RESILIA free to use?', a: 'Yes! RESILIA is completely free. All modules, RPGs, and tools are accessible without payment. ResiCoins are earned through engagement, not purchased.' },
-  { q: 'Do I need medical training?', a: 'Not at all. RESILIA is designed for anyone aged 15+. We start from the basics and build up your knowledge gradually through gamified modules.' },
-  { q: 'What languages are supported?', a: 'Currently English and Bahasa Indonesia, with Thai, Vietnamese, Malay, Filipino, Burmese, Khmer, and Lao coming soon to serve all ASEAN countries.' },
-  { q: 'Is my data safe?', a: 'In this MVP, all data is stored locally in your browser. No data is transmitted to external servers. Your privacy is our priority.' },
-])
+const faqs = computed(() => lt('landing.faqs') || [])
 
 const openFaqIndices = ref([])
 
@@ -887,6 +906,30 @@ function scrollTo(id) {
 }
 .animate-scroll-bounce {
   animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+/* ━━━ HERO ORBS ━━━ */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+}
+.hero-orb-1 {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.2) 0%, transparent 70%);
+  top: -15%;
+  left: -15%;
+  animation: float-slow 15s ease-in-out infinite;
+}
+.hero-orb-2 {
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, transparent 70%);
+  bottom: 5%;
+  right: -10%;
+  animation: float-slow 20s ease-in-out infinite reverse;
 }
 
 /* ━━━ CTA SECTION ━━━ */

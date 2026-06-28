@@ -18,6 +18,293 @@ export default {
         backToAcademy: '← Back to Academy',
         free: 'FREE',
     },
+    academy: {
+        "dossierTitle": "Mission Dossier",
+        "dossierSub": "CLASSIFIED · LIA'S ASEAN STORY · {done}/{total} FILES PROCESSED",
+        "statActs": "Acts Done",
+        "statQuests": "Quests",
+        "statSimHP": "Sim HP",
+        "preReqTitle": "PREREQUISITE: Ground-Zero Readiness Check",
+        "preReqDesc": "Complete before accessing mission files",
+        "btnBegin": "Begin →",
+        "bookCoverLeft": "Mission Dossier",
+        "bookCoverRight": "Field Journal",
+        "toc": "Table of Contents",
+        "statusDone": "✓ Done",
+        "statusActive": "Active",
+        "emptyTitle": "Select a chapter file to view",
+        "emptyDesc": "Click any chapter on the left to open its contents",
+        "btnPlay": "💬 Play →",
+        "btnStart": "Start →",
+        "btnReplay": "Replay ↺",
+        "btnTalkLia": "💬 Talk to Lia",
+        "btnRpgQuest": "⚔️ RPG Quest",
+        "btnContinueStory": "📖 Continue Story →",
+        "btnReplayStory": "📖 Replay Story ↺",
+        "btnReplayQuest": "📖 Replay Quest ↺",
+        "btnReplayChapter": "📖 Replay Chapter ↺",
+        "questComplete": "✓ Quest Complete",
+        "lockedHint": "🔒 Complete the previous chapter to access",
+        "lockedMeta": "{acts} acts · {mins} min total",
+        "postReqTitle": "All Files Processed",
+        "postReqDesc": "Final assessment: see how much you've grown.",
+        "trainingRpg": "Training RPG Scenarios"
+},
+    profile: {
+        "upload": "Upload",
+        "joined": "Joined {date}",
+        "level": "Lv.{level}",
+        "streakCount": "{streak} streak",
+        "xpDisplay": "{current}/{next} XP",
+        "achievements": "Achievements",
+        "locked": "Locked",
+        "editProfile": "Edit Profile",
+        "displayName": "Display Name",
+        "country": "Country",
+        "bio": "Bio",
+        "bioPlaceholder": "Tell us about yourself...",
+        "avatarColor": "Avatar Color",
+        "saveChanges": "Save Changes",
+        "reset": "Reset",
+        "saved": "✓ Saved!",
+        "recentActivity": "Recent Activity",
+        "noActivity": "No activity yet. Start your training!",
+        "accountTitle": "Account",
+        "accountDesc": "Sign out of your RESILIA account. Your progress is saved locally and will be available when you sign back in.",
+        "btnSignOut": "Sign Out",
+        "btnConfirmSignOut": "Yes, Sign Out",
+        "btnCancel": "Cancel",
+        "statTotalXP": "Total XP",
+        "statResiCoins": "ResiCoins",
+        "statModules": "Modules",
+        "statRpgs": "RPGs Cleared",
+        "statBreathing": "Breathing",
+        "statStreak": "Streak",
+        "mockUploadAlert": "Mock: User selected {file}. Profile picture updated!"
+},
+    toolkit: {
+        "title": "Toolkit",
+        "desc": "Free resources and interactive wellness tools for your resilience practice.",
+        "interactiveTools": "Interactive Tools",
+        "calmBreathing": "Calm Breathing",
+        "calmBreathingDesc": "4-7-8 technique · Reduce anxiety",
+        "btnStop": "Stop",
+        "btnStartBreathing": "Start Breathing",
+        "sessionsText": "{count} sessions",
+        "grounding": "5-4-3-2-1 Grounding",
+        "groundingDesc": "Sensory grounding · Stay present",
+        "btnFinish": "Finish ✓",
+        "btnNext": "Next →",
+        "btnStartExercise": "Start Exercise",
+        "moodLog": "Quick Mood Log",
+        "moodDesc": "Track how you feel · Build awareness",
+        "moodPrompt": "How are you feeling right now?",
+        "moodLogged": "Mood logged!",
+        "recent": "Recent",
+        "wellnessStudio": "Wellness Studio",
+        "meditation": "Guided Meditation",
+        "meditationDesc": "Timed mindfulness · Inner peace",
+        "btnStopIcon": "⬜ Stop",
+        "btnStartIcon": "▶ Start",
+        "affirmations": "Positive Affirmations",
+        "affirmationsDesc": "Daily strength · Self-belief",
+        "btnNewAff": "New Affirmation",
+        "emotionWheel": "Emotion Wheel",
+        "emotionDesc": "Name what you feel · Build EQ",
+        "quickJournal": "Quick Journal",
+        "journalDesc": "Write freely · Process thoughts",
+        "journalPlaceholder": "What's on your mind today...",
+        "btnSaved": "✓ Saved!",
+        "btnSaveEntry": "Save Entry",
+        "entriesWritten": "{count} entries written",
+        "sleepHygiene": "Sleep Hygiene",
+        "sleepDesc": "Better rest · Deeper recovery",
+        "habitsPracticed": "{done}/{total} habits practiced tonight",
+        "emergencyContacts": "Emergency Contacts",
+        "freeResources": "Free Resources",
+        "free": "FREE",
+        "contactProvider": "Contact your local {category} provider for more information. Resources are available across all 10 ASEAN countries.",
+        "btnClose": "Close",
+        "breathIn": "Breathe In",
+        "breathHold": "Hold",
+        "breathOut": "Breathe Out",
+        "breathReady": "Ready",
+        "g1Label": "things you can SEE",
+        "g1Prompt": "Look around and name 5 things you can see right now.",
+        "g2Label": "things you can TOUCH",
+        "g2Prompt": "Reach out and feel 4 different textures around you.",
+        "g3Label": "things you can HEAR",
+        "g3Prompt": "Listen carefully for 3 distinct sounds.",
+        "g4Label": "things you can SMELL",
+        "g4Prompt": "Notice 2 scents, even subtle ones.",
+        "g5Label": "thing you can TASTE",
+        "g5Prompt": "Focus on 1 taste, your mouth, a sip of water.",
+        "aff0": "I am capable of handling whatever comes my way.",
+        "aff1": "My strength grows with every challenge I face.",
+        "aff2": "I am a source of calm and support for others.",
+        "aff3": "Every day I become more resilient.",
+        "aff4": "I choose courage over comfort.",
+        "aff5": "I am making a meaningful difference in my community.",
+        "aff6": "My empathy is my superpower.",
+        "aff7": "I am prepared to help when disaster strikes.",
+        "aff8": "Together, we are stronger than any storm.",
+        "aff9": "I trust my training and my instincts.",
+        "aff10": "I am worthy of rest and recovery.",
+        "aff11": "My training builds bridges across ASEAN.",
+        "emo1Name": "Angry",
+        "emo1Tip": "Try a breathing exercise or physical movement to release tension.",
+        "emo2Name": "Sad",
+        "emo2Tip": "It's okay to feel sad. Journaling or talking to someone can help.",
+        "emo3Name": "Fearful",
+        "emo3Tip": "Fear is natural. Ground yourself with the 5-4-3-2-1 technique.",
+        "emo4Name": "Joy",
+        "emo4Tip": "Wonderful! Savor this feeling and share it with someone you care about.",
+        "emo5Name": "Surprise",
+        "emo5Tip": "Take a moment to process the unexpected. Breathe and assess.",
+        "emo6Name": "Disgust",
+        "emo6Tip": "Step away from what bothers you. Self-care is not selfish.",
+        "emo7Name": "Content",
+        "emo7Tip": "Stay present in this peace. You've earned it.",
+        "emo8Name": "Frustrated",
+        "emo8Tip": "Break the problem into smaller steps. Progress over perfection.",
+        "emo9Name": "Loved",
+        "emo9Tip": "Connection is healing. Reach out to someone you appreciate.",
+        "sleep1": "Avoid screens 30 min before bed",
+        "sleep2": "Keep bedroom cool (18-20°C)",
+        "sleep3": "No caffeine after 2 PM",
+        "sleep4": "Consistent wake-up time daily",
+        "sleep5": "Journal worries before sleeping"
+},
+    wallet: {
+        "vault": "ResiCoin Vault",
+        "lifetimeEarned": "Lifetime earned",
+        "transactionsCount": "{count} transactions",
+        "communityFund": "Community Fund",
+        "sponsorText": "Sponsor PFA workshops across ASEAN communities.",
+        "amountPlaceholder": "Amount",
+        "btnContribute": "Contribute",
+        "perk1": "Funds go to local PFA training workshops",
+        "perk2": "Earn +10% XP bonus per 50 RC donated",
+        "perk3": "Earn exclusive \"Community Patron\" badge at 500 RC",
+        "bannerTitle": "Free resources moved to Toolkit!",
+        "bannerDesc": "Counseling sessions, prep kits, and wellness tools are now free.",
+        "btnOpenToolkit": "Open Toolkit →",
+        "catAll": "All",
+        "catBooster": "Booster",
+        "catCosmetic": "Cosmetic",
+        "catCommunity": "Community",
+        "catContent": "Content",
+        "guildShop": "Guild Shop",
+        "history": "Transaction History",
+        "noHistory": "No transactions yet. Start earning!",
+        "rc": "RC"
+},
+    dashboard: {
+        "title": "Mission Control",
+        "subtitle": "ASEAN disaster intelligence & real-time threat overview.",
+        "live": "LIVE",
+        "readiness": "Your Readiness",
+        "readinessSub": "Based on your progress",
+        "riskComparison": "ASEAN Risk Comparison",
+        "riskComparisonSub": "Comparative analysis of Disaster Risk Indices across member nations.",
+        "intelHub": "ASEAN Intelligence Hub",
+        "emergency": "Emergency",
+        "populationGdp": "Population: {pop}M · GDP/Cap: ${gdp}",
+        "riskIndex": "Risk Index",
+        "hdi": "HDI",
+        "disastersYr": "Disasters/yr",
+        "responders": "Responders",
+        "topThreats": "Top Threats",
+        "mostRecent": "Most Recent",
+        "aseanToday": "ASEAN Today",
+        "leaderboard": "Community Leaderboard",
+        "you": "(You)",
+        "respondersDeployed": "Responders Deployed",
+        "recentDisasters": "Recent Disasters",
+        "labels": {
+                "fieldReady": "Field Ready",
+                "advanced": "Advanced",
+                "developing": "Developing",
+                "beginner": "Beginner"
+        },
+        "metrics": {
+                "activeResponders": "Active Responders",
+                "activeRespondersSub": "deployed across ASEAN",
+                "communityFund": "Community Fund",
+                "communityFundSub": "sponsored to communities"
+        },
+        "facts": {
+                "didYouKnow": "Did You Know?",
+                "didYouKnowDesc": "Indonesia experiences about 2,000 earthquakes per year, making it the most seismically active country in ASEAN.",
+                "trainingTip": "Training Tip",
+                "trainingTipDesc": "Psychological First Aid (PFA) is most effective when applied within the first 72 hours after a disaster event.",
+                "aseanStats": "ASEAN Stats",
+                "aseanStatsDesc": "Over 650 million people in ASEAN face increasing climate-related disaster risks each year."
+        },
+        "tour": {
+                "missionControl": "Mission Control",
+                "missionControlDesc": "Your command center for ASEAN disaster intelligence and deployment data.",
+                "aseanIntel": "ASEAN Intelligence",
+                "aseanIntelDesc": "Click any country card to see detailed risk data, threats, and emergency hotlines.",
+                "responderMap": "Responder Map",
+                "responderMapDesc": "See trained responders deployed in each country."
+        }
+},
+    onboarding: {
+        "step0": {
+                "transmission": "[ INCOMING TRANSMISSION ]",
+                "title1": "A signal has been",
+                "title2": "detected…",
+                "desc": "Across Southeast Asia, communities are calling for help. Disasters strike without warning. But there are those who are prepared, the <strong class=\"text-ink\">Digital Reserve Corps</strong>.",
+                "subdesc": "Your training begins now.",
+                "accept": "Accept the Mission →",
+                "backToLanding": "← Back to landing page"
+        },
+        "step1": {
+                "briefing": "[ MISSION BRIEFING ]",
+                "title": "Every region has its own story",
+                "desc": "Where will your training begin? Select your ASEAN base of operations.",
+                "back": "← Back",
+                "continue": "Continue →"
+        },
+        "step2": {
+                "clearance": "[ CLEARANCE CHECK ]",
+                "title": "Your readiness level",
+                "desc": "Before we assign your training path, we need to calibrate your experience level.",
+                "adult": "I am 18 or above",
+                "adultDesc": "Full access to all training modules",
+                "minor": "I am under 18",
+                "minorDesc": "Age-appropriate training path"
+        },
+        "step3": {
+                "profile": "[ RESPONDER PROFILE ]",
+                "title": "Every responder is unique",
+                "desc": "Your perspective matters. This helps us personalize your training experience.",
+                "male": "Male",
+                "female": "Female",
+                "preferNotToSay": "Prefer not to say"
+        },
+        "step4": {
+                "fieldExp": "[ FIELD EXPERIENCE ]",
+                "title": "Some of us have already faced the storm",
+                "desc": "Have you ever personally experienced a natural disaster? This helps us shape your training.",
+                "yes": "Yes, I have",
+                "yesDesc": "Your experience makes you an invaluable responder",
+                "no": "No, I haven't",
+                "noDesc": "That's okay, preparation is the best defense"
+        },
+        "step5": {
+                "callsign": "[ CALLSIGN ASSIGNMENT ]",
+                "title": "Your callsign awaits",
+                "desc": "This name will be remembered across ASEAN. Choose wisely, responder.",
+                "placeholder": "Enter your callsign",
+                "profilePreview": "Your responder profile",
+                "cadet": "Cadet",
+                "adultLabel": "18+",
+                "minorLabel": "Under 18",
+                "begin": "Begin Training →"
+        }
+},
     landing: {
         forAsean: '🌏 For ASEAN Gen Z',
         hero1: 'Train to be a',
@@ -31,14 +318,14 @@ export default {
         whyDesc: 'What makes us different from every other disaster preparedness platform.',
         howTitle: 'How RESILIA Works',
         howDesc: 'From zero knowledge to certified community responder in 5 steps.',
-        roadmapTitle: 'Your Journey to Mastery',
-        roadmapDesc: 'Progress through ranks, unlock perks, and rise through the Digital Reserve Corps.',
+        roadmapTitle: 'Your Path to Mastery',
+        roadmapDesc: 'Progress through ranks, earn perks, and rise through the Digital Reserve Corps.',
         voicesTitle: 'Voices from the Field',
         voicesDesc: 'From students to professionals, RESILIA is making a difference.',
         faqTitle: 'Frequently Asked Questions',
         ctaTitle: 'Ready to make a difference?',
         ctaDesc: 'Join thousands of ASEAN youth building disaster resilience in their communities.',
-        ctaBtn: 'Start Your Journey →',
+        ctaBtn: 'Start Training →',
         footerTerms: 'Terms of Service',
         footerPrivacy: 'Privacy Policy',
         footerCopyright: 'Building resilient communities across ASEAN. ISF Post-Stress © 2026',
@@ -61,6 +348,110 @@ export default {
             communityDesc: 'Earn ResiCoins, donate to real causes, sponsor workshops, and grow together as a network of digital responders.'
         },
 
+        navWhy: "Why RESILIA",
+        navHow: "How it Works",
+        videoLabel: "Watch how Resilia works",
+        subtitleWhy: "Why RESILIA",
+        subtitleHow: "How It Works",
+        subtitleProgression: "Progression System",
+        xpRequired: "{xp} XP required",
+        subtitleTestimonials: "Testimonials",
+        subtitleFaq: "FAQ",
+        subtitleReady: "Ready to Begin?",
+        freeForever: "Free forever · No credit card · All ASEAN languages",
+        footerTagline: "Digital Reserve Corps for ASEAN",
+        tiers: [
+          {
+                    "name": "Cadet",
+                    "perks": [
+                              "Foundations access",
+                              "Toolkit access",
+                              "Daily missions"
+                    ],
+                    "desc": "Your training begins. Learn the fundamentals of Psychological First Aid and build basic readiness."
+          },
+          {
+                    "name": "Trainee",
+                    "perks": [
+                              "PFA modules",
+                              "Calm Breathing",
+                              "Community challenges"
+                    ],
+                    "desc": "Access hands-on modules and essential breathing techniques to build inner resilience and confidence."
+          },
+          {
+                    "name": "Responder",
+                    "perks": [
+                              "Advanced RPGs",
+                              "Mood tracking",
+                              "Double rewards"
+                    ],
+                    "desc": "Step into realistic disaster scenarios. Test your skills through interactive RPGs and earn bonus XP."
+          },
+          {
+                    "name": "Guardian",
+                    "perks": [
+                              "Mentor badge",
+                              "Double XP weekends",
+                              "Priority access"
+                    ],
+                    "desc": "Achieve veteran status. Access exclusive community channels and wear the distinguished Mentor badge."
+          },
+          {
+                    "name": "Commander",
+                    "perks": [
+                              "Custom frames",
+                              "Exclusive scenarios",
+                              "Community lead"
+                    ],
+                    "desc": "Lead by example. Gain prestige cosmetics and access to ultra-hardcore, zero-mistake disaster drills."
+          },
+          {
+                    "name": "Marshal",
+                    "perks": [
+                              "Leaderboard crown",
+                              "All cosmetics",
+                              "Legacy status"
+                    ],
+                    "desc": "The peak of the Digital Reserve Corps. You are a master of crisis response, recognized across all of ASEAN."
+          }
+],
+        testimonials: [
+          {
+                    "quote": "RESILIA taught me how to stay calm during the Cianjur earthquake. The breathing techniques I learned literally saved my family from panicking.",
+                    "role": "Student, Indonesia"
+          },
+          {
+                    "quote": "The RPG scenarios feel incredibly real. I practiced flood evacuation steps so many times that when it actually happened, I knew exactly what to do.",
+                    "role": "Volunteer, Vietnam"
+          },
+          {
+                    "quote": "As a teacher, I use RESILIA modules to teach my students about disaster preparedness. The gamification keeps them engaged for hours.",
+                    "role": "Educator, Philippines"
+          }
+],
+        faqs: [
+          {
+                    "q": "What is Psychological First Aid (PFA)?",
+                    "a": "PFA is a framework developed by the WHO for providing emotional and practical support to people affected by crises. It's not therapy, it's about being a compassionate, informed first responder when disaster strikes."
+          },
+          {
+                    "q": "Is RESILIA free to use?",
+                    "a": "Yes! RESILIA is completely free. All modules, RPGs, and tools are accessible without payment. ResiCoins are earned through engagement, not purchased."
+          },
+          {
+                    "q": "Do I need medical training?",
+                    "a": "Not at all. RESILIA is designed for anyone aged 15+. We start from the basics and build up your knowledge gradually through gamified modules."
+          },
+          {
+                    "q": "What languages are supported?",
+                    "a": "Currently English and Bahasa Indonesia, with Thai, Vietnamese, Malay, Filipino, Burmese, Khmer, and Lao coming soon to serve all ASEAN countries."
+          },
+          {
+                    "q": "Is my data safe?",
+                    "a": "In this MVP, all data is stored locally in your browser. No data is transmitted to external servers. Your privacy is our priority."
+          }
+],
         steps: {
             checkIn: 'Daily Journal',
             checkInDesc: 'A quick self-reflection to see how you\'re feeling today before you start learning.',
@@ -69,10 +460,19 @@ export default {
             practice: 'Practice',
             practiceDesc: 'Apply knowledge in scenario-based RPGs with branching dialogue and realistic disaster situations.',
             measure: 'Reflect',
-            measureDesc: 'Your journey shapes itself to you. Personalized insights help you see your own growth, no pressure, just clarity.',
+            measureDesc: 'Your path shapes itself to you. Personalized insights help you see your own growth, no pressure, just clarity.',
             levelUp: 'Level Up',
-            levelUpDesc: 'Earn XP, climb ranks, unlock perks, and become a certified Digital First Responder.'
-        }
+            levelUpDesc: 'Earn XP, climb ranks, access new perks, and become a certified Digital First Responder.'
+        },
+        title: 'Academy 🎓',
+        subtitle: 'Master Psychological First Aid and become a certified community responder.',
+        startChapter: 'Start Chapter',
+        continueChapter: 'Continue',
+        completed: '✓ Completed',
+        locked: '🔒 Locked',
+        modules: '{count} Modules',
+        rpg: '1 Scenario RPG',
+
     },
     home: {
         welcome: 'Welcome back, {name} 👋',
@@ -131,35 +531,36 @@ export default {
             title: 'Personal Milestones',
             reward: '{amount} RC reward'
         },
+        spotlight: {
+            title: 'Academy Spotlight',
+            desc: 'Your current adventure across ASEAN',
+            open: 'Open Academy →',
+            status: {
+                complete: '✓ Complete',
+                simulation: 'Simulation',
+                inProgress: 'In Progress',
+                locked: 'Locked'
+            },
+            badge: {
+                done: 'DONE',
+                active: 'ACTIVE',
+                locked: 'LOCKED'
+            }
+        },
+        course: {
+            chapters_done: 'Chapters Done',
+            chapters_of: 'of {total} chapters',
+            story: 'Lia\'s ASEAN Story',
+            continue: 'Continue training',
+            complete_prev: 'Complete previous to access',
+            go: 'GO →'
+        },
         activity: {
             title: 'Recent Activity',
             empty: 'No activity yet. Start a lesson to get going!'
-        }
-    },
-    wallet: {
-        title: 'ResiCoin Vault 🏦',
-        lifetime: 'Lifetime earned',
-        txCount: '{count} transactions',
-        donateTitle: 'Donate to ASEAN 🤝',
-        donateDesc: 'Contribute to ASEAN disaster relief funds.',
-        donateBtn: 'Donate',
-        toolkitBanner: '🧰 Free resources moved to Toolkit!',
-        toolkitDesc: 'Counseling sessions, prep kits, and wellness tools are now free.',
-        toolkitBtn: 'Open Toolkit →',
-        shopTitle: 'Guild Shop ⚔️',
-        historyTitle: 'Transaction History 🧾',
-        emptyHistory: 'No transactions yet. Start earning!',
-        categories: {
-            All: 'All',
-            Booster: 'Booster',
-            Cosmetic: 'Cosmetic',
-            Community: 'Community',
-            Content: 'Content'
-        }
-    },
-    toolkit: {
+        },
         title: 'Toolkit 🧰',
-        subtitle: 'Free resources and interactive wellness tools for your resilience journey.',
+        subtitle: 'Free resources and interactive wellness tools for your resilience practice.',
         interactiveTitle: 'Interactive Tools',
         breathing: {
             title: 'Calm Breathing',
@@ -217,9 +618,29 @@ export default {
             title: 'Free Resources',
             close: 'Close',
             disclaimer: '📞 Contact your local {category} provider for more information. Resources are available across all 10 ASEAN countries.'
-        }
+        },
+
     },
-    dashboard: {
+    wallet: {
+        title: 'ResiCoin Vault 🏦',
+        lifetime: 'Lifetime earned',
+        txCount: '{count} transactions',
+        donateTitle: 'Donate to ASEAN 🤝',
+        donateDesc: 'Contribute to ASEAN disaster relief funds.',
+        donateBtn: 'Donate',
+        toolkitBanner: '🧰 Free resources moved to Toolkit!',
+        toolkitDesc: 'Counseling sessions, prep kits, and wellness tools are now free.',
+        toolkitBtn: 'Open Toolkit →',
+        shopTitle: 'Guild Shop ⚔️',
+        historyTitle: 'Transaction History 🧾',
+        emptyHistory: 'No transactions yet. Start earning!',
+        categories: {
+            All: 'All',
+            Booster: 'Booster',
+            Cosmetic: 'Cosmetic',
+            Community: 'Community',
+            Content: 'Content'
+        },
         title: 'Mission Control 🌐',
         subtitle: 'Live ASEAN disaster intelligence and deployment metrics.',
         stats: {
@@ -243,17 +664,143 @@ export default {
             threats: 'Top Threats',
             emergency: 'Emergency #',
             status: 'Status'
-        }
+        },
     },
-    academy: {
-        title: 'Academy 🎓',
-        subtitle: 'Master Psychological First Aid and become a certified community responder.',
-        startChapter: 'Start Chapter',
-        continueChapter: 'Continue',
-        completed: '✓ Completed',
-        locked: '🔒 Locked',
-        modules: '{count} Modules',
-        rpg: '1 Scenario RPG'
+    landing: {
+        forAsean: '🌏 For ASEAN Gen Z',
+        hero1: 'Train to become',
+        hero2: 'First Digital',
+        hero3: 'Responders.',
+        heroDesc: 'Learn Psychological First Aid, build resilience, and join a community of citizens ready to face disasters across Southeast Asia.',
+        startTraining: 'Start Training →',
+        learnMore: 'Learn More',
+
+        whyTitle: 'Why RESILIA?',
+        whyDesc: 'What sets us apart from other disaster preparedness platforms.',
+        howTitle: 'How RESILIA Works',
+        howDesc: 'From ground zero to becoming a certified community responder in 5 steps.',
+        roadmapTitle: 'Your Journey to Mastery',
+        roadmapDesc: 'Progress through ranks, unlock perks, and rise in the Digital Reserve Corps.',
+        voicesTitle: 'Voices from the Field',
+        voicesDesc: 'From students to professionals, RESILIA makes a difference.',
+        faqTitle: 'Frequently Asked Questions',
+        ctaTitle: 'Ready to make a difference?',
+        ctaDesc: 'Join thousands of ASEAN youths building disaster resilience in their communities.',
+        ctaBtn: 'Start Your Journey →',
+        footerTerms: 'Terms of Service',
+        footerPrivacy: 'Privacy Policy',
+        footerCopyright: 'Building resilient communities across ASEAN. ISF Post-Stress © 2026',
+
+        stats: {
+            activeResponders: 'Active Responders',
+            aseanCountries: 'ASEAN Countries',
+            modulesCompleted: 'Modules Completed',
+            resiCoinsDonated: 'ResiCoins Donated'
+        },
+
+        usps: {
+            gamified: 'Gamified Learning',
+            gamifiedDesc: 'Not just boring slides. Interactive RPGs, branching dialogues, and missions that make disaster prep engaging and memorable.',
+            asean: 'Made for ASEAN',
+            aseanDesc: 'Culturally relevant, multilingual, covering region-specific disasters from earthquakes, typhoons, to volcanic eruptions.',
+            science: 'Science-Backed',
+            scienceDesc: 'Based on WHO\'s Psychological First Aid framework. Every module is rooted in evidence-based practices.',
+            community: 'Community-Driven',
+            communityDesc: 'Earn ResiCoins, donate to real causes, sponsor workshops, and grow together as a digital responder network.'
+        },
+
+        navWhy: 'Why RESILIA',
+        navHow: 'How It Works',
+        videoLabel: 'Watch how Resilia works',
+        subtitleWhy: 'Why RESILIA',
+        subtitleHow: 'How It Works',
+        subtitleProgression: 'Progression System',
+        xpRequired: '{xp} XP Required',
+        subtitleTestimonials: 'Testimonials',
+        subtitleFaq: 'FAQ',
+        subtitleReady: 'Ready to Start?',
+        freeForever: 'Always free · No credit card · All ASEAN languages',
+        footerTagline: 'The Digital Reserve Corps for ASEAN',
+        tiers: [
+          {
+                    name: 'Cadet',
+                    perks: ['Basic access', 'Toolkit access', 'Daily missions'],
+                    desc: 'Your training begins. Learn the basics of Psychological First Aid and build initial readiness.'
+          },
+          {
+                    name: 'Trainee',
+                    perks: ['PFA Modules', 'Calm Breathing', 'Community challenges'],
+                    desc: 'Access practical modules and breathing techniques to build inner resilience and confidence.'
+          },
+          {
+                    name: 'Responder',
+                    perks: ['Advanced RPGs', 'Mood tracking', 'Double rewards'],
+                    desc: 'Enter realistic disaster scenarios. Test your skills through RPGs and earn bonus XP.'
+          },
+          {
+                    name: 'Sentinel',
+                    perks: ['Mentor badge', 'Double XP weekends', 'Priority access'],
+                    desc: 'Achieve veteran status. Access exclusive community channels and wear the prestigious Mentor badge.'
+          },
+          {
+                    name: 'Commander',
+                    perks: ['Custom frame', 'Exclusive scenarios', 'Community leader'],
+                    desc: 'Lead by example. Get prestige cosmetics and highly difficult zero-mistake disaster drills.'
+          },
+          {
+                    name: 'Field Marshal',
+                    perks: ['Leaderboard crown', 'All cosmetics', 'Legacy status'],
+                    desc: 'The pinnacle of the Digital Reserve Corps. You are a recognized crisis response expert across ASEAN.'
+          }
+        ],
+        testimonials: [
+          {
+                    quote: 'RESILIA taught me how to stay calm during the Cianjur earthquake. The breathing techniques I learned saved my family from panic.',
+                    role: 'Student, Indonesia'
+          },
+          {
+                    quote: 'The RPG scenarios feel incredibly real. I practiced flood evacuation so many times that when it happened, I knew exactly what to do.',
+                    role: 'Volunteer, Vietnam'
+          },
+          {
+                    quote: 'As a teacher, I use RESILIA\'s modules to teach disaster preparedness. The gamification keeps them engaged for hours.',
+                    role: 'Educator, Philippines'
+          }
+        ],
+        faqs: [
+          {
+                    q: 'What is Psychological First Aid (PFA)?',
+                    a: 'PFA is a framework developed by WHO to provide emotional and practical support to people affected by crisis. It\'s not therapy, it\'s about being a compassionate, informed first responder when disaster strikes.'
+          },
+          {
+                    q: 'Is RESILIA free to use?',
+                    a: 'Yes! RESILIA is completely free. All modules, RPGs, and tools are accessible without payment. ResiCoins are earned through engagement, not bought.'
+          },
+          {
+                    q: 'Do I need medical training?',
+                    a: 'Not at all. RESILIA is designed for anyone aged 15+. We start from the basics and build your knowledge gradually through gamified modules.'
+          },
+          {
+                    q: 'What languages are supported?',
+                    a: 'Currently English and Indonesian, with Thai, Vietnamese, Malay, Tagalog, Burmese, Khmer, and Lao coming soon to serve all ASEAN countries.'
+          },
+          {
+                    q: 'Is my data safe?',
+                    a: 'In this MVP, all data is stored locally in your browser. No data is sent to external servers. Your privacy is our priority.'
+          }
+        ],
+        steps: {
+            checkIn: 'Check-In',
+            checkInDesc: 'A quick mental readiness assessment based on DASS-21 to ensure you are in the right state to learn.',
+            learn: 'Learn',
+            learnDesc: 'Bite-sized modules covering PFA basics, active listening, de-escalation, and more.',
+            practice: 'Practice',
+            practiceDesc: 'Apply knowledge in scenario-based RPGs with branching dialogue and realistic disaster situations.',
+            measure: 'Measure',
+            measureDesc: 'Pre and post-tests track your growth. See how much you\'ve learned with visual score comparisons.',
+            levelUp: 'Level Up',
+            levelUpDesc: 'Earn XP, climb ranks, unlock perks, and become a certified Digital First Responder.'
+        }
     },
     prologue: {
         msg1: 'Heyy! 🙋‍♀️',

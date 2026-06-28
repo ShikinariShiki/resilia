@@ -11,16 +11,16 @@
 
 export default {
     nav: {
-        home: 'Home (TODO)',
-        academy: 'Academy (TODO)',
-        wallet: 'Wallet (TODO)',
-        dashboard: 'Dashboard (TODO)',
-        profile: 'Profile (TODO)',
-        toolkit: 'Toolkit (TODO)'
+        home: 'Home',
+        academy: 'Academy',
+        wallet: 'Wallet',
+        dashboard: 'Dashboard',
+        profile: 'Profile',
+        toolkit: 'Toolkit'
     },
     home: {
-        welcome: 'Welcome back, {name} (TODO)',
-        subtitle: "Here's your training overview for today. (TODO)",
+        welcome: 'Welcome back, {name}',
+        subtitle: "Here's your training overview for today.",
         // ... add structure matching en.js
     }
 }

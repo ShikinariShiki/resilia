@@ -1,0 +1,497 @@
+{
+  "en": {
+    "step0": {
+      "transmission": "[ INCOMING TRANSMISSION ]",
+      "title1": "A signal has been",
+      "title2": "detected…",
+      "desc": "Across Southeast Asia, communities are calling for help. Disasters strike without warning. But there are those who are prepared, the <strong class=\"text-ink\">Digital Reserve Corps</strong>.",
+      "subdesc": "Your training begins now.",
+      "accept": "Accept the Mission →",
+      "backToLanding": "← Back to landing page"
+    },
+    "step1": {
+      "briefing": "[ MISSION BRIEFING ]",
+      "title": "Every region has its own story",
+      "desc": "Where will your training begin? Select your ASEAN base of operations.",
+      "back": "← Back",
+      "continue": "Continue →"
+    },
+    "step2": {
+      "clearance": "[ CLEARANCE CHECK ]",
+      "title": "Your readiness level",
+      "desc": "Before we assign your training path, we need to calibrate your experience level.",
+      "adult": "I am 18 or above",
+      "adultDesc": "Full access to all training modules",
+      "minor": "I am under 18",
+      "minorDesc": "Age-appropriate training path"
+    },
+    "step3": {
+      "profile": "[ RESPONDER PROFILE ]",
+      "title": "Every responder is unique",
+      "desc": "Your perspective matters. This helps us personalize your training experience.",
+      "male": "Male",
+      "female": "Female",
+      "preferNotToSay": "Prefer not to say"
+    },
+    "step4": {
+      "fieldExp": "[ FIELD EXPERIENCE ]",
+      "title": "Some of us have already faced the storm",
+      "desc": "Have you ever personally experienced a natural disaster? This helps us shape your training.",
+      "yes": "Yes, I have",
+      "yesDesc": "Your experience makes you an invaluable responder",
+      "no": "No, I haven't",
+      "noDesc": "That's okay, preparation is the best defense"
+    },
+    "step5": {
+      "callsign": "[ CALLSIGN ASSIGNMENT ]",
+      "title": "Your callsign awaits",
+      "desc": "This name will be remembered across ASEAN. Choose wisely, responder.",
+      "placeholder": "Enter your callsign",
+      "profilePreview": "Your responder profile",
+      "cadet": "Cadet",
+      "adultLabel": "18+",
+      "minorLabel": "Under 18",
+      "begin": "Begin Training →"
+    }
+  },
+  "id": {
+    "step0": {
+      "transmission": "[ TRANSMISI MASUK ]",
+      "title1": "Sebuah sinyal telah",
+      "title2": "terdeteksi…",
+      "desc": "Di seluruh Asia Tenggara, komunitas memanggil bantuan. Bencana datang tanpa peringatan. Namun ada mereka yang telah siap, <strong class=\"text-ink\">Digital Reserve Corps</strong>.",
+      "subdesc": "Pelatihan Anda dimulai sekarang.",
+      "accept": "Terima Misi →",
+      "backToLanding": "← Kembali ke beranda"
+    },
+    "step1": {
+      "briefing": "[ PENGARAHAN MISI ]",
+      "title": "Setiap daerah memiliki ceritanya sendiri",
+      "desc": "Di mana pelatihan Anda akan dimulai? Pilih basis operasi ASEAN Anda.",
+      "back": "← Kembali",
+      "continue": "Lanjutkan →"
+    },
+    "step2": {
+      "clearance": "[ PEMERIKSAAN IZIN ]",
+      "title": "Tingkat kesiapan Anda",
+      "desc": "Sebelum kami menentukan jalur pelatihan Anda, kami perlu menyesuaikan tingkat pengalaman Anda.",
+      "adult": "Saya berusia 18 tahun atau lebih",
+      "adultDesc": "Akses penuh ke semua modul pelatihan",
+      "minor": "Saya di bawah 18 tahun",
+      "minorDesc": "Jalur pelatihan yang sesuai usia"
+    },
+    "step3": {
+      "profile": "[ PROFIL RELAWAN ]",
+      "title": "Setiap relawan itu unik",
+      "desc": "Perspektif Anda penting. Ini membantu kami mempersonalisasi pengalaman pelatihan Anda.",
+      "male": "Laki-laki",
+      "female": "Perempuan",
+      "preferNotToSay": "Memilih untuk tidak mengatakan"
+    },
+    "step4": {
+      "fieldExp": "[ PENGALAMAN LAPANGAN ]",
+      "title": "Beberapa dari kita sudah menghadapi badai",
+      "desc": "Pernahkah Anda secara pribadi mengalami bencana alam? Ini membantu kami membentuk pelatihan Anda.",
+      "yes": "Ya, pernah",
+      "yesDesc": "Pengalaman Anda menjadikan Anda relawan yang tak ternilai",
+      "no": "Tidak, belum pernah",
+      "noDesc": "Tidak apa-apa, persiapan adalah pertahanan terbaik"
+    },
+    "step5": {
+      "callsign": "[ PENETAPAN SANDI PANGGILAN ]",
+      "title": "Sandi panggilan Anda menanti",
+      "desc": "Nama ini akan diingat di seluruh ASEAN. Pilihlah dengan bijak, relawan.",
+      "placeholder": "Masukkan sandi panggilan Anda",
+      "profilePreview": "Profil relawan Anda",
+      "cadet": "Kadet",
+      "adultLabel": "18+",
+      "minorLabel": "Di bawah 18",
+      "begin": "Mulai Pelatihan →"
+    }
+  },
+  "ms": {
+    "step0": {
+      "transmission": "[ TRANSMISI MASUK ]",
+      "title1": "Satu isyarat telah",
+      "title2": "dikesan…",
+      "desc": "Di seluruh Asia Tenggara, komuniti memohon bantuan. Bencana melanda tanpa amaran. Tetapi ada mereka yang bersedia, <strong class=\"text-ink\">Digital Reserve Corps</strong>.",
+      "subdesc": "Latihan anda bermula sekarang.",
+      "accept": "Terima Misi →",
+      "backToLanding": "← Kembali ke halaman utama"
+    },
+    "step1": {
+      "briefing": "[ TAKLIMAT MISI ]",
+      "title": "Setiap rantau ada ceritanya tersendiri",
+      "desc": "Di mana latihan anda akan bermula? Pilih pangkalan operasi ASEAN anda.",
+      "back": "← Kembali",
+      "continue": "Teruskan →"
+    },
+    "step2": {
+      "clearance": "[ SEMAKAN KELULUSAN ]",
+      "title": "Tahap kesediaan anda",
+      "desc": "Sebelum kami menetapkan laluan latihan anda, kami perlu menyelaras tahap pengalaman anda.",
+      "adult": "Saya berumur 18 tahun ke atas",
+      "adultDesc": "Akses penuh kepada semua modul latihan",
+      "minor": "Saya berumur di bawah 18 tahun",
+      "minorDesc": "Laluan latihan yang sesuai dengan umur"
+    },
+    "step3": {
+      "profile": "[ PROFIL RESPONDEN ]",
+      "title": "Setiap responden adalah unik",
+      "desc": "Perspektif anda penting. Ini membantu kami memperibadikan pengalaman latihan anda.",
+      "male": "Lelaki",
+      "female": "Perempuan",
+      "preferNotToSay": "Lebih suka untuk tidak beritahu"
+    },
+    "step4": {
+      "fieldExp": "[ PENGALAMAN LAPANGAN ]",
+      "title": "Sebilangan daripada kita telah menghadapi ribut",
+      "desc": "Pernahkah anda mengalami bencana alam secara peribadi? Ini membantu kami membentuk latihan anda.",
+      "yes": "Ya, pernah",
+      "yesDesc": "Pengalaman anda menjadikan anda responden yang sangat berharga",
+      "no": "Tidak, belum pernah",
+      "noDesc": "Tidak mengapa, persediaan adalah pertahanan terbaik"
+    },
+    "step5": {
+      "callsign": "[ PENETAPAN PANGGILAN ]",
+      "title": "Panggilan anda menanti",
+      "desc": "Nama ini akan diingati di seluruh ASEAN. Pilih dengan bijak, responden.",
+      "placeholder": "Masukkan panggilan anda",
+      "profilePreview": "Profil responden anda",
+      "cadet": "Kadet",
+      "adultLabel": "18+",
+      "minorLabel": "Bawah 18",
+      "begin": "Mula Latihan →"
+    }
+  },
+  "tl": {
+    "step0": {
+      "transmission": "[ INCOMING TRANSMISSION ]",
+      "title1": "Isang signal ang",
+      "title2": "na-detect…",
+      "desc": "Sa buong Timog-Silangang Asya, ang mga komunidad ay humihingi ng tulong. Ang mga sakuna ay dumarating nang walang babala. Ngunit may mga taong handa, ang <strong class=\"text-ink\">Digital Reserve Corps</strong>.",
+      "subdesc": "Ang iyong pagsasanay ay magsisimula ngayon.",
+      "accept": "Tanggapin ang Misyon →",
+      "backToLanding": "← Bumalik sa landing page"
+    },
+    "step1": {
+      "briefing": "[ MISSION BRIEFING ]",
+      "title": "Bawat rehiyon ay may sariling kwento",
+      "desc": "Saan magsisimula ang iyong pagsasanay? Piliin ang iyong ASEAN base ng operasyon.",
+      "back": "← Bumalik",
+      "continue": "Magpatuloy →"
+    },
+    "step2": {
+      "clearance": "[ CLEARANCE CHECK ]",
+      "title": "Ang iyong antas ng kahandaan",
+      "desc": "Bago namin italaga ang iyong training path, kailangan naming ayusin ang iyong antas ng karanasan.",
+      "adult": "Ako ay 18 o pataas",
+      "adultDesc": "Buong access sa lahat ng training modules",
+      "minor": "Ako ay wala pang 18",
+      "minorDesc": "Training path na angkop sa edad"
+    },
+    "step3": {
+      "profile": "[ RESPONDER PROFILE ]",
+      "title": "Bawat responder ay natatangi",
+      "desc": "Mahalaga ang iyong pananaw. Nakakatulong ito sa amin na i-personalize ang iyong karanasan sa pagsasanay.",
+      "male": "Lalaki",
+      "female": "Babae",
+      "preferNotToSay": "Mas piniling hindi sabihin"
+    },
+    "step4": {
+      "fieldExp": "[ FIELD EXPERIENCE ]",
+      "title": "Ang ilan sa atin ay naharap na sa bagyo",
+      "desc": "Naranasan mo na ba nang personal ang isang natural na sakuna? Nakakatulong ito sa amin na hubugin ang iyong pagsasanay.",
+      "yes": "Oo, naranasan ko na",
+      "yesDesc": "Ang iyong karanasan ay gumagawa sa iyo na isang napakahalagang responder",
+      "no": "Hindi, hindi pa",
+      "noDesc": "Ayos lang yan, ang paghahanda ang pinakamahusay na depensa"
+    },
+    "step5": {
+      "callsign": "[ CALLSIGN ASSIGNMENT ]",
+      "title": "Naghihintay ang iyong callsign",
+      "desc": "Ang pangalang ito ay maaalala sa buong ASEAN. Pumili nang matalino, responder.",
+      "placeholder": "Ipasok ang iyong callsign",
+      "profilePreview": "Iyong responder profile",
+      "cadet": "Kadet",
+      "adultLabel": "18+",
+      "minorLabel": "Wala pang 18",
+      "begin": "Magsimula ng Pagsasanay →"
+    }
+  },
+  "th": {
+    "step0": {
+      "transmission": "[ การส่งสัญญาณขาเข้า ]",
+      "title1": "ตรวจพบ",
+      "title2": "สัญญาณบางอย่าง…",
+      "desc": "ทั่วเอเชียตะวันออกเฉียงใต้ ชุมชนต่างๆ กำลังร้องขอความช่วยเหลือ ภัยพิบัติเกิดขึ้นโดยไม่มีการแจ้งเตือนล่วงหน้า แต่มีกลุ่มคนที่พร้อมรับมือ นั่นคือ <strong class=\"text-ink\">Digital Reserve Corps</strong>",
+      "subdesc": "การฝึกอบรมของคุณเริ่มต้นขึ้นแล้ว",
+      "accept": "ยอมรับภารกิจ →",
+      "backToLanding": "← กลับสู่หน้าหลัก"
+    },
+    "step1": {
+      "briefing": "[ การบรรยายสรุปภารกิจ ]",
+      "title": "แต่ละภูมิภาคมีเรื่องราวของตัวเอง",
+      "desc": "การฝึกอบรมของคุณจะเริ่มต้นที่ไหน? เลือกฐานปฏิบัติการอาเซียนของคุณ",
+      "back": "← กลับ",
+      "continue": "ดำเนินการต่อ →"
+    },
+    "step2": {
+      "clearance": "[ ตรวจสอบสิทธิ์ ]",
+      "title": "ระดับความพร้อมของคุณ",
+      "desc": "ก่อนที่เราจะกำหนดเส้นทางการฝึกอบรมของคุณ เราจำเป็นต้องปรับเทียบระดับประสบการณ์ของคุณ",
+      "adult": "ฉันอายุ 18 ปีขึ้นไป",
+      "adultDesc": "เข้าถึงโมดูลการฝึกอบรมทั้งหมด",
+      "minor": "ฉันอายุต่ำกว่า 18 ปี",
+      "minorDesc": "เส้นทางการฝึกอบรมที่เหมาะสมกับวัย"
+    },
+    "step3": {
+      "profile": "[ โปรไฟล์ผู้ปฏิบัติงาน ]",
+      "title": "ผู้ปฏิบัติงานทุกคนล้วนมีความพิเศษ",
+      "desc": "มุมมองของคุณมีความสำคัญ สิ่งนี้ช่วยให้เราปรับแต่งประสบการณ์การฝึกอบรมของคุณได้",
+      "male": "ชาย",
+      "female": "หญิง",
+      "preferNotToSay": "ไม่ต้องการระบุ"
+    },
+    "step4": {
+      "fieldExp": "[ ประสบการณ์ภาคสนาม ]",
+      "title": "บางคนเคยเผชิญกับพายุมาแล้ว",
+      "desc": "คุณเคยประสบภัยพิบัติทางธรรมชาติด้วยตัวเองหรือไม่? สิ่งนี้จะช่วยให้เรากำหนดทิศทางการฝึกอบรมของคุณ",
+      "yes": "ใช่ ฉันเคยประสบ",
+      "yesDesc": "ประสบการณ์ของคุณทำให้คุณเป็นผู้ปฏิบัติงานที่มีค่าอย่างยิ่ง",
+      "no": "ไม่ ฉันไม่เคย",
+      "noDesc": "ไม่เป็นไร การเตรียมตัวคือการป้องกันที่ดีที่สุด"
+    },
+    "step5": {
+      "callsign": "[ การกำหนดนามเรียกขาน ]",
+      "title": "นามเรียกขานของคุณรออยู่",
+      "desc": "ชื่อนี้จะเป็นที่จดจำไปทั่วอาเซียน เลือกให้ดีล่ะ ผู้ปฏิบัติงาน",
+      "placeholder": "ป้อนนามเรียกขานของคุณ",
+      "profilePreview": "โปรไฟล์ผู้ปฏิบัติงานของคุณ",
+      "cadet": "นักเรียนนายร้อย",
+      "adultLabel": "18+",
+      "minorLabel": "อายุต่ำกว่า 18",
+      "begin": "เริ่มการฝึกอบรม →"
+    }
+  },
+  "vi": {
+    "step0": {
+      "transmission": "[ TÍN HIỆU ĐẾN ]",
+      "title1": "Một tín hiệu đã",
+      "title2": "được phát hiện…",
+      "desc": "Khắp Đông Nam Á, các cộng đồng đang kêu gọi giúp đỡ. Thảm họa ập đến không báo trước. Nhưng có những người đã sẵn sàng, <strong class=\"text-ink\">Lực Lượng Dự Bị Số</strong>.",
+      "subdesc": "Quá trình đào tạo của bạn bắt đầu ngay bây giờ.",
+      "accept": "Chấp Nhận Nhiệm Vụ →",
+      "backToLanding": "← Quay lại trang chủ"
+    },
+    "step1": {
+      "briefing": "[ TÓM TẮT NHIỆM VỤ ]",
+      "title": "Mỗi khu vực đều có câu chuyện riêng",
+      "desc": "Quá trình đào tạo của bạn sẽ bắt đầu ở đâu? Chọn cơ sở hoạt động ASEAN của bạn.",
+      "back": "← Quay lại",
+      "continue": "Tiếp tục →"
+    },
+    "step2": {
+      "clearance": "[ KIỂM TRA PHÊ DUYỆT ]",
+      "title": "Mức độ sẵn sàng của bạn",
+      "desc": "Trước khi chúng tôi chỉ định lộ trình đào tạo của bạn, chúng tôi cần hiệu chỉnh mức độ kinh nghiệm của bạn.",
+      "adult": "Tôi từ 18 tuổi trở lên",
+      "adultDesc": "Toàn quyền truy cập vào tất cả các học phần",
+      "minor": "Tôi dưới 18 tuổi",
+      "minorDesc": "Lộ trình đào tạo phù hợp với lứa tuổi"
+    },
+    "step3": {
+      "profile": "[ HỒ SƠ NGƯỜI ỨNG PHÓ ]",
+      "title": "Mỗi người ứng phó là duy nhất",
+      "desc": "Góc nhìn của bạn rất quan trọng. Điều này giúp chúng tôi cá nhân hóa trải nghiệm đào tạo của bạn.",
+      "male": "Nam",
+      "female": "Nữ",
+      "preferNotToSay": "Không muốn tiết lộ"
+    },
+    "step4": {
+      "fieldExp": "[ KINH NGHIỆM THỰC ĐỊA ]",
+      "title": "Một số người trong chúng ta đã từng đối mặt với cơn bão",
+      "desc": "Bạn đã bao giờ đích thân trải qua một thảm họa thiên nhiên chưa? Điều này giúp chúng tôi định hình khóa đào tạo của bạn.",
+      "yes": "Có, tôi đã từng",
+      "yesDesc": "Kinh nghiệm làm cho bạn trở thành một người ứng phó vô giá",
+      "no": "Không, tôi chưa từng",
+      "noDesc": "Không sao, chuẩn bị là cách phòng thủ tốt nhất"
+    },
+    "step5": {
+      "callsign": "[ CHỈ ĐỊNH BIỆT DANH ]",
+      "title": "Biệt danh của bạn đang chờ",
+      "desc": "Cái tên này sẽ được nhớ đến trên toàn ASEAN. Hãy chọn một cách khôn ngoan, người ứng phó.",
+      "placeholder": "Nhập biệt danh của bạn",
+      "profilePreview": "Hồ sơ người ứng phó của bạn",
+      "cadet": "Thực tập sinh",
+      "adultLabel": "18+",
+      "minorLabel": "Dưới 18",
+      "begin": "Bắt Đầu Đào Tạo →"
+    }
+  },
+  "km": {
+    "step0": {
+      "transmission": "[ ការបញ្ជូនព័ត៌មានចូល ]",
+      "title1": "សញ្ញាមួយត្រូវបាន",
+      "title2": "រកឃើញ…",
+      "desc": "នៅទូទាំងអាស៊ីអាគ្នេយ៍ សហគមន៍កំពុងអំពាវនាវរកជំនួយ។ គ្រោះមហន្តរាយវាយប្រហារដោយគ្មានការព្រមាន។ ប៉ុន្តែមានអ្នកដែលបានត្រៀមខ្លួន <strong class=\"text-ink\">កងកម្លាំងបម្រុងឌីជីថល</strong>។",
+      "subdesc": "ការបណ្តុះបណ្តាលរបស់អ្នកចាប់ផ្តើមឥឡូវនេះ។",
+      "accept": "ទទួលយកបេសកកម្ម →",
+      "backToLanding": "← ត្រលប់ទៅទំព័រដើមវិញ"
+    },
+    "step1": {
+      "briefing": "[ ការសង្ខេបបេសកកម្ម ]",
+      "title": "តំបន់នីមួយៗមានរឿងរ៉ាវផ្ទាល់ខ្លួន",
+      "desc": "តើការបណ្តុះបណ្តាលរបស់អ្នកនឹងចាប់ផ្តើមនៅឯណា? ជ្រើសរើសមូលដ្ឋានប្រតិបត្តិការអាស៊ានរបស់អ្នក។",
+      "back": "← ត្រលប់",
+      "continue": "បន្ត →"
+    },
+    "step2": {
+      "clearance": "[ ការត្រួតពិនិត្យការអនុញ្ញាត ]",
+      "title": "កម្រិតនៃការត្រៀមខ្លួនរបស់អ្នក",
+      "desc": "មុនពេលយើងចាត់តាំងផ្លូវបណ្តុះបណ្តាលរបស់អ្នក យើងត្រូវតម្រឹមកម្រិតបទពិសោធន៍របស់អ្នក។",
+      "adult": "ខ្ញុំអាយុ 18 ឆ្នាំឡើងទៅ",
+      "adultDesc": "ចូលប្រើប្រាស់ពេញលេញនូវម៉ូឌុលបណ្តុះបណ្តាលទាំងអស់",
+      "minor": "ខ្ញុំអាយុក្រោម 18 ឆ្នាំ",
+      "minorDesc": "ផ្លូវបណ្តុះបណ្តាលដែលសមស្របតាមអាយុ"
+    },
+    "step3": {
+      "profile": "[ ប្រវត្តិរូបអ្នកឆ្លើយតប ]",
+      "title": "អ្នកឆ្លើយតបគ្រប់រូបគឺមានតែមួយគត់",
+      "desc": "ទស្សនៈរបស់អ្នកមានសារៈសំខាន់។ នេះជួយយើងក្នុងការធ្វើឱ្យបទពិសោធន៍នៃការបណ្តុះបណ្តាលរបស់អ្នកមានលក្ខណៈផ្ទាល់ខ្លួន។",
+      "male": "ប្រុស",
+      "female": "ស្រី",
+      "preferNotToSay": "មិនចង់ប្រាប់"
+    },
+    "step4": {
+      "fieldExp": "[ បទពិសោធន៍នៅទីវាល ]",
+      "title": "ពួកយើងខ្លះធ្លាប់ប្រឈមមុខនឹងព្យុះរួចហើយ",
+      "desc": "តើអ្នកធ្លាប់ជួបប្រទះគ្រោះមហន្តរាយធម្មជាតិផ្ទាល់ខ្លួនទេ? នេះជួយយើងបង្កើតការបណ្តុះបណ្តាលរបស់អ្នក។",
+      "yes": "បាទ/ចាស ខ្ញុំធ្លាប់",
+      "yesDesc": "បទពិសោធន៍របស់អ្នកធ្វើឱ្យអ្នកក្លាយជាអ្នកឆ្លើយតបដ៏មានតម្លៃបំផុត",
+      "no": "ទេ ខ្ញុំមិនធ្លាប់ទេ",
+      "noDesc": "មិនអីទេ ការរៀបចំគឺជាការការពារដ៏ល្អបំផុត"
+    },
+    "step5": {
+      "callsign": "[ ការចាត់តាំងឈ្មោះហៅក្រៅ ]",
+      "title": "ឈ្មោះហៅក្រៅរបស់អ្នកកំពុងរង់ចាំ",
+      "desc": "ឈ្មោះនេះនឹងត្រូវបានចងចាំនៅទូទាំងអាស៊ាន។ ជ្រើសរើសដោយប្រាជ្ញា អ្នកឆ្លើយតប។",
+      "placeholder": "បញ្ចូលឈ្មោះហៅក្រៅរបស់អ្នក",
+      "profilePreview": "ប្រវត្តិរូបអ្នកឆ្លើយតបរបស់អ្នក",
+      "cadet": "សិក្ខាកាម",
+      "adultLabel": "18+",
+      "minorLabel": "អាយុក្រោម 18",
+      "begin": "ចាប់ផ្តើមការបណ្តុះបណ្តាល →"
+    }
+  },
+  "lo": {
+    "step0": {
+      "transmission": "[ ສັນຍານເຂົ້າ ]",
+      "title1": "ກວດພົບສັນຍານ",
+      "title2": "ບາງຢ່າງ…",
+      "desc": "ທົ່ວອາຊີຕາເວັນອອກສ່ຽງໃຕ້, ຊຸມຊົນກຳລັງຮຽກຮ້ອງການຊ່ວຍເຫຼືອ. ໄພພິບັດເກີດຂຶ້ນໂດຍບໍ່ມີການເຕືອນລ່ວງໜ້າ. ແຕ່ມີຜູ້ທີ່ກຽມພ້ອມແລ້ວຄື <strong class=\"text-ink\">ກອງກຳລັງສຳຮອງດິຈິຕອນ</strong>.",
+      "subdesc": "ການຝຶກອົບຮົມຂອງທ່ານເລີ່ມຕົ້ນແລ້ວ.",
+      "accept": "ຍອມຮັບພາລະກິດ →",
+      "backToLanding": "← ກັບຄືນໜ້າຫຼັກ"
+    },
+    "step1": {
+      "briefing": "[ ສະຫຼຸບພາລະກິດ ]",
+      "title": "ແຕ່ລະພາກພື້ນມີເລື່ອງລາວຂອງຕົນເອງ",
+      "desc": "ການຝຶກອົບຮົມຂອງທ່ານຈະເລີ່ມຕົ້ນຢູ່ໃສ? ເລືອກຖານປະຕິບັດການອາຊຽນຂອງທ່ານ.",
+      "back": "← ກັບຄືນ",
+      "continue": "ສືບຕໍ່ →"
+    },
+    "step2": {
+      "clearance": "[ ກວດສອບສິດ ]",
+      "title": "ລະດັບຄວາມພ້ອມຂອງທ່ານ",
+      "desc": "ກ່ອນທີ່ພວກເຮົາຈະກຳນົດເສັ້ນທາງການຝຶກອົບຮົມຂອງທ່ານ, ພວກເຮົາຈຳເປັນຕ້ອງປັບລະດັບປະສົບການຂອງທ່ານກ່ອນ.",
+      "adult": "ຂ້ອຍອາຍຸ 18 ປີຂຶ້ນໄປ",
+      "adultDesc": "ເຂົ້າເຖິງໂມດູນການຝຶກອົບຮົມທັງໝົດໄດ້",
+      "minor": "ຂ້ອຍອາຍຸຕ່ຳກວ່າ 18 ປີ",
+      "minorDesc": "ເສັ້ນທາງການຝຶກອົບຮົມທີ່ເໝາະສົມກັບໄວ"
+    },
+    "step3": {
+      "profile": "[ ໂປຣໄຟລ໌ຜູ້ຕອບສະໜອງ ]",
+      "title": "ຜູ້ຕອບສະໜອງທຸກຄົນລ້ວນແຕ່ມີຄວາມພິເສດ",
+      "desc": "ມຸມມອງຂອງທ່ານສຳຄັນ. ສິ່ງນີ້ຊ່ວຍໃຫ້ພວກເຮົາປັບແຕ່ງປະສົບການການຝຶກອົບຮົມຂອງທ່ານໄດ້.",
+      "male": "ຊາຍ",
+      "female": "ຍິງ",
+      "preferNotToSay": "ບໍ່ຕ້ອງການລະບຸ"
+    },
+    "step4": {
+      "fieldExp": "[ ປະສົບການພາກສະໜາມ ]",
+      "title": "ບາງຄົນເຄີຍປະເຊີນກັບພາຍຸມາແລ້ວ",
+      "desc": "ທ່ານເຄີຍປະສົບໄພພິບັດທາງທຳມະຊາດດ້ວຍຕົນເອງຫຼືບໍ່? ສິ່ງນີ້ຊ່ວຍໃຫ້ພວກເຮົາກຳນົດທິດທາງການຝຶກອົບຮົມຂອງທ່ານ.",
+      "yes": "ແມ່ນແລ້ວ, ຂ້ອຍເຄີຍ",
+      "yesDesc": "ປະສົບການຂອງທ່ານເຮັດໃຫ້ທ່ານເປັນຜູ້ຕອບສະໜອງທີ່ມີຄ່າທີ່ສຸດ",
+      "no": "ບໍ່, ຂ້ອຍບໍ່ເຄີຍ",
+      "noDesc": "ບໍ່ເປັນຫຍັງ, ການກຽມພ້ອມຄືການປ້ອງກັນທີ່ດີທີ່ສຸດ"
+    },
+    "step5": {
+      "callsign": "[ ການກຳນົດນາມຮຽກຂານ ]",
+      "title": "ນາມຮຽກຂານຂອງທ່ານລໍຖ້າຢູ່",
+      "desc": "ຊື່ນີ້ຈະເປັນທີ່ຈົດຈຳໄປທົ່ວອາຊຽນ. ເລືອກໃຫ້ດີ, ຜູ້ຕອບສະໜອງ.",
+      "placeholder": "ປ້ອນນາມຮຽກຂານຂອງທ່ານ",
+      "profilePreview": "ໂປຣໄຟລ໌ຜູ້ຕອບສະໜອງຂອງທ່ານ",
+      "cadet": "ນັກຮຽນນາຍຮ້ອຍ",
+      "adultLabel": "18+",
+      "minorLabel": "ອາຍຸຕ່ຳກວ່າ 18",
+      "begin": "ເລີ່ມການຝຶກອົບຮົມ →"
+    }
+  },
+  "my": {
+    "step0": {
+      "transmission": "[ အချက်ပြ ဝင်ရောက်လာသည် ]",
+      "title1": "အချက်ပြတစ်ခုကို",
+      "title2": "ဖမ်းယူရရှိသည်…",
+      "desc": "အာဆီယံတစ်လွှားတွင် အသိုင်းအဝိုင်းများက အကူအညီတောင်းခံနေကြသည်။ သဘာဝဘေးအန္တရာယ်များသည် သတိမပေးဘဲ ဝင်ရောက်လာတတ်သည်။ သို့သော် အသင့်ပြင်ထားသူများဖြစ်သည့် <strong class=\"text-ink\">ဒစ်ဂျစ်တယ် အရန်တပ်ဖွဲ့</strong> ရှိပါသည်။",
+      "subdesc": "သင်၏လေ့ကျင့်မှု ယခုစတင်ပါပြီ။",
+      "accept": "မစ်ရှင်ကို လက်ခံမည် →",
+      "backToLanding": "← ပင်မစာမျက်နှာသို့ ပြန်သွားရန်"
+    },
+    "step1": {
+      "briefing": "[ မစ်ရှင် ရှင်းလင်းချက် ]",
+      "title": "ဒေသတစ်ခုစီတွင် ကိုယ်ပိုင်ဇာတ်လမ်းရှိသည်",
+      "desc": "သင်၏လေ့ကျင့်မှု မည်သည့်နေရာမှ စတင်မည်နည်း။ သင်၏ အာဆီယံ အခြေစိုက်စခန်းကို ရွေးချယ်ပါ။",
+      "back": "← နောက်သို့",
+      "continue": "ရှေ့ဆက်မည် →"
+    },
+    "step2": {
+      "clearance": "[ ခွင့်ပြုချက် စစ်ဆေးခြင်း ]",
+      "title": "သင်၏ အသင့်ဖြစ်မှု အဆင့်",
+      "desc": "သင်၏လေ့ကျင့်ရေးလမ်းကြောင်းကို မသတ်မှတ်မီ၊ သင်၏ အတွေ့အကြုံအဆင့်ကို စစ်ဆေးရန်လိုအပ်သည်။",
+      "adult": "ကျွန်ုပ် အသက် ၁၈ နှစ် သို့မဟုတ် ထိုထက်ကြီးပါသည်",
+      "adultDesc": "လေ့ကျင့်ရေးသင်ခန်းစာအားလုံးကို အပြည့်အဝ ဝင်ရောက်ကြည့်ရှုနိုင်သည်",
+      "minor": "ကျွန်ုပ် အသက် ၁၈ နှစ်အောက် ဖြစ်ပါသည်",
+      "minorDesc": "အသက်အရွယ်နှင့်ကိုက်ညီသော လေ့ကျင့်ရေးလမ်းကြောင်း"
+    },
+    "step3": {
+      "profile": "[ ကယ်ဆယ်ရေးသမား ကိုယ်ရေးအကျဉ်း ]",
+      "title": "ကယ်ဆယ်ရေးသမားတိုင်းသည် ထူးခြားသည်",
+      "desc": "သင်၏ အမြင်သည် အရေးကြီးပါသည်။ ၎င်းသည် သင်၏ လေ့ကျင့်ရေးအတွေ့အကြုံကို စိတ်ကြိုက်ဖန်တီးရန် ကူညီပေးပါမည်။",
+      "male": "ကျား",
+      "female": "မ",
+      "preferNotToSay": "မဖြေဆိုလိုပါ"
+    },
+    "step4": {
+      "fieldExp": "[ လက်တွေ့ အတွေ့အကြုံ ]",
+      "title": "ကျွန်ုပ်တို့ထဲမှ အချို့သည် မုန်တိုင်းများကို ရင်ဆိုင်ခဲ့ဖူးသည်",
+      "desc": "သဘာဝဘေးအန္တရာယ်တစ်ခုကို ကိုယ်တိုင် ကြုံတွေ့ခဲ့ဖူးပါသလား။ ၎င်းသည် သင်၏လေ့ကျင့်ရေးကို ပုံဖော်ရန် ကူညီပေးသည်။",
+      "yes": "ဟုတ်ကဲ့၊ ကြုံဖူးပါတယ်",
+      "yesDesc": "သင်၏အတွေ့အကြုံက သင့်အား အဖိုးတန်ကယ်ဆယ်ရေးသမားတစ်ဦး ဖြစ်စေသည်",
+      "no": "ဟင့်အင်း၊ မကြုံဖူးပါ",
+      "noDesc": "ရပါတယ်၊ ကြိုတင်ပြင်ဆင်ခြင်းက အကောင်းဆုံး ကာကွယ်ခြင်းပါပဲ"
+    },
+    "step5": {
+      "callsign": "[ ခေါ်ဆိုမည့် အမည် သတ်မှတ်ခြင်း ]",
+      "title": "သင်၏ အမည်က စောင့်ကြိုနေသည်",
+      "desc": "ဤအမည်ကို အာဆီယံတစ်လွှားတွင် မှတ်မိနေမည်ဖြစ်သည်။ သေချာစွာ ရွေးချယ်ပါ၊ ကယ်ဆယ်ရေးသမား။",
+      "placeholder": "သင်၏အမည်ကို ရိုက်ထည့်ပါ",
+      "profilePreview": "သင်၏ ကယ်ဆယ်ရေးသမား ကိုယ်ရေးအကျဉ်း",
+      "cadet": "သင်တန်းသား",
+      "adultLabel": "၁၈+",
+      "minorLabel": "၁၈ နှစ်အောက်",
+      "begin": "လေ့ကျင့်ရေး စတင်မည် →"
+    }
+  }
+}

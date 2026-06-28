@@ -49,7 +49,7 @@
     </div>
 
     <!-- Quiz -->
-    <div v-if="showQuiz" class="bg-white rounded-3xl p-8 mb-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] animate-slide-up">
+    <div v-if="showQuiz" v-motion class="bg-white rounded-3xl p-8 mb-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
       <div class="flex items-center gap-3 mb-6">
         <span class="px-4 py-1.5 bg-orange-500 text-white rounded-xl font-heading font-bold text-xs">⚡ Attention Check</span>
         <span class="text-xs text-gray-400 font-body">Paused at {{ formatTime(currentTime) }}</span>

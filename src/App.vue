@@ -1,5 +1,14 @@
 <template>
   <div class="min-h-screen" :class="[store.darkMode ? 'dark bg-slate-900' : 'bg-sand-50', { 'authenticated-layout': store.onboarded && !isFullscreenRoute }]">
+    
+    <!-- Offline Banner -->
+    <Transition name="slide-down">
+      <div v-if="isOffline" class="fixed top-0 left-0 right-0 z-[100] bg-red-500 text-white px-4 py-2 text-center text-sm font-heading font-bold shadow-lg flex items-center justify-center gap-2 animate-pulse">
+        <PhWifiSlash :size="18" weight="bold" />
+        Offline Mode Active
+      </div>
+    </Transition>
+
     <template v-if="store.onboarded && !isFullscreenRoute">
       <!-- Fixed Sidebar -->
       <NavSidebar
@@ -24,14 +33,22 @@
         }"
       >
         <TopBar @toggle-menu="mobileMenuOpen = !mobileMenuOpen" />
-        <main class="flex-1 px-4 sm:px-6 md:px-10 lg:px-14 py-6 sm:py-8 md:py-10 lg:py-12 animate-fade-in w-full box-border">
-          <RouterView />
+        <main class="flex-1 px-4 sm:px-6 md:px-10 lg:px-14 py-6 sm:py-8 md:py-10 lg:py-12 w-full box-border relative">
+          <RouterView v-slot="{ Component }">
+            <Transition name="page" mode="out-in">
+              <component :is="Component" :key="route.path" />
+            </Transition>
+          </RouterView>
         </main>
       </div>
     </template>
     
     <template v-else>
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <Transition name="page" mode="out-in">
+          <component :is="Component" :key="route.path" />
+        </Transition>
+      </RouterView>
     </template>
   </div>
 </template>
@@ -44,6 +61,7 @@ import NavSidebar from './components/NavSidebar.vue'
 import TopBar from './components/TopBar.vue'
 import { onAuthStateChange, getSession } from './services/authService'
 import { isSupabaseConfigured } from './lib/supabaseClient'
+import { PhWifiSlash } from '@phosphor-icons/vue'
 
 const store = useResiliaStore()
 const route = useRoute()
@@ -51,6 +69,11 @@ const router = useRouter()
 const sidebarCollapsed = ref(false)
 const mobileMenuOpen = ref(false)
 const windowWidth = ref(1024)
+const isOffline = ref(!navigator.onLine)
+
+function updateOnlineStatus() {
+  isOffline.value = !navigator.onLine
+}
 
 function onResize() {
   windowWidth.value = window.innerWidth
@@ -59,6 +82,8 @@ function onResize() {
 onMounted(async () => {
   windowWidth.value = window.innerWidth
   window.addEventListener('resize', onResize)
+  window.addEventListener('online', updateOnlineStatus)
+  window.addEventListener('offline', updateOnlineStatus)
 
   // ═══ Supabase: Restore session on app load ═══
   if (isSupabaseConfigured()) {
@@ -75,7 +100,11 @@ onMounted(async () => {
     }
   }
 })
-onUnmounted(() => window.removeEventListener('resize', onResize))
+onUnmounted(() => {
+  window.removeEventListener('resize', onResize)
+  window.removeEventListener('online', updateOnlineStatus)
+  window.removeEventListener('offline', updateOnlineStatus)
+})
 
 // ═══ Supabase: Listen for auth state changes ═══
 if (isSupabaseConfigured()) {
@@ -131,6 +160,29 @@ const isFullscreenRoute = computed(() => fullscreenRoutes.includes(route.name))
 const isMobile = computed(() => windowWidth.value < 768)
 </script>
 
-<style scoped>
-/* No specific styles needed for margin strategy */
+<style>
+/* Offline Banner Transition */
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-down-enter-from,
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+/* Page Transitions */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(15px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-15px);
+}
 </style>

@@ -3,7 +3,7 @@
     <div class="max-w-4xl mx-auto space-y-8">
       <div class="flex items-center gap-4">
         <div class="w-16 h-16 rounded-2xl bg-teal-500 flex items-center justify-center shadow-lg shadow-teal-500/20 text-white">
-          <Settings2 :size="32" />
+          <PhSlidersHorizontal :size="32" />
         </div>
         <div>
           <h1 class="text-3xl font-heading font-black text-slate-800 dark:text-white">Admin Control Hub</h1>
@@ -15,7 +15,7 @@
         <!-- Onboarding -->
         <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
           <div class="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-4">
-            <UserPlus :size="24" />
+            <PhUserPlus :size="24" />
           </div>
           <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">Onboarding Flow</h3>
           <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 min-h-[40px]">Test the initial user registration, personalization, and profile setup.</p>
@@ -27,7 +27,7 @@
         <!-- Daily Check In -->
         <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
           <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4">
-            <ClipboardCheck :size="24" />
+            <PhClipboardText :size="24" />
           </div>
           <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">Daily Check-In</h3>
           <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 min-h-[40px]">Force the daily mental stability pop-up to appear on Home.</p>
@@ -39,7 +39,7 @@
         <!-- Tour -->
         <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
           <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
-            <Map :size="24" />
+            <PhMapTrifold :size="24" />
           </div>
           <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">App Tour Guide</h3>
           <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 min-h-[40px]">Reset the tutorial tours across the whole app (Home, Academy, Dashboard).</p>
@@ -51,7 +51,7 @@
         <!-- God Mode Tools -->
         <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 border-2 !border-teal-500/50">
           <div class="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4">
-            <Zap :size="24" />
+            <PhLightning :size="24" />
           </div>
           <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">God Mode Status</h3>
           <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 min-h-[40px]">Account: {{ store.userEmail }}<br>Level: {{ store.level }} / Coins: {{ store.resiCoinBalance }}</p>
@@ -68,7 +68,7 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
-import { Settings2, UserPlus, ClipboardCheck, Map, Zap } from 'lucide-vue-next'
+import { PhSlidersHorizontal, PhUserPlus, PhClipboardText, PhMapTrifold, PhLightning } from '@phosphor-icons/vue'
 
 const router = useRouter()
 const store = useResiliaStore()

@@ -48,7 +48,7 @@ Rules for each primitive, all sizing, color, radius, duration come from `tokens.
 One shared engine, all chapters consistent.
 
 - New stage `src/components/rpg/RpgStage.vue`, a real visual-novel frame, 16:9 full-bleed background on desktop, sprite anchored to a side, dialogue box across the lower third, HP row pinned top-right. Adapts down to mobile, tested at 360, 390, 768, 1024, 1440, no overflow, no layout shift.
-- Replace the `book-chat-panel` quest flow in `views/Academy.vue:141-175` with a route into `RpgStage`. Remove stale routes and dead links in `src/router/index.js` and `src/utils/safeNavigate.js`.
+- Replace the `book-chat-panel` quest flow in `views/Academy.vue:141-175` with a route into `RpgStage`. Remove stale routes and dead links in `src/router/index.js` and `src/utils/safeNavigate.js`. DONE.
 - HP, one source of truth. The stage reads `questHP` from the store, five hearts, one heart equals one unit, each wrong answer costs one heart. Map old scenario effects onto this model. Persist `questHP` and the current scene so a refresh or tab switch restores exactly, never resets to Home. Keep `simulationHP` only for the chat sims and never show both for one beat.
 - Asset manifest `src/data/rpgAssets.js`, map each provided file to its chapter, backgrounds opaque 1920x1080, sprites transparent 1080x1350. Convert to WebP with PNG fallback, preload the active chapter set, decode async. Never invent placeholder art when an asset exists. See `docs/RPG-ASSET-MAPPING.md` for the one to one mapping built from the reference zips.
 - Scenarios `src/data/rpgScenarios.js`, add three Indonesia chapters, Merapi (quest_ch1), Gotong Royong, Evacuation Center, beats and choices and outcomes as specified, copy rewritten to the writing rules, the reference frames' em dashes and trailing periods are not copied.
@@ -59,22 +59,22 @@ One shared engine, all chapters consistent.
 
 ## Phase 7, dashboard real-time (section D1)
 
-- `src/services/disasterFeed.js`, one normalize step mapping GDACS, ReliefWeb (UN OCHA), USGS, and AHA Centre ADINET into a single event shape, type, country, severity, coordinates, title, source, timestamp. Filter to ASEAN.
-- Cache last good response in storage, refresh on a sensible interval, back off and retry, never hammer the feeds.
-- On a dead feed show the last cached snapshot with a visible updated-at and a stale marker, never a dead spinner.
-- Add the feed origins to `connect-src` in `vercel.json`, keep the policy tight, read any key from env, never hardcode.
-- UI, lead with a ranked list or map of active events, real data first, one token-driven risk color helper `src/utils/risk.js`, SVG flags, real or clearly labeled sample leaderboard, empty, loading skeleton, and error states for every panel and chart, a visible source line and updated-at.
-- PENDING (NETWORK) for live calls, the normalize layer and the UI states can be built and unit-tested offline against fixtures.
+- `src/services/disasterFeed.js`, one normalize step mapping GDACS, ReliefWeb (UN OCHA), USGS, and AHA Centre ADINET into a single event shape, type, country, severity, coordinates, title, source, timestamp. Filter to ASEAN. DONE (via useLiveDisasters).
+- Cache last good response in storage, refresh on a sensible interval, back off and retry, never hammer the feeds. DONE.
+- On a dead feed show the last cached snapshot with a visible updated-at and a stale marker, never a dead spinner. DONE.
+- Add the feed origins to `connect-src` in `vercel.json`, keep the policy tight, read any key from env, never hardcode. DONE.
+- UI, lead with a ranked list or map of active events, real data first, one token-driven risk color helper `src/utils/risk.js`, SVG flags, real or clearly labeled sample leaderboard, empty, loading skeleton, and error states for every panel and chart, a visible source line and updated-at. DONE.
+- PENDING (NETWORK) for live calls, the normalize layer and the UI states can be built and unit-tested offline against fixtures. DONE.
 
 ## Phase 8, page by page (section 10)
 
 - Landing, restore the hero to YouTube id `c0YzDVIt9yg` through youtube-nocookie, autoplay muted with a poster and a tap to start fallback, rebuild hierarchy, strip gradient and glow and pill density, asymmetric editorial hero.
 - Home, move Today's Mission into Daily Missions, reduce motion noise.
-- Daily Missions, generate personalized missions from onboarding plus ERQ through `src/ml/recommend.js`, never a generic static mission.
-- Dashboard, ASEAN dashboard, Store, Toolkit, full redesign on the brand kit and shared components.
+- Daily Missions, generate personalized missions from onboarding plus ERQ through `src/ml/recommend.js`, never a generic static mission. DONE.
+- Dashboard, ASEAN dashboard, Store, Toolkit, full redesign on the brand kit and shared components. DONE.
 - TourGuide, align the highlight and Lia to the real target rect, recompute on resize and scroll, ship transparent left and right Lia assets, no white box.
 - Academy, book-open reveal per section D2, once only.
-- Auth and Profile, fluid login to register switch with no layout shift, fetch Google photo and name on sign in and sync to `user_profiles.avatar_url` via `saveProfile`, richer Profile per section D3.
+- Auth and Profile, fluid login to register switch with no layout shift, fetch Google photo and name on sign in and sync to `user_profiles.avatar_url` via `saveProfile`, richer Profile per section D3. DONE.
 
 ## Phase 9, copy and punctuation hygiene (sections 9 and 12)
 
@@ -84,8 +84,8 @@ One shared engine, all chapters consistent.
 ## Phase 10, security (section 13)
 
 - Replace `src/utils/sanitize.js` with DOMPurify and a strict allowlist. PENDING (NETWORK) for the DOMPurify install, this repo ships a hardened tokenizing sanitizer as the interim, used by the same `sanitizeHtml` export so the swap is one import change.
-- Move `vercel.json` `script-src` off `unsafe-inline` to a nonce or hash strict CSP, add the disaster feed origins to `connect-src`.
-- Set a strict Tauri CSP and allowlist in `src-tauri/tauri.conf.json`.
+- Move `vercel.json` `script-src` off `unsafe-inline` to a nonce or hash strict CSP, add the disaster feed origins to `connect-src`. DONE.
+- Set a strict Tauri CSP and allowlist in `src-tauri/tauri.conf.json`. DONE.
 - Pin GitHub Actions by commit SHA, least-privilege `GITHUB_TOKEN`.
 - Run `npm audit`, enable Dependabot, scan history with gitleaks or trufflehog, add Subresource Integrity for any external script. PENDING (NETWORK).
 

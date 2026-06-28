@@ -6,7 +6,7 @@
 
     <div class="w-full max-w-md relative z-10">
       <!-- Logo -->
-      <div class="text-center mb-10 animate-slide-up">
+      <div v-motion class="text-center mb-10">
         <img src="../assets/icon.png" class="w-16 h-16 object-cover rounded-2xl mx-auto mb-5 bg-teal-50 shadow-xl border border-teal-100/50" alt="RESILIA" />
         <h1 class="font-heading text-3xl md:text-4xl font-bold text-ink">
           Join <span class="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">RESILIA</span>
@@ -15,7 +15,7 @@
       </div>
 
       <!-- Tab Switcher -->
-      <div class="flex bg-gray-100 rounded-2xl p-1.5 mb-8 animate-slide-up" style="animation-delay: 0.05s">
+      <div v-motion class="flex bg-gray-100 rounded-2xl p-1.5 mb-8" style="animation-delay: 0.05s">
         <button @click="mode = 'register'"
           class="flex-1 py-3 rounded-xl font-heading font-bold text-sm transition-all duration-300"
           :class="mode === 'register' ? 'bg-white text-ink shadow-sm' : 'text-gray-400 hover:text-gray-600'">
@@ -30,7 +30,7 @@
 
       <Transition name="slide" mode="out-in">
         <!-- Register Form -->
-        <div v-if="mode === 'register'" key="register" class="animate-slide-up" style="animation-delay: 0.1s">
+        <div v-if="mode === 'register'" key="register" v-motion style="animation-delay: 0.1s">
           <div class="space-y-4 mb-6">
             <!-- Name -->
             <div>
@@ -99,7 +99,7 @@
         </div>
 
         <!-- Login Form -->
-        <div v-else key="login" class="animate-slide-up" style="animation-delay: 0.1s">
+        <div v-else key="login" v-motion style="animation-delay: 0.1s">
           <div class="space-y-4 mb-6">
             <div>
               <label class="block text-xs font-heading font-bold text-gray-400 uppercase tracking-wider mb-2">Email</label>
@@ -130,7 +130,7 @@
       </Transition>
 
       <!-- Back to landing -->
-      <div class="text-center mt-8 animate-slide-up" style="animation-delay: 0.15s">
+      <div v-motion class="text-center mt-8" style="animation-delay: 0.15s">
         <RouterLink to="/" class="text-sm text-gray-400 font-body hover:text-teal-600 transition-colors">
           ← Back to landing page
         </RouterLink>
@@ -141,7 +141,7 @@
     <Teleport to="body">
       <Transition name="fade">
         <div v-if="showToS || showPrivacy" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6" @click.self="showToS = false; showPrivacy = false">
-          <div class="bg-white rounded-3xl max-w-lg w-full max-h-[80vh] overflow-y-auto p-8 animate-slide-up shadow-2xl">
+          <div v-motion class="bg-white rounded-3xl max-w-lg w-full max-h-[80vh] overflow-y-auto p-8 shadow-2xl">
             <h2 class="font-heading text-2xl font-bold text-ink mb-4">{{ showToS ? 'Terms of Service' : 'Privacy Policy' }}</h2>
             <div v-if="showToS" class="text-sm text-gray-500 font-body space-y-4 leading-relaxed">
               <p><strong>1. Acceptance of Terms</strong><br>By creating an account on RESILIA, you agree to these Terms of Service.</p>

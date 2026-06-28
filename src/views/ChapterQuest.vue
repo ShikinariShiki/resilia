@@ -9,7 +9,7 @@
 
     <div v-else>
       <!-- Start Screen -->
-      <div v-if="!started" class="animate-slide-up">
+      <div v-if="!started" v-motion>
         <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block cursor-pointer">← Academy</button>
         <RouterLink v-else to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block">← Academy</RouterLink>
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 text-center">
@@ -50,7 +50,7 @@
       </div>
 
       <!-- Active Step -->
-      <div v-else-if="currentStepIndex < quest.steps.length && !questFailed" class="animate-slide-up" :key="currentStepIndex">
+      <div v-else-if="currentStepIndex < quest.steps.length && !questFailed" v-motion :key="currentStepIndex">
         <!-- Top bar with HP -->
         <div class="flex items-center gap-3 mb-6">
           <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading cursor-pointer bg-transparent border-none">← Exit</button>
@@ -121,7 +121,7 @@
             </div>
 
             <!-- Lia Message Bubble -->
-            <div v-if="currentStep.npc" class="flex flex-col gap-1 items-start max-w-[85%] animate-slide-up">
+            <div v-if="currentStep.npc" v-motion class="flex flex-col gap-1 items-start max-w-[85%]">
               <div class="bg-[#E8E5DE] dark:bg-[#2A2620] text-ink dark:text-[#E8E0D4] px-4 py-3 rounded-2xl rounded-tl-sm text-sm font-body leading-relaxed relative border border-gray-200/50 dark:border-amber-800/20">
                 <span v-if="currentStep.emotionLabel" class="text-[9px] text-teal-600 dark:text-teal-400 font-bold block mb-1 uppercase tracking-wider">{{ currentStep.emotionLabel }}</span>
                 {{ replaceNames(currentStep.npc) }}
@@ -130,21 +130,21 @@
             </div>
 
             <!-- Clue Pill -->
-            <div v-if="currentStep.clue" class="text-center my-2 animate-slide-up" style="animation-delay: 0.1s">
+            <div v-if="currentStep.clue" v-motion class="text-center my-2" style="animation-delay: 0.1s">
               <span class="inline-block bg-amber-500/10 text-amber-500 dark:text-amber-400 text-[11px] font-body px-4 py-2 rounded-2xl max-w-[90%] border border-amber-500/20">
                 💡 {{ replaceNames(currentStep.clue) }}
               </span>
             </div>
 
             <!-- User Response Bubble -->
-            <div v-if="stepAnswered && selectedOption !== null" class="flex flex-col gap-1 items-end self-end max-w-[85%] mt-2 animate-slide-up">
+            <div v-if="stepAnswered && selectedOption !== null" v-motion class="flex flex-col gap-1 items-end self-end max-w-[85%] mt-2">
                <div class="bg-gradient-to-br from-teal-500 to-teal-600 text-white px-4 py-3 rounded-2xl rounded-tr-sm text-sm font-body leading-relaxed shadow-lg shadow-teal-500/20">
                   {{ replaceNames(selectedOption.text) }}
                </div>
             </div>
 
             <!-- Feedback Bubble (from Lia) -->
-            <div v-if="stepAnswered && selectedOption" class="flex flex-col gap-1 items-start max-w-[85%] mt-2 animate-slide-up" style="animation-delay: 0.1s">
+            <div v-if="stepAnswered && selectedOption" v-motion class="flex flex-col gap-1 items-start max-w-[85%] mt-2" style="animation-delay: 0.1s">
               <div class="bg-[#E8E5DE] dark:bg-[#2A2620] text-ink dark:text-white px-4 py-3 rounded-2xl rounded-tl-sm text-sm font-body leading-relaxed border"
                 :class="selectedOption.score >= 3 ? 'border-teal-500/50 shadow-[0_0_15px_rgba(20,184,166,0.15)]' : selectedOption.score >= 1 ? 'border-amber-500/50' : 'border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.15)]'">
                  <div class="flex items-center gap-1.5 mb-1.5 border-b border-black/10 dark:border-white/10 pb-1.5">
@@ -181,7 +181,7 @@
       </div>
 
       <!-- Quest Failed -->
-      <div v-else-if="questFailed" class="text-center animate-slide-up">
+      <div v-else-if="questFailed" v-motion class="text-center">
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-red-800/30">
           <div class="text-6xl mb-6">💀</div>
           <h2 class="font-heading text-2xl sm:text-3xl font-bold text-red-500 mb-3">Quest Failed!</h2>
@@ -220,7 +220,7 @@
       </div>
 
       <!-- Quest Complete -->
-      <div v-else class="text-center animate-slide-up">
+      <div v-else v-motion class="text-center">
         <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
           <div class="text-6xl mb-6 quest-trophy">🏆</div>
           <h2 class="font-heading text-2xl sm:text-3xl font-bold text-ink dark:text-white mb-3">Quest Complete!</h2>

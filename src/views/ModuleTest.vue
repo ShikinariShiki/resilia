@@ -14,7 +14,7 @@
       <div class="w-full max-w-2xl">
         <Transition name="slide" mode="out-in">
           <!-- Intro screen -->
-          <div v-if="phase === 'intro'" key="intro" class="text-center animate-slide-up">
+          <div v-if="phase === 'intro'" key="intro" v-motion class="text-center">
             <div class="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg"
               :class="testType === 'pre' ? 'bg-gradient-to-br from-blue-400 to-blue-600' : 'bg-gradient-to-br from-green-400 to-green-600'">
               <span class="text-4xl">{{ testType === 'pre' ? '📋' : '🎯' }}</span>
@@ -35,7 +35,7 @@
           </div>
 
           <!-- Quiz -->
-          <div v-else-if="phase === 'quiz'" key="quiz" class="animate-slide-up">
+          <div v-else-if="phase === 'quiz'" key="quiz" v-motion>
             <!-- Progress bar -->
             <div class="w-full h-2 bg-gray-100 dark:bg-slate-800 rounded-full mb-8 overflow-hidden">
               <div class="h-full rounded-full transition-all duration-500 bg-gradient-to-r"
@@ -68,7 +68,7 @@
                   </button>
                 </div>
 
-                <div v-if="answered !== null" class="animate-slide-up">
+                <div v-if="answered !== null" v-motion>
                   <div class="p-4 rounded-2xl mb-6 text-sm font-body"
                     :class="answered === questions[currentQ].correct ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400'">
                     {{ answered === questions[currentQ].correct ? '✅ Correct!' : '❌ Not quite. The correct answer is: ' + questions[currentQ].options[questions[currentQ].correct] }}
@@ -83,7 +83,7 @@
           </div>
 
           <!-- Results -->
-          <div v-else-if="phase === 'results'" key="results" class="text-center animate-slide-up">
+          <div v-else-if="phase === 'results'" key="results" v-motion class="text-center">
             <div class="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg"
               :class="scorePercent >= 70 ? 'bg-gradient-to-br from-green-400 to-green-600' : 'bg-gradient-to-br from-amber-400 to-amber-600'">
               <span class="text-4xl">{{ scorePercent >= 70 ? '🏆' : '💡' }}</span>

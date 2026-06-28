@@ -1,0 +1,461 @@
+{
+  "en": {
+    "title": "Mission Control",
+    "subtitle": "ASEAN disaster intelligence & real-time threat overview.",
+    "live": "LIVE",
+    "readiness": "Your Readiness",
+    "readinessSub": "Based on your progress",
+    "riskComparison": "ASEAN Risk Comparison",
+    "riskComparisonSub": "Comparative analysis of Disaster Risk Indices across member nations.",
+    "intelHub": "ASEAN Intelligence Hub",
+    "emergency": "Emergency",
+    "populationGdp": "Population: {pop}M · GDP/Cap: ${gdp}",
+    "riskIndex": "Risk Index",
+    "hdi": "HDI",
+    "disastersYr": "Disasters/yr",
+    "responders": "Responders",
+    "topThreats": "Top Threats",
+    "mostRecent": "Most Recent",
+    "aseanToday": "ASEAN Today",
+    "leaderboard": "Community Leaderboard",
+    "you": "(You)",
+    "respondersDeployed": "Responders Deployed",
+    "recentDisasters": "Recent Disasters",
+    "labels": {
+      "fieldReady": "Field Ready",
+      "advanced": "Advanced",
+      "developing": "Developing",
+      "beginner": "Beginner"
+    },
+    "metrics": {
+      "activeResponders": "Active Responders",
+      "activeRespondersSub": "deployed across ASEAN",
+      "communityFund": "Community Fund",
+      "communityFundSub": "sponsored to communities"
+    },
+    "facts": {
+      "didYouKnow": "Did You Know?",
+      "didYouKnowDesc": "Indonesia experiences about 2,000 earthquakes per year, making it the most seismically active country in ASEAN.",
+      "trainingTip": "Training Tip",
+      "trainingTipDesc": "Psychological First Aid (PFA) is most effective when applied within the first 72 hours after a disaster event.",
+      "aseanStats": "ASEAN Stats",
+      "aseanStatsDesc": "Over 650 million people in ASEAN face increasing climate-related disaster risks each year."
+    },
+    "tour": {
+      "missionControl": "Mission Control",
+      "missionControlDesc": "Your command center for ASEAN disaster intelligence and deployment data.",
+      "aseanIntel": "ASEAN Intelligence",
+      "aseanIntelDesc": "Click any country card to see detailed risk data, threats, and emergency hotlines.",
+      "responderMap": "Responder Map",
+      "responderMapDesc": "See trained responders deployed in each country."
+    }
+  },
+  "id": {
+    "title": "Pusat Kendali",
+    "subtitle": "Intelijen bencana ASEAN & tinjauan ancaman waktu nyata.",
+    "live": "LANGSUNG",
+    "readiness": "Kesiapan Anda",
+    "readinessSub": "Berdasarkan kemajuan Anda",
+    "riskComparison": "Perbandingan Risiko ASEAN",
+    "riskComparisonSub": "Analisis komparatif Indeks Risiko Bencana di seluruh negara anggota.",
+    "intelHub": "Pusat Intelijen ASEAN",
+    "emergency": "Darurat",
+    "populationGdp": "Populasi: {pop}Jt · PDB/Kap: ${gdp}",
+    "riskIndex": "Indeks Risiko",
+    "hdi": "IPM",
+    "disastersYr": "Bencana/thn",
+    "responders": "Relawan",
+    "topThreats": "Ancaman Utama",
+    "mostRecent": "Paling Baru",
+    "aseanToday": "ASEAN Hari Ini",
+    "leaderboard": "Papan Peringkat",
+    "you": "(Anda)",
+    "respondersDeployed": "Relawan Dikerahkan",
+    "recentDisasters": "Bencana Baru-Baru Ini",
+    "labels": {
+      "fieldReady": "Siap Lapangan",
+      "advanced": "Lanjutan",
+      "developing": "Berkembang",
+      "beginner": "Pemula"
+    },
+    "metrics": {
+      "activeResponders": "Relawan Aktif",
+      "activeRespondersSub": "dikerahkan di seluruh ASEAN",
+      "communityFund": "Dana Komunitas",
+      "communityFundSub": "disponsori untuk komunitas"
+    },
+    "facts": {
+      "didYouKnow": "Tahukah Anda?",
+      "didYouKnowDesc": "Indonesia mengalami sekitar 2.000 gempa bumi per tahun, menjadikannya negara paling aktif secara seismik di ASEAN.",
+      "trainingTip": "Tips Pelatihan",
+      "trainingTipDesc": "Pertolongan Pertama Psikologis (PFA) paling efektif jika diterapkan dalam 72 jam pertama setelah peristiwa bencana.",
+      "aseanStats": "Statistik ASEAN",
+      "aseanStatsDesc": "Lebih dari 650 juta orang di ASEAN menghadapi peningkatan risiko bencana terkait iklim setiap tahunnya."
+    },
+    "tour": {
+      "missionControl": "Pusat Kendali",
+      "missionControlDesc": "Pusat komando Anda untuk intelijen bencana ASEAN dan data pengerahan.",
+      "aseanIntel": "Intelijen ASEAN",
+      "aseanIntelDesc": "Klik kartu negara mana pun untuk melihat data risiko, ancaman, dan nomor darurat terperinci.",
+      "responderMap": "Peta Relawan",
+      "responderMapDesc": "Lihat relawan terlatih yang dikerahkan di setiap negara."
+    }
+  },
+  "ms": {
+    "title": "Pusat Kawalan",
+    "subtitle": "Risikan bencana ASEAN & tinjauan ancaman masa nyata.",
+    "live": "LANGSUNG",
+    "readiness": "Kesediaan Anda",
+    "readinessSub": "Berdasarkan kemajuan anda",
+    "riskComparison": "Perbandingan Risiko ASEAN",
+    "riskComparisonSub": "Analisis perbandingan Indeks Risiko Bencana di seluruh negara anggota.",
+    "intelHub": "Hab Risikan ASEAN",
+    "emergency": "Kecemasan",
+    "populationGdp": "Populasi: {pop}J · KDNK/Kap: ${gdp}",
+    "riskIndex": "Indeks Risiko",
+    "hdi": "IPM",
+    "disastersYr": "Bencana/thn",
+    "responders": "Responden",
+    "topThreats": "Ancaman Utama",
+    "mostRecent": "Terbaharu",
+    "aseanToday": "ASEAN Hari Ini",
+    "leaderboard": "Papan Pendahulu",
+    "you": "(Anda)",
+    "respondersDeployed": "Responden Dikerahkan",
+    "recentDisasters": "Bencana Terkini",
+    "labels": {
+      "fieldReady": "Sedia Lapangan",
+      "advanced": "Lanjutan",
+      "developing": "Membangun",
+      "beginner": "Pemula"
+    },
+    "metrics": {
+      "activeResponders": "Responden Aktif",
+      "activeRespondersSub": "dikerahkan di seluruh ASEAN",
+      "communityFund": "Dana Komuniti",
+      "communityFundSub": "ditaja kepada komuniti"
+    },
+    "facts": {
+      "didYouKnow": "Tahukah Anda?",
+      "didYouKnowDesc": "Indonesia mengalami kira-kira 2,000 gempa bumi setahun, menjadikannya negara paling aktif secara seismik di ASEAN.",
+      "trainingTip": "Petua Latihan",
+      "trainingTipDesc": "Bantuan Kecemasan Psikologi (PFA) paling berkesan apabila digunakan dalam tempoh 72 jam pertama selepas peristiwa bencana.",
+      "aseanStats": "Statistik ASEAN",
+      "aseanStatsDesc": "Lebih 650 juta orang di ASEAN menghadapi peningkatan risiko bencana berkaitan iklim setiap tahun."
+    },
+    "tour": {
+      "missionControl": "Pusat Kawalan",
+      "missionControlDesc": "Pusat arahan anda untuk risikan bencana ASEAN dan data pengerahan.",
+      "aseanIntel": "Risikan ASEAN",
+      "aseanIntelDesc": "Klik mana-mana kad negara untuk melihat data risiko, ancaman dan nombor kecemasan terperinci.",
+      "responderMap": "Peta Responden",
+      "responderMapDesc": "Lihat responden terlatih yang dikerahkan di setiap negara."
+    }
+  },
+  "tl": {
+    "title": "Mission Control",
+    "subtitle": "ASEAN disaster intelligence & pangkalahatang-ideya ng banta sa real-time.",
+    "live": "LIVE",
+    "readiness": "Iyong Kahandaan",
+    "readinessSub": "Batay sa iyong pag-unlad",
+    "riskComparison": "Paghahambing ng Panganib sa ASEAN",
+    "riskComparisonSub": "Paghahambing na pagsusuri ng mga Disaster Risk Index sa mga bansang kasapi.",
+    "intelHub": "ASEAN Intelligence Hub",
+    "emergency": "Emergency",
+    "populationGdp": "Populasyon: {pop}M · GDP/Cap: ${gdp}",
+    "riskIndex": "Risk Index",
+    "hdi": "HDI",
+    "disastersYr": "Mga Sakuna/taon",
+    "responders": "Mga Tumutugon",
+    "topThreats": "Pangunahing Banta",
+    "mostRecent": "Pinakabago",
+    "aseanToday": "ASEAN Ngayon",
+    "leaderboard": "Leaderboard ng Komunidad",
+    "you": "(Ikaw)",
+    "respondersDeployed": "Naka-deploy na mga Tumutugon",
+    "recentDisasters": "Mga Kamakailang Sakuna",
+    "labels": {
+      "fieldReady": "Handa sa Field",
+      "advanced": "Advanced",
+      "developing": "Umuunlad",
+      "beginner": "Baguhan"
+    },
+    "metrics": {
+      "activeResponders": "Mga Aktibong Tumutugon",
+      "activeRespondersSub": "naka-deploy sa buong ASEAN",
+      "communityFund": "Pondo ng Komunidad",
+      "communityFundSub": "inisponsoran sa mga komunidad"
+    },
+    "facts": {
+      "didYouKnow": "Alam Mo Ba?",
+      "didYouKnowDesc": "Nakakaranas ang Indonesia ng halos 2,000 na lindol taun-taon, kaya ito ang pinaka-aktibong seismic country sa ASEAN.",
+      "trainingTip": "Tip sa Pagsasanay",
+      "trainingTipDesc": "Ang Psychological First Aid (PFA) ay pinakamabisa kapag inilapat sa loob ng unang 72 oras pagkatapos ng isang sakuna.",
+      "aseanStats": "ASEAN Stats",
+      "aseanStatsDesc": "Higit sa 650 milyong mga tao sa ASEAN ang nahaharap sa tumataas na panganib sa sakuna na nauugnay sa klima bawat taon."
+    },
+    "tour": {
+      "missionControl": "Mission Control",
+      "missionControlDesc": "Ang iyong command center para sa ASEAN disaster intelligence at deployment data.",
+      "aseanIntel": "ASEAN Intelligence",
+      "aseanIntelDesc": "I-click ang alinmang country card upang makita ang detalyadong data ng panganib, mga banta, at mga emergency hotline.",
+      "responderMap": "Mapa ng Tumutugon",
+      "responderMapDesc": "Tingnan ang mga sinanay na tumutugon na naka-deploy sa bawat bansa."
+    }
+  },
+  "th": {
+    "title": "ศูนย์ควบคุม",
+    "subtitle": "ข้อมูลภัยพิบัติอาเซียน & ภาพรวมภัยคุกคามแบบเรียลไทม์",
+    "live": "สด",
+    "readiness": "ความพร้อมของคุณ",
+    "readinessSub": "ตามความคืบหน้าของคุณ",
+    "riskComparison": "เปรียบเทียบความเสี่ยงอาเซียน",
+    "riskComparisonSub": "การวิเคราะห์เปรียบเทียบดัชนีความเสี่ยงภัยพิบัติทั่วประเทศสมาชิก",
+    "intelHub": "ศูนย์ข้อมูลอาเซียน",
+    "emergency": "ฉุกเฉิน",
+    "populationGdp": "ประชากร: {pop}M · GDP/Cap: ${gdp}",
+    "riskIndex": "ดัชนีความเสี่ยง",
+    "hdi": "HDI",
+    "disastersYr": "ภัยพิบัติ/ปี",
+    "responders": "ผู้ปฏิบัติงาน",
+    "topThreats": "ภัยคุกคามสูงสุด",
+    "mostRecent": "ล่าสุด",
+    "aseanToday": "อาเซียนวันนี้",
+    "leaderboard": "กระดานผู้นำ",
+    "you": "(คุณ)",
+    "respondersDeployed": "ผู้ปฏิบัติงานที่ประจำการ",
+    "recentDisasters": "ภัยพิบัติล่าสุด",
+    "labels": {
+      "fieldReady": "พร้อมลงพื้นที่",
+      "advanced": "ขั้นสูง",
+      "developing": "กำลังพัฒนา",
+      "beginner": "ผู้เริ่มต้น"
+    },
+    "metrics": {
+      "activeResponders": "ผู้ปฏิบัติงานที่ใช้งานอยู่",
+      "activeRespondersSub": "ประจำการทั่วอาเซียน",
+      "communityFund": "กองทุนชุมชน",
+      "communityFundSub": "สนับสนุนชุมชน"
+    },
+    "facts": {
+      "didYouKnow": "คุณรู้หรือไม่?",
+      "didYouKnowDesc": "อินโดนีเซียประสบแผ่นดินไหวประมาณ 2,000 ครั้งต่อปี ทำให้เป็นประเทศที่มีความเคลื่อนไหวทางแผ่นดินไหวมากที่สุดในอาเซียน",
+      "trainingTip": "เคล็ดลับการฝึกอบรม",
+      "trainingTipDesc": "การปฐมพยาบาลทางจิตใจ (PFA) จะมีประสิทธิภาพมากที่สุดเมื่อใช้ภายใน 72 ชั่วโมงแรกหลังจากเกิดภัยพิบัติ",
+      "aseanStats": "สถิติอาเซียน",
+      "aseanStatsDesc": "ประชากรมากกว่า 650 ล้านคนในอาเซียนเผชิญกับความเสี่ยงภัยพิบัติที่เกี่ยวข้องกับสภาพภูมิอากาศเพิ่มขึ้นทุกปี"
+    },
+    "tour": {
+      "missionControl": "ศูนย์ควบคุม",
+      "missionControlDesc": "ศูนย์บัญชาการของคุณสำหรับข้อมูลภัยพิบัติอาเซียนและข้อมูลการประจำการ",
+      "aseanIntel": "ข้อมูลอาเซียน",
+      "aseanIntelDesc": "คลิกที่การ์ดประเทศใดก็ได้เพื่อดูข้อมูลความเสี่ยงโดยละเอียด ภัยคุกคาม และสายด่วนฉุกเฉิน",
+      "responderMap": "แผนที่ผู้ปฏิบัติงาน",
+      "responderMapDesc": "ดูผู้ปฏิบัติงานที่ผ่านการฝึกอบรมที่ประจำการอยู่ในแต่ละประเทศ"
+    }
+  },
+  "vi": {
+    "title": "Trung Tâm Điều Khiển",
+    "subtitle": "Thông tin thảm họa ASEAN & tổng quan về mối đe dọa thời gian thực.",
+    "live": "TRỰC TIẾP",
+    "readiness": "Mức Độ Sẵn Sàng Của Bạn",
+    "readinessSub": "Dựa trên tiến trình của bạn",
+    "riskComparison": "So Sánh Rủi Ro ASEAN",
+    "riskComparisonSub": "Phân tích so sánh Chỉ Số Rủi Ro Thảm Họa trên các quốc gia thành viên.",
+    "intelHub": "Trung Tâm Thông Tin ASEAN",
+    "emergency": "Khẩn cấp",
+    "populationGdp": "Dân số: {pop}Tr · GDP/Ng: ${gdp}",
+    "riskIndex": "Chỉ Số Rủi Ro",
+    "hdi": "HDI",
+    "disastersYr": "Thảm họa/năm",
+    "responders": "Người Ứng Phó",
+    "topThreats": "Mối Đe Dọa Hàng Đầu",
+    "mostRecent": "Mới Nhất",
+    "aseanToday": "ASEAN Hôm Nay",
+    "leaderboard": "Bảng Xếp Hạng",
+    "you": "(Bạn)",
+    "respondersDeployed": "Người Ứng Phó Đã Triển Khai",
+    "recentDisasters": "Thảm Họa Gần Đây",
+    "labels": {
+      "fieldReady": "Sẵn Sàng Thực Địa",
+      "advanced": "Nâng Cao",
+      "developing": "Đang Phát Triển",
+      "beginner": "Người Mới"
+    },
+    "metrics": {
+      "activeResponders": "Người Ứng Phó Tích Cực",
+      "activeRespondersSub": "triển khai khắp ASEAN",
+      "communityFund": "Quỹ Cộng Đồng",
+      "communityFundSub": "tài trợ cho cộng đồng"
+    },
+    "facts": {
+      "didYouKnow": "Bạn Có Biết?",
+      "didYouKnowDesc": "Indonesia trải qua khoảng 2.000 trận động đất mỗi năm, trở thành quốc gia hoạt động địa chấn mạnh nhất trong ASEAN.",
+      "trainingTip": "Mẹo Đào Tạo",
+      "trainingTipDesc": "Sơ Cứu Tâm Lý (PFA) hiệu quả nhất khi được áp dụng trong vòng 72 giờ đầu tiên sau thảm họa.",
+      "aseanStats": "Thống Kê ASEAN",
+      "aseanStatsDesc": "Hơn 650 triệu người ở ASEAN phải đối mặt với nguy cơ thảm họa liên quan đến khí hậu ngày càng tăng mỗi năm."
+    },
+    "tour": {
+      "missionControl": "Trung Tâm Điều Khiển",
+      "missionControlDesc": "Trung tâm chỉ huy của bạn về thông tin thảm họa ASEAN và dữ liệu triển khai.",
+      "aseanIntel": "Thông Tin ASEAN",
+      "aseanIntelDesc": "Nhấp vào bất kỳ thẻ quốc gia nào để xem dữ liệu rủi ro chi tiết, các mối đe dọa và đường dây nóng khẩn cấp.",
+      "responderMap": "Bản Đồ Người Ứng Phó",
+      "responderMapDesc": "Xem các người ứng phó đã được đào tạo đang triển khai tại mỗi quốc gia."
+    }
+  },
+  "km": {
+    "title": "មជ្ឈមណ្ឌលត្រួតពិនិត្យ",
+    "subtitle": "ព័ត៌មានគ្រោះមហន្តរាយអាស៊ាន & ទិដ្ឋភាពទូទៅនៃការគំរាមកំហែង។",
+    "live": "បន្តផ្ទាល់",
+    "readiness": "ការត្រៀមខ្លួនរបស់អ្នក",
+    "readinessSub": "ផ្អែកលើវឌ្ឍនភាពរបស់អ្នក",
+    "riskComparison": "ការប្រៀបធៀបហានិភ័យអាស៊ាន",
+    "riskComparisonSub": "ការវិភាគប្រៀបធៀបសន្ទស្សន៍ហានិភ័យគ្រោះមហន្តរាយនៅទូទាំងប្រទេសជាសមាជិក។",
+    "intelHub": "មជ្ឈមណ្ឌលព័ត៌មានអាស៊ាន",
+    "emergency": "សង្គ្រោះបន្ទាន់",
+    "populationGdp": "ប្រជាជន: {pop}ល · ផ.ស.ស/ម: ${gdp}",
+    "riskIndex": "សន្ទស្សន៍ហានិភ័យ",
+    "hdi": "HDI",
+    "disastersYr": "គ្រោះមហន្តរាយ/ឆ្នាំ",
+    "responders": "អ្នកឆ្លើយតប",
+    "topThreats": "ការគំរាមកំហែងកំពូល",
+    "mostRecent": "ថ្មីៗបំផុត",
+    "aseanToday": "អាស៊ានថ្ងៃនេះ",
+    "leaderboard": "តារាងពិន្ទុ",
+    "you": "(អ្នក)",
+    "respondersDeployed": "អ្នកឆ្លើយតបដែលបានដាក់ពង្រាយ",
+    "recentDisasters": "គ្រោះមហន្តរាយថ្មីៗ",
+    "labels": {
+      "fieldReady": "ត្រៀមខ្លួនរួចជាស្រេច",
+      "advanced": "កម្រិតខ្ពស់",
+      "developing": "កំពុងអភិវឌ្ឍ",
+      "beginner": "អ្នកចាប់ផ្តើម"
+    },
+    "metrics": {
+      "activeResponders": "អ្នកឆ្លើយតបសកម្ម",
+      "activeRespondersSub": "ដាក់ពង្រាយទូទាំងអាស៊ាន",
+      "communityFund": "មូលនិធិសហគមន៍",
+      "communityFundSub": "ឧបត្ថម្ភដល់សហគមន៍"
+    },
+    "facts": {
+      "didYouKnow": "តើអ្នកដឹងទេ?",
+      "didYouKnowDesc": "ប្រទេសឥណ្ឌូនេស៊ីជួបប្រទះការរញ្ជួយដីប្រហែល 2,000 ដងក្នុងមួយឆ្នាំ ដែលធ្វើឱ្យប្រទេសនេះសកម្មបំផុតនៅក្នុងអាស៊ាន។",
+      "trainingTip": "គន្លឹះបណ្តុះបណ្តាល",
+      "trainingTipDesc": "ការសង្គ្រោះបឋមផ្លូវចិត្ត (PFA) មានប្រសិទ្ធភាពបំផុតនៅពេលអនុវត្តក្នុងរយៈពេល 72 ម៉ោងដំបូង។",
+      "aseanStats": "ស្ថិតិអាស៊ាន",
+      "aseanStatsDesc": "ប្រជាជនជាង 650 លាននាក់ប្រឈមនឹងហានិភ័យគ្រោះមហន្តរាយទាក់ទងនឹងអាកាសធាតុកើនឡើងជារៀងរាល់ឆ្នាំ។"
+    },
+    "tour": {
+      "missionControl": "មជ្ឈមណ្ឌលត្រួតពិនិត្យ",
+      "missionControlDesc": "មជ្ឈមណ្ឌលបញ្ជារបស់អ្នកសម្រាប់ព័ត៌មានគ្រោះមហន្តរាយអាស៊ាន។",
+      "aseanIntel": "ព័ត៌មានអាស៊ាន",
+      "aseanIntelDesc": "ចុចកាតប្រទេសណាមួយដើម្បីមើលទិន្នន័យហានិភ័យលម្អិត។",
+      "responderMap": "ផែនទីអ្នកឆ្លើយតប",
+      "responderMapDesc": "មើលអ្នកឆ្លើយតបដែលបានទទួលការបណ្តុះបណ្តាលនៅក្នុងប្រទេសនីមួយៗ។"
+    }
+  },
+  "lo": {
+    "title": "ສູນຄວບຄຸມ",
+    "subtitle": "ຂໍ້ມູນໄພພິບັດອາຊຽນ & ພາບລວມໄພຂົ່ມຂູ່ແບບສົດ.",
+    "live": "ສົດ",
+    "readiness": "ຄວາມພ້ອມຂອງທ່ານ",
+    "readinessSub": "ອີງຕາມຄວາມຄືບໜ້າຂອງທ່ານ",
+    "riskComparison": "ປຽບທຽບຄວາມສ່ຽງອາຊຽນ",
+    "riskComparisonSub": "ການວິເຄາະປຽບທຽບດັດຊະນີຄວາມສ່ຽງໄພພິບັດທົ່ວປະເທດສະມາຊິກ.",
+    "intelHub": "ສູນຂໍ້ມູນອາຊຽນ",
+    "emergency": "ສຸກເສີນ",
+    "populationGdp": "ປະຊາກອນ: {pop}ລ · GDP/ຄົນ: ${gdp}",
+    "riskIndex": "ດັດຊະນີຄວາມສ່ຽງ",
+    "hdi": "HDI",
+    "disastersYr": "ໄພພິບັດ/ປີ",
+    "responders": "ຜູ້ຕອບສະໜອງ",
+    "topThreats": "ໄພຂົ່ມຂູ່ສູງສຸດ",
+    "mostRecent": "ຫຼ້າສຸດ",
+    "aseanToday": "ອາຊຽນມື້ນີ້",
+    "leaderboard": "ກະດານຜູ້ນຳ",
+    "you": "(ທ່ານ)",
+    "respondersDeployed": "ຜູ້ຕອບສະໜອງທີ່ປະຈຳການ",
+    "recentDisasters": "ໄພພິບັດຫຼ້າສຸດ",
+    "labels": {
+      "fieldReady": "ພ້ອມລົງພື້ນທີ່",
+      "advanced": "ຂັ້ນສູງ",
+      "developing": "ກຳລັງພັດທະນາ",
+      "beginner": "ຜູ້ເລີ່ມຕົ້ນ"
+    },
+    "metrics": {
+      "activeResponders": "ຜູ້ຕອບສະໜອງທີ່ເຄື່ອນໄຫວ",
+      "activeRespondersSub": "ປະຈຳການທົ່ວອາຊຽນ",
+      "communityFund": "ກອງທຶນຊຸມຊົນ",
+      "communityFundSub": "ສະໜັບສະໜູນຊຸມຊົນ"
+    },
+    "facts": {
+      "didYouKnow": "ທ່ານຮູ້ບໍ່?",
+      "didYouKnowDesc": "ອິນໂດເນເຊຍປະສົບແຜ່ນດິນໄຫວປະມານ 2,000 ຄັ້ງຕໍ່ປີ, ເຮັດໃຫ້ເປັນປະເທດທີ່ມີແຜ່ນດິນໄຫວຫຼາຍທີ່ສຸດໃນອາຊຽນ.",
+      "trainingTip": "ເຄັດລັບການຝຶກອົບຮົມ",
+      "trainingTipDesc": "ການປະຖົມພະຍາບານທາງຈິດໃຈ (PFA) ມີປະສິດທິຜົນທີ່ສຸດເມື່ອໃຊ້ພາຍໃນ 72 ຊົ່ວໂມງທຳອິດ.",
+      "aseanStats": "ສະຖິຕິອາຊຽນ",
+      "aseanStatsDesc": "ປະຊາກອນຫຼາຍກວ່າ 650 ລ້ານຄົນໃນອາຊຽນປະເຊີນກັບຄວາມສ່ຽງໄພພິບັດທີ່ກ່ຽວຂ້ອງກັບດິນຟ້າອາກາດເພີ່ມຂຶ້ນທຸກປີ."
+    },
+    "tour": {
+      "missionControl": "ສູນຄວບຄຸມ",
+      "missionControlDesc": "ສູນບັນຊາການຂອງທ່ານສຳລັບຂໍ້ມູນໄພພິບັດອາຊຽນ.",
+      "aseanIntel": "ຂໍ້ມູນອາຊຽນ",
+      "aseanIntelDesc": "ຄລິກໃສ່ບັດປະເທດໃດກໍໄດ້ເພື່ອເບິ່ງຂໍ້ມູນຄວາມສ່ຽງລະອຽດ.",
+      "responderMap": "ແຜນທີ່ຜູ້ຕອບສະໜອງ",
+      "responderMapDesc": "ເບິ່ງຜູ້ຕອບສະໜອງທີ່ຜ່ານການຝຶກອົບຮົມທີ່ປະຈຳການຢູ່ໃນແຕ່ລະປະເທດ."
+    }
+  },
+  "my": {
+    "title": "ထိန်းချုပ်ရေးစင်တာ",
+    "subtitle": "အာဆီယံ သဘာဝဘေးအန္တရာယ် သတင်းအချက်အလက်",
+    "live": "တိုက်ရိုက်",
+    "readiness": "သင်၏ အဆင်သင့်ဖြစ်မှု",
+    "readinessSub": "တိုးတက်မှုအပေါ် အခြေခံသည်",
+    "riskComparison": "အာဆီယံ အန္တရာယ် နှိုင်းယှဉ်ချက်",
+    "riskComparisonSub": "အဖွဲ့ဝင်နိုင်ငံများအကြား ဘေးအန္တရာယ် ညွှန်းကိန်း နှိုင်းယှဉ်ချက်",
+    "intelHub": "အာဆီယံ သတင်းအချက်အလက်",
+    "emergency": "အရေးပေါ်",
+    "populationGdp": "လူဦးရေ: {pop}M · GDP/Cap: ${gdp}",
+    "riskIndex": "အန္တရာယ် ညွှန်းကိန်း",
+    "hdi": "HDI",
+    "disastersYr": "ဘေးအန္တရာယ်/နှစ်",
+    "responders": "ကယ်ဆယ်ရေးသမားများ",
+    "topThreats": "ထိပ်တန်းအန္တရာယ်",
+    "mostRecent": "လတ်တလော",
+    "aseanToday": "ယနေ့ အာဆီယံ",
+    "leaderboard": "အမှတ်ပေးဇယား",
+    "you": "(သင်)",
+    "respondersDeployed": "ချထားသော ကယ်ဆယ်ရေးသမားများ",
+    "recentDisasters": "လတ်တလော ဘေးအန္တရာယ်များ",
+    "labels": {
+      "fieldReady": "အဆင်သင့်ဖြစ်ပြီ",
+      "advanced": "အဆင့်မြင့်",
+      "developing": "တိုးတက်နေဆဲ",
+      "beginner": "အစပြုသူ"
+    },
+    "metrics": {
+      "activeResponders": "တက်ကြွသော ကယ်ဆယ်ရေးသမားများ",
+      "activeRespondersSub": "အာဆီယံတစ်ဝှမ်း",
+      "communityFund": "အသိုင်းအဝိုင်း ရန်ပုံငွေ",
+      "communityFundSub": "အသိုင်းအဝိုင်းသို့ ကူညီရန်"
+    },
+    "facts": {
+      "didYouKnow": "သင်သိပါသလား?",
+      "didYouKnowDesc": "အင်ဒိုနီးရှားသည် တစ်နှစ်လျှင် ငလျင်အကြိမ် ၂၀၀၀ ခန့်လှုပ်ခတ်ပြီး အာဆီယံတွင် အများဆုံးဖြစ်သည်။",
+      "trainingTip": "လေ့ကျင့်ရေး အကြံပြုချက်",
+      "trainingTipDesc": "PFA သည် ဘေးအန္တရာယ်ဖြစ်ပြီး ၇၂ နာရီအတွင်း အထိရောက်ဆုံးဖြစ်သည်။",
+      "aseanStats": "အာဆီယံ စာရင်းအင်း",
+      "aseanStatsDesc": "လူဦးရေ ၆၅၀ သန်းကျော်သည် ရာသီဥတုပြောင်းလဲမှုဆိုင်ရာ ဘေးအန္တရာယ်များကို ရင်ဆိုင်နေရသည်။"
+    },
+    "tour": {
+      "missionControl": "ထိန်းချုပ်ရေးစင်တာ",
+      "missionControlDesc": "အာဆီယံ သဘာဝဘေးအန္တရာယ် သတင်းအချက်အလက် စင်တာ။",
+      "aseanIntel": "အာဆီယံ သတင်းအချက်အလက်",
+      "aseanIntelDesc": "အသေးစိတ် အန္တရာယ် အချက်အလက်များ ကြည့်ရှုရန် နှိပ်ပါ။",
+      "responderMap": "ကယ်ဆယ်ရေး မြေပုံ",
+      "responderMapDesc": "နိုင်ငံအလိုက် ကယ်ဆယ်ရေးသမားများကို ကြည့်ပါ။"
+    }
+  }
+}

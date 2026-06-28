@@ -6,7 +6,7 @@
       </button>
 
       <!-- Scenario header -->
-      <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm overflow-hidden mb-6 sm:mb-8 animate-slide-up">
+      <div v-motion class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm overflow-hidden mb-6 sm:mb-8">
         <div class="bg-gradient-to-br from-gray-800 to-gray-950 p-6 sm:p-8 lg:p-10 relative overflow-hidden">
           <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
           <div class="relative z-10">
@@ -21,7 +21,7 @@
 
         <!-- Chat -->
         <div class="h-[50vh] sm:h-[60vh] p-4 sm:p-6 lg:p-8 overflow-y-auto bg-gray-50/50 dark:bg-slate-900/50 scroll-smooth" ref="chatContainer">
-          <div v-for="(msg, i) in messages" :key="i" class="mb-5 animate-slide-up">
+          <div v-for="(msg, i) in messages" :key="i" v-motion class="mb-5">
             
             <!-- Narrative / Flavor Text -->
             <div v-if="msg.from === 'narrative'" class="text-center my-6 opacity-75">
@@ -83,7 +83,7 @@
         </div>
 
         <!-- Completion State -->
-        <div v-if="completed" class="p-8 border-t border-gray-100 dark:border-slate-700 bg-teal-50 dark:bg-teal-900/20 text-center animate-slide-up">
+        <div v-if="completed" v-motion class="p-8 border-t border-gray-100 dark:border-slate-700 bg-teal-50 dark:bg-teal-900/20 text-center">
           <div class="w-16 h-16 bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 animate-bounce">✓</div>
           <h4 class="font-heading text-xl font-bold text-teal-800 dark:text-teal-300 mb-2">Simulation Complete!</h4>
           <p class="text-sm text-teal-600/80 dark:text-teal-400/80 mb-6 font-body">You earned <span class="font-bold">+100 XP</span> and <span class="font-bold">+20 RC</span>.</p>
@@ -153,7 +153,7 @@ const scenarios = {
         npc: "It's shaking again! Oh God, they're going to be crushed!",
         emotion: '😱', emotionLabel: 'High Distress',
         options: [
-          { text: "Let's move away from the overhang, Rina. Come with me to the safe zone, and we'll radio the SAR team together.", score: 3, feedback: "Safety first. Guiding her to action empowers her and keeps both of you safe." },
+          { text: "Let's move away from the overhang, Rina. Come with me to the safe zone, and we'll radio the SAR team together.", score: 3, feedback: "Safety first. Guiding her to action builds her confidence and keeps both of you safe." },
           { text: "Let go of me, I need to work.", score: 0, feedback: "Rejection increases isolation and panic." },
           { text: "It's just a small one, ignore it.", score: 1, feedback: "Never ignore safety threats in a disaster zone." }
         ]
@@ -310,7 +310,7 @@ const scenarios = {
         npc: "There is too much mud. We cannot do this alone.",
         emotion: '😓', emotionLabel: 'Overwhelmed',
         options: [
-          { text: "I'll call the army to do it for you.", score: 1, feedback: "External aid is good, but empowering the community is better for resilience." },
+          { text: "I'll call the army to do it for you.", score: 1, feedback: "External aid is good, but building the community's own capacity is better for resilience." },
           { text: "Let's gather the young men and form a bucket chain. We can clear the temple first to use as a shelter.", score: 3, feedback: "Mobilizing local resources and setting a communal goal (the temple) builds agency." },
           { text: "You should have built barriers.", score: 0, feedback: "Blaming the victim." }
         ]
@@ -522,9 +522,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.animate-slide-up {
-  animation: slideUp 0.4s ease-out forwards;
-}
+
 
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(10px); }

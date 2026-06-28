@@ -4,14 +4,14 @@
     <TourGuide :steps="homeTourSteps" tourKey="home" nextTourRoute="/dashboard" :totalSteps="9" :delay="2000" />
 
     <!-- Header -->
-    <div class="mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up">
+    <div v-motion class="mb-8 sm:mb-10 md:mb-12 lg:mb-14">
       <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-ink dark:text-white leading-tight">{{ t('home.welcome', { name: store.userName }) }}</h1>
       <p class="text-gray-400 font-body mt-2 sm:mt-3 text-sm sm:text-base">{{ t('home.subtitle') }}</p>
     </div>
 
     <!-- Rank + Balance -->
-    <div id="tour-rank-balance" class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up" style="animation-delay: 0.05s">
-      <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700">
+    <div id="tour-rank-balance" v-motion class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14" style="animation-delay: 0.05s">
+      <BaseCard padding="lg" class="lg:col-span-2">
         <div class="flex items-start justify-between mb-6 sm:mb-8">
           <div class="flex items-center gap-4 sm:gap-5">
             <div class="w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center text-2xl sm:text-3xl md:text-4xl" :style="{ backgroundColor: store.currentTier.color + '15' }">
@@ -36,7 +36,7 @@
           />
         </div>
         <p class="text-xs sm:text-sm text-gray-400 font-body mt-2 sm:mt-3" v-if="store.nextTier">{{ t('home.rank.to_next', { xp: store.nextTier.minXP - store.totalXPEarned, next_rank: store.nextTier.name }) }}</p>
-      </div>
+      </BaseCard>
 
       <div class="bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 text-white flex flex-col justify-between min-h-[160px] sm:min-h-0 hover-lift">
         <div>
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Community Challenge -->
-    <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up hover-lift" style="animation-delay: 0.07s">
+    <div v-motion class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14 hover-lift" style="animation-delay: 0.07s">
       <div class="flex items-start sm:items-center justify-between gap-4 flex-col sm:flex-row">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-purple-500/20 dark:bg-purple-500/30 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 animate-pulse-soft"><PhTrophy :size="24" weight="fill" class="text-purple-500" /></div>
@@ -76,15 +76,15 @@
     </div>
 
     <!-- Academy Spotlight + Streak -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up" style="animation-delay: 0.1s">
-      <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 hover-lift">
+    <div v-motion class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14" style="animation-delay: 0.1s">
+      <BaseCard padding="lg" hoverable class="lg:col-span-2">
         <div class="flex items-center justify-between mb-6 sm:mb-8">
           <div>
-            <h3 class="font-heading text-base sm:text-lg md:text-xl font-bold text-ink dark:text-white">Academy Spotlight</h3>
-            <p class="text-xs sm:text-sm text-gray-400 font-body mt-1">Your current adventure across ASEAN</p>
+            <h3 class="font-heading text-base sm:text-lg md:text-xl font-bold text-ink dark:text-white">{{ t('home.spotlight.title') }}</h3>
+            <p class="text-xs sm:text-sm text-gray-400 font-body mt-1">{{ t('home.spotlight.desc') }}</p>
           </div>
           <RouterLink to="/academy" class="text-[10px] font-heading font-bold text-teal-500 hover:text-teal-600 px-3 py-1.5 bg-teal-50 dark:bg-teal-900/20 rounded-lg transition-colors">
-            Open Academy →
+            {{ t('home.spotlight.open') }}
           </RouterLink>
         </div>
         <div class="space-y-3 sm:space-y-4">
@@ -97,16 +97,16 @@
             <div class="flex-1 min-w-0">
               <p class="font-heading font-bold text-xs sm:text-sm" :class="chapter.status === 'completed' ? 'text-teal-600 dark:text-teal-400' : 'text-ink dark:text-white'">{{ chapter.title }}</p>
               <p class="text-[10px] sm:text-xs text-gray-400 mt-0.5 font-body truncate">
-                {{ chapter.status === 'completed' ? '✓ Complete' : chapter.status === 'available' ? (chapter.chatSimulation ? 'Simulation' : 'In Progress') : 'Locked' }}
+                {{ chapter.status === 'completed' ? t('home.spotlight.status.complete') : chapter.status === 'available' ? (chapter.chatSimulation ? t('home.spotlight.status.simulation') : t('home.spotlight.status.inProgress')) : t('home.spotlight.status.locked') }}
               </p>
             </div>
             <span class="text-[9px] sm:text-[10px] font-heading font-bold px-2 py-1 rounded-lg flex-shrink-0"
               :class="chapter.status === 'completed' ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-600' : chapter.status === 'available' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-600' : 'bg-gray-100 dark:bg-slate-700 text-gray-400'">
-              {{ chapter.status === 'completed' ? 'DONE' : chapter.status === 'available' ? 'ACTIVE' : 'LOCKED' }}
+              {{ chapter.status === 'completed' ? t('home.spotlight.badge.done') : chapter.status === 'available' ? t('home.spotlight.badge.active') : t('home.spotlight.badge.locked') }}
             </span>
           </div>
         </div>
-      </div>
+      </BaseCard>
 
       <!-- Streak + Today's Progress -->
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-5 lg:gap-6">
@@ -118,26 +118,26 @@
           </div>
           <p class="text-xs sm:text-sm text-orange-200 mt-1 sm:mt-2 font-body">{{ t('home.streak.unit') }}</p>
         </div>
-        <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 hover-lift">
-          <p class="text-[9px] sm:text-[10px] md:text-[11px] font-heading font-bold text-gray-300 dark:text-gray-500 uppercase tracking-wider mb-2 sm:mb-3">Chapters Done</p>
+        <BaseCard hoverable padding="lg">
+          <p class="text-[9px] sm:text-[10px] md:text-[11px] font-heading font-bold text-gray-300 dark:text-gray-500 uppercase tracking-wider mb-2 sm:mb-3">{{ t('home.course.chapters_done') }}</p>
           <p class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-teal-600 dark:text-teal-400">{{ chaptersCompleted }}</p>
-          <p class="text-xs sm:text-sm text-gray-400 mt-1 sm:mt-2 font-body">of {{ store.academyChapters.length }} chapters</p>
-        </div>
+          <p class="text-xs sm:text-sm text-gray-400 mt-1 sm:mt-2 font-body">{{ t('home.course.chapters_of', { total: store.academyChapters.length }) }}</p>
+        </BaseCard>
       </div>
     </div>
 
     <!-- Stats grid -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up" style="animation-delay: 0.15s">
-      <div v-for="stat in stats" :key="stat.label" class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 hover-lift">
+    <div v-motion class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-10 md:mb-12 lg:mb-14" style="animation-delay: 0.15s">
+      <BaseCard v-for="stat in stats" :key="stat.label" padding="sm" hoverable>
         <p class="text-[8px] sm:text-[10px] md:text-[11px] font-heading font-bold text-gray-300 dark:text-gray-500 uppercase tracking-wider mb-2 sm:mb-3">{{ stat.label }}</p>
         <p class="font-heading text-xl sm:text-2xl md:text-3xl font-bold" :class="stat.color">{{ stat.value }}</p>
         <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mt-1 sm:mt-2 font-body" v-if="stat.sub">{{ stat.sub }}</p>
-      </div>
+      </BaseCard>
     </div>
 
     <!-- Quick Actions + Course Progress -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up" style="animation-delay: 0.2s">
-      <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 hover-lift">
+    <div v-motion class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14" style="animation-delay: 0.2s">
+      <BaseCard padding="lg" hoverable>
         <h3 class="font-heading text-base sm:text-lg md:text-xl font-bold text-ink dark:text-white mb-5 sm:mb-6 md:mb-8">{{ t('home.quick_actions.title') }}</h3>
         <div class="space-y-3 sm:space-y-4">
           <RouterLink v-for="action in quickActions" :key="action.to" :to="action.to"
@@ -151,16 +151,16 @@
             </div>
           </RouterLink>
         </div>
-      </div>
+      </BaseCard>
 
-      <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 hover-lift relative overflow-hidden">
+      <BaseCard padding="lg" hoverable class="relative overflow-hidden">
         <!-- Background decoration -->
         <div class="absolute -top-10 -right-10 w-32 h-32 bg-teal-500/5 rounded-full blur-3xl"></div>
 
         <div class="flex items-center justify-between mb-5 sm:mb-6 md:mb-8 relative z-10">
           <div>
             <h3 class="font-heading text-base sm:text-lg md:text-xl font-bold text-ink dark:text-white">{{ t('home.course_progress.title') }}</h3>
-            <p class="text-xs text-gray-400 mt-1">Lia's ASEAN Journey</p>
+            <p class="text-xs text-gray-400 mt-1">{{ t('home.course.story') }}</p>
           </div>
           <span class="text-sm sm:text-base md:text-lg font-heading font-bold text-teal-600 dark:text-teal-400">{{ academyProgress }}%</span>
         </div>
@@ -196,33 +196,35 @@
                   {{ chapter.status === 'locked' ? `${chapter.icon} ${chapter.title.split(', ')[0]}` : chapter.title }}
                 </p>
                 <p class="text-[10px] sm:text-xs mt-0.5" :class="chapter.status === 'available' ? 'text-orange-600 dark:text-orange-400 font-bold' : 'text-gray-400'">
-                   {{ chapter.status === 'completed' ? '✓ Complete' : chapter.status === 'available' ? 'Continue your journey' : 'Complete previous to unlock' }}
+                   {{ chapter.status === 'completed' ? t('home.spotlight.status.complete') : chapter.status === 'available' ? t('home.course.continue') : t('home.course.complete_prev') }}
                 </p>
               </div>
 
               <!-- Action Badge -->
               <RouterLink v-if="chapter.status === 'available'" to="/academy"
                 class="text-[9px] sm:text-[10px] font-heading font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg flex-shrink-0 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 hover:bg-orange-200 transition-colors">
-                GO →
+                {{ t('home.course.go') }}
               </RouterLink>
               <span v-else class="text-[9px] sm:text-[10px] font-heading font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg flex-shrink-0"
                 :class="chapter.status === 'completed' ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300' : 'bg-gray-100 dark:bg-slate-700 text-gray-400'">
-                {{ chapter.status === 'completed' ? 'DONE' : 'LOCKED' }}
+                {{ chapter.status === 'completed' ? t('home.spotlight.badge.done') : t('home.spotlight.badge.locked') }}
               </span>
             </div>
           </div>
         </div>
-      </div>
+      </BaseCard>
     </div>
 
     <!-- Personal Milestones -->
-    <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 mb-8 sm:mb-10 md:mb-12 lg:mb-14 animate-slide-up hover-lift" style="animation-delay: 0.22s">
+    <BaseCard padding="lg" hoverable v-motion class="mb-8 sm:mb-10 md:mb-12 lg:mb-14" style="animation-delay: 0.22s">
       <h3 class="font-heading text-base sm:text-lg md:text-xl font-bold text-ink dark:text-white mb-5 sm:mb-6">{{ t('home.milestones.title') }}</h3>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div v-for="ms in store.personalMilestones" :key="ms.id"
           class="p-4 rounded-2xl bg-gray-50 dark:bg-slate-700 transition-transform hover:scale-[1.02]">
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl animate-float" :style="{ animationDelay: ms.id * 0.5 + 's' }">{{ ms.icon }}</span>
+            <span class="text-2xl animate-float text-teal-500" :style="{ animationDelay: ms.id * 0.5 + 's' }">
+              <component :is="ms.id === 1 ? PhSun : ms.id === 2 ? PhBookOpen : PhHeartStraight" weight="duotone" />
+            </span>
             <div class="flex-1 min-w-0">
               <p class="font-heading font-bold text-xs text-ink dark:text-white truncate">{{ ms.title }}</p>
               <p class="text-[10px] text-gray-400 font-body">{{ ms.progress }}/{{ ms.target }}</p>
@@ -234,10 +236,10 @@
           <p class="text-[9px] text-amber-500 font-heading font-bold mt-2 flex items-center gap-0.5"><PhCoins :size="11" weight="fill" class="inline" /> {{ t('home.milestones.reward', { amount: ms.reward }) }}</p>
         </div>
       </div>
-    </div>
+    </BaseCard>
 
     <!-- Recent Activity -->
-    <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700 animate-slide-up hover-lift" style="animation-delay: 0.25s">
+    <BaseCard padding="lg" hoverable v-motion style="animation-delay: 0.25s">
       <h3 class="font-heading text-base sm:text-lg md:text-xl font-bold text-ink dark:text-white mb-5 sm:mb-6 md:mb-8">{{ t('home.activity.title') }}</h3>
       <div v-if="store.transactions.length === 0" class="text-center py-10 sm:py-12 md:py-16">
         <PhNotepad :size="40" class="text-gray-300 dark:text-gray-600 mb-3 sm:mb-4 mx-auto animate-float" weight="duotone" />
@@ -260,7 +262,7 @@
           </span>
         </div>
       </div>
-    </div>
+    </BaseCard>
 
     <ConfettiAnimation :trigger="confettiTrigger" />
   </div>
@@ -271,8 +273,9 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import { useI18n } from '../i18n'
-import { BookOpen, Briefcase, Wallet, BarChart3 } from 'lucide-vue-next'
-import { PhShieldCheckered, PhTarget, PhRocketLaunch, PhTrophy, PhCoins, PhFire, PhNotepad } from '@phosphor-icons/vue'
+import { PhBookOpen, PhBriefcase, PhWallet, PhChartBar, PhShieldCheckered, PhTarget, PhRocketLaunch, PhTrophy, PhCoins, PhFire, PhNotepad, PhCurrencyCircleDollar, PhHeartStraight, PhShoppingCart, PhSun } from '@phosphor-icons/vue'
+import BaseCard from '../components/BaseCard.vue'
+import BaseProgress from '../components/BaseProgress.vue'
 import DailyRewardModal from '../components/DailyRewardModal.vue'
 import ConfettiAnimation from '../components/ConfettiAnimation.vue'
 import XPBarAnimated from '../components/XPBarAnimated.vue'

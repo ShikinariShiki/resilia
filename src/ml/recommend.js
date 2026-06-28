@@ -41,6 +41,50 @@ export function predictMissionWeights(ans = {}) {
   return out
 }
 
+// Dynamically shifts mission weights based on current daily distress (1-7 scale).
+// High distress (5-7) suppresses high-cognitive tasks (RPG, lessons) and boosts soothing (toolkit, checkin).
+// Low distress (1-2) boosts active learning and drills (RPG, lessons, donate).
+export function adaptWeightsByDistress(baseWeights, distressLevel) {
+  // distressLevel is 1 to 7. We normalize it to 0.0 to 1.0 (1.0 = highly distressed)
+  const normalizedDistress = (distressLevel - 1) / 6.0;
+  
+  // Define bias vectors for distress
+  const distressBias = {
+    toolkit: 3.5, // highly boosted when stressed
+    checkin: 2.0, 
+    donate: -0.5,
+    dashboard: -1.0,
+    lesson: -2.5,
+    rpg: -3.5 // severely suppressed when stressed (prevents secondary trauma)
+  }
+  
+  // Define bias vectors for stability (0.0 = Max Stability / 1.0 = Max distress reversed)
+  const stabilityBias = {
+    rpg: 2.5,
+    lesson: 2.0,
+    donate: 1.0,
+    dashboard: 0.5,
+    checkin: -0.5,
+    toolkit: -1.5
+  }
+
+  const logits = CATS.map(cat => {
+    // Reverse the softmax roughly to get pseudo-logits back from base probs
+    let val = Math.log(baseWeights[cat] + 1e-9);
+    
+    // Apply distress bias and stability bias based on the user's current scale
+    val += distressBias[cat] * normalizedDistress;
+    val += stabilityBias[cat] * (1 - normalizedDistress);
+    
+    return val;
+  });
+
+  const adaptedProbs = softmax(logits);
+  const out = {};
+  CATS.forEach((c, j) => out[c] = adaptedProbs[j]);
+  return out;
+}
+
 // Mission pool: several variants per category. Generated missions match the
 // shape used everywhere in the store: { id, title, description, icon,
 // xpReward, coinReward, completed, type }.

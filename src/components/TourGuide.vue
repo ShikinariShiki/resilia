@@ -11,7 +11,7 @@
 
         <!-- Tooltip card, always within viewport -->
         <div ref="tooltipEl"
-          class="absolute bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-5 transition-all duration-500 ease-out animate-slide-up"
+          v-motion class="absolute bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-5 transition-all duration-500 ease-out"
           :style="tooltipStyle"
           style="max-width: min(360px, calc(100vw - 32px)); width: max-content;">
           <!-- Mascot Lia, points toward the highlighted element -->

@@ -49,46 +49,6 @@ const routes = [
         component: () => import('../views/RpgQuestView.vue'),
     },
     {
-        path: '/academy/test/:moduleId/:testType',
-        name: 'module-test',
-        component: () => import('../views/ModuleTest.vue'),
-    },
-    {
-        path: '/academy/disaster-rpg/:id',
-        name: 'disaster-rpg',
-        component: () => import('../views/DisasterRPG.vue'),
-    },
-    {
-        path: '/academy/story-rpg/:id',
-        name: 'story-rpg',
-        component: () => import('../views/LiaRPG.vue'),
-    },
-    {
-        path: '/academy/lia/:chapterId/:phase',
-        name: 'lia-eval',
-        component: () => import('../views/LiaChat.vue'),
-    },
-    {
-        path: '/academy/sim/:chapterId/:actId',
-        name: 'chat-simulation',
-        component: () => import('../views/LiaChat.vue'),
-    },
-    {
-        path: '/academy/chapter/:chapterId/act/:actId',
-        name: 'act-lesson',
-        component: () => import('../views/ActLesson.vue'),
-    },
-    {
-        path: '/academy/quest/:id',
-        name: 'chapter-quest',
-        component: () => import('../views/ChapterQuest.vue'),
-    },
-    {
-        path: '/academy/bridging/:id',
-        name: 'bridging-quest',
-        component: () => import('../views/BridgingQuest.vue'),
-    },
-    {
         path: '/wallet',
         name: 'wallet',
         component: () => import('../views/Wallet.vue'),
