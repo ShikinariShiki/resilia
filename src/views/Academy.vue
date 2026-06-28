@@ -309,7 +309,7 @@
         {{ t('academy.trainingRpg') }}
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <RouterLink v-for="(rpg, key) in store.disasterRPGScenarios" :key="key" :to="`/academy/disaster-rpg/${key}`"
+        <RouterLink v-for="(rpg, key) in store.disasterRPGScenarios" :key="key" :to="`/academy/rpg/${key}`"
           class="rpg-card p-4 cursor-pointer hover:-translate-y-1 transition-all">
           <h3 class="font-heading font-bold text-sm text-ink dark:text-white mb-1">{{ rpg.title }}</h3>
           <p class="text-[10px] text-gray-400 font-body">{{ rpg.description }}</p>
@@ -419,7 +419,10 @@ function handleNextAct(payload) {
 }
 
 function openQuest(questId) {
-  router.push(`/academy/rpg/${questId}`)
+  chatMode.value = null
+  actMode.value = null
+  bridgeMode.value = null
+  questMode.value = { questId }
 }
 
 function closeQuest() {

@@ -26,6 +26,9 @@ const ALLOWED_PREFIXES = [
     '/academy/rpg/',
     '/academy/foundations/',
     '/academy/erq/',
+    '/academy/quest/',
+    '/academy/chapter/',
+    '/academy/sim/',
 ]
 
 /**
