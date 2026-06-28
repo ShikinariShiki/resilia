@@ -41,6 +41,20 @@ export function useLiveDisasters() {
         // Approximate risk based on magnitude
         let risk = Math.round((eq.properties.mag / 9.0) * 100)
         
+        const locLower = location.toLowerCase();
+        let iso = 'un';
+        if (locLower.includes('indonesia')) iso = 'id';
+        else if (locLower.includes('philippines')) iso = 'ph';
+        else if (locLower.includes('thailand')) iso = 'th';
+        else if (locLower.includes('vietnam')) iso = 'vn';
+        else if (locLower.includes('malaysia')) iso = 'my';
+        else if (locLower.includes('myanmar') || locLower.includes('burma')) iso = 'mm';
+        else if (locLower.includes('cambodia')) iso = 'kh';
+        else if (locLower.includes('laos')) iso = 'la';
+        else if (locLower.includes('singapore')) iso = 'sg';
+        else if (locLower.includes('brunei')) iso = 'bn';
+        else if (locLower.includes('timor') || locLower.includes('timor-leste')) iso = 'tl';
+        
         return {
           id: eq.id,
           country: location,
@@ -48,8 +62,7 @@ export function useLiveDisasters() {
           disasterRiskIndex: risk,
           time: eq.properties.time,
           url: eq.properties.url,
-          // Generic warning flag
-          flag: '/src/assets/flags/.svg'
+          flag: `/src/assets/flags/${iso}.svg`
         }
       })
 

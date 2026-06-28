@@ -621,55 +621,6 @@ export default {
         },
 
     },
-    wallet: {
-        title: 'Brankas ResiCoin 🏦',
-        lifetime: 'Penghasilan seumur hidup',
-        txCount: '{count} transaksi',
-        donateTitle: 'Donasi ke ASEAN 🤝',
-        donateDesc: 'Kontribusi untuk dana bantuan bencana ASEAN.',
-        donateBtn: 'Donasi',
-        toolkitBanner: '🧰 Sumber daya gratis pindah ke Toolkit!',
-        toolkitDesc: 'Sesi konseling, alat persiapan, dan fasilitas kesejahteraan kini gratis.',
-        toolkitBtn: 'Buka Toolkit →',
-        shopTitle: 'Toko Serikat ⚔️',
-        historyTitle: 'Riwayat Transaksi 🧾',
-        emptyHistory: 'Belum ada transaksi. Mulai hasilkan!',
-        categories: {
-            All: 'Semua',
-            Booster: 'Penguat',
-            Cosmetic: 'Kosmetik',
-            Community: 'Komunitas',
-            Content: 'Konten'
-        },
-        title: 'Pusat Misi 🌐',
-        subtitle: 'Intelijen bencana ASEAN langsung dan metrik penyebaran.',
-        stats: {
-            responders: 'Responden Aktif',
-            modules: 'Modul Selesai',
-            funds: 'Dana Komunitas (RC)',
-            growth: '7 hari terakhir'
-        },
-        chartTitle: 'Aktivitas Penerapan (30 Hari)',
-        quickLinks: 'Tautan Cepat',
-        dailyMissions: 'Misi Harian',
-        dailyDesc: 'Dapatkan XP dan pertahankan rentetan Anda',
-        aseanData: 'Data Negara ASEAN',
-        table: {
-            country: 'Negara',
-            pop: 'Pop.',
-            gdp: 'PDB/Kapita',
-            hdi: 'IPM',
-            risk: 'Indeks Risiko',
-            disasters: 'Bencana/thn',
-            threats: 'Ancaman Utama',
-            emergency: 'No Darurat',
-            status: 'Status'
-        },
-
-    },
-
-
-
     prologue: {
         msg1: 'Hei! 🙋‍♀️',
         msg2: 'Kamu ambil Psikologi juga kan? Aku lihat namamu di grup chat!',

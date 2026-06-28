@@ -667,54 +667,5 @@ export default {
             disclaimer: '📞 Makipag-ugnayan sa inyong lokal na {category}.'
         },
 
-    },
-    wallet: {
-        title: 'Vault ng ResiCoin 🏦',
-        lifetime: 'Kinita',
-        txCount: '{count} transaksyon',
-        donateTitle: 'Mag-donate sa ASEAN 🤝',
-        donateDesc: 'Tumulong sa mga biktima ng sakuna.',
-        donateBtn: 'Mag-donate',
-        toolkitBanner: '🧰 Mga mapagkukunan ay nasa Toolkit na!',
-        toolkitDesc: 'Libre na ang mga resources.',
-        toolkitBtn: 'Buksan ang Toolkit →',
-        shopTitle: 'Tindahan ng Guild ⚔️',
-        historyTitle: 'Kasaysayan ng Transaksyon 🧾',
-        emptyHistory: 'Wala pang transaksyon.',
-        categories: {
-            All: 'Lahat',
-            Booster: 'Booster',
-            Cosmetic: 'Pampaganda',
-            Community: 'Komunidad',
-            Content: 'Nilalaman'
-        },
-        title: 'Mission Control 🌐',
-        subtitle: 'Mga datos mula sa ASEAN.',
-        stats: {
-            responders: 'Mga Responder',
-            modules: 'Mga Modyul',
-            funds: 'Pondo (RC)',
-            growth: 'Nakalipas na 7 araw'
-        },
-        chartTitle: 'Aktibidad ng Deployment',
-        quickLinks: 'Mabilisang Link',
-        dailyMissions: 'Pang-araw-araw na Misyon',
-        dailyDesc: 'Panatilihin ang streak',
-        aseanData: 'Datos ng ASEAN',
-        table: {
-            country: 'Bansa',
-            pop: 'Pop.',
-            gdp: 'GDP/Tao',
-            hdi: 'HDI',
-            risk: 'Panganib Indeks',
-            disasters: 'Sakuna/taon',
-            threats: 'Mga Banta',
-            emergency: 'Emergency #',
-            status: 'Katayuan'
-        },
-
-    },
-
-
-
+    }
 }

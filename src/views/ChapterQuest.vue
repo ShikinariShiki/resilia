@@ -267,17 +267,17 @@ import { useRoute, RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 
 const props = defineProps({
-  propQuestId: { type: String, default: '' },
+  computedQuestId: { type: String, default: '' },
   embedded: { type: Boolean, default: false },
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'open-bridge'])
 
 const route = useRoute()
 const store = useResiliaStore()
 
-const questId = props.propQuestId || route.params.id
-const quest = computed(() => store.chapterQuests?.[questId])
+const computedQuestId = props.questId || route.params.id
+const quest = computed(() => store.chapterQuests?.[computedQuestId])
 
 const started = ref(false)
 const currentStepIndex = ref(0)
@@ -294,7 +294,7 @@ const attentionCorrect = ref(false)
 const attentionTimer = ref(0)
 let timerInterval = null
 
-const retriesLeft = computed(() => store.getQuestRetries(questId))
+const retriesLeft = computed(() => store.getQuestRetries(computedQuestId))
 
 const currentStep = computed(() => quest.value?.steps[currentStepIndex.value])
 const stepProgress = computed(() => ((currentStepIndex.value + 1) / (quest.value?.steps.length || 1)) * 100)
@@ -386,12 +386,12 @@ function nextStep() {
 
   // Complete quest when done
   if (currentStepIndex.value >= quest.value.steps.length) {
-    store.completeChapterQuest(questId, totalScore.value)
+    store.completeChapterQuest(computedQuestId, totalScore.value)
   }
 }
 
 function retryQuest() {
-  store.useQuestRetry(questId)
+  store.useQuestRetry(computedQuestId)
   currentStepIndex.value = 0
   totalScore.value = 0
   questFailed.value = false

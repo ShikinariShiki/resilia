@@ -667,54 +667,5 @@ export default {
             disclaimer: '📞 Liên hệ tổ chức {category} địa phương.'
         },
 
-    },
-    wallet: {
-        title: 'Kho ResiCoin 🏦',
-        lifetime: 'Tổng kiếm được',
-        txCount: '{count} giao dịch',
-        donateTitle: 'Quyên góp 🤝',
-        donateDesc: 'Hỗ trợ quỹ giảm nhẹ thảm họa.',
-        donateBtn: 'Quyên góp',
-        toolkitBanner: '🧰 Tài nguyên đã chuyển sang Công cụ!',
-        toolkitDesc: 'Miễn phí cho mọi người.',
-        toolkitBtn: 'Mở công cụ →',
-        shopTitle: 'Cửa hàng bang hội ⚔️',
-        historyTitle: 'Lịch sử giao dịch 🧾',
-        emptyHistory: 'Chưa có giao dịch.',
-        categories: {
-            All: 'Tất cả',
-            Booster: 'Tăng tốc',
-            Cosmetic: 'Trang trí',
-            Community: 'Cộng đồng',
-            Content: 'Nội dung'
-        },
-        title: 'Trung tâm chỉ huy 🌐',
-        subtitle: 'Dữ liệu thảm họa ASEAN.',
-        stats: {
-            responders: 'Thành viên',
-            modules: 'Hoàn thành',
-            funds: 'Quỹ (RC)',
-            growth: '7 ngày qua'
-        },
-        chartTitle: 'Hoạt động',
-        quickLinks: 'Liên kết nhanh',
-        dailyMissions: 'Nhiệm vụ hàng ngày',
-        dailyDesc: 'Nhận phần thưởng',
-        aseanData: 'Dữ liệu ASEAN',
-        table: {
-            country: 'Quốc gia',
-            pop: 'Dân số',
-            gdp: 'GDP',
-            hdi: 'HDI',
-            risk: 'Rủi ro',
-            disasters: 'Thảm họa/Năm',
-            threats: 'Mối đe dọa',
-            emergency: 'Khẩn cấp',
-            status: 'Trạng thái'
-        },
-
-    },
-
-
-
+    }
 }

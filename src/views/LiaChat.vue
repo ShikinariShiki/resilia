@@ -116,9 +116,9 @@ import { useResiliaStore } from '../stores/resiliaStore'
 import { sanitizeHtml } from '../utils/sanitize'
 
 const props = defineProps({
-  propChapterId: { type: String, default: '' },
-  propPhase: { type: String, default: '' },
-  propActId: { type: String, default: '' },
+  chapterId: { type: String, default: '' },
+  phase: { type: String, default: '' },
+  actId: { type: String, default: '' },
   embedded: { type: Boolean, default: false },
 })
 
@@ -151,13 +151,13 @@ const nextActData = ref(null)
 const completedActTitle = ref('')
 const currentActIndex = ref(0)
 
-const chapterId = computed(() => props.propChapterId || route.params.chapterId)
-const phase = computed(() => props.propPhase || route.params.phase)
+const computedChapterId = computed(() => props.chapterId || route.params.chapterId)
+const computedPhase = computed(() => props.phase || route.params.phase)
 
 // Detect if this is a simulation chapter act (e.g., /academy/lia/ch1h/act1)
-const internalActId = ref(props.propActId || '')
-const actId = computed(() => internalActId.value || route.params.actId || null)
-const chapterData = computed(() => store.academyChapters.find(c => c.id === chapterId.value))
+const internalActId = ref(props.actId || '')
+const computedActId = computed(() => internalActId.value || route.params.actId || null)
+const chapterData = computed(() => store.academyChapters.find(c => c.id === computedChapterId.value))
 const isSimMode = computed(() => !!chapterData.value?.chatSimulation)
 const npcCharacters = computed(() => chapterData.value?.npcCharacters || [])
 
@@ -165,13 +165,13 @@ const chatFlow = computed(() => {
   const chapter = chapterData.value
   if (!chapter) return []
   // If actId is set, load act-specific chatFlow (simulation mode)
-  if (actId.value && chapter.chatSimulation) {
-    const act = chapter.acts?.find(a => a.id === actId.value)
+  if (computedActId.value && chapter.chatSimulation) {
+    const act = chapter.acts?.find(a => a.id === computedActId.value)
     return act?.chatFlow || []
   }
   // Otherwise load liaChat pre/post flow
   if (!chapter.liaChat) return []
-  return chapter.liaChat[phase.value] || []
+  return chapter.liaChat[computedPhase.value] || []
 })
 
 // NPC lookup helpers
@@ -282,14 +282,14 @@ async function processFlow() {
   }
 
   // If simulation mode, complete the act and check for next
-  if (isSimMode.value && actId.value) {
-    store.completeAct(chapterId.value, actId.value)
+  if (isSimMode.value && computedActId.value) {
+    store.completeAct(computedChapterId.value, computedActId.value)
     if (!skipFlag.value) await sleep(1000)
 
     // Find next act
     const chapter = chapterData.value
     const acts = chapter?.acts || []
-    const currentIdx = acts.findIndex(a => a.id === actId.value)
+    const currentIdx = acts.findIndex(a => a.id === computedActId.value)
     const nextAct = currentIdx >= 0 && currentIdx < acts.length - 1 ? acts[currentIdx + 1] : null
 
     completedActTitle.value = acts[currentIdx]?.title || 'Act'
@@ -311,7 +311,7 @@ function selectScale(value) {
     text: `${value}, ${item.scaleLabel[value - 1]}`,
   })
 
-  store.saveLiaEvalScore(chapterId.value, phase.value || 'sim', item.key, value)
+  store.saveLiaEvalScore(computedChapterId.value, computedPhase.value || 'sim', item.key, value)
 
   flowIndex.value++
   scrollToBottom()
@@ -329,7 +329,7 @@ function selectChoice(index, choice) {
   })
   scrollToBottom()
 
-  const alreadyCompleted = store.isActCompleted(chapterId.value, actId.value)
+  const alreadyCompleted = store.isActCompleted(computedChapterId.value, computedActId.value)
 
   // Apply HP effect if simulation and not already completed
   if (isSimMode.value && choice.hpEffect && !alreadyCompleted) {
@@ -406,7 +406,7 @@ function loadNextAct() {
     })
   } else {
     // Update the route to the next act (keeps URL in sync)
-    router.replace(`/academy/sim/${chapterId.value}/${nextId}`)
+    router.replace(`/academy/sim/${computedChapterId.value}/${nextId}`)
     nextTick(() => {
       processFlow()
     })

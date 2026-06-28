@@ -667,54 +667,5 @@ export default {
             disclaimer: '📞 Hubungi pembekal {category} tempatan.'
         },
 
-    },
-    wallet: {
-        title: 'Peti Besi ResiCoin 🏦',
-        lifetime: 'Keseluruhan',
-        txCount: '{count} transaksi',
-        donateTitle: 'Derma ASEAN 🤝',
-        donateDesc: 'Bantu dana bantuan bencana.',
-        donateBtn: 'Derma',
-        toolkitBanner: '🧰 Sumber dipindahkan ke Kit Alat!',
-        toolkitDesc: 'Sumber percuma untuk semua.',
-        toolkitBtn: 'Buka Kit Alat →',
-        shopTitle: 'Kedai Persatuan ⚔️',
-        historyTitle: 'Sejarah Transaksi 🧾',
-        emptyHistory: 'Tiada rekod.',
-        categories: {
-            All: 'Semua',
-            Booster: 'Penggalak',
-            Cosmetic: 'Kosmetik',
-            Community: 'Komuniti',
-            Content: 'Kandungan'
-        },
-        title: 'Pusat Kawalan 🌐',
-        subtitle: 'Metrik pelancaran ASEAN.',
-        stats: {
-            responders: 'Ahli Aktif',
-            modules: 'Modul Siap',
-            funds: 'Dana (RC)',
-            growth: '7 hari lalu'
-        },
-        chartTitle: 'Aktiviti Komuniti',
-        quickLinks: 'Pautan Pantas',
-        dailyMissions: 'Misi Harian',
-        dailyDesc: 'Dapatkan ganjaran',
-        aseanData: 'Data ASEAN',
-        table: {
-            country: 'Negara',
-            pop: 'Populasi',
-            gdp: 'KDNK',
-            hdi: 'HDI',
-            risk: 'Risiko',
-            disasters: 'Bencana/Thn',
-            threats: 'Ancaman Utama',
-            emergency: 'Kecemasan',
-            status: 'Status'
-        },
-
-    },
-
-
-
+    }
 }

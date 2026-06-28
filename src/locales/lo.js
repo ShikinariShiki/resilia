@@ -667,54 +667,5 @@ export default {
             disclaimer: '📞 ຕິດຕໍ່ {category} ໃນພື້ນທີ່ຂອງທ່ານ.'
         },
 
-    },
-    wallet: {
-        title: 'ຫ້ອງນິລະໄພ RC 🏦',
-        lifetime: 'ທີ່ໄດ້ຮັບທັງໝົດ',
-        txCount: '{count} ທຸລະກຳ',
-        donateTitle: 'ບໍລິຈາກ 🤝',
-        donateDesc: 'ຊ່ວຍເຫຼືອໄພພິບັດ.',
-        donateBtn: 'ບໍລິຈາກ',
-        toolkitBanner: '🧰 ຍ້າຍໄປກ່ອງເຄື່ອງມືແລ້ວ!',
-        toolkitDesc: 'ຕອນນີ້ຟຣີທັງໝົດ.',
-        toolkitBtn: 'ເປີດກ່ອງເຄື່ອງມື →',
-        shopTitle: 'ຮ້ານຄ້າ ⚔️',
-        historyTitle: 'ປະຫວັດທຸລະກຳ 🧾',
-        emptyHistory: 'ຍັງບໍ່ມີທຸລະກຳ.',
-        categories: {
-            All: 'ທັງໝົດ',
-            Booster: 'ບູສເຕີ',
-            Cosmetic: 'ຕົກແຕ່ງ',
-            Community: 'ຊຸມຊົນ',
-            Content: 'ເນື້ອຫາ'
-        },
-        title: 'ສູນຄວບຄຸມ 🌐',
-        subtitle: 'ຂໍ້ມູນໄພພິບັດອາຊຽນ.',
-        stats: {
-            responders: 'ຜູ້ຕອບສະໜອງ',
-            modules: 'ໂມດູນສຳເລັດ',
-            funds: 'ກອງທຶນຊຸມຊົນ',
-            growth: '7 ມື້ຜ່ານມາ'
-        },
-        chartTitle: 'ກິດຈະກຳ',
-        quickLinks: 'ລິ້ງດ່ວນ',
-        dailyMissions: 'ພາລະກິດປະຈຳວັນ',
-        dailyDesc: 'ຮັບ XP',
-        aseanData: 'ຂໍ້ມູນອາຊຽນ',
-        table: {
-            country: 'ປະເທດ',
-            pop: 'ປະຊາກອນ',
-            gdp: 'GDP',
-            hdi: 'HDI',
-            risk: 'ຄວາມສ່ຽງ',
-            disasters: 'ໄພພິບັດ/ປີ',
-            threats: 'ໄພຂົ່ມຂູ່',
-            emergency: 'ສຸກເສີນ',
-            status: 'ສະຖານະ'
-        },
-
-    },
-
-
-
+    }
 }

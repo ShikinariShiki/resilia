@@ -60,12 +60,12 @@ export function adaptWeightsByDistress(baseWeights, distressLevel) {
   
   // Define bias vectors for stability (0.0 = Max Stability / 1.0 = Max distress reversed)
   const stabilityBias = {
-    rpg: 2.5,
-    lesson: 2.0,
-    donate: 1.0,
+    rpg: 4.5,
+    lesson: 3.5,
+    donate: 1.5,
     dashboard: 0.5,
-    checkin: -0.5,
-    toolkit: -1.5
+    checkin: -1.0,
+    toolkit: -3.0
   }
 
   const logits = CATS.map(cat => {

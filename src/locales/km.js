@@ -667,54 +667,5 @@ export default {
             disclaimer: '📞 ទាក់ទង {category} ក្នុងតំបន់របស់អ្នក។'
         },
 
-    },
-    wallet: {
-        title: 'ឃ្លាំង ResiCoin 🏦',
-        lifetime: 'រកបានពេញមួយជីវិត',
-        txCount: '{count} ប្រតិបត្តិការ',
-        donateTitle: 'បរិច្ចាគដល់អាស៊ាន 🤝',
-        donateDesc: 'រួមចំណែកមូលនិធិសង្គ្រោះ។',
-        donateBtn: 'បរិច្ចាគ',
-        toolkitBanner: '🧰 ធនធានឥតគិតថ្លៃបានផ្លាស់ទីទៅប្រអប់ឧបករណ៍!',
-        toolkitDesc: 'ឥឡូវនេះអ្វីៗទាំងអស់គឺឥតគិតថ្លៃ។',
-        toolkitBtn: 'បើកប្រអប់ឧបករណ៍ →',
-        shopTitle: 'ហាងសមាគម ⚔️',
-        historyTitle: 'ប្រវត្តិប្រតិបត្តិការ 🧾',
-        emptyHistory: 'មិនទាន់មានប្រតិបត្តិការនៅឡើយទេ។',
-        categories: {
-            All: 'ទាំងអស់',
-            Booster: 'ជំរុញ',
-            Cosmetic: 'គ្រឿងសម្អាង',
-            Community: 'សហគមន៍',
-            Content: 'មាតិកា'
-        },
-        title: 'មជ្ឈមណ្ឌលត្រួតពិនិត្យ 🌐',
-        subtitle: 'ទិន្នន័យគ្រោះមហន្តរាយអាស៊ាន។',
-        stats: {
-            responders: 'អ្នកឆ្លើយតបសកម្ម',
-            modules: 'ម៉ូឌុលដែលបានបញ្ចប់',
-            funds: 'មូលនិធិសហគមន៍ (RC)',
-            growth: '៧ ថ្ងៃមុន'
-        },
-        chartTitle: 'សកម្មភាពពង្រាយ',
-        quickLinks: 'តំណរហ័ស',
-        dailyMissions: 'បេសកកម្មប្រចាំថ្ងៃ',
-        dailyDesc: 'រកបាន XP',
-        aseanData: 'ទិន្នន័យអាស៊ាន',
-        table: {
-            country: 'ប្រទេស',
-            pop: 'ប្រជាជន',
-            gdp: 'GDP/ប្រជាជន',
-            hdi: 'HDI',
-            risk: 'សន្ទស្សន៍ហានិភ័យ',
-            disasters: 'គ្រោះមហន្តរាយ/ឆ្នាំ',
-            threats: 'ការគំរាមកំហែង',
-            emergency: 'លេខបន្ទាន់',
-            status: 'ស្ថានភាព'
-        },
-
-    },
-
-
-
+    }
 }

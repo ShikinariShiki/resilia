@@ -667,54 +667,5 @@ export default {
             disclaimer: '📞 ติดต่อหน่วยงาน {category} ในพื้นที่เพื่อดูข้อมูลเพิ่มเติม'
         },
 
-    },
-    wallet: {
-        title: 'ห้องนิรภัย ResiCoin 🏦',
-        lifetime: 'ที่ได้รับตลอดชีพ',
-        txCount: '{count} ธุรกรรม',
-        donateTitle: 'บริจาคให้อาเซียน 🤝',
-        donateDesc: 'สมทบทุนช่วยเหลือภัยพิบัติ',
-        donateBtn: 'บริจาค',
-        toolkitBanner: '🧰 แหล่งข้อมูลฟรีย้ายไปที่เครื่องมือ!',
-        toolkitDesc: 'ทรัพยากรฟรี',
-        toolkitBtn: 'เปิดกล่องเครื่องมือ →',
-        shopTitle: 'ร้านค้ากิลด์ ⚔️',
-        historyTitle: 'ประวัติการทำธุรกรรม 🧾',
-        emptyHistory: 'ยังไม่มีธุรกรรม',
-        categories: {
-            All: 'ทั้งหมด',
-            Booster: 'บูสเตอร์',
-            Cosmetic: 'เครื่องแต่งกาย',
-            Community: 'ชุมชน',
-            Content: 'เนื้อหา'
-        },
-        title: 'ศูนย์บัญชาการ 🌐',
-        subtitle: 'ข้อมูลภัยพิบัติอาเซียน',
-        stats: {
-            responders: 'ผู้ตอบสนอง',
-            modules: 'ภารกิจ',
-            funds: 'กองทุน (RC)',
-            growth: '7 วันที่ผ่านมา'
-        },
-        chartTitle: 'กิจกรรมการใช้งาน',
-        quickLinks: 'ลิงก์ด่วน',
-        dailyMissions: 'ภารกิจประจำวัน',
-        dailyDesc: 'รับ XP พิเศษ',
-        aseanData: 'ข้อมูลอาเซียน',
-        table: {
-            country: 'ประเทศ',
-            pop: 'ประชากร',
-            gdp: 'GDP/หัว',
-            hdi: 'HDI',
-            risk: 'ความเสี่ยง',
-            disasters: 'ภัยพิบัติ/ปี',
-            threats: 'ภัยคุกคาม',
-            emergency: 'ฉุกเฉิน',
-            status: 'สถานะ'
-        },
-
-    },
-
-
-
+    }
 }
