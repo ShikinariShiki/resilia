@@ -221,16 +221,16 @@ export const useResiliaStore = defineStore('resilia', () => {
     ])
 
     const countries = ref([
-        { code: 'ID', name: 'Indonesia', flag: '/src/assets/flags/.svg' },
-        { code: 'PH', name: 'Philippines', flag: '/src/assets/flags/.svg' },
-        { code: 'VN', name: 'Vietnam', flag: '/src/assets/flags/.svg' },
-        { code: 'TH', name: 'Thailand', flag: '/src/assets/flags/.svg' },
-        { code: 'MY', name: 'Malaysia', flag: '/src/assets/flags/.svg' },
-        { code: 'MM', name: 'Myanmar', flag: '/src/assets/flags/.svg' },
-        { code: 'KH', name: 'Cambodia', flag: '/src/assets/flags/.svg' },
-        { code: 'LA', name: 'Laos', flag: '/src/assets/flags/.svg' },
-        { code: 'SG', name: 'Singapore', flag: '/src/assets/flags/.svg' },
-        { code: 'BN', name: 'Brunei', flag: '/src/assets/flags/.svg' },
+        { code: 'ID', name: 'Indonesia', flag: '/flags/id.svg' },
+        { code: 'PH', name: 'Philippines', flag: '/flags/ph.svg' },
+        { code: 'VN', name: 'Vietnam', flag: '/flags/vn.svg' },
+        { code: 'TH', name: 'Thailand', flag: '/flags/th.svg' },
+        { code: 'MY', name: 'Malaysia', flag: '/flags/my.svg' },
+        { code: 'MM', name: 'Myanmar', flag: '/flags/mm.svg' },
+        { code: 'KH', name: 'Cambodia', flag: '/flags/kh.svg' },
+        { code: 'LA', name: 'Laos', flag: '/flags/la.svg' },
+        { code: 'SG', name: 'Singapore', flag: '/flags/sg.svg' },
+        { code: 'BN', name: 'Brunei', flag: '/flags/bn.svg' },
     ])
 
     const levelTiers = [

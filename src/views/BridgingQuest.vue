@@ -127,7 +127,7 @@ import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 
 const props = defineProps({
-  computedBridgeId: { type: String, default: '' },
+  bridgeId: { type: String, default: '' },
   embedded: { type: Boolean, default: false },
 })
 
@@ -137,8 +137,8 @@ const route = useRoute()
 const router = useRouter()
 const store = useResiliaStore()
 
-const computedBridgeId = props.bridgeId || route.params.id
-const bridgeQuest = computed(() => store.bridgingQuests?.[computedBridgeId])
+const resolvedBridgeId = props.bridgeId || route.params.id
+const bridgeQuest = computed(() => store.bridgingQuests?.[resolvedBridgeId])
 
 const started = ref(false)
 const currentStepIndex = ref(0)
@@ -166,7 +166,7 @@ function nextStep() {
   currentStepIndex.value++
 
   if (currentStepIndex.value >= bridgeQuest.value.steps.length) {
-    store.completeBridgingQuest(computedBridgeId)
+    store.completeBridgingQuest(resolvedBridgeId)
     if (!props.embedded) startAutoNav()
   }
 }

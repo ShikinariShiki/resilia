@@ -140,7 +140,7 @@
         <!-- Embedded ChapterQuest overlay -->
         <div v-if="questMode" class="book-chat-panel" :key="'quest-' + questMode.questId">
           <ChapterQuest
-            :propQuestId="questMode.questId"
+            :quest-id="questMode.questId"
             :embedded="true"
             @close="closeQuest"
           />
@@ -163,9 +163,9 @@
         <!-- Embedded LiaChat overlay -->
         <div v-else-if="chatMode" class="book-chat-panel" :key="chatMode.chapterId + (chatMode.actId || chatMode.phase)">
           <LiaChat
-            :propChapterId="chatMode.chapterId"
-            :propPhase="chatMode.phase || ''"
-            :propActId="chatMode.actId || ''"
+            :chapter-id="chatMode.chapterId"
+            :phase="chatMode.phase || ''"
+            :act-id="chatMode.actId || ''"
             :embedded="true"
             @close="closeChat"
           />
@@ -174,7 +174,7 @@
         <!-- Embedded BridgingQuest overlay -->
         <div v-else-if="bridgeMode" class="book-chat-panel" :key="'bridge-' + bridgeMode.bridgeId">
           <BridgingQuest
-            :propBridgeId="bridgeMode.bridgeId"
+            :bridge-id="bridgeMode.bridgeId"
             :embedded="true"
             @close="closeBridge"
           />

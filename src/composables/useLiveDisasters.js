@@ -62,7 +62,7 @@ export function useLiveDisasters() {
           disasterRiskIndex: risk,
           time: eq.properties.time,
           url: eq.properties.url,
-          flag: `/src/assets/flags/${iso}.svg`
+          flag: `/flags/${iso}.svg`
         }
       })
 
