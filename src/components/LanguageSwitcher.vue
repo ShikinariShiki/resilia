@@ -1,7 +1,7 @@
 <template>
   <div class="relative group" ref="container">
     <button @click="isOpen = !isOpen" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors">
-      <span class="text-xl inline-block drop-shadow-sm">{{ currentLang.flag }}</span>
+      <img :src="currentLang.flag" class="w-5 h-auto rounded-sm shadow-sm" alt="Flag" />
       <span class="font-heading font-bold text-sm text-ink dark:text-white uppercase">{{ locale }}</span>
     </button>
     
@@ -9,7 +9,7 @@
       <button v-for="lang in languages" :key="lang.code" @click="setLocale(lang.code)"
         class="w-full text-left px-4 py-3 hover:bg-gray-50 dark:hover:bg-slate-700 flex items-center gap-3 transition-colors"
         :class="locale === lang.code ? 'bg-teal-50 dark:bg-teal-900/20' : ''">
-        <span class="text-xl inline-block drop-shadow-sm">{{ lang.flag }}</span>
+        <img :src="lang.flag" class="w-5 h-auto rounded-sm shadow-sm" alt="Flag" />
         <span class="text-sm font-heading font-bold text-ink dark:text-white">{{ lang.label }}</span>
         <span v-if="locale === lang.code" class="ml-auto text-teal-500 text-xs">✓</span>
       </button>
@@ -28,15 +28,15 @@ const isOpen = ref(false)
 const container = ref(null)
 
 const languages = [
-  { code: 'en', flag: '🇬🇧', label: 'English' },
-  { code: 'id', flag: '🇮🇩', label: 'Bahasa' },
-  { code: 'th', flag: '🇹🇭', label: 'ไทย' },
-  { code: 'vi', flag: '🇻🇳', label: 'Tiếng Việt' },
-  { code: 'ms', flag: '🇲🇾', label: 'Melayu' },
-  { code: 'tl', flag: '🇵🇭', label: 'Filipino' },
-  { code: 'my', flag: '🇲🇲', label: 'မြန်မာ' },
-  { code: 'km', flag: '🇰🇭', label: 'ខ្មែរ' },
-  { code: 'lo', flag: '🇱🇦', label: 'ລາວ' },
+  { code: 'en', flag: '/flags/gb.svg', label: 'English' },
+  { code: 'id', flag: '/flags/id.svg', label: 'Bahasa' },
+  { code: 'th', flag: '/flags/th.svg', label: 'ไทย' },
+  { code: 'vi', flag: '/flags/vn.svg', label: 'Tiếng Việt' },
+  { code: 'ms', flag: '/flags/my.svg', label: 'Melayu' },
+  { code: 'tl', flag: '/flags/ph.svg', label: 'Filipino' },
+  { code: 'my', flag: '/flags/mm.svg', label: 'မြန်မာ' },
+  { code: 'km', flag: '/flags/kh.svg', label: 'ខ្មែរ' },
+  { code: 'lo', flag: '/flags/la.svg', label: 'ລາວ' },
 ]
 
 const currentLang = computed(() => languages.find(l => l.code === locale.value) || languages[0])

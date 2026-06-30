@@ -256,7 +256,7 @@
             </div>
             <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">COPING STRATEGY</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">How do you usually cope?</h2>
-            <p class="text-gray-400 font-body text-sm">No wrong answers — this calibrates your missions</p>
+            <p class="text-gray-400 font-body text-sm">No wrong answers. This calibrates your missions</p>
           </div>
           <div class="space-y-3 mb-8">
             <button v-for="c in copingOptions" :key="c.value" @click="selectedCoping = c.value"

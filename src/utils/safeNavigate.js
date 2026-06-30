@@ -24,6 +24,7 @@ const ALLOWED_PATHS = [
 const ALLOWED_PREFIXES = [
     '/academy/lesson/',
     '/academy/rpg/',
+    '/academy/disaster-rpg/',
     '/academy/foundations/',
     '/academy/erq/',
     '/academy/quest/',

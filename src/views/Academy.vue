@@ -309,7 +309,7 @@
         {{ t('academy.trainingRpg') }}
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <RouterLink v-for="(rpg, key) in store.disasterRPGScenarios" :key="key" :to="`/academy/rpg/${key}`"
+        <RouterLink v-for="(rpg, key) in store.disasterRPGScenarios" :key="key" :to="`/academy/disaster-rpg/${key}`"
           class="rpg-card p-4 cursor-pointer hover:-translate-y-1 transition-all">
           <h3 class="font-heading font-bold text-sm text-ink dark:text-white mb-1">{{ rpg.title }}</h3>
           <p class="text-[10px] text-gray-400 font-body">{{ rpg.description }}</p>
@@ -321,7 +321,7 @@
 
 <script setup>
 import { ref, computed, nextTick, onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 import TourGuide from '../components/TourGuide.vue'
 import { PhBookOpen, PhBookmarkSimple, PhChartDonut, PhFolders, PhFolderOpen } from '@phosphor-icons/vue'
@@ -333,6 +333,7 @@ import { useI18n } from '../i18n'
 
 const store = useResiliaStore()
 const { t } = useI18n()
+const router = useRouter()
 
 const completedChapters = computed(() => store.academyChapters.filter(c => c.status === 'completed').length)
 const overallProgress = computed(() => (completedChapters.value / store.academyChapters.length) * 100)
@@ -419,10 +420,20 @@ function handleNextAct(payload) {
 }
 
 function openQuest(questId) {
-  chatMode.value = null
-  actMode.value = null
-  bridgeMode.value = null
-  questMode.value = { questId }
+  const v2Map = {
+    'quest_ch1': 'merapi',
+    'quest_ch1h': 'gotong',
+    'quest_ch2': 'evac'
+  }
+  
+  if (v2Map[questId]) {
+    router.push(`/academy/rpg/${v2Map[questId]}`)
+  } else {
+    chatMode.value = null
+    actMode.value = null
+    bridgeMode.value = null
+    questMode.value = { questId }
+  }
 }
 
 function closeQuest() {

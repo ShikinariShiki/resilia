@@ -174,16 +174,65 @@ function nextQuestion() {
 const activityOffer = ref(false)
 const bestActivity = ref('toolkit')
 
-const popupData = {
-  toolkit: { emoji: '🧘', title: 'Take a Moment?', desc: 'It seems like things have been a bit heavy lately. A quick breathing exercise can help you feel grounded.', btn: 'Yes, let\'s breathe 🌿', route: '/toolkit' },
-  checkin: { emoji: '📝', title: 'Need to Vent?', desc: 'You seem a bit overwhelmed. Writing your thoughts down in a private journal can clear your mind.', btn: 'Open Journal 📔', route: '/journal' },
-  lesson: { emoji: '🧠', title: 'Ready to Learn?', desc: 'You are in a great state of mind! This is the perfect time to build your disaster readiness skills.', btn: 'Go to Academy 📚', route: '/academy' },
-  rpg: { emoji: '🛡️', title: 'Field Drill Time', desc: 'Your focus is sharp today. How about running a quick disaster response scenario to test your instincts?', btn: 'Start RPG Scenario 🎮', route: '/academy' },
-  donate: { emoji: '🤝', title: 'Spread the Positivity', desc: 'You are doing great! Consider paying it forward by checking out community donation goals.', btn: 'View Community 🌍', route: '/wallet' },
-  dashboard: { emoji: '📊', title: 'Analytical Mindset', desc: 'You are feeling balanced. It\'s a good time to review the latest ASEAN disaster data.', btn: 'Open Dashboard 📈', route: '/dashboard' }
-}
+// KNN-driven popup: content adapts based on distress level and journal answers
+const popupContent = computed(() => {
+  const cat = bestActivity.value
+  const avg = answers.value.reduce((s, v) => s + v, 0) / questions.length
+  const distressLevel = (avg - 1) / 6  // normalized 0..1
 
-const popupContent = computed(() => popupData[bestActivity.value] || popupData.toolkit)
+  // Category-specific routes and base data
+  const routes = {
+    toolkit: '/toolkit',
+    checkin: '/journal',
+    lesson: '/academy',
+    rpg: '/academy',
+    donate: '/wallet',
+    dashboard: '/dashboard'
+  }
+
+  // KNN-adaptive titles and descriptions based on distress level
+  const content = {
+    toolkit: {
+      high: { emoji: '🧘', title: 'Let\'s Take a Breather', desc: 'Your journal shows some heavy feelings today. A short breathing exercise can help your body relax before anything else.', btn: 'Start Breathing' },
+      mid: { emoji: '🧘', title: 'A Quick Pause?', desc: 'You seem a bit tense. A guided breathing session might help you feel more grounded.', btn: 'Let\'s Breathe' },
+      low: { emoji: '🌿', title: 'Stay Grounded', desc: 'You are doing well today. A quick grounding exercise can help you stay balanced.', btn: 'Quick Exercise' }
+    },
+    checkin: {
+      high: { emoji: '📝', title: 'It Helps to Write It Down', desc: 'Your answers suggest a lot on your mind right now. Putting thoughts into words can ease the weight.', btn: 'Open Journal' },
+      mid: { emoji: '📝', title: 'Need to Vent?', desc: 'You seem a bit overwhelmed. Writing your thoughts down can help clear your mind.', btn: 'Open Journal' },
+      low: { emoji: '📓', title: 'Daily Reflection', desc: 'Good time for a quick reflection. Journaling keeps your mental fitness sharp.', btn: 'Write Today' }
+    },
+    lesson: {
+      high: { emoji: '📖', title: 'Learn at Your Own Pace', desc: 'When things feel heavy, learning can be a healthy distraction. A short lesson might help shift focus.', btn: 'Browse Lessons' },
+      mid: { emoji: '🧠', title: 'Build Your Skills', desc: 'You are in a decent headspace. This is a good time to build disaster readiness skills.', btn: 'Go to Academy' },
+      low: { emoji: '📚', title: 'Sharp and Ready', desc: 'You are feeling great. Perfect time to deepen your knowledge and stay ahead.', btn: 'Start Learning' }
+    },
+    rpg: {
+      high: { emoji: '🛡️', title: 'A Gentle Challenge', desc: 'Sometimes a structured scenario helps process what we are feeling. Try a short drill at your pace.', btn: 'Try a Scenario' },
+      mid: { emoji: '🎮', title: 'Test Your Instincts', desc: 'Your focus is decent today. A disaster response scenario could sharpen your skills.', btn: 'Start Scenario' },
+      low: { emoji: '⚔️', title: 'Field Drill Time', desc: 'Your focus is sharp. Run a disaster response scenario to put your training to the test.', btn: 'Start RPG Drill' }
+    },
+    donate: {
+      high: { emoji: '💛', title: 'Small Acts Help You Too', desc: 'Helping others can lift your own spirits. Even a small contribution makes a difference.', btn: 'See Causes' },
+      mid: { emoji: '🤝', title: 'Spread Some Good', desc: 'You are doing okay. Consider paying it forward with a community donation.', btn: 'View Community' },
+      low: { emoji: '🌍', title: 'Pay It Forward', desc: 'You are in a great spot. Share some positivity with the community today.', btn: 'Donate Now' }
+    },
+    dashboard: {
+      high: { emoji: '📊', title: 'Ground Yourself with Facts', desc: 'Sometimes looking at real data helps put things in perspective. Check the latest updates.', btn: 'View Data' },
+      mid: { emoji: '📈', title: 'Stay Informed', desc: 'A quick look at the disaster data can help you feel prepared and in control.', btn: 'Open Dashboard' },
+      low: { emoji: '🗺️', title: 'Analytical Mindset', desc: 'You are feeling balanced. Great time to review ASEAN disaster data and stay sharp.', btn: 'Open Dashboard' }
+    }
+  }
+
+  const level = distressLevel > 0.6 ? 'high' : distressLevel > 0.3 ? 'mid' : 'low'
+  const catContent = content[cat] || content.toolkit
+  const selected = catContent[level] || catContent.mid
+
+  return {
+    ...selected,
+    route: routes[cat] || '/home'
+  }
+})
 
 function submit() {
   if (answers.value[currentIndex.value] === 0) return
@@ -191,7 +240,7 @@ function submit() {
   const avg = total / questions.length
   let scorePercent = Math.round(((7 - avg) / 6) * 100)
   
-  bestActivity.value = store.updateStability(scorePercent, avg)
+  bestActivity.value = store.updateStability(scorePercent, avg, answers.value)
   activityOffer.value = true
 }
 

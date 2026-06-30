@@ -20,7 +20,10 @@
         <div class="text-center sm:text-left flex-1">
           <h1 class="font-heading text-2xl sm:text-3xl font-bold mb-1">{{ store.userName }}</h1>
           <div class="flex items-center justify-center sm:justify-start gap-2 mb-3">
-            <span class="text-sm opacity-80">{{ userCountry?.flag }} {{ userCountry?.name }}</span>
+            <span class="text-sm opacity-80 flex items-center gap-1.5">
+              <img v-if="userCountry?.flag" :src="userCountry.flag" class="w-4 h-3 object-cover rounded-sm shadow-sm" alt="Flag" />
+              {{ userCountry?.name }}
+            </span>
             <span class="text-xs opacity-60">·</span>
             <span class="text-xs opacity-60">{{ t('profile.joined').replace('{date}', store.joinDate) }}</span>
           </div>

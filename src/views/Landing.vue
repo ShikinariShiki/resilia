@@ -447,18 +447,18 @@ const langOpen = ref(false)
 const langDropdownRef = ref(null)
 
 const availableLangs = [
-  { code: 'en', flag: '/src/assets/flags/gb.svg', label: 'English' },
-  { code: 'id', flag: '/src/assets/flags/id.svg', label: 'Bahasa Indonesia' },
-  { code: 'th', flag: '/src/assets/flags/th.svg', label: 'ภาษาไทย' },
-  { code: 'vi', flag: '/src/assets/flags/vn.svg', label: 'Tiếng Việt' },
-  { code: 'ms', flag: '/src/assets/flags/un.svg', label: 'Bahasa Melayu' },
-  { code: 'tl', flag: '/src/assets/flags/ph.svg', label: 'Filipino' },
-  { code: 'my', flag: '/src/assets/flags/mm.svg', label: 'မြန်မာဘာသာ' },
-  { code: 'km', flag: '/src/assets/flags/kh.svg', label: 'ភាសាខ្មែរ' },
-  { code: 'lo', flag: '/src/assets/flags/la.svg', label: 'ພາສາລາວ' },
+  { code: 'en', flag: '/flags/gb.svg', label: 'English' },
+  { code: 'id', flag: '/flags/id.svg', label: 'Bahasa Indonesia' },
+  { code: 'th', flag: '/flags/th.svg', label: 'ภาษาไทย' },
+  { code: 'vi', flag: '/flags/vn.svg', label: 'Tiếng Việt' },
+  { code: 'ms', flag: '/flags/un.svg', label: 'Bahasa Melayu' },
+  { code: 'tl', flag: '/flags/ph.svg', label: 'Filipino' },
+  { code: 'my', flag: '/flags/mm.svg', label: 'မြန်မာဘာသာ' },
+  { code: 'km', flag: '/flags/kh.svg', label: 'ភាសាខ្មែរ' },
+  { code: 'lo', flag: '/flags/la.svg', label: 'ພາສາລາວ' },
 ]
 
-const currentLangFlag = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.flag || '/src/assets/flags/un.svg')
+const currentLangFlag = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.flag || '/flags/un.svg')
 const currentLangLabel = computed(() => availableLangs.find(l => l.code === landingLocale.value)?.label || 'English')
 
 function setLandingLocale(code) {

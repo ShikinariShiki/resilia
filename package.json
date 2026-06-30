@@ -14,7 +14,7 @@
     "@fontsource-variable/hanken-grotesk": "^5.2.8",
     "@fontsource/dm-mono": "^5.2.7",
     "@phosphor-icons/vue": "^2.2.1",
-    "@supabase/supabase-js": "^2.97.0",
+    "@supabase/supabase-js": "2.109.0",
     "@tailwindcss/vite": "^4.1.18",
     "@vitalets/google-translate-api": "^9.2.1",
     "chart.js": "^4.5.1",

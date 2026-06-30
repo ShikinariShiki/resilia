@@ -3,7 +3,7 @@ import { ref, computed, watch } from 'vue'
 import * as authService from '../services/authService'
 import * as dataService from '../services/dataService'
 import { isSupabaseConfigured } from '../lib/supabaseClient'
-import { predictMissionWeights, generatePersonalizedMissions, recommendMissions, adaptWeightsByDistress } from '../ml/recommend'
+import { predictMissionWeights, generatePersonalizedMissions, recommendMissions, adaptWeightsKNN } from '../ml/recommend'
 
 export const useResiliaStore = defineStore('resilia', () => {
     // ═══ Session TTL (6 hours) ═══
@@ -208,16 +208,16 @@ export const useResiliaStore = defineStore('resilia', () => {
     const modulesCompletedGlobal = ref(28910)
 
     const regionData = ref([
-        { country: 'Indonesia', code: 'ID', flag: '/src/assets/flags/.svg', population: 275.5, gdpPerCapita: 4788, hdi: 0.705, disasterRiskIndex: 46.92, readiness: 74, responders: 1240, recentDisaster: 'Cianjur Earthquake 2022', annualDisasters: 3092, topDisasters: 'Earthquake, Flood, Volcano', emergencyHotline: '112 / 119' },
-        { country: 'Philippines', code: 'PH', flag: '/src/assets/flags/.svg', population: 115.6, gdpPerCapita: 3623, hdi: 0.699, disasterRiskIndex: 45.12, readiness: 68, responders: 890, recentDisaster: 'Typhoon Rai 2021', annualDisasters: 1058, topDisasters: 'Typhoon, Earthquake, Flood', emergencyHotline: '911' },
-        { country: 'Vietnam', code: 'VN', flag: '/src/assets/flags/.svg', population: 99.5, gdpPerCapita: 4164, hdi: 0.703, disasterRiskIndex: 24.96, readiness: 55, responders: 420, recentDisaster: 'Typhoon Noru 2022', annualDisasters: 394, topDisasters: 'Typhoon, Flood, Landslide', emergencyHotline: '113 / 115' },
-        { country: 'Thailand', code: 'TH', flag: '/src/assets/flags/.svg', population: 71.8, gdpPerCapita: 7233, hdi: 0.800, disasterRiskIndex: 14.37, readiness: 82, responders: 610, recentDisaster: 'Southern Floods 2023', annualDisasters: 128, topDisasters: 'Flood, Drought, Landslide', emergencyHotline: '1669' },
-        { country: 'Malaysia', code: 'MY', flag: '/src/assets/flags/.svg', population: 33.9, gdpPerCapita: 12448, hdi: 0.803, disasterRiskIndex: 8.63, readiness: 78, responders: 340, recentDisaster: 'Selangor Floods 2021', annualDisasters: 52, topDisasters: 'Flood, Landslide, Haze', emergencyHotline: '999' },
-        { country: 'Myanmar', code: 'MM', flag: '/src/assets/flags/.svg', population: 54.4, gdpPerCapita: 1210, hdi: 0.585, disasterRiskIndex: 42.55, readiness: 42, responders: 180, recentDisaster: 'Cyclone Mocha 2023', annualDisasters: 312, topDisasters: 'Cyclone, Flood, Earthquake', emergencyHotline: '199' },
-        { country: 'Cambodia', code: 'KH', flag: '/src/assets/flags/.svg', population: 16.9, gdpPerCapita: 1768, hdi: 0.593, disasterRiskIndex: 16.58, readiness: 48, responders: 95, recentDisaster: 'Mekong Floods 2022', annualDisasters: 67, topDisasters: 'Flood, Drought, Storm', emergencyHotline: '119' },
-        { country: 'Laos', code: 'LA', flag: '/src/assets/flags/.svg', population: 7.5, gdpPerCapita: 2054, hdi: 0.607, disasterRiskIndex: 15.57, readiness: 38, responders: 45, recentDisaster: 'Dam Collapse 2018', annualDisasters: 34, topDisasters: 'Flood, Drought, UXO', emergencyHotline: '1195' },
-        { country: 'Singapore', code: 'SG', flag: '/src/assets/flags/.svg', population: 5.9, gdpPerCapita: 72794, hdi: 0.939, disasterRiskIndex: 2.42, readiness: 91, responders: 220, recentDisaster: 'Heatwave 2023', annualDisasters: 3, topDisasters: 'Heatwave, Flood, Haze', emergencyHotline: '995' },
-        { country: 'Brunei', code: 'BN', flag: '/src/assets/flags/.svg', population: 0.45, gdpPerCapita: 31449, hdi: 0.829, disasterRiskIndex: 3.08, readiness: 85, responders: 42, recentDisaster: 'Floods 2021', annualDisasters: 5, topDisasters: 'Flood, Haze, Fire', emergencyHotline: '993' },
+        { country: 'Indonesia', code: 'ID', flag: '/flags/id.svg', population: 275.5, gdpPerCapita: 4788, hdi: 0.705, disasterRiskIndex: 46.92, readiness: 74, responders: 1240, recentDisaster: 'Cianjur Earthquake 2022', annualDisasters: 3092, topDisasters: 'Earthquake, Flood, Volcano', emergencyHotline: '112 / 119' },
+        { country: 'Philippines', code: 'PH', flag: '/flags/ph.svg', population: 115.6, gdpPerCapita: 3623, hdi: 0.699, disasterRiskIndex: 45.12, readiness: 68, responders: 890, recentDisaster: 'Typhoon Rai 2021', annualDisasters: 1058, topDisasters: 'Typhoon, Earthquake, Flood', emergencyHotline: '911' },
+        { country: 'Vietnam', code: 'VN', flag: '/flags/vn.svg', population: 99.5, gdpPerCapita: 4164, hdi: 0.703, disasterRiskIndex: 24.96, readiness: 55, responders: 420, recentDisaster: 'Typhoon Noru 2022', annualDisasters: 394, topDisasters: 'Typhoon, Flood, Landslide', emergencyHotline: '113 / 115' },
+        { country: 'Thailand', code: 'TH', flag: '/flags/th.svg', population: 71.8, gdpPerCapita: 7233, hdi: 0.800, disasterRiskIndex: 14.37, readiness: 82, responders: 610, recentDisaster: 'Southern Floods 2023', annualDisasters: 128, topDisasters: 'Flood, Drought, Landslide', emergencyHotline: '1669' },
+        { country: 'Malaysia', code: 'MY', flag: '/flags/my.svg', population: 33.9, gdpPerCapita: 12448, hdi: 0.803, disasterRiskIndex: 8.63, readiness: 78, responders: 340, recentDisaster: 'Selangor Floods 2021', annualDisasters: 52, topDisasters: 'Flood, Landslide, Haze', emergencyHotline: '999' },
+        { country: 'Myanmar', code: 'MM', flag: '/flags/mm.svg', population: 54.4, gdpPerCapita: 1210, hdi: 0.585, disasterRiskIndex: 42.55, readiness: 42, responders: 180, recentDisaster: 'Cyclone Mocha 2023', annualDisasters: 312, topDisasters: 'Cyclone, Flood, Earthquake', emergencyHotline: '199' },
+        { country: 'Cambodia', code: 'KH', flag: '/flags/kh.svg', population: 16.9, gdpPerCapita: 1768, hdi: 0.593, disasterRiskIndex: 16.58, readiness: 48, responders: 95, recentDisaster: 'Mekong Floods 2022', annualDisasters: 67, topDisasters: 'Flood, Drought, Storm', emergencyHotline: '119' },
+        { country: 'Laos', code: 'LA', flag: '/flags/la.svg', population: 7.5, gdpPerCapita: 2054, hdi: 0.607, disasterRiskIndex: 15.57, readiness: 38, responders: 45, recentDisaster: 'Dam Collapse 2018', annualDisasters: 34, topDisasters: 'Flood, Drought, UXO', emergencyHotline: '1195' },
+        { country: 'Singapore', code: 'SG', flag: '/flags/sg.svg', population: 5.9, gdpPerCapita: 72794, hdi: 0.939, disasterRiskIndex: 2.42, readiness: 91, responders: 220, recentDisaster: 'Heatwave 2023', annualDisasters: 3, topDisasters: 'Heatwave, Flood, Haze', emergencyHotline: '995' },
+        { country: 'Brunei', code: 'BN', flag: '/flags/bn.svg', population: 0.45, gdpPerCapita: 31449, hdi: 0.829, disasterRiskIndex: 3.08, readiness: 85, responders: 42, recentDisaster: 'Floods 2021', annualDisasters: 5, topDisasters: 'Flood, Haze, Fire', emergencyHotline: '993' },
     ])
 
     const countries = ref([
@@ -2847,7 +2847,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         }
     }, { immediate: true })
 
-    function updateStability(scorePercent, avgLikert) {
+    function updateStability(scorePercent, avgLikert, currentAnswers = []) {
         stabilityScore.value = scorePercent
         isStable.value = scorePercent > 30
         soothingModeActive.value = scorePercent <= 30
@@ -2868,7 +2868,7 @@ export const useResiliaStore = defineStore('resilia', () => {
             }
         }
         
-        const adaptedWeights = adaptWeightsByDistress(baseWeights, avgLikert || ((100 - scorePercent) / 100 * 6 + 1))
+        const adaptedWeights = adaptWeightsKNN(baseWeights, currentAnswers, avgLikert || ((100 - scorePercent) / 100 * 6 + 1))
         
         // Re-roll today's missions using the new adapted probabilities
         dailyMissions.value = generatePersonalizedMissions(adaptedWeights)

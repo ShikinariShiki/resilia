@@ -49,6 +49,11 @@ const routes = [
         component: () => import('../views/RpgQuestView.vue'),
     },
     {
+        path: '/academy/disaster-rpg/:id',
+        name: 'disaster-rpg',
+        component: () => import('../views/DisasterRPG.vue'),
+    },
+    {
         path: '/wallet',
         name: 'wallet',
         component: () => import('../views/Wallet.vue'),

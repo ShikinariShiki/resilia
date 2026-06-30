@@ -41,44 +41,68 @@ export function predictMissionWeights(ans = {}) {
   return out
 }
 
-// Dynamically shifts mission weights based on current daily distress (1-7 scale).
-// High distress (5-7) suppresses high-cognitive tasks (RPG, lessons) and boosts soothing (toolkit, checkin).
-// Low distress (1-2) boosts active learning and drills (RPG, lessons, donate).
-export function adaptWeightsByDistress(baseWeights, distressLevel) {
-  // distressLevel is 1 to 7. We normalize it to 0.0 to 1.0 (1.0 = highly distressed)
-  const normalizedDistress = (distressLevel - 1) / 6.0;
-  
-  // Define bias vectors for distress
-  const distressBias = {
-    toolkit: 3.5, // highly boosted when stressed
-    checkin: 2.0, 
-    donate: -0.5,
-    dashboard: -1.0,
-    lesson: -2.5,
-    rpg: -3.5 // severely suppressed when stressed (prevents secondary trauma)
-  }
-  
-  // Define bias vectors for stability (0.0 = Max Stability / 1.0 = Max distress reversed)
-  const stabilityBias = {
-    rpg: 4.5,
-    lesson: 3.5,
-    donate: 1.5,
-    dashboard: 0.5,
-    checkin: -1.0,
-    toolkit: -3.0
+// K-Nearest Neighbors (KNN) heuristic approach to adapt daily mission weights.
+// We compare the 7-dimensional daily journal input to predefined "emotional state" centroids.
+// High distress shifts weights toward soothing/toolkit. Low distress shifts toward RPG/lessons.
+export function adaptWeightsKNN(baseWeights, currentAnswers, avgLikert) {
+  // If answers array is empty or invalid, fallback to simple average
+  if (!currentAnswers || currentAnswers.length < 7) {
+    const normalizedDistress = (avgLikert - 1) / 6.0;
+    return applyBias(baseWeights, calculateFallbackBias(normalizedDistress));
   }
 
-  const logits = CATS.map(cat => {
-    // Reverse the softmax roughly to get pseudo-logits back from base probs
-    let val = Math.log(baseWeights[cat] + 1e-9);
-    
-    // Apply distress bias and stability bias based on the user's current scale
-    val += distressBias[cat] * normalizedDistress;
-    val += stabilityBias[cat] * (1 - normalizedDistress);
-    
-    return val;
+  // Predefined neighbors (centroids) representing typical emotional clusters (scale 1-7)
+  const neighbors = [
+    { name: 'Highly_Stressed', vec: [7, 6, 5, 7, 6, 4, 7], bias: { toolkit: 4.0, checkin: 2.5, donate: -1.0, dashboard: -1.0, lesson: -2.5, rpg: -4.0 } },
+    { name: 'Anxious_Tense', vec: [5, 7, 4, 5, 7, 3, 5], bias: { toolkit: 3.0, checkin: 2.0, donate: -0.5, dashboard: 0.0, lesson: -1.5, rpg: -3.0 } },
+    { name: 'Depressed_LowEnergy', vec: [3, 2, 7, 4, 3, 7, 4], bias: { checkin: 3.5, toolkit: 1.5, donate: 0.5, dashboard: -0.5, lesson: -1.0, rpg: -2.0 } },
+    { name: 'Neutral_Stable', vec: [4, 4, 4, 4, 4, 4, 4], bias: { lesson: 2.0, dashboard: 1.5, donate: 1.0, rpg: 1.0, checkin: 0.0, toolkit: -2.0 } },
+    { name: 'Highly_Resilient', vec: [1, 1, 1, 1, 1, 1, 1], bias: { rpg: 4.0, lesson: 3.0, donate: 2.0, dashboard: 1.0, checkin: -1.0, toolkit: -4.0 } }
+  ];
+
+  // Calculate Euclidean distances
+  const distances = neighbors.map(neighbor => {
+    let sum = 0;
+    for (let i = 0; i < 7; i++) {
+      sum += Math.pow((currentAnswers[i] || 0) - neighbor.vec[i], 2);
+    }
+    return { name: neighbor.name, bias: neighbor.bias, dist: Math.sqrt(sum) };
   });
 
+  // Sort by distance (ascending) and take top K=2
+  distances.sort((a, b) => a.dist - b.dist);
+  const k = 2;
+  const topK = distances.slice(0, k);
+
+  // Average the biases of the top K neighbors
+  const aggregatedBias = {};
+  CATS.forEach(cat => {
+    let catSum = 0;
+    topK.forEach(n => {
+      catSum += (n.bias[cat] || 0);
+    });
+    aggregatedBias[cat] = catSum / k;
+  });
+
+  return applyBias(baseWeights, aggregatedBias);
+}
+
+function calculateFallbackBias(normalizedDistress) {
+  const distressBias = { toolkit: 3.5, checkin: 2.0, donate: -0.5, dashboard: -1.0, lesson: -2.5, rpg: -3.5 };
+  const stabilityBias = { rpg: 4.5, lesson: 3.5, donate: 1.5, dashboard: 0.5, checkin: -1.0, toolkit: -3.0 };
+  const result = {};
+  CATS.forEach(cat => {
+    result[cat] = (distressBias[cat] || 0) * normalizedDistress + (stabilityBias[cat] || 0) * (1 - normalizedDistress);
+  });
+  return result;
+}
+
+function applyBias(baseWeights, biasMap) {
+  const logits = CATS.map(cat => {
+    let val = Math.log(baseWeights[cat] + 1e-9);
+    val += (biasMap[cat] || 0);
+    return val;
+  });
   const adaptedProbs = softmax(logits);
   const out = {};
   CATS.forEach((c, j) => out[c] = adaptedProbs[j]);

@@ -189,7 +189,10 @@
               <p class="text-xs font-heading font-bold truncate" :class="user.isYou ? 'text-teal-600 dark:text-teal-400' : 'text-ink dark:text-white'">
                 {{ user.name }}{{ user.isYou ? ' ' + t('dashboard.you') : '' }}
               </p>
-              <p class="text-[10px] text-gray-400 font-body">{{ user.country }}</p>
+              <p class="text-[10px] text-gray-400 font-body flex items-center gap-1">
+                <img v-if="user.flag" :src="user.flag" class="w-4 h-auto inline-block rounded-sm shadow-sm" alt="Flag" />
+                {{ user.country }}
+              </p>
             </div>
             <span class="text-xs font-heading font-bold text-amber-500">{{ user.xp }} XP</span>
           </div>
@@ -362,7 +365,7 @@ const leaderboard = computed(() => [
   { name: 'ResiMaster_PH', country: '🇵🇭 Manila', xp: 4520 },
   { name: 'DisasterReady_ID', country: '🇮🇩 Jakarta', xp: 3890 },
   { name: 'CycloneHunter_MM', country: '🇲🇲 Yangon', xp: 3210 },
-  { name: store.userName || 'Tester', country: store.countryCode ? `${store.regionData.find(r => r.code === store.countryCode)?.flag || ''} ${store.regionData.find(r => r.code === store.countryCode)?.country || ''}` : '🌏 ASEAN', xp: store.totalXPEarned, isYou: true },
+  { name: store.userName || 'Tester', country: store.countryCode ? `${store.regionData.find(r => r.code === store.countryCode)?.country || 'ASEAN'}` : '🌏 ASEAN', flag: store.countryCode ? store.regionData.find(r => r.code === store.countryCode)?.flag : null, xp: store.totalXPEarned, isYou: true },
   { name: 'FloodWatch_VN', country: '🇻🇳 Hanoi', xp: 1580 },
   { name: 'QuakeReady_TH', country: '🇹🇭 Bangkok', xp: 1120 },
 ])
