@@ -12,7 +12,7 @@
       <div v-if="!started" v-motion>
         <button v-if="embedded" @click="emit('close')" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block cursor-pointer bg-transparent border-none">← Academy</button>
         <RouterLink v-else to="/academy" class="text-xs text-gray-400 hover:text-teal-500 transition-colors font-heading mb-6 inline-block">← Academy</RouterLink>
-        <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 text-center">
+        <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-8 sm:p-10 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50 text-center">
           <div class="text-6xl mb-6">📖</div>
           <h1 class="font-heading text-2xl sm:text-3xl font-bold text-ink dark:text-white mb-2">{{ bridgeQuest.title }}</h1>
           <p class="text-sm text-amber-500 font-heading font-bold mb-6">Story Bridge</p>
@@ -37,7 +37,7 @@
           <span class="text-[10px] font-heading font-bold text-amber-400">📖 Story</span>
         </div>
 
-        <div class="bg-[#FAFAF8] dark:bg-[#1A1714] w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto rounded-3xl overflow-hidden border border-amber-200/30 dark:border-amber-800/20 shadow-2xl flex flex-col h-[650px] sm:h-[700px] md:h-[75vh] max-h-[85vh]">
+        <div class="bg-[#FAFAF8] dark:bg-[#1A1714] w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto rounded-2xl overflow-hidden border border-amber-200/30 dark:border-amber-800/20 shadow-2xl flex flex-col h-[650px] sm:h-[700px] md:h-[75vh] max-h-[85vh]">
           <!-- Chat Header -->
           <div class="flex items-center gap-3 p-4 bg-[#F0EDE6] dark:bg-[#211E19] backdrop-blur-md border-b border-amber-200/20 dark:border-amber-800/15">
             <div class="w-10 h-10 rounded-full border border-amber-200/20 shadow-sm flex items-center justify-center relative flex-shrink-0 bg-[#F0EDE6] dark:bg-[#211E19]">
@@ -97,7 +97,7 @@
 
       <!-- Complete -->
       <div v-else v-motion class="text-center">
-        <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
+        <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-8 sm:p-12 shadow-[0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-none dark:border dark:border-slate-700/50">
           <div class="text-6xl mb-6">✨</div>
           <h2 class="font-heading text-2xl font-bold text-ink dark:text-white mb-3">Story Chapter Complete!</h2>
           <p class="text-sm text-gray-400 font-body mb-4">{{ bridgeQuest.title }}</p>

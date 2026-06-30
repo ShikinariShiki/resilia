@@ -5,7 +5,7 @@
       :class="scrollY > 50 ? 'bg-white/85 dark:bg-[#0A0A0A]/85 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-white/5' : 'bg-transparent border-b border-transparent'">
       <div class="mx-auto h-16 md:h-20 flex items-center justify-between" style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
         <div class="flex items-center gap-3">
-          <img src="../assets/icon.png" class="w-10 h-10 object-cover rounded-2xl bg-teal-50 shadow-lg shadow-teal-500/20 transition-transform duration-500 hover:scale-110 hover:rotate-3" alt="RESILIA" />
+          <img src="../assets/icon.png" class="w-10 h-10 object-cover rounded-2xl bg-teal-50 shadow-lg shadow-teal-500/20 transition-transform duration-500" alt="RESILIA" />
           <span class="font-heading text-xl font-bold tracking-tight transition-colors duration-500"
             :class="scrollY > 50 ? 'text-ink dark:text-white' : 'text-ink dark:text-white'">RESILIA</span>
         </div>
@@ -53,11 +53,6 @@
         <!-- Gradient orbs with parallax -->
         <div class="hero-orb hero-orb-1" :style="{ transform: `translate(${scrollY * 0.08}px, ${scrollY * 0.12}px)` }"></div>
         <div class="hero-orb hero-orb-2" :style="{ transform: `translate(${-scrollY * 0.05}px, ${scrollY * 0.06}px)` }"></div>
-        
-        <!-- Floating Glass Shapes -->
-        <div class="absolute top-[20%] left-[10%] w-16 h-16 bg-teal-500/10 backdrop-blur-md rounded-2xl rotate-12 animate-float border border-teal-500/20"></div>
-        <div class="absolute top-[35%] right-[45%] w-10 h-10 bg-orange-500/10 backdrop-blur-md rounded-full -rotate-12 animate-float border border-orange-500/20" style="animation-delay: 2s"></div>
-        <div class="absolute bottom-[25%] left-[40%] w-12 h-12 border-4 border-purple-500/10 backdrop-blur-md rounded-xl rotate-45 animate-float" style="animation-delay: 1s"></div>
       </div>
 
       <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center relative w-full pt-20 md:pt-0">
@@ -111,14 +106,15 @@
           <!-- Stats grid with animated counters -->
           <div class="grid grid-cols-2 gap-4">
             <div v-for="(stat, i) in heroStats" :key="i"
-              class="stat-card rounded-2xl p-6 group hover:-translate-y-1 transition-all duration-500 relative overflow-hidden" :class="stat.bg">
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" :class="stat.glowBg"></div>
-              <p class="font-heading text-3xl lg:text-4xl font-bold transition-transform duration-300 group-hover:scale-105 relative" :class="stat.color">
+              class="stat-card rounded-2xl p-6 transition-all duration-500 relative overflow-hidden" :class="stat.bg">
+              <div class="absolute inset-0 opacity-0" :class="stat.glowBg"></div>
+              <p class="font-heading text-3xl lg:text-4xl font-bold relative" :class="stat.color">
                 <span ref="counterRefs">{{ animatedCounters[i]?.display || stat.value }}</span>
               </p>
               <p class="text-xs mt-2 font-body relative" :class="stat.subColor">{{ stat.label }}</p>
             </div>
           </div>
+          <p class="text-[10px] text-gray-400/60 dark:text-gray-500/50 font-body mt-3 relative text-right">{{ lt('landing.stats.disclaimer') || 'Platform data, June 2026' }}</p>
         </div>
       </div>
 
@@ -134,27 +130,22 @@
     <AppleScrollytelling />
     <section id="why-resilia" ref="whySection" class="py-28 md:py-40 relative overflow-hidden bg-white dark:bg-[#0A0A0A]"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
-      <!-- Organic background shape -->
-      <div class="absolute -left-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-100/30 dark:bg-teal-900/10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] blur-3xl pointer-events-none"
-        :style="{ transform: `translateY(${(scrollY - 600) * 0.03}px)` }"></div>
 
       <div class="text-center mb-20 reveal-base" :class="whyVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-teal-500 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleWhy') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.whyTitle') }}</h2>
         <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.whyDesc') }}</p>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
         <div v-for="(usp, i) in usps" :key="i"
-          class="usp-card bg-white dark:bg-slate-800/80 rounded-3xl p-8 hover-lift reveal-base border border-gray-100/80 dark:border-slate-700/50 relative overflow-hidden group"
+          class="usp-card bg-white dark:bg-slate-800/80 rounded-2xl p-8 reveal-base border border-gray-100/80 dark:border-slate-700/50 relative overflow-hidden"
           :class="whyVisible ? 'reveal-visible' : 'reveal-hidden'"
           :style="{ transitionDelay: (i * 0.12) + 's' }">
-          <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-700" :class="usp.hoverGradient"></div>
           <div class="relative">
-            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6" :class="usp.iconBg">
-              <component :is="usp.icon" :size="28" weight="duotone" />
+            <div class="flex items-center gap-3 mb-4">
+              <component :is="usp.icon" :size="22" weight="duotone" class="flex-shrink-0" :class="usp.iconColor" />
+              <h3 class="font-heading font-bold text-ink dark:text-white text-lg">{{ usp.title }}</h3>
             </div>
-            <h3 class="font-heading font-bold text-ink dark:text-white text-lg mb-3">{{ usp.title }}</h3>
             <p class="text-sm text-gray-400 font-body leading-relaxed">{{ usp.desc }}</p>
           </div>
         </div>
@@ -165,7 +156,6 @@
     <section id="features" ref="howSection" class="py-28 md:py-40 bg-gradient-to-b from-sand-50 to-white dark:from-slate-900 dark:to-[#0A0A0A] relative"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="howVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-orange-500 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleHow') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.howTitle') }}</h2>
         <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.howDesc') }}</p>
       </div>
@@ -173,7 +163,7 @@
       <div class="max-w-5xl mx-auto">
         <div class="grid md:grid-cols-5 gap-4">
           <div v-for="(step, i) in howItWorks" :key="i"
-            class="how-card relative rounded-3xl p-6 bg-white dark:bg-slate-800/80 group reveal-base border border-gray-100/60 dark:border-slate-700/50 overflow-hidden cursor-pointer"
+            class="how-card relative rounded-2xl p-6 bg-white dark:bg-slate-800/80 group reveal-base border border-gray-100/60 dark:border-slate-700/50 overflow-hidden cursor-pointer"
             :class="howVisible ? 'reveal-visible' : 'reveal-hidden'"
             :style="{ transitionDelay: (i * 0.1) + 's' }"
             @click="toggleHow(i)">
@@ -189,7 +179,7 @@
               </div>
             </div>
             
-            <div class="text-3xl mb-3 transition-transform duration-500 group-hover:scale-110"><component :is="step.icon" :size="32" weight="duotone" /></div>
+            <div class="text-3xl mb-3"><component :is="step.icon" :size="32" weight="duotone" /></div>
             <h3 class="font-heading font-bold text-ink dark:text-white text-base">{{ step.title }}</h3>
             
             <Transition name="accordion">
@@ -209,7 +199,6 @@
     <section ref="tiersSection" class="py-28 md:py-40 bg-white dark:bg-[#0A0A0A] relative overflow-hidden"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-16 reveal-base" :class="tiersVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-purple-500 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleProgression') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.roadmapTitle') }}</h2>
         <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.roadmapDesc') }}</p>
       </div>
@@ -244,7 +233,7 @@
             </div>
 
             <!-- Card -->
-            <div class="tier-card w-full bg-white dark:bg-slate-800/80 rounded-3xl p-7 transition-all duration-[600ms] border group relative"
+            <div class="tier-card w-full bg-white dark:bg-slate-800/80 rounded-2xl p-7 transition-all duration-[600ms] border group relative"
               :class="activeTierIndex === i ? 'border-transparent dark:border-transparent scale-[1.05] z-20 ring-1' : 'border-gray-100 dark:border-slate-700/50 scale-[0.98] grayscale-[0.5] opacity-50 z-10'"
               :style="{ '--tier-color': tier.color, boxShadow: activeTierIndex === i ? `0 0 80px -10px ${tier.color}70, 0 0 30px -5px ${tier.color}50, inset 0 0 20px -5px ${tier.color}30` : undefined, borderColor: activeTierIndex === i ? `${tier.color}80` : undefined, ringColor: activeTierIndex === i ? `${tier.color}A0` : undefined }">
               <div class="flex items-center gap-4 mb-5">
@@ -279,12 +268,12 @@
         <!-- Navigation Arrows -->
         <div class="flex justify-center gap-4 mt-8 relative z-30">
           <button @click="scrollTier('prev')" 
-            class="w-14 h-14 rounded-full flex items-center justify-center bg-white dark:bg-slate-800 shadow-xl border border-gray-100 dark:border-slate-700/50 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-all hover:scale-110 disabled:opacity-30 disabled:hover:scale-100"
+            class="w-14 h-14 rounded-full flex items-center justify-center bg-white dark:bg-slate-800 shadow-xl border border-gray-100 dark:border-slate-700/50 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-all disabled:opacity-30"
             :disabled="activeTierIndex === 0">
             <PhCaretLeft :size="22" weight="bold" />
           </button>
           <button @click="scrollTier('next')" 
-            class="w-14 h-14 rounded-full flex items-center justify-center bg-white dark:bg-slate-800 shadow-xl border border-gray-100 dark:border-slate-700/50 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-all hover:scale-110 disabled:opacity-30 disabled:hover:scale-100"
+            class="w-14 h-14 rounded-full flex items-center justify-center bg-white dark:bg-slate-800 shadow-xl border border-gray-100 dark:border-slate-700/50 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-all disabled:opacity-30"
             :disabled="activeTierIndex === tiers.length - 1">
             <PhCaretRight :size="22" weight="bold" />
           </button>
@@ -296,14 +285,13 @@
     <section ref="testSection" class="py-28 md:py-40 bg-gradient-to-b from-white to-sand-50 dark:from-[#0A0A0A] dark:to-slate-900 relative"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="testVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-teal-500 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleTestimonials') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.voicesTitle') }}</h2>
         <p class="text-gray-400 font-body text-lg max-w-2xl mx-auto leading-relaxed">{{ lt('landing.voicesDesc') }}</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
         <div v-for="(t, i) in testimonials" :key="i"
-          class="testimonial-card bg-white dark:bg-slate-800/80 rounded-3xl p-8 lg:p-10 hover-lift reveal-base border border-gray-100/60 dark:border-slate-700/50 relative overflow-hidden"
+          class="testimonial-card bg-white dark:bg-slate-800/80 rounded-2xl p-8 lg:p-10 hover-lift reveal-base border border-gray-100/60 dark:border-slate-700/50 relative overflow-hidden"
           :class="testVisible ? 'reveal-visible' : 'reveal-hidden'"
           :style="{ transitionDelay: (i * 0.15) + 's' }">
           <!-- Decorative quote mark -->
@@ -329,7 +317,6 @@
     <section ref="faqSection" class="py-28 md:py-40 bg-sand-50 dark:bg-slate-900"
       style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
       <div class="text-center mb-20 reveal-base" :class="faqVisible ? 'reveal-visible' : 'reveal-hidden'">
-        <p class="text-xs font-heading font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">{{ lt('landing.subtitleFaq') }}</p>
         <h2 class="font-heading text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight">{{ lt('landing.faqTitle') }}</h2>
       </div>
       <div class="max-w-2xl mx-auto space-y-3">
@@ -353,17 +340,12 @@
 
     <!-- ━━━ CTA ━━━ -->
     <section ref="ctaSection" class="py-32 md:py-44 bg-ink dark:bg-[#050505] relative overflow-hidden">
-      <!-- Animated glow orbs -->
+      <!-- Subtle grid texture -->
       <div class="absolute inset-0 pointer-events-none">
-        <div class="cta-orb cta-orb-1"></div>
-        <div class="cta-orb cta-orb-2"></div>
-        <div class="cta-orb cta-orb-3"></div>
-        <!-- Subtle grid -->
         <div class="absolute inset-0 hero-grid opacity-[0.02]"></div>
       </div>
       <div class="text-center relative" style="padding-left: clamp(1.5rem, 5vw, 6rem); padding-right: clamp(1.5rem, 5vw, 6rem);">
         <div class="reveal-base" :class="ctaVisible ? 'reveal-visible' : 'reveal-hidden'">
-          <p class="text-xs font-heading font-bold text-teal-400/70 uppercase tracking-[0.2em] mb-6">{{ lt('landing.subtitleReady') }}</p>
           <h2 class="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight max-w-3xl mx-auto">{{ lt('landing.ctaTitle') }}</h2>
           <p class="text-gray-500 font-body text-lg mb-14 max-w-lg mx-auto leading-relaxed">{{ lt('landing.ctaDesc') }}</p>
           <button @click="getStarted" class="group relative px-12 py-5 bg-gradient-to-r from-teal-400 to-teal-600 text-white rounded-2xl font-heading font-bold text-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-teal-500/30 hover:-translate-y-1">
@@ -660,10 +642,10 @@ const heroStats = computed(() => [
 ])
 
 const usps = computed(() => [
-  { icon: PhGameController, title: lt('landing.usps.gamified'), desc: lt('landing.usps.gamifiedDesc'), iconBg: 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400', hoverGradient: 'from-teal-50/50 to-transparent' },
-  { icon: PhGlobeHemisphereWest, title: lt('landing.usps.asean'), desc: lt('landing.usps.aseanDesc'), iconBg: 'bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400', hoverGradient: 'from-orange-50/50 to-transparent' },
-  { icon: PhBrain, title: lt('landing.usps.science'), desc: lt('landing.usps.scienceDesc'), iconBg: 'bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400', hoverGradient: 'from-purple-50/50 to-transparent' },
-  { icon: PhHandshake, title: lt('landing.usps.community'), desc: lt('landing.usps.communityDesc'), iconBg: 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400', hoverGradient: 'from-blue-50/50 to-transparent' },
+  { icon: PhGameController, title: lt('landing.usps.gamified'), desc: lt('landing.usps.gamifiedDesc'), iconColor: 'text-teal-500' },
+  { icon: PhGlobeHemisphereWest, title: lt('landing.usps.asean'), desc: lt('landing.usps.aseanDesc'), iconColor: 'text-orange-500' },
+  { icon: PhBrain, title: lt('landing.usps.science'), desc: lt('landing.usps.scienceDesc'), iconColor: 'text-purple-500' },
+  { icon: PhHandshake, title: lt('landing.usps.community'), desc: lt('landing.usps.communityDesc'), iconColor: 'text-blue-500' },
 ])
 
 const howItWorks = computed(() => [

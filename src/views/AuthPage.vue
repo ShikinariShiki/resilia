@@ -1,15 +1,11 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-teal-50/30 flex items-center justify-center overflow-hidden px-6 py-10 sm:px-8 md:px-12">
-    <!-- Decorative blobs -->
-    <div class="fixed top-[-20%] right-[-10%] w-[600px] h-[600px] bg-teal-100/40 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="fixed bottom-[-15%] left-[-10%] w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-3xl pointer-events-none"></div>
-
     <div class="w-full max-w-md relative z-10">
       <!-- Logo -->
       <div v-motion class="text-center mb-10">
         <img src="../assets/icon.png" class="w-16 h-16 object-cover rounded-2xl mx-auto mb-5 bg-teal-50 shadow-xl border border-teal-100/50" alt="RESILIA" />
         <h1 class="font-heading text-3xl md:text-4xl font-bold text-ink">
-          Join <span class="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">RESILIA</span>
+          Join <span class="text-teal-500">RESILIA</span>
         </h1>
         <p class="text-gray-400 font-body text-sm mt-2">Train to be a Digital First Responder</p>
       </div>
@@ -141,7 +137,7 @@
     <Teleport to="body">
       <Transition name="fade">
         <div v-if="showToS || showPrivacy" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6" @click.self="showToS = false; showPrivacy = false">
-          <div v-motion class="bg-white rounded-3xl max-w-lg w-full max-h-[80vh] overflow-y-auto p-8 shadow-2xl">
+          <div v-motion class="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto p-8 shadow-2xl">
             <h2 class="font-heading text-2xl font-bold text-ink mb-4">{{ showToS ? 'Terms of Service' : 'Privacy Policy' }}</h2>
             <div v-if="showToS" class="text-sm text-gray-500 font-body space-y-4 leading-relaxed">
               <p><strong>1. Acceptance of Terms</strong><br>By creating an account on RESILIA, you agree to these Terms of Service.</p>

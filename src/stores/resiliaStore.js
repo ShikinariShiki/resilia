@@ -2022,34 +2022,34 @@ export const useResiliaStore = defineStore('resilia', () => {
 
     const marketplace = ref([
         // Boosters (Common/Rare)
-        { id: 1, name: 'XP Boost (1h)', cost: 15, icon: '⚡', category: 'Booster', rarity: 'Common', description: '+25% XP for 1 hour' },
-        { id: 2, name: 'XP Boost (24h)', cost: 75, icon: '⚡', category: 'Booster', rarity: 'Rare', description: '+25% XP for 24 hours' },
-        { id: 3, name: 'Coin Doubler (24h)', cost: 90, icon: '🪙', category: 'Booster', rarity: 'Rare', description: '2x ResiCoins for 24 hours' },
-        { id: 4, name: 'Streak Shield', cost: 60, icon: '🛡️', category: 'Booster', rarity: 'Rare', description: 'Protects your streak if you miss a day' },
-        // Cosmetics (Common → Legendary)
-        { id: 5, name: 'Custom Avatar Frame', cost: 50, icon: '🖼️', category: 'Cosmetic', rarity: 'Common', description: 'A basic colored frame for your avatar' },
-        { id: 6, name: 'Dark Theme Premium', cost: 40, icon: '🌙', category: 'Cosmetic', rarity: 'Common', description: 'Access premium dark mode palette' },
-        { id: 7, name: 'Name Color: Teal', cost: 60, icon: '✨', category: 'Cosmetic', rarity: 'Common', description: 'Change your display name to teal' },
-        { id: 8, name: 'Custom Profile Banner', cost: 80, icon: '🎨', category: 'Cosmetic', rarity: 'Rare', description: 'Upload a custom banner image' },
-        { id: 9, name: 'Animated Avatar Frame', cost: 150, icon: '💫', category: 'Cosmetic', rarity: 'Epic', description: 'Glowing animated frame for your avatar' },
-        { id: 10, name: 'Title: Guardian of ASEAN', cost: 250, icon: '👑', category: 'Cosmetic', rarity: 'Legendary', description: 'Exclusive title displayed on your profile' },
-        { id: 11, name: 'Golden Name Effect', cost: 300, icon: '🌟', category: 'Cosmetic', rarity: 'Legendary', description: 'Your name shimmers in gold' },
+        { id: 1, name: 'XP Boost (1h)', cost: 15, phosphorIcon: 'PhLightning', category: 'Booster', rarity: 'Common', description: '+25% XP for 1 hour' },
+        { id: 2, name: 'XP Boost (24h)', cost: 75, phosphorIcon: 'PhLightning', category: 'Booster', rarity: 'Rare', description: '+25% XP for 24 hours' },
+        { id: 3, name: 'Coin Doubler (24h)', cost: 90, phosphorIcon: 'PhCoins', category: 'Booster', rarity: 'Rare', description: '2x ResiCoins for 24 hours' },
+        { id: 4, name: 'Streak Shield', cost: 60, phosphorIcon: 'PhShieldCheck', category: 'Booster', rarity: 'Rare', description: 'Protects your streak if you miss a day' },
+        // Cosmetics (Common to Legendary)
+        { id: 5, name: 'Custom Avatar Frame', cost: 50, phosphorIcon: 'PhFrameCorners', category: 'Cosmetic', rarity: 'Common', description: 'A basic colored frame for your avatar' },
+        { id: 6, name: 'Dark Theme Premium', cost: 40, phosphorIcon: 'PhMoon', category: 'Cosmetic', rarity: 'Common', description: 'Access premium dark mode palette' },
+        { id: 7, name: 'Name Color: Teal', cost: 60, phosphorIcon: 'PhPalette', category: 'Cosmetic', rarity: 'Common', description: 'Change your display name to teal' },
+        { id: 8, name: 'Custom Profile Banner', cost: 80, phosphorIcon: 'PhImage', category: 'Cosmetic', rarity: 'Rare', description: 'Upload a custom banner image' },
+        { id: 9, name: 'Animated Avatar Frame', cost: 150, phosphorIcon: 'PhSparkle', category: 'Cosmetic', rarity: 'Epic', description: 'Glowing animated frame for your avatar' },
+        { id: 10, name: 'Title: Guardian of ASEAN', cost: 250, phosphorIcon: 'PhCrown', category: 'Cosmetic', rarity: 'Legendary', description: 'Exclusive title displayed on your profile' },
+        { id: 11, name: 'Golden Name Effect', cost: 300, phosphorIcon: 'PhStar', category: 'Cosmetic', rarity: 'Legendary', description: 'Your name shimmers in gold' },
         // Community / Donation
-        { id: 12, name: 'Emergency Supply Box', cost: 60, icon: '📦', category: 'Community', rarity: 'Common', description: 'Sponsors an emergency supply kit via UNICEF' },
-        { id: 13, name: 'Workshop Sponsorship', cost: 150, icon: '🏫', category: 'Community', rarity: 'Epic', description: 'Fund a PFA workshop in an ASEAN community' },
-        { id: 14, name: 'Red Cross Donation', cost: 100, icon: '❤️', category: 'Community', rarity: 'Rare', description: 'Direct donation to Red Cross ASEAN' },
-        { id: 15, name: 'School Kit Sponsorship', cost: 80, icon: '🎒', category: 'Community', rarity: 'Rare', description: 'Sponsor a disaster prep kit for a school' },
+        { id: 12, name: 'Emergency Supply Box', cost: 60, phosphorIcon: 'PhPackage', category: 'Community', rarity: 'Common', description: 'Sponsors an emergency supply kit via UNICEF' },
+        { id: 13, name: 'Workshop Sponsorship', cost: 150, phosphorIcon: 'PhChalkboardTeacher', category: 'Community', rarity: 'Epic', description: 'Fund a PFA workshop in an ASEAN community' },
+        { id: 14, name: 'Red Cross Donation', cost: 100, phosphorIcon: 'PhHeart', category: 'Community', rarity: 'Rare', description: 'Direct donation to Red Cross ASEAN' },
+        { id: 15, name: 'School Kit Sponsorship', cost: 80, phosphorIcon: 'PhBackpack', category: 'Community', rarity: 'Rare', description: 'Sponsor a disaster prep kit for a school' },
         // Content & Status
-        { id: 16, name: 'Certificate of Completion', cost: 100, icon: '📜', category: 'Content', rarity: 'Rare', description: 'Printable certificate for your PFA training' },
-        { id: 17, name: 'Mentor Badge', cost: 120, icon: '🏅', category: 'Content', rarity: 'Epic', description: 'Unlocks mentoring features' },
-        { id: 18, name: 'Exclusive Scenario Pack', cost: 200, icon: '🎭', category: 'Content', rarity: 'Epic', description: '3 bonus disaster RPG scenarios' },
-        { id: 19, name: 'Lucky Loot Box', cost: 30, icon: '🎁', category: 'Content', rarity: 'Common', description: 'Random reward: XP, coins, or cosmetic' },
-        { id: 20, name: 'Leaderboard Crown', cost: 500, icon: '👑', category: 'Content', rarity: 'Legendary', description: 'Crown icon next to your name on leaderboard' },
+        { id: 16, name: 'Certificate of Completion', cost: 100, phosphorIcon: 'PhCertificate', category: 'Content', rarity: 'Rare', description: 'Printable certificate for your PFA training' },
+        { id: 17, name: 'Mentor Badge', cost: 120, phosphorIcon: 'PhIdentificationBadge', category: 'Content', rarity: 'Epic', description: 'Unlocks mentoring features' },
+        { id: 18, name: 'Exclusive Scenario Pack', cost: 200, phosphorIcon: 'PhGameController', category: 'Content', rarity: 'Epic', description: '3 bonus disaster RPG scenarios' },
+        { id: 19, name: 'Lucky Loot Box', cost: 30, phosphorIcon: 'PhGift', category: 'Content', rarity: 'Common', description: 'Random reward: XP, coins, or cosmetic' },
+        { id: 20, name: 'Leaderboard Crown', cost: 500, phosphorIcon: 'PhCrown', category: 'Content', rarity: 'Legendary', description: 'Crown icon next to your name on leaderboard' },
         // Utilities
-        { id: 21, name: 'Quiz Retry Token', cost: 25, icon: '🔄', category: 'Booster', rarity: 'Common', description: 'One extra attempt on any post-test' },
-        { id: 22, name: 'Hint Token (RPG)', cost: 35, icon: '💡', category: 'Booster', rarity: 'Common', description: 'Get a hint during RPG decisions' },
-        { id: 23, name: 'Module Skip Token', cost: 200, icon: '⏭️', category: 'Booster', rarity: 'Epic', description: 'Skip one module (still must pass test)' },
-        { id: 24, name: 'ASEAN Aid Bundle', cost: 400, icon: '🌏', category: 'Community', rarity: 'Legendary', description: 'Sponsors aid packages to 5 ASEAN countries' },
+        { id: 21, name: 'Quiz Retry Token', cost: 25, phosphorIcon: 'PhArrowCounterClockwise', category: 'Booster', rarity: 'Common', description: 'One extra attempt on any post-test' },
+        { id: 22, name: 'Hint Token (RPG)', cost: 35, phosphorIcon: 'PhLightbulb', category: 'Booster', rarity: 'Common', description: 'Get a hint during RPG decisions' },
+        { id: 23, name: 'Module Skip Token', cost: 200, phosphorIcon: 'PhFastForward', category: 'Booster', rarity: 'Epic', description: 'Skip one module (still must pass test)' },
+        { id: 24, name: 'ASEAN Aid Bundle', cost: 400, phosphorIcon: 'PhGlobeHemisphereEast', category: 'Community', rarity: 'Legendary', description: 'Sponsors aid packages to 5 ASEAN countries' },
     ])
 
     // ═══ Shop Inventory & Active Effects ═══

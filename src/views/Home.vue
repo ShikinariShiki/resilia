@@ -38,7 +38,7 @@
         <p class="text-xs sm:text-sm text-gray-400 font-body mt-2 sm:mt-3" v-if="store.nextTier">{{ t('home.rank.to_next', { xp: store.nextTier.minXP - store.totalXPEarned, next_rank: store.nextTier.name }) }}</p>
       </BaseCard>
 
-      <div class="bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 lg:p-10 text-white flex flex-col justify-between min-h-[160px] sm:min-h-0 hover-lift">
+      <div class="bg-gradient-to-br from-teal-500 to-teal-700 rounded-xl sm:rounded-2xl p-5 sm:p-7 md:p-8 lg:p-10 text-white flex flex-col justify-between min-h-[160px] sm:min-h-0 hover-lift">
         <div>
           <p class="text-[10px] sm:text-[11px] font-heading font-bold text-teal-200 uppercase tracking-wider mb-3 sm:mb-4">{{ t('home.balance.label') }}</p>
           <div class="flex items-baseline gap-2 sm:gap-3">
@@ -47,14 +47,14 @@
             <span class="font-heading text-sm sm:text-lg text-teal-200">RC</span>
           </div>
         </div>
-        <RouterLink to="/wallet" class="inline-block mt-4 sm:mt-6 px-4 sm:px-5 py-2.5 sm:py-3 bg-white/15 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-heading font-bold hover:bg-white/25 transition-colors w-fit backdrop-blur-sm">
+        <RouterLink to="/wallet" class="inline-block mt-4 sm:mt-6 px-4 sm:px-5 py-2.5 sm:py-3 bg-white/15 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-heading font-bold hover:bg-white/25 transition-colors w-fit">
           {{ t('home.balance.view_wallet') }}
         </RouterLink>
       </div>
     </div>
 
     <!-- Community Challenge -->
-    <div v-motion class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14 hover-lift" style="animation-delay: 0.07s">
+    <div v-motion class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-900/30 dark:to-pink-900/30 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 mb-8 sm:mb-10 md:mb-12 lg:mb-14 hover-lift" style="animation-delay: 0.07s">
       <div class="flex items-start sm:items-center justify-between gap-4 flex-col sm:flex-row">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-purple-500/20 dark:bg-purple-500/30 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 animate-pulse-soft"><PhTrophy :size="24" weight="fill" class="text-purple-500" /></div>
@@ -110,7 +110,7 @@
 
       <!-- Streak + Today's Progress -->
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-5 lg:gap-6">
-        <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 text-white hover-lift">
+        <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 text-white hover-lift">
           <p class="text-[9px] sm:text-[10px] md:text-[11px] font-heading font-bold text-orange-200 uppercase tracking-wider mb-2 sm:mb-3">{{ t('home.streak.label') }}</p>
           <div class="flex items-baseline gap-2">
             <PhFire :size="28" class="text-orange-200 animate-pulse-soft" weight="fill" />
@@ -154,9 +154,6 @@
       </BaseCard>
 
       <BaseCard padding="lg" hoverable class="relative overflow-hidden">
-        <!-- Background decoration -->
-        <div class="absolute -top-10 -right-10 w-32 h-32 bg-teal-500/5 rounded-full blur-3xl"></div>
-
         <div class="flex items-center justify-between mb-5 sm:mb-6 md:mb-8 relative z-10">
           <div>
             <h3 class="font-heading text-base sm:text-lg md:text-xl font-bold text-ink dark:text-white">{{ t('home.course_progress.title') }}</h3>

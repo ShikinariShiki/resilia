@@ -1,9 +1,5 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-teal-50/30 flex items-center justify-center overflow-hidden px-6 py-10 sm:px-8 md:px-12">
-    <!-- Decorative blobs -->
-    <div class="fixed top-[-20%] right-[-10%] w-[600px] h-[600px] bg-teal-100/40 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="fixed bottom-[-15%] left-[-10%] w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-3xl pointer-events-none"></div>
-
     <div class="w-full max-w-lg relative z-10">
       <!-- Progress dots (6 steps) -->
       <div class="flex items-center justify-center gap-2 mb-12 md:mb-14">
@@ -15,13 +11,13 @@
         <!-- Step 0: Welcome Splash (Narrative) -->
         <div v-if="step === 0" key="welcome" class="text-center">
           <div v-motion class="mb-12">
-            <div class="w-24 h-24 bg-gradient-to-br from-teal-400 to-teal-600 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-xl animate-pulse-slow">
+            <div class="w-24 h-24 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-10 shadow-xl animate-pulse-slow">
               <PhBroadcast :size="48" class="text-teal-100" weight="fill" />
             </div>
             <p v-motion class="text-teal-600/70 font-body text-xs uppercase tracking-[0.25em] mb-6">{{ t('onboarding.step0.transmission') }}</p>
             <h1 v-motion class="font-heading text-3xl md:text-4xl font-bold text-ink mb-5 leading-tight" style="animation-delay: 0.05s">
               {{ t('onboarding.step0.title1') }}<br>
-              <span class="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">{{ t('onboarding.step0.title2') }}</span>
+              <span class="text-teal-500">{{ t('onboarding.step0.title2') }}</span>
             </h1>
             <p v-motion class="text-gray-400 font-body text-sm md:text-base leading-relaxed max-w-sm mx-auto" style="animation-delay: 0.1s" v-html="t('onboarding.step0.desc')">
             </p>
@@ -46,7 +42,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhGlobeHemisphereEast :size="32" class="text-blue-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step1.briefing') }}</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step1.title') }}</h2>
             <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step1.desc') }}</p>
           </div>
@@ -82,7 +77,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhCake :size="32" class="text-purple-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step2.clearance') }}</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step2.title') }}</h2>
             <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step2.desc') }}</p>
           </div>
@@ -125,7 +119,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhUsers :size="32" class="text-pink-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step3.profile') }}</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step3.title') }}</h2>
             <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step3.desc') }}</p>
           </div>
@@ -154,7 +147,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhDrop :size="32" class="text-amber-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step4.fieldExp') }}</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step4.title') }}</h2>
             <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step4.desc') }}</p>
           </div>
@@ -197,7 +189,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhTarget :size="32" class="text-teal-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">MISSION OBJECTIVE</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">What's your main goal?</h2>
             <p class="text-gray-400 font-body text-sm">This helps us personalize your experience</p>
           </div>
@@ -227,7 +218,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-rose-50 to-rose-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhHeartBreak :size="32" class="text-rose-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">STRESS PROFILE</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">What concerns you most?</h2>
             <p class="text-gray-400 font-body text-sm">We'll adjust difficulty and tone accordingly</p>
           </div>
@@ -254,7 +244,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhPuzzlePiece :size="32" class="text-indigo-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">COPING STRATEGY</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">How do you usually cope?</h2>
             <p class="text-gray-400 font-body text-sm">No wrong answers. This calibrates your missions</p>
           </div>
@@ -284,7 +273,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhTimer :size="32" class="text-cyan-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">TIME COMMITMENT</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">How much time can you spare?</h2>
             <p class="text-gray-400 font-body text-sm">We'll match your daily mission length</p>
           </div>
@@ -314,7 +302,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhShieldCheck :size="32" class="text-emerald-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">READINESS LEVEL</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">How confident are you?</h2>
             <p class="text-gray-400 font-body text-sm">About handling disaster situations</p>
           </div>
@@ -344,7 +331,6 @@
             <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <PhSparkle :size="32" class="text-orange-500" weight="fill" />
             </div>
-            <p class="text-teal-600/70 font-body text-[10px] uppercase tracking-[0.25em] mb-3">{{ t('onboarding.step5.callsign') }}</p>
             <h2 class="font-heading text-2xl md:text-3xl font-bold text-ink mb-3">{{ t('onboarding.step5.title') }}</h2>
             <p class="text-gray-400 font-body text-sm">{{ t('onboarding.step5.desc') }}</p>
           </div>

@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-slate-800/80 rounded-3xl p-6 sm:p-8 md:p-10 mb-8 md:mb-10 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-none dark:border dark:border-slate-700/50 transition-all duration-500">
+        <div class="bg-white dark:bg-slate-800/80 rounded-2xl p-6 sm:p-8 md:p-10 mb-8 md:mb-10 shadow-[0_4px_20px_rgba(0,0,0,0.03)] dark:shadow-none dark:border dark:border-slate-700/50 transition-all duration-500">
           <Transition name="fade-scale" mode="out-in">
             <div :key="currentIndex" class="w-full">
               <div class="flex items-start gap-4 md:gap-5 mb-8 md:mb-10">
@@ -107,7 +107,7 @@
 
         <!-- Dynamic Activity Offer Overlay -->
         <div v-if="activityOffer" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center px-6">
-          <div v-motion class="bg-white dark:bg-slate-800 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl">
+          <div v-motion class="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
             <div class="text-5xl mb-4">{{ popupContent.emoji }}</div>
             <h2 class="font-heading text-xl font-bold text-ink dark:text-white mb-3">{{ popupContent.title }}</h2>
             <p class="text-sm text-gray-400 font-body mb-6 leading-relaxed">{{ popupContent.desc }}</p>

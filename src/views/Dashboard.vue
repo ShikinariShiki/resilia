@@ -35,7 +35,7 @@
     <!-- Top metrics, Personal Readiness + Global Stats -->
     <div id="top-metrics" v-motion class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10" style="animation-delay:0.03s">
       <!-- Personal Readiness Score -->
-      <div class="bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl sm:rounded-3xl p-5 sm:p-7 text-white relative overflow-hidden">
+      <div class="bg-gradient-to-br from-teal-500 to-teal-700 rounded-xl sm:rounded-2xl p-5 sm:p-7 text-white relative overflow-hidden">
         <div class="absolute top-0 right-0 w-20 h-20 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
         <p class="text-[10px] font-heading font-bold text-teal-200 uppercase tracking-wider mb-2">{{ t('dashboard.readiness') }}</p>
         <div class="flex items-center gap-3">

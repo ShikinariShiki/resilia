@@ -2,7 +2,7 @@
   <div>
     <!-- Balance + Donate -->
     <div v-motion class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
-      <div class="lg:col-span-2 bg-gradient-to-br from-teal-500 to-teal-700 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 text-white relative overflow-hidden">
+      <div class="lg:col-span-2 bg-gradient-to-br from-teal-500 to-teal-700 rounded-xl sm:rounded-2xl p-5 sm:p-7 md:p-8 text-white relative overflow-hidden">
         <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
         <div class="flex items-center justify-between relative">
@@ -91,7 +91,7 @@
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         <div v-for="item in filteredShop" :key="item.id" 
-          class="group relative bg-gray-50 dark:bg-slate-700/40 rounded-xl sm:rounded-2xl p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden border-2"
+          class="group relative bg-gray-50 dark:bg-slate-700/40 rounded-xl sm:rounded-2xl p-4 transition-all duration-300 hover:shadow-lg overflow-hidden border-2"
           :class="[
             store.resiCoinBalance >= item.cost ? 'hover:shadow-teal-500/10' : 'opacity-60 grayscale-[30%]',
             rarityBorder(item.rarity)
@@ -103,7 +103,9 @@
             {{ item.rarity }}
           </span>
 
-          <div class="text-3xl sm:text-4xl mb-2 transform transition-transform group-hover:scale-110 group-hover:rotate-3">{{ item.icon }}</div>
+          <div class="text-3xl sm:text-4xl mb-2 text-teal-500 dark:text-teal-400">
+            <component :is="iconMap[item.phosphorIcon]" :size="32" weight="duotone" />
+          </div>
           
           <p class="font-heading font-bold text-xs text-ink dark:text-white mb-0.5 leading-tight min-h-[2em]">{{ item.name }}</p>
           <p class="text-[9px] text-gray-400 font-body mb-3 line-clamp-2">{{ item.description }}</p>
@@ -159,7 +161,11 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
-import { PhCoins, PhVault, PhHandshake, PhDiamondsFour, PhToolbox, PhSword, PhReceipt } from '@phosphor-icons/vue'
+import { PhCoins, PhVault, PhHandshake, PhDiamondsFour, PhToolbox, PhSword, PhReceipt,
+  PhLightning, PhShieldCheck, PhFrameCorners, PhMoon, PhPalette, PhImage, PhSparkle,
+  PhCrown, PhStar, PhPackage, PhChalkboardTeacher, PhHeart, PhBackpack, PhCertificate,
+  PhIdentificationBadge, PhGameController, PhGift, PhArrowCounterClockwise, PhLightbulb,
+  PhFastForward, PhGlobeHemisphereEast } from '@phosphor-icons/vue'
 import CoinAnimation from '../components/CoinAnimation.vue'
 import { useI18n } from '../i18n'
 import BaseCard from '../components/BaseCard.vue'
@@ -175,6 +181,14 @@ const showHistory = ref(false)
 const activeCategory = ref('All')
 const purchaseToast = ref('')
 let toastTimer = null
+
+// Phosphor icon map for marketplace items
+const iconMap = {
+  PhLightning, PhCoins, PhShieldCheck, PhFrameCorners, PhMoon, PhPalette,
+  PhImage, PhSparkle, PhCrown, PhStar, PhPackage, PhChalkboardTeacher,
+  PhHeart, PhBackpack, PhCertificate, PhIdentificationBadge, PhGameController,
+  PhGift, PhArrowCounterClockwise, PhLightbulb, PhFastForward, PhGlobeHemisphereEast,
+}
 
 // Cosmetic item IDs that are one-time purchases
 const cosmeticIds = [5, 6, 7, 8, 9, 10, 11, 16, 17, 18, 20]

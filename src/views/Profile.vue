@@ -1,18 +1,18 @@
 <template>
   <div>
     <!-- Hero Profile Card -->
-    <div v-motion class="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-3xl p-6 sm:p-8 mb-8 sm:mb-10 text-white relative overflow-hidden">
+    <div v-motion class="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl p-6 sm:p-8 mb-8 sm:mb-10 text-white relative overflow-hidden">
       <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
       <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4"></div>
       <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-8">
         <!-- Avatar -->
         <div class="relative group">
-          <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl flex items-center justify-center text-5xl sm:text-6xl font-heading font-bold bg-white/20 backdrop-blur-sm shadow-lg flex-shrink-0 overflow-hidden transition-transform group-hover:scale-105"
+          <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl flex items-center justify-center text-5xl sm:text-6xl font-heading font-bold bg-white/20 backdrop-blur-sm shadow-lg flex-shrink-0 overflow-hidden"
             :style="{ borderColor: store.avatarColor, borderWidth: '3px' }">
             <img v-if="store.avatarUrl" :src="store.avatarUrl" class="w-full h-full object-cover" alt="Profile" />
             <span v-else>{{ store.userName.charAt(0).toUpperCase() }}</span>
           </div>
-          <button v-if="!store.avatarUrl" @click="triggerFileInput" class="absolute inset-0 bg-black/40 rounded-3xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+          <button v-if="!store.avatarUrl" @click="triggerFileInput" class="absolute inset-0 bg-black/40 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
             <span class="text-white text-xs font-bold font-heading flex items-center gap-1"><PhCamera :size="14" weight="fill" /> {{ t('profile.upload') }}</span>
           </button>
           <input v-if="!store.avatarUrl" type="file" id="avatar-upload" class="hidden" accept="image/*" @change="handleFileUpload">
@@ -30,13 +30,13 @@
             <span class="text-xs opacity-60">{{ t('profile.joined').replace('{date}', store.joinDate) }}</span>
           </div>
           <div class="flex items-center justify-center sm:justify-start gap-3 flex-wrap">
-            <div class="px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-xl text-sm font-heading font-bold flex items-center gap-1.5">
+            <div class="px-3 py-1.5 bg-white/20 rounded-xl text-sm font-heading font-bold flex items-center gap-1.5">
               {{ store.currentTier.icon }} {{ store.currentTier.name }}
             </div>
-            <div class="px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-xl text-sm font-heading font-bold">
+            <div class="px-3 py-1.5 bg-white/20 rounded-xl text-sm font-heading font-bold">
               {{ t('profile.level').replace('{level}', store.level) }}
             </div>
-            <div class="px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-xl text-sm font-heading font-bold">
+            <div class="px-3 py-1.5 bg-white/20 rounded-xl text-sm font-heading font-bold">
               <PhFire :size="14" weight="fill" class="inline" /> {{ t('profile.streakCount').replace('{streak}', store.loginStreak) }}
             </div>
           </div>
@@ -100,7 +100,7 @@
           <label class="text-[10px] font-heading font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider block mb-2">{{ t('profile.avatarColor') }}</label>
           <div class="flex items-center gap-2 flex-wrap">
             <button v-for="color in avatarColors" :key="color" @click="editColor = color"
-              class="w-8 h-8 rounded-lg transition-all hover:scale-110"
+              class="w-8 h-8 rounded-lg transition-all"
               :style="{ background: color }"
               :class="editColor === color ? 'ring-2 ring-offset-2 ring-teal-500 scale-110' : ''">
             </button>
