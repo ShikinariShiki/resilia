@@ -37,7 +37,7 @@
           <span class="text-[10px] font-heading font-bold text-amber-400">📖 Story</span>
         </div>
 
-        <div class="bg-[#FAFAF8] dark:bg-[#1A1714] w-full max-w-md mx-auto rounded-3xl overflow-hidden border border-amber-200/30 dark:border-amber-800/20 shadow-2xl flex flex-col h-[650px] max-h-[80vh]">
+        <div class="bg-[#FAFAF8] dark:bg-[#1A1714] w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto rounded-3xl overflow-hidden border border-amber-200/30 dark:border-amber-800/20 shadow-2xl flex flex-col h-[650px] sm:h-[700px] md:h-[75vh] max-h-[85vh]">
           <!-- Chat Header -->
           <div class="flex items-center gap-3 p-4 bg-[#F0EDE6] dark:bg-[#211E19] backdrop-blur-md border-b border-amber-200/20 dark:border-amber-800/15">
             <div class="w-10 h-10 rounded-full border border-amber-200/20 shadow-sm flex items-center justify-center relative flex-shrink-0 bg-[#F0EDE6] dark:bg-[#211E19]">

@@ -9,12 +9,14 @@
         <div class="relative group">
           <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl flex items-center justify-center text-5xl sm:text-6xl font-heading font-bold bg-white/20 backdrop-blur-sm shadow-lg flex-shrink-0 overflow-hidden transition-transform group-hover:scale-105"
             :style="{ borderColor: store.avatarColor, borderWidth: '3px' }">
-            {{ store.userName.charAt(0).toUpperCase() }}
+            <img v-if="store.avatarUrl" :src="store.avatarUrl" class="w-full h-full object-cover" alt="Profile" />
+            <span v-else>{{ store.userName.charAt(0).toUpperCase() }}</span>
           </div>
-          <button @click="triggerFileInput" class="absolute inset-0 bg-black/40 rounded-3xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+          <button v-if="!store.avatarUrl" @click="triggerFileInput" class="absolute inset-0 bg-black/40 rounded-3xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
             <span class="text-white text-xs font-bold font-heading flex items-center gap-1"><PhCamera :size="14" weight="fill" /> {{ t('profile.upload') }}</span>
           </button>
-          <input type="file" id="avatar-upload" class="hidden" accept="image/*" @change="handleFileUpload">
+          <input v-if="!store.avatarUrl" type="file" id="avatar-upload" class="hidden" accept="image/*" @change="handleFileUpload">
+          <p v-if="store.avatarUrl" class="text-[9px] text-white/60 text-center mt-1.5 font-body">{{ t('profile.googleSynced') || 'Synced with Google' }}</p>
         </div>
         <!-- Info -->
         <div class="text-center sm:text-left flex-1">
@@ -94,7 +96,7 @@
           <textarea v-model="editBio" rows="3" :placeholder="t('profile.bioPlaceholder')"
             class="w-full px-4 py-3 bg-gray-50 dark:bg-slate-700 border border-gray-100 dark:border-slate-600 rounded-xl font-body text-sm text-ink dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500/50 resize-none transition-all"></textarea>
         </div>
-        <div>
+        <div v-if="!store.avatarUrl">
           <label class="text-[10px] font-heading font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider block mb-2">{{ t('profile.avatarColor') }}</label>
           <div class="flex items-center gap-2 flex-wrap">
             <button v-for="color in avatarColors" :key="color" @click="editColor = color"
@@ -205,10 +207,11 @@ const stats = computed(() => [
 ])
 
 const hasChanges = computed(() => {
-  return editName.value !== store.userName ||
+  const base = editName.value !== store.userName ||
     editCountry.value !== store.countryCode ||
-    editBio.value !== store.bio ||
-    editColor.value !== store.avatarColor
+    editBio.value !== store.bio
+  if (store.avatarUrl) return base
+  return base || editColor.value !== store.avatarColor
 })
 
 function triggerFileInput() {

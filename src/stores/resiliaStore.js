@@ -2052,6 +2052,31 @@ export const useResiliaStore = defineStore('resilia', () => {
         { id: 24, name: 'ASEAN Aid Bundle', cost: 400, icon: '🌏', category: 'Community', rarity: 'Legendary', description: 'Sponsors aid packages to 5 ASEAN countries' },
     ])
 
+    // ═══ Shop Inventory & Active Effects ═══
+    const ownedItems = ref(JSON.parse(localStorage.getItem('resilia_owned_items') || '[]'))
+    const activeBoosters = ref(JSON.parse(localStorage.getItem('resilia_active_boosters') || '[]'))
+    const cosmeticState = ref(JSON.parse(localStorage.getItem('resilia_cosmetics') || '{}'))
+    // Cosmetic state: { avatarFrame, nameColor, banner, title, goldenName, animatedFrame }
+
+    function _saveShopState() {
+        localStorage.setItem('resilia_owned_items', JSON.stringify(ownedItems.value))
+        localStorage.setItem('resilia_active_boosters', JSON.stringify(activeBoosters.value))
+        localStorage.setItem('resilia_cosmetics', JSON.stringify(cosmeticState.value))
+    }
+
+    // Clean expired boosters on init
+    const _now = Date.now()
+    activeBoosters.value = activeBoosters.value.filter(b => b.expiresAt > _now)
+    _saveShopState()
+
+    // Computed: is XP boost active?
+    const xpBoostActive = computed(() => activeBoosters.value.some(b => b.type === 'xp_boost' && b.expiresAt > Date.now()))
+    const coinBoostActive = computed(() => activeBoosters.value.some(b => b.type === 'coin_doubler' && b.expiresAt > Date.now()))
+    const streakShieldActive = computed(() => activeBoosters.value.some(b => b.type === 'streak_shield' && b.expiresAt > Date.now()))
+
+    // Purchased item feedback
+    const lastPurchaseMessage = ref('')
+
     // Achievements
     const achievementsList = ref([
         { id: 'first_steps', name: 'First Steps', icon: '🌱', description: 'Complete your first module', unlocked: false, date: null },
@@ -2475,8 +2500,12 @@ export const useResiliaStore = defineStore('resilia', () => {
     }
 
     function earnXP(amount) {
-        xp.value += amount
-        totalXPEarned.value += amount
+        // Apply XP boost if active
+        let boosted = amount
+        const boost = activeBoosters.value.find(b => b.type === 'xp_boost' && b.expiresAt > Date.now())
+        if (boost) boosted = Math.round(amount * boost.mult)
+        xp.value += boosted
+        totalXPEarned.value += boosted
         while (xp.value >= xpForNextLevel.value) {
             xp.value -= xpForNextLevel.value
             level.value++
@@ -2484,18 +2513,140 @@ export const useResiliaStore = defineStore('resilia', () => {
     }
 
     function earnCoins(amount, reason) {
-        resiCoinBalance.value += amount
+        // Apply coin doubler if active
+        let boosted = amount
+        if (coinBoostActive.value) boosted = amount * 2
+        resiCoinBalance.value += boosted
         transactions.value.unshift({ id: Date.now(), type: 'earn', amount, reason, date: new Date().toLocaleDateString() })
     }
 
     function redeemCoins(itemId) {
         const item = marketplace.value.find(i => i.id === itemId)
-        if (item && resiCoinBalance.value >= item.cost) {
-            resiCoinBalance.value -= item.cost
-            transactions.value.unshift({ id: Date.now(), type: 'redeem', amount: -item.cost, reason: `Redeemed: ${item.name}`, date: new Date().toLocaleDateString() })
-            return true
+        if (!item || resiCoinBalance.value < item.cost) return false
+
+        resiCoinBalance.value -= item.cost
+        transactions.value.unshift({ id: Date.now(), type: 'redeem', amount: -item.cost, reason: `Redeemed: ${item.name}`, date: new Date().toLocaleDateString() })
+
+        // Track ownership
+        ownedItems.value.push({ id: item.id, name: item.name, purchasedAt: Date.now() })
+
+        // Apply item effects
+        const now = Date.now()
+        switch (item.id) {
+            case 1: // XP Boost 1h
+                activeBoosters.value.push({ type: 'xp_boost', mult: 1.25, expiresAt: now + 60 * 60 * 1000 })
+                lastPurchaseMessage.value = 'XP Boost activated for 1 hour!'
+                break
+            case 2: // XP Boost 24h
+                activeBoosters.value.push({ type: 'xp_boost', mult: 1.25, expiresAt: now + 24 * 60 * 60 * 1000 })
+                lastPurchaseMessage.value = 'XP Boost activated for 24 hours!'
+                break
+            case 3: // Coin Doubler 24h
+                activeBoosters.value.push({ type: 'coin_doubler', mult: 2, expiresAt: now + 24 * 60 * 60 * 1000 })
+                lastPurchaseMessage.value = 'Coin Doubler activated for 24 hours!'
+                break
+            case 4: // Streak Shield
+                activeBoosters.value.push({ type: 'streak_shield', expiresAt: now + 7 * 24 * 60 * 60 * 1000 })
+                lastPurchaseMessage.value = 'Streak Shield active for 7 days!'
+                break
+            case 5: // Custom Avatar Frame
+                cosmeticState.value.avatarFrame = 'basic'
+                lastPurchaseMessage.value = 'Avatar frame applied!'
+                break
+            case 6: // Dark Theme Premium
+                cosmeticState.value.darkPremium = true
+                lastPurchaseMessage.value = 'Premium dark palette unlocked!'
+                break
+            case 7: // Name Color: Teal
+                cosmeticState.value.nameColor = '#0D9488'
+                lastPurchaseMessage.value = 'Teal name color applied!'
+                break
+            case 8: // Custom Profile Banner
+                cosmeticState.value.banner = 'custom'
+                lastPurchaseMessage.value = 'Profile banner unlocked!'
+                break
+            case 9: // Animated Avatar Frame
+                cosmeticState.value.animatedFrame = true
+                lastPurchaseMessage.value = 'Animated frame applied!'
+                break
+            case 10: // Title: Guardian of ASEAN
+                cosmeticState.value.title = 'Guardian of ASEAN'
+                lastPurchaseMessage.value = 'Title unlocked: Guardian of ASEAN!'
+                break
+            case 11: // Golden Name Effect
+                cosmeticState.value.goldenName = true
+                lastPurchaseMessage.value = 'Golden name effect activated!'
+                break
+            case 12: // Emergency Supply Box
+                totalDonated.value += 60
+                lastPurchaseMessage.value = 'Emergency supply kit sponsored via UNICEF!'
+                break
+            case 13: // Workshop Sponsorship
+                totalDonated.value += 150
+                lastPurchaseMessage.value = 'PFA workshop funded for an ASEAN community!'
+                break
+            case 14: // Red Cross Donation
+                totalDonated.value += 100
+                lastPurchaseMessage.value = 'Donated to Red Cross ASEAN!'
+                break
+            case 15: // School Kit Sponsorship
+                totalDonated.value += 80
+                lastPurchaseMessage.value = 'Disaster prep kit sponsored for a school!'
+                break
+            case 16: // Certificate of Completion
+                cosmeticState.value.certificate = true
+                lastPurchaseMessage.value = 'Certificate unlocked in your profile!'
+                break
+            case 17: // Mentor Badge
+                cosmeticState.value.mentorBadge = true
+                lastPurchaseMessage.value = 'Mentor badge earned!'
+                break
+            case 18: // Exclusive Scenario Pack
+                cosmeticState.value.extraScenarios = true
+                lastPurchaseMessage.value = '3 bonus scenarios unlocked!'
+                break
+            case 19: // Lucky Loot Box
+                const lootRoll = Math.random()
+                if (lootRoll < 0.4) {
+                    const bonus = Math.floor(Math.random() * 30) + 10
+                    xp.value += bonus
+                    lastPurchaseMessage.value = `Loot Box: +${bonus} XP!`
+                } else if (lootRoll < 0.7) {
+                    const bonus = Math.floor(Math.random() * 50) + 20
+                    resiCoinBalance.value += bonus
+                    lastPurchaseMessage.value = `Loot Box: +${bonus} RC!`
+                } else {
+                    cosmeticState.value.lootCosmetic = true
+                    lastPurchaseMessage.value = 'Loot Box: Rare cosmetic unlocked!'
+                }
+                break
+            case 20: // Leaderboard Crown
+                cosmeticState.value.leaderboardCrown = true
+                lastPurchaseMessage.value = 'Crown icon activated on leaderboard!'
+                break
+            case 21: // Quiz Retry Token
+                cosmeticState.value.quizRetryTokens = (cosmeticState.value.quizRetryTokens || 0) + 1
+                lastPurchaseMessage.value = 'Quiz retry token added!'
+                break
+            case 22: // Hint Token (RPG)
+                cosmeticState.value.hintTokens = (cosmeticState.value.hintTokens || 0) + 1
+                lastPurchaseMessage.value = 'RPG hint token added!'
+                break
+            case 23: // Module Skip Token
+                cosmeticState.value.skipTokens = (cosmeticState.value.skipTokens || 0) + 1
+                lastPurchaseMessage.value = 'Module skip token added!'
+                break
+            case 24: // ASEAN Aid Bundle
+                totalDonated.value += 400
+                lastPurchaseMessage.value = 'Aid packages sponsored for 5 ASEAN countries!'
+                break
+            default:
+                lastPurchaseMessage.value = `${item.name} redeemed!`
         }
-        return false
+
+        _saveShopState()
+        saveDailySession()
+        return true
     }
 
     function donateCoins(amount) {
@@ -2906,6 +3057,7 @@ export const useResiliaStore = defineStore('resilia', () => {
         resiCoinBalance, transactions,
         totalDonated, activeResponders, modulesCompletedGlobal, regionData,
         countries, levelTiers, modules, marketplace,
+        ownedItems, activeBoosters, cosmeticState, xpBoostActive, coinBoostActive, streakShieldActive, lastPurchaseMessage,
         beginnerModules, beginnerCompleted, toolkitItems,
         academyChapters, completedLiaRPGs, postTestAttempts, KKM_THRESHOLD,
         liaEvalScores, saveLiaEvalScore, getLiaEvalScore,

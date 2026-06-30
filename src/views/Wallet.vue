@@ -69,6 +69,26 @@
     <!-- Shop grid -->
     <BaseCard v-motion class="mb-8 sm:mb-10" style="animation-delay: 0.07s">
       <h3 class="font-heading text-base sm:text-lg font-bold text-ink dark:text-white mb-5">{{ t('wallet.guildShop') }} <PhSword :size="16" weight="fill" class="inline text-teal-500" /></h3>
+      
+      <!-- Active boosters banner -->
+      <div v-if="store.activeBoosters.length > 0" class="mb-5 p-3 bg-amber-50 dark:bg-amber-900/15 rounded-xl border border-amber-200/30 dark:border-amber-800/20">
+        <p class="text-[10px] font-heading font-bold text-amber-600 dark:text-amber-400 uppercase mb-2">Active Boosters</p>
+        <div class="flex flex-wrap gap-2">
+          <span v-for="(b, i) in store.activeBoosters" :key="i"
+            class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-[10px] font-heading font-bold text-amber-700 dark:text-amber-400">
+            {{ b.type === 'xp_boost' ? '⚡ XP x1.25' : b.type === 'coin_doubler' ? '🪙 2x Coins' : '🛡️ Streak' }}
+            <span class="text-amber-500/70">({{ timeLeft(b.expiresAt) }})</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Purchase toast -->
+      <Transition name="fade-slide">
+        <div v-if="purchaseToast" class="mb-5 p-3 bg-teal-50 dark:bg-teal-900/20 rounded-xl border border-teal-200/30 dark:border-teal-800/20 text-center">
+          <p class="text-xs font-heading font-bold text-teal-700 dark:text-teal-400">{{ purchaseToast }}</p>
+        </div>
+      </Transition>
+
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         <div v-for="item in filteredShop" :key="item.id" 
           class="group relative bg-gray-50 dark:bg-slate-700/40 rounded-xl sm:rounded-2xl p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden border-2"
@@ -88,10 +108,13 @@
           <p class="font-heading font-bold text-xs text-ink dark:text-white mb-0.5 leading-tight min-h-[2em]">{{ item.name }}</p>
           <p class="text-[9px] text-gray-400 font-body mb-3 line-clamp-2">{{ item.description }}</p>
           
-          <button @click="redeem(item.id)" :disabled="store.resiCoinBalance < item.cost"
+          <button @click="redeem(item.id)" :disabled="store.resiCoinBalance < item.cost || isOwnedCosmetic(item.id)"
             class="w-full py-2 rounded-lg text-[10px] font-heading font-bold transition-colors flex items-center justify-center gap-1"
-            :class="store.resiCoinBalance >= item.cost ? 'bg-teal-500 text-white hover:bg-teal-600 shadow-sm shadow-teal-500/20' : 'bg-gray-200 dark:bg-slate-600 text-gray-400 cursor-not-allowed'">
-            <span class="flex items-center gap-0.5"><PhCoins :size="12" weight="fill" /> {{ item.cost }} {{ t('wallet.rc') }}</span>
+            :class="isOwnedCosmetic(item.id)
+              ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 cursor-default'
+              : store.resiCoinBalance >= item.cost ? 'bg-teal-500 text-white hover:bg-teal-600 shadow-sm shadow-teal-500/20' : 'bg-gray-200 dark:bg-slate-600 text-gray-400 cursor-not-allowed'">
+            <span v-if="isOwnedCosmetic(item.id)" class="flex items-center gap-0.5">✓ Owned</span>
+            <span v-else class="flex items-center gap-0.5"><PhCoins :size="12" weight="fill" /> {{ item.cost }} {{ t('wallet.rc') }}</span>
           </button>
         </div>
       </div>
@@ -150,6 +173,25 @@ const coinTrigger = ref(0)
 const coinAmount = ref(0)
 const showHistory = ref(false)
 const activeCategory = ref('All')
+const purchaseToast = ref('')
+let toastTimer = null
+
+// Cosmetic item IDs that are one-time purchases
+const cosmeticIds = [5, 6, 7, 8, 9, 10, 11, 16, 17, 18, 20]
+
+function isOwnedCosmetic(itemId) {
+  if (!cosmeticIds.includes(itemId)) return false
+  return store.ownedItems.some(i => i.id === itemId)
+}
+
+function timeLeft(expiresAt) {
+  const diff = expiresAt - Date.now()
+  if (diff <= 0) return 'expired'
+  const hours = Math.floor(diff / (1000 * 60 * 60))
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  if (hours > 24) return Math.floor(hours / 24) + 'd ' + (hours % 24) + 'h'
+  return hours + 'h ' + mins + 'm'
+}
 
 const categories = ['All', 'Booster', 'Cosmetic', 'Community', 'Content']
 
@@ -170,10 +212,22 @@ function rarityClass(rarity) {
 }
 
 function redeem(itemId) {
+  if (isOwnedCosmetic(itemId)) return
   const item = store.marketplace.find(i => i.id === itemId)
-  if (store.redeemCoins(itemId)) { coinAmount.value = -item.cost; coinTrigger.value++ }
+  if (store.redeemCoins(itemId)) {
+    coinAmount.value = -item.cost
+    coinTrigger.value++
+    purchaseToast.value = store.lastPurchaseMessage || `${item.name} redeemed!`
+    if (toastTimer) clearTimeout(toastTimer)
+    toastTimer = setTimeout(() => { purchaseToast.value = '' }, 3000)
+  }
 }
 function donate() {
   if (store.donateCoins(donateAmount.value)) { coinAmount.value = -donateAmount.value; coinTrigger.value++; donateAmount.value = 10 }
 }
 </script>
+
+<style scoped>
+.fade-slide-enter-active, .fade-slide-leave-active { transition: all 0.3s ease; }
+.fade-slide-enter-from, .fade-slide-leave-to { opacity: 0; transform: translateY(-8px); }
+</style>

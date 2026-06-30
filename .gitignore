@@ -32,3 +32,5 @@ node_modules
 # Personal handoff prompts, never commit
 RESILIA-MASTER-PROMPT.md
 resilia_task_list.md
+
+.vercel

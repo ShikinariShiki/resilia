@@ -128,11 +128,12 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { RouterLink, useRouter } from 'vue-router'
+import { RouterLink, useRouter, useRoute } from 'vue-router'
 import { useResiliaStore } from '../stores/resiliaStore'
 
 const store = useResiliaStore()
 const router = useRouter()
+const route = useRoute()
 
 const questions = [
   { text: 'I found it hard to wind down lately', emoji: '😮‍💨', _cat: 's' },
@@ -249,7 +250,8 @@ function acceptActivity() {
 }
 
 function skipActivity() {
-  router.push('/home')
+  const redirectTo = route.query.redirect || '/home'
+  router.push(redirectTo)
 }
 </script>
 

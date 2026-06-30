@@ -135,7 +135,7 @@ router.beforeEach((to, from, next) => {
     else if (to.name === 'journal' && store.hasCompletedCheckIn) {
         next({ name: 'home' })
     } else if (!store.hasCompletedCheckIn && store.onboarded && !publicRoutes.includes(to.name) && to.name !== 'journal' && to.name !== 'soothing' && to.name !== 'lia-eval') {
-        next({ name: 'journal' })
+        next({ name: 'journal', query: { redirect: to.fullPath } })
     } else if (to.name === 'lesson') {
         const moduleId = parseInt(to.params.id)
         const mod = store.modules.find(m => m.id === moduleId)
